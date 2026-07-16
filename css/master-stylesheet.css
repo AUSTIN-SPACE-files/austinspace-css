@@ -6235,10 +6235,17 @@ left untouched. */
 
 /* Tighter section rhythm - base .as-services is var(--as-space-section)
    (7rem/112px) top and bottom. Desktop-only values guarded below; mobile
-   (<=480px) falls back to the unscoped 64px mobile token rhythm. */
+   (<=480px) falls back to the unscoped 64px mobile token rhythm.
+   Top uses --as-pad-band (80px), same token every other white section
+   uses coming off an ink band (see .as-about-*, .as-contact-form/.as-faq
+   above) - this gives the "WHAT I DO" eyebrow proper clearance below
+   .as-backstory instead of sitting flush against it. Paired with
+   .as-backstory's own bottom padding (--as-pad-ink, 72px, css:8517-8519),
+   the two together total 152px, matching every other ink-to-white gap
+   on this page. */
 @media (min-width: 481px) {
   .as-allsorts .as-services {
-    padding-top: 0;
+    padding-top: var(--as-pad-band);
     padding-bottom: 96px;
   }
 }
@@ -8501,21 +8508,21 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    correct at every width; only the desktop-scale padding is guarded.
    Mobile falls back to the unscoped .as-backstory 480px rule above.
 
-   Bottom overridden below the shorthand: every OTHER section transition
-   on this page measures ~152px (creds->positioning, positioning->
-   backstory) because that gap is always ink-band bottom (--as-pad-ink,
-   72px) + the next section's own top padding (--as-pad-band, 80px).
-   .as-services is the one section with padding-top:0 (css:6240), so the
-   backstory->services gap was only backstory's own 72px bottom - the
-   72px bug. Since services contributes nothing, backstory's bottom must
-   supply the FULL 152px alone here: calc(ink + band), not a hardcoded
-   152, so it stays correct if either token is retuned. Top is untouched
-   at the plain ink value - the positioning->backstory gap (80 + 72) is
-   already correct and must not change. */
+   Bottom matches every other ink-band transition on this page: the gap
+   splits two-sided, ink-band bottom (--as-pad-ink, 72px) plus the next
+   section's own top padding (--as-pad-band, 80px), total 152px. Formerly
+   .as-services carried padding-top:0, so this rule had to solo-supply
+   the full 152px via calc(ink + band) - that made the "WHAT I DO"
+   eyebrow sit flush against the ink band. .as-services now carries its
+   own --as-pad-band top padding (see the .as-allsorts .as-services rule
+   above), so bottom here reverts to the plain ink value like every other
+   ink band on the page. Top is untouched at the plain ink value - the
+   positioning->backstory gap (80 + 72) is already correct and must not
+   change. */
 @media (min-width: 481px) {
 .as-allsorts .as-backstory {
   padding: var(--as-pad-ink) var(--as-pad-side);
-  padding-bottom: calc(var(--as-pad-ink) + var(--as-pad-band));
+  padding-bottom: var(--as-pad-ink);
 }
 }
 
