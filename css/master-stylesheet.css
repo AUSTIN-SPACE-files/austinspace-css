@@ -1677,9 +1677,17 @@
  gap: 24px;
 }
 
+/* Deep-page centred-CTA headline size - shared by services + case-study
+   CTAs only. NOT homepage/About (.as-cta__headline), which stays at the
+   original clamp(2rem, 3.5vw, 3rem). */
+.as-svc-cta__headline,
+.as-cs-page-cta__headline,
+.as-cs-hub-cta__headline {
+ font-size: clamp(2rem, 1rem + 3.2vw, 3.5rem);
+}
+
 .as-svc-cta__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
  font-weight: 400;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -2711,7 +2719,6 @@
 
 .as-cs-page-cta__headline {
  font-family: var(--font-heading);
- font-size: clamp(2rem, 3.5vw, 3rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -3775,7 +3782,6 @@
 
 .as-cs-hub-cta__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
  font-weight: 400;
  line-height: 1.1;
  letter-spacing: -0.02em;
