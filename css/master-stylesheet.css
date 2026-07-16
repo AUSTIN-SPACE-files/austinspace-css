@@ -4127,7 +4127,6 @@
  cursor: pointer;
  transition: background var(--transition);
  letter-spacing: 0.01em;
- width: 100%;
  box-sizing: border-box;
 }
 
