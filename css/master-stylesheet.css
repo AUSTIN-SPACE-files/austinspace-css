@@ -5701,6 +5701,28 @@ a.cky-banner-element.as-cookie__btn:hover {
  -moz-osx-font-smoothing: auto;
 }
 
+/* FAQ - dark editorial variant (services hub, custom build, site refresh,
+   ongoing support only). Scoped under .as-faq--dark so the shared light-
+   accordion .as-faq rules above stay untouched for about/contact/case-
+   studies/one-page-website, which also use the bare .as-faq component. */
+.as-allsorts .as-faq.as-faq--dark { background: rgb(23,23,26); padding: 96px 32px 104px; }
+.as-allsorts .as-faq--dark .as-faq__inner { max-width: 1160px; margin: 0 auto; }
+.as-allsorts .as-faq--dark .as-faq__header { margin: 0 0 56px; max-width: 720px; }
+.as-allsorts .as-faq--dark .as-faq__headline { margin: 0 0 18px; font-family: var(--font-display); font-weight: 900; font-size: 48px; line-height: 1.02; color: #fff; }
+.as-allsorts .as-faq--dark .as-faq__intro { margin: 0; font-family: var(--font-body); font-size: 17px; line-height: 1.6; color: rgb(198,198,206); max-width: 56ch; }
+
+.as-allsorts .as-faq--dark .as-faq__qa { column-count: 2; column-gap: 64px; }
+.as-allsorts .as-faq--dark .as-faq__pair { break-inside: avoid; padding: 0 0 34px; margin: 0 0 34px; border-bottom: 1px solid rgba(255,255,255,.16); }
+.as-allsorts .as-faq--dark .as-faq__pair:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.as-allsorts .as-faq--dark .as-faq__q { margin: 0 0 12px; font-family: var(--font-display); font-weight: 400; font-style: normal; font-size: 23px; line-height: 1.3; color: #fff; }
+.as-allsorts .as-faq--dark .as-faq__a { margin: 0; font-family: var(--font-body); font-size: 16px; line-height: 1.72; color: rgb(198,198,206); }
+
+@media (max-width: 860px) {
+  .as-allsorts .as-faq--dark .as-faq__qa { column-count: 1; }
+  .as-allsorts .as-faq--dark .as-faq__headline { font-size: 38px; }
+  .as-allsorts .as-faq--dark .as-faq__header { margin-bottom: 40px; }
+}
+
 /* Hero H1 fixed size - can't add font-size to the shared headline group
    above (.as-contact-form__headline / .as-faq__headline / .as-cf-success h3
    all share that selector and must not pick up a 64px override). Standalone
