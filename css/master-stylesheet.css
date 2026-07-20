@@ -1750,14 +1750,6 @@
 }
 
 
-/* =============================================
- ONE-PAGE WEBSITE — SELL SECTIONS
- Solid colour band + signature wave divider, reused
- across as-sell-hook / as-sell-speed / as-sell-upgrade.
- .as-cosmos-band below is kept for the cosmos backdrop
- used elsewhere on this page (cards section, hero).
- ============================================= */
-
 /* Wave cap — fixed-pixel-height wave accent layered over a section edge.
  Depth is set by height (36px shallow / 72px deep), never by a percentage
  of section height, so the same wave reads identically regardless of how
@@ -1788,127 +1780,8 @@
 .as-wave-cap--fill-pink { --cap-fill: var(--as-pink); }
 .as-wave-cap--fill-purple { --cap-fill: var(--as-purple); }
 
-/* Cosmos break — a slim (~120px), pure-graphic strip. No dimming, no text,
- no overlay: just the cosmos image, clipped to a wave on one edge, with a
- black stroke tracing that same curve. The clip-path cuts pixels from the
- IMAGE only, so the container's own flat background (whichever colour
- sits directly above it in the page) shows through the missing corner —
- --fill-black for the one that follows the black CTA, plain white default
- for the one that follows a white section. Top/bottom outline only, same
- as .as-solid-band, no vertical side borders. */
-.as-cosmos-break {
- position: relative;
- height: 120px;
- overflow: hidden;
- box-sizing: border-box;
- background: var(--as-white);
-}
-
-.as-cosmos-break--fill-black { background: var(--as-black); }
-.as-cosmos-break--edge-top { border-top: 5px solid var(--as-black); }
-.as-cosmos-break--edge-bottom { border-bottom: 5px solid var(--as-black); }
-
-.as-cosmos-break__img {
- position: absolute;
- inset: 0;
- width: 100%;
- height: 100%;
- object-fit: cover;
- object-position: center 50%; /* tune live */
-}
-
-.as-cosmos-break--wave-top .as-cosmos-break__img {
- clip-path: url(#wave-clip-home-footer);
-}
-
-.as-cosmos-break__stroke {
- position: absolute;
- inset: 0;
- width: 100%;
- height: 100%;
- z-index: 2;
- pointer-events: none;
-}
-
-.as-cosmos-break__stroke svg { display: block; width: 100%; height: 100%; }
-
-.as-cosmos-band {
- position: relative;
- overflow: hidden;
- background: var(--as-black);
- padding: 130px var(--as-space-section-side);
-}
-
-.as-cosmos-band::before {
- content: '';
- position: absolute;
- inset: 0;
- z-index: 0;
- background-image: url('https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/de2a78f0-8188-4f7a-8cc9-439c70385354/hero-cosmos-1920.jpg');
- background-size: cover;
- background-position: center var(--cosmos-y, 50%);
- opacity: 0.82;
-}
-
-@media (min-width: 1920px) {
- .as-cosmos-band::before {
- background-image: url('https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg');
- }
-}
-
-.as-cosmos-band::after {
- content: '';
- position: absolute;
- inset: 0;
- z-index: 1;
- background:
- radial-gradient(ellipse 60% 70% at 50% 45%, rgba(13, 13, 13, 0.55), rgba(13, 13, 13, 0) 70%),
- linear-gradient(180deg, rgba(13, 13, 13, 0.45), rgba(13, 13, 13, 0.7));
-}
-
-/* Wave edges — clip the whole band to the signature curve (reuses the site's
- existing wave-clip defs from footer-injection.html; do not add new defs).
- Clipping the parent (not just the image/overlay) carries the band's own
- background along with it, so the carved sliver reveals page white instead
- of the band's black backdrop, with no change to the locked opacity/gradient
- blend elsewhere on the band. */
-
-.as-cosmos-band--wave-bottom {
- clip-path: url(#wave-clip-one-page);
- padding-bottom: 250px; /* clears the wave trough from content — first pass, tune live */
-}
-
-.as-cosmos-band--wave-top {
- clip-path: url(#wave-clip-home-footer);
- padding-top: 250px; /* clears the wave trough from content — first pass, tune live */
-}
-
-.as-cosmos-band__inner {
- position: relative;
- z-index: 3;
- display: flex;
- flex-direction: column;
- align-items: center;
- gap: 1.5rem;
- text-align: center;
-}
-
 .as-eyebrow--on-dark .as-label {
  color: #c9b8ff;
-}
-
-@media (max-width: 480px) {
- .as-cosmos-band {
- padding: var(--as-space-section-mobile) var(--as-space-section-side-mobile);
- }
-
- .as-cosmos-band--wave-bottom {
- padding-bottom: 190px; /* first pass, tune live */
- }
-
- .as-cosmos-band--wave-top {
- padding-top: 190px; /* first pass, tune live */
- }
 }
 
 /* =============================================
