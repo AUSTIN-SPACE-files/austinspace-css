@@ -1278,7 +1278,12 @@
   margin-bottom: 48px;
 }
 .as-allsorts .as-svc-editorial__headline {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.12;
   color: var(--white);
+  margin: 0 0 20px;
 }
 .as-allsorts .as-svc-editorial__body {
   color: rgb(183, 183, 191);
@@ -1292,6 +1297,9 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 40px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* Row items carry a white card treatment because they were built
@@ -4622,8 +4630,8 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 /* Per-page heights */
 .as-hero--home { aspect-ratio: 2880 / 300; }
-.as-hero--home-high-mid { aspect-ratio: 2880 / 300; background-color: var(--white);}
-.as-hero--home-low-mid { aspect-ratio: 2880 / 300; background-color: var(--white);}
+.as-hero--home-high-mid { aspect-ratio: 2880 / 300; background-color: var(--white); border-top: 0;}
+.as-hero--home-low-mid { aspect-ratio: 2880 / 300; background-color: var(--white); border-top: 0;}
 .as-hero--home-footer { aspect-ratio: 2880 / 200; border-top: none; border-bottom: 5px solid var(--liquorice); }
 .as-hero--about { aspect-ratio: 2880 / 216; }
 .as-hero--services { aspect-ratio: 2880 / 300; }
@@ -4667,6 +4675,52 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--policy-tos .as-hero__img { clip-path: url(#wave-clip-policy-tos); object-position: center 33%; }
 .as-hero--policy-cookies .as-hero__img { clip-path: url(#wave-clip-policy-cookies); object-position: center 60%; }
 .as-hero--one-page .as-hero__img { clip-path: url(#wave-clip-one-page); object-position: center 20%; }
+
+/* Cosmos mid/low-mid bands. Same treatment as as-hero--home-high-mid,
+   which sits in the equivalent slot after the homepage ink band.
+   Stroke is the clip path scaled x100 with the box-closure segments
+   stripped and Y nudged 1 unit away from the solid mass: +1 for a
+   wavy bottom edge, -1 for a wavy top edge. If the clip curve
+   changes, re-derive. Do not assume. */
+.as-hero--one-page-mid {
+  aspect-ratio: 2880 / 300;
+  background-color: var(--white);
+  border-top: 0;
+}
+.as-hero--one-page-mid .as-hero__img {
+  clip-path: url(#wave-clip-one-page-mid);
+  object-position: 0 100%;
+}
+
+.as-hero--custom-build-mid {
+  aspect-ratio: 2880 / 300;
+  background-color: var(--white);
+  border-top: 0;
+}
+.as-hero--custom-build-mid .as-hero__img {
+  clip-path: url(#wave-clip-custom-build-mid);
+  object-position: center 40%;
+}
+
+.as-hero--one-page-low-mid {
+  aspect-ratio: 2880 / 300;
+  background-color: var(--white);
+  border-top: 0;
+}
+.as-hero--one-page-low-mid .as-hero__img {
+  clip-path: url(#wave-clip-one-page-low-mid);
+  object-position: center 58%;
+}
+
+.as-hero--custom-build-low-mid {
+  aspect-ratio: 2880 / 300;
+  background-color: var(--white);
+  border-top: 0;
+}
+.as-hero--custom-build-low-mid .as-hero__img {
+  clip-path: url(#wave-clip-custom-build-low-mid);
+  object-position: center 62%;
+}
 
 /* Stroke overlay sits on top of the whole hero */
 .as-hero__stroke {
@@ -6791,6 +6845,12 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   padding: 0 24px;
   border-left: 1px solid rgba(255, 255, 255, 0.12);
 }
+
+/* Three-step variant. The base grid is four fixed columns for
+   the four-step Custom Build process. */
+.as-allsorts .as-svc-process--three .as-svc-process__steps {
+  grid-template-columns: repeat(3, 1fr);
+}
 .as-allsorts .as-svc-process__step:first-child {
   border-left: 0;
   padding-left: 0;
@@ -7984,6 +8044,27 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   line-height: 1.55;
   color: var(--grey-500);
   margin: 0;
+}
+
+.as-allsorts .as-pos-card__list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.as-allsorts .as-pos-card__list li {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--grey-500);
+}
+.as-allsorts .as-pos-card__list li i {
+  color: var(--candy-pink);
+  font-size: 13px;
+  margin-top: 3px;
 }
 
 /* Cards pair up only once there is room for them. Measured: pairing from 481px gives
