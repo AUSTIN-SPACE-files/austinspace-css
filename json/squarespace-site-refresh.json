@@ -1,0 +1,104 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.austinspace.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://www.austinspace.co.uk/services/view-all"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Squarespace Site Refresh",
+          "item": "https://www.austinspace.co.uk/services/squarespace-site-refresh"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Squarespace Site Refresh",
+      "description": "A focused Squarespace refresh or full website redesign for sites already on Squarespace. Covers visual design, performance optimisation, SEO and AI search improvements, mobile responsiveness, content reorganisation, and feature enhancements. Free site review first, with scope and price agreed upfront. Starting at £1,500.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "AUSTIN_SPACE",
+        "url": "https://www.austinspace.co.uk"
+      },
+      "areaServed": "United Kingdom",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "GBP",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": "800",
+          "maxPrice": "2200",
+          "priceCurrency": "GBP"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I know if my site needs a refresh or a full rebuild?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the current state of the site. If the underlying structure is sound and the issues are mostly visual, performance, or content presentation, a refresh is the right answer. If the site's structure itself is the problem, like bad navigation, fundamentally broken architecture, or a platform that doesn't fit the business, a full custom build makes more sense. The free site review is where this gets decided. I'll tell you which is the honest answer for your situation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "My site was built by someone else. Can you still work on it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, often. Whether you outgrew your previous designer, built it yourself and hit a wall, or just haven't had time to keep on top of it, I can pick up an existing Squarespace site and improve it. The site needs to be on Squarespace already. If it's on another platform, the refresh service doesn't apply, but a custom build might."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What usually makes the biggest difference in a refresh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Layout and page structure, every time. Get the structure right and the visual work has something solid to sit on. Get the structure wrong and no amount of visual polish will rescue it. Most refreshes spend more time on layout than people expect, and it's where the visible improvement actually comes from."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will a refresh help me get more traffic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A refresh can identify and fix the technical issues that are actively holding traffic back. Broken SEO fundamentals, missing metadata, poor page structure and slow load times that hurt rankings. What a refresh won't do is replace a dedicated SEO strategy, content marketing, or backlink work. It clears the technical blockers so the rest of your marketing has something to work with."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does a site refresh cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Starting at £1,500. A design refresh covering visual and layout improvements is £1,500. A complete overhaul covering design, SEO, performance, and content runs £1,800 to £2,200. A focused performance-only engagement runs £800 to £1,200. The free site review is where scope and price get agreed, before any work starts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a Squarespace refresh the same as a website redesign?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Roughly, yes. The difference is depth. A site refresh keeps the existing structure and improves what's there: design, performance, SEO, content presentation. A full website redesign rebuilds it from the ground up, which is what the Custom Build service covers. If the site has good bones but a tired feel, a refresh is the right call. If the underlying structure is the problem, a custom build is."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

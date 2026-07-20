@@ -1,0 +1,99 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.austinspace.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://www.austinspace.co.uk/services/view-all"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "One-Page Website",
+          "item": "https://www.austinspace.co.uk/services/one-page-website"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "One-Page Website Design",
+      "description": "A single, properly built web page for sole traders and local trades. Covers a local-search check, one-page design, mobile-first build, a working contact form, and hosting and domain setup. Live in about a week. £300 one-off, then £49.99 a year for hosting, domain, and small changes. Built and looked after by one person.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "AUSTIN_SPACE",
+        "url": "https://www.austinspace.co.uk"
+      },
+      "areaServed": "United Kingdom",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "GBP",
+        "price": "300"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I have to update it myself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. You never touch it. Tell me what's changed and I'll change it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I don't have a logo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fine. The page makes your name look good on its own. Most clients start without one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will people actually find me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every build includes a check of the terms local customers search for, built into the page and the behind-the-scenes detail Google and AI assistants read. It's the best possible start."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is one page really enough?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For most local businesses, yes, and often better. One fast page that answers the obvious questions beats five nobody reads."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the £49.99 a year cover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your web address, hosting, security updates, and small changes within reason. Less than a fiver a month to keep the lights on and the page current."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I outgrow it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Good. If you move up to a full bespoke site within two years, your whole £300 comes off the price. It's a stepping stone, not a dead end."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

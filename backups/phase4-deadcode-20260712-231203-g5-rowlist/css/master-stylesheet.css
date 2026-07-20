@@ -27,10 +27,16 @@
  --as-text-secondary: #555;
  --as-indigo: #0b0b1e;
 
- --font-display: "Fraunces", "DM Serif Display", Georgia, "Times New Roman", serif;
- --font-heading: "Fraunces", "DM Serif Display", Georgia, "Times New Roman", serif;
- --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", monospace;
- --font-body: "DM Sans", system-ui, sans-serif;
+ --font-display: 'Exo 2', sans-serif;
+ --font-heading: 'Exo 2', sans-serif;
+ --font-mono: 'IBM Plex Mono', monospace;
+ --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+
+ --space-xs: 0.5rem;
+ --space-sm: 1rem;
+ --space-md: 2rem;
+ --space-lg: 4rem;
+ --space-xl: 7rem;
 
  --as-space-section: 7rem;
  --as-space-section-hero: 5rem;
@@ -57,11 +63,24 @@
  2. BASE
  ============================================= */
 
+.as-section {
+ width: 100%;
+ padding: var(--space-lg) var(--space-md);
+ box-sizing: border-box;
+}
+
 .as-inner {
  max-width: var(--max-width);
  margin: 0 auto;
  width: 100%;
 }
+
+@media (max-width: 768px) {
+ .as-section {
+ padding: var(--space-md) var(--space-sm);
+ }
+}
+
 
 /* =============================================
  3. TYPOGRAPHY UTILITIES
@@ -218,12 +237,21 @@
  align-items: center;
  gap: 1.8rem;
  background: var(--white);
- padding: 24px 32px;
+ padding: 1.6rem 1.8rem;
  border-bottom: 1px solid var(--as-border);
+ transition: background var(--transition);
+}
+
+.as-row-item:hover {
+ background: #f0eee9;
 }
 
 .as-row-list--invert .as-row-item {
  background: var(--as-white);
+}
+
+.as-row-list--invert .as-row-item:hover {
+ background: var(--grey-050);
 }
 
 .as-row-item__icon {
@@ -243,6 +271,10 @@
  border-bottom: none;
 }
 
+.as-row-item:hover {
+ background: #fafaf8;
+}
+
 .as-row-item__content {
  display: flex;
  flex-direction: column;
@@ -252,27 +284,63 @@
 
 .as-row-item__title {
  font-family: var(--font-body);
- font-size: 17px;
+ font-size: 0.9rem;
  font-weight: 600;
- line-height: 1.40;
  color: var(--as-black);
  margin: 0;
 }
 
 .as-row-item__desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
+ font-size: 0.82rem;
+ font-weight: 300;
  color: var(--as-mid);
- line-height: 1.60;
+ line-height: 1.5;
  margin: 0;
 }
 
-/* .as-row-list--dark and .as-row-list--icon-box removed in the Phase 4
- dead-code pass - both had been flagged dead since Phase 3 (items 2 and
- 4: /about's Why Solo and /contact's trust-signal list were their only
- consumers, both since rebuilt off dedicated classes) with zero HTML
- consumers remaining. */
+/* Dark variant — for sections with black backgrounds.
+ DEAD CODE as of Phase 3 item 2 (12 July 2026) - /about's Why Solo was
+ the only consumer and it was rebuilt off .as-about-solo__reason* instead
+ (this variant never re-coloured __title/__desc for dark surfaces - a
+ live contrast bug, near-black text on a near-black band). Flagged, not
+ deleted - grep "as-row-list--dark" turns up zero remaining HTML
+ consumers if this needs confirming again later. */
+.as-row-list--dark {
+ border-color: rgba(255, 255, 255, 0.06);
+ background: rgba(255, 255, 255, 0.06);
+}
+
+.as-row-list--dark .as-row-item {
+ background: rgba(255, 255, 255, 0.02);
+ border-color: rgba(255, 255, 255, 0.06);
+}
+
+.as-row-list--dark .as-row-item:hover {
+ background: rgba(255, 255, 255, 0.05);
+}
+
+.as-row-list--dark .as-row-item__title {
+ color: rgba(255, 255, 255, 0.85);
+}
+
+.as-row-list--dark .as-row-item__desc {
+ color: rgba(255, 255, 255, 0.4);
+}
+
+/* Boxed icon variant — icon sits in a purple-light pill.
+ DEAD CODE as of Phase 3 item 4 (12 July 2026) - /contact's trust-signal
+ list was the only consumer and was rebuilt off .as-contact-bar__col
+ instead. Flagged, not deleted - grep "as-row-list--icon-box" turns up
+ zero remaining HTML consumers if this needs confirming again later. */
+.as-row-list--icon-box .as-row-item__icon {
+ width: 36px;
+ height: 36px;
+ border-radius: var(--radius-sm);
+ font-size: 2rem;
+ flex-shrink: 0;
+}
+
 
 /* =============================================
  6. SQUARESPACE OVERRIDES
@@ -311,6 +379,11 @@
  color: #f6d847 !important;
 }
 
+.as-about-focus__tag--light {
+ background: #242424 !important;
+ color: #f6d847 !important;
+}
+
 .fa-location-dot {
  color: #fed146;
 }
@@ -328,6 +401,13 @@
  justify-content: flex-start !important;
  align-items: flex-start !important;
  margin-bottom: 1.8rem;
+}
+
+/* DEAD CODE as of Phase 3 item 2 (12 July 2026) - .as-about-solo no
+ longer contains any .as-row-item, rebuilt off .as-about-solo__reason*
+ instead. Flagged, not deleted. */
+.as-about-solo .as-row-item__icon {
+ color: #f6d847;
 }
 
 .as-svc-included__item-icon {
@@ -392,7 +472,7 @@
 .as-hero-combined__left {
  display: flex;
  flex-direction: column;
- gap: 32px;
+ gap: 1.8rem;
 }
 
 .as-hero-combined__headline {
@@ -407,9 +487,9 @@
 
 .as-hero-combined__subline {
  font-family: var(--font-body);
- font-size: 18px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: clamp(1rem, 1.4vw, 1.15rem);
+ font-weight: 300;
+ line-height: 1.65;
  color: var(--as-text-secondary);
  margin: 0;
  max-width: 420px;
@@ -445,107 +525,6 @@
  .as-hero-combined {
  background-position: center center;
  }
-}
-
-/* ==========================================================
-   HERO TRUST ROW
-   Google rating + Squarespace Circle Silver Partner badge.
-   Sits as the last flex child of .as-hero-combined__left,
-   which supplies the 32px top gap from its own row-gap.
-   Do not add margin-top here.
-   ========================================================== */
-
-.as-allsorts .as-hero-combined__trust {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 18px 22px;
-}
-
-.as-allsorts .as-hero-combined__trust-google {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
-
-/* The Google G source PNG is a square canvas and the glyph fills only
-   33.6 percent of it, so a plain img renders a tiny G in a big empty box.
-   background-size 298 percent scales the image until the glyph height
-   equals the box height. If the asset is ever re-cropped to its ink box,
-   replace the span with a plain img and delete this whole rule. */
-.as-allsorts .as-hero-combined__trust-g {
-  width: 34px;
-  height: 34px;
-  flex: 0 0 auto;
-  display: block;
-  background-image: url("https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/9b1a8679-4737-4556-bd46-f590e7917f72/GoogleG_FullColor_RGB.png?content-type=image%2Fpng");
-  background-position: center;
-  background-size: 298%;
-  background-repeat: no-repeat;
-}
-
-.as-allsorts .as-hero-combined__trust-stars {
-  display: inline-flex;
-  gap: 3px;
-}
-
-/* Duotone sunshine. Locked hex on the SHAPE, derived tint on the FILL behind.
-   Same treatment as the service-card icons. Ratio matches the shipped pairs.
-   Class MUST be fa-slab-duo. fa-duotone fa-slab silently falls back to plain
-   black in this kit. */
-.as-allsorts .as-hero-combined__trust-stars i {
-  font-size: 20px;
-  line-height: 1;
-  --fa-primary-color: #d69d1c;    /* was #f4cf3b - match .as-icon--sunshine */
-  --fa-secondary-color: #fae9a6;  /* was #fae9a5 - one digit off, a rounding artefact */
-  --fa-secondary-opacity: 1;
-}
-
-.as-allsorts .as-hero-combined__trust-score {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1;
-  color: var(--ink-900);
-}
-
-.as-allsorts .as-hero-combined__trust-sep,
-.as-allsorts .as-hero-combined__trust-meta {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1;
-  color: var(--grey-500);
-}
-
-/* Hidden by default. The row wraps to two lines on narrow screens and a
-   stranded vertical rule looks like a bug. Restored at the desktop guard. */
-.as-allsorts .as-hero-combined__trust-rule {
-  display: none;
-  width: 1px;
-  height: 33px;
-  flex: 0 0 auto;
-  background: rgba(23, 23, 26, 0.18);
-}
-
-.as-allsorts .as-hero-combined__trust-badge {
-  height: 46px;
-  width: auto;
-  display: block;
-}
-
-@media (min-width: 481px) {
-
-  .as-allsorts .as-hero-combined__trust {
-    gap: 28px;
-    flex-wrap: nowrap;
-  }
-
-  .as-allsorts .as-hero-combined__trust-rule {
-    display: block;
-  }
-
 }
 
 
@@ -596,10 +575,10 @@
 
 .as-creds__text {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
+ font-size: 0.82rem;
+ font-weight: 300;
  color: rgba(255, 255, 255, 0.5);
- line-height: 1.60;
+ line-height: 1.5;
  letter-spacing: 0.01em;
  margin: 0;
 }
@@ -615,8 +594,8 @@
 .as-creds__header {
  display: flex;
  flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
+ gap: 0.8rem;
+ margin-bottom: 2.8rem;
 }
 
 .as-creds__headline {
@@ -661,7 +640,7 @@
 .as-positioning__left {
  display: flex;
  flex-direction: column;
- gap: 24px;
+ gap: 1.2rem;
 }
 
 /* Base layout fix, not a skin rule - unscoped. Column flex containers with
@@ -677,7 +656,7 @@
 
 .as-positioning__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(2rem, 3.5vw, 3.2rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -692,9 +671,9 @@
 
 .as-positioning__body {
  font-family: var(--font-body);
- font-size: 18px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 1.05rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-secondary);
  margin: 1rem 0 0;
  max-width: 480px;
@@ -723,27 +702,6 @@
 
 
 /* =============================================
- HOME — BACKGROUND STORY
- ============================================= */
-
-/* NEW - .as-backstory is always dark by design, no white legacy version
- ever existed - same category as .as-creds / .as-hub-bar / .as-contact-bar,
- so the dark background sits here, unscoped. */
-.as-backstory {
- background: var(--liquorice);
-}
-
-.as-backstory__inner {
-}
-
-@media (max-width: 480px) {
- .as-backstory {
- padding: var(--as-space-section-mobile) var(--as-space-section-side-mobile);
- }
-}
-
-
-/* =============================================
  HOME — SERVICES
  ============================================= */
 
@@ -758,8 +716,8 @@
 .as-services__header {
  display: flex;
  flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
+ gap: 0.8rem;
+ margin-bottom: 3.5rem;
 }
 
 .as-services__headline {
@@ -775,10 +733,9 @@
 .as-services__subline {
  font-family: var(--font-body);
  font-size: 1rem;
- font-weight: 400;
- line-height: 1.70;
+ font-weight: 300;
  color: var(--as-mid);
- margin: 8px 0 0;
+ margin: 0;
  max-width: 480px;
 }
 
@@ -808,10 +765,10 @@
 }
 
 .as-services__card-tag {
- font-family: var(--font-mono);
- font-size: 11.5px;
- font-weight: 500;
- letter-spacing: var(--ls-label);
+ font-family: var(--font-body);
+ font-size: 0.7rem;
+ font-weight: 600;
+ letter-spacing: 0.12em;
  text-transform: uppercase;
  color: var(--as-purple);
  margin-bottom: 0.6rem;
@@ -830,16 +787,14 @@
 
 .as-services__card-price {
  font-family: var(--font-body);
- font-size: 14px;
+ font-size: 0.82rem;
  font-weight: 500;
- line-height: 1.50;
  color: var(--as-mid);
  margin-bottom: 1.4rem;
 }
 
 .as-services__card-price span {
- font-family: var(--font-mono);
- font-weight: 500;
+ font-weight: 700;
  color: var(--as-black);
  font-size: 0.9rem;
 }
@@ -847,7 +802,7 @@
 .as-services__card-desc {
  font-family: var(--font-body);
  font-size: 0.92rem;
- font-weight: 400;
+ font-weight: 300;
  line-height: 1.7;
  color: var(--as-text-body);
  margin: 0 0 2rem;
@@ -870,10 +825,10 @@
  align-items: flex-start;
  gap: 0.6rem;
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
+ font-size: 0.84rem;
+ font-weight: 300;
  color: var(--as-text-secondary);
- line-height: 1.60;
+ line-height: 1.4;
 }
 
 .as-services__card-features li i {
@@ -948,12 +903,13 @@
 .as-casestudy {
  display: block;
  background: var(--liquorice);
+ padding: var(--as-space-section) var(--as-space-section-side);
  text-decoration: none;
 }
 
 .as-casestudy__client {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.8rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -1017,12 +973,12 @@
 .as-cta__left {
  display: flex;
  flex-direction: column;
- gap: 24px;
+ gap: 1.4rem;
 }
 
 .as-cta__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(2.2rem, 4vw, 3.6rem);
  font-weight: 800;
  line-height: 1.08;
  letter-spacing: -0.025em;
@@ -1037,9 +993,9 @@
 
 .as-cta__body {
  font-family: var(--font-body);
- font-size: 16px;
- font-weight: 400;
- line-height: 1.70;
+ font-size: 1rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-body);
  margin: 0;
  max-width: 440px;
@@ -1080,12 +1036,6 @@
  padding: 2rem 2rem 5rem;
 }
 
-@media (min-width: 481px) {
-  .as-svc-hero {
-    padding-top: 16px;
-  }
-}
-
 .as-svc-hero__inner {
  display: grid;
  grid-template-columns: 1fr 380px;
@@ -1096,7 +1046,7 @@
 .as-svc-hero__left {
  display: flex;
  flex-direction: column;
- gap: 32px;
+ gap: 1.8rem;
 }
 
 .as-svc-hero__headline {
@@ -1116,9 +1066,9 @@
 
 .as-svc-hero__desc {
  font-family: var(--font-body);
- font-size: 18px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 1.05rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-body);
  margin: 0;
  max-width: 520px;
@@ -1161,7 +1111,7 @@
 .as-svc-hero__price span {
  font-family: var(--font-body);
  font-size: 0.9rem;
- font-weight: 400;
+ font-weight: 300;
  color: var(--as-mid);
 }
 
@@ -1182,9 +1132,8 @@
  align-items: center;
  gap: 1rem;
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 0.85rem;
+ font-weight: 300;
  color: var(--as-text-secondary);
 }
 
@@ -1205,13 +1154,13 @@
 .as-svc-included__header {
  display: flex;
  flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
+ gap: 0.8rem;
+ margin-bottom: 3.5rem;
 }
 
 .as-svc-section-headline {
  font-family: var(--font-heading);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.6rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -1229,7 +1178,7 @@
  background: #fff;
  border: 1px solid var(--as-border);
  border-radius: var(--radius-md);
- padding: 32px;
+ padding: 2rem;
  display: flex;
  flex-direction: column;
  gap: 0.8rem;
@@ -1247,19 +1196,18 @@
 
 .as-svc-included__item-title {
  font-family: var(--font-body);
- font-size: 17px;
+ font-size: 0.92rem;
  font-weight: 600;
- line-height: 1.40;
  color: var(--as-black);
  margin: 0;
 }
 
 .as-svc-included__item-desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
+ font-size: 0.84rem;
+ font-weight: 300;
  color: var(--as-text-body);
- line-height: 1.60;
+ line-height: 1.65;
  margin: 0;
 }
 
@@ -1421,163 +1369,9 @@
  }
 }
 
-/* ---- SERVICE PAGE: INK EDITORIAL BAND ---- */
-/* Ink band, matching the homepage as-creds treatment.
-   Sits between the white hero and the white included grid so
-   the page alternates ink and white the way the homepage does.
-   Padding is 72px to match the other ink bands, NOT the
-   as-space-section token, which nothing on the site uses. */
-.as-allsorts .as-svc-editorial {
-  background-color: rgb(23, 23, 26);
-  padding: 72px 0;
-}
-.as-allsorts .as-svc-editorial__header {
-  max-width: 720px;
-  margin-bottom: 48px;
-}
-.as-allsorts .as-svc-editorial__headline {
-  color: var(--white);
-}
-.as-allsorts .as-svc-editorial__body {
-  color: rgb(183, 183, 191);
-}
-
-/* as-row-list is flex by default and only becomes a grid inside
-   the CTA, so the layout is declared here rather than inherited.
-   Two columns, because these descriptions are prose and would
-   be too cramped in the four-column creds grid. */
-.as-allsorts .as-svc-editorial .as-row-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-}
-
-/* Row items carry a white card treatment because they were built
-   for the CTA on white. On ink they must be bare type, matching
-   the as-backstory editorial band on the homepage. */
-.as-allsorts .as-svc-editorial .as-row-item {
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-}
-.as-allsorts .as-svc-editorial .as-row-item__title {
-  color: var(--white);
-}
-.as-allsorts .as-svc-editorial .as-row-item__desc {
-  color: rgb(183, 183, 191);
-}
-
-@media (max-width: 767px) {
-  .as-allsorts .as-svc-editorial .as-row-list {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .as-allsorts .as-svc-editorial {
-    padding: 56px 0;
-  }
-}
-
-/* ---- SERVICE PAGE: TIER FIT BAND ---- */
-/* White band splitting the process and proof ink sections.
-   Reuses the homepage as-pos-card component. That grid is
-   declared inside the positioning section only, so the
-   columns are declared again here rather than inherited. */
-.as-allsorts .as-svc-fit {
-  background-color: var(--white);
-  padding: 80px 0;
-}
-.as-allsorts .as-svc-fit__header {
-  max-width: 720px;
-  margin-bottom: 48px;
-}
-.as-allsorts .as-svc-fit__body {
-  color: var(--grey-500);
-}
-.as-allsorts .as-svc-fit .as-pos-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
-}
-.as-allsorts .as-svc-fit__credit {
-  max-width: 860px;
-  margin: 48px 0 0;
-  color: var(--grey-500);
-}
-
-@media (max-width: 767px) {
-  .as-allsorts .as-svc-fit {
-    padding: 56px 0;
-  }
-  .as-allsorts .as-svc-fit .as-pos-cards {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---- SERVICE PAGE: PROOF BAND ---- */
-.as-allsorts .as-svc-proof {
-  background-color: rgb(23, 23, 26);
-  padding: 72px 0;
-}
-.as-allsorts .as-svc-proof__quote {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(1.5rem, 1rem + 1.6vw, 2rem);
-  line-height: 1.35;
-  color: var(--white);
-  max-width: 860px;
-  margin: 24px 0 0;
-  padding: 0 0 0 24px;
-  border-left: 3px solid var(--candy-pink);
-}
-.as-allsorts .as-svc-proof__attribution {
-  font-size: 15px;
-  color: rgb(138, 138, 148);
-  margin: 20px 0 0 27px;
-}
-.as-allsorts .as-svc-proof__links {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  margin-top: 56px;
-}
-.as-allsorts .as-svc-proof__link {
-  display: block;
-  text-decoration: none;
-  border-top: 2px solid rgba(255, 255, 255, 0.16);
-  padding-top: 20px;
-  transition: border-color 0.2s ease;
-}
-.as-allsorts .as-svc-proof__link:hover {
-  border-top-color: var(--candy-pink);
-}
-.as-allsorts .as-svc-proof__link-client {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 24px;
-  color: var(--white);
-  margin-bottom: 8px;
-}
-.as-allsorts .as-svc-proof__link-desc {
-  display: block;
-  font-size: 15px;
-  line-height: 1.55;
-  color: rgb(183, 183, 191);
-}
-
-@media (max-width: 767px) {
-  .as-allsorts .as-svc-proof {
-    padding: 56px 0;
-  }
-  .as-allsorts .as-svc-proof__links {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-}
-
 .as-svc-process {
  background: var(--as-white);
+ padding: var(--as-space-section) var(--as-space-section-side);
 }
 
 .as-svc-process__inner {
@@ -1586,8 +1380,8 @@
 .as-svc-process__header {
  display: flex;
  flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
+ gap: 0.8rem;
+ margin-bottom: 3.5rem;
 }
 
 .as-svc-process__steps {
@@ -1629,19 +1423,18 @@
 
 .as-svc-process__step-title {
  font-family: var(--font-body);
- font-size: 17px;
+ font-size: 0.92rem;
  font-weight: 600;
- line-height: 1.40;
  color: var(--as-black);
  margin: 0;
 }
 
 .as-svc-process__step-desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
+ font-size: 0.83rem;
+ font-weight: 300;
  color: var(--as-text-body);
- line-height: 1.60;
+ line-height: 1.6;
  margin: 0;
 }
 
@@ -1666,7 +1459,7 @@
 .as-svc-bottom__col {
  display: flex;
  flex-direction: column;
- gap: 24px;
+ gap: 1.8rem;
 }
 
 .as-svc-bottom__col-header {
@@ -1689,10 +1482,10 @@
  align-items: flex-start;
  gap: 0.8rem;
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
+ font-size: 0.9rem;
+ font-weight: 300;
  color: var(--as-text-secondary);
- line-height: 1.60;
+ line-height: 1.55;
 }
 
 .as-svc-perfect__list li i {
@@ -1713,7 +1506,7 @@
 
 .as-svc-pricing__tier {
  background: #fff;
- padding: 24px 32px;
+ padding: 1.6rem 1.8rem;
  display: flex;
  align-items: center;
  justify-content: space-between;
@@ -1738,18 +1531,16 @@
 
 .as-svc-pricing__tier-name {
  font-family: var(--font-body);
- font-size: 17px;
+ font-size: 0.9rem;
  font-weight: 600;
- line-height: 1.40;
  color: var(--as-black);
  margin: 0;
 }
 
 .as-svc-pricing__tier-desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 0.78rem;
+ font-weight: 300;
  color: var(--as-mid);
  margin: 0;
 }
@@ -1829,20 +1620,12 @@
 .as-svc-cta__left {
  display: flex;
  flex-direction: column;
- gap: 24px;
-}
-
-/* Deep-page centred-CTA headline size - shared by services + case-study
-   CTAs only. NOT homepage/About (.as-cta__headline), which stays at the
-   original clamp(2rem, 3.5vw, 3rem). */
-.as-svc-cta__headline,
-.as-cs-page-cta__headline,
-.as-cs-hub-cta__headline {
- font-size: clamp(2rem, 1rem + 3.2vw, 3.5rem);
+ gap: 1rem;
 }
 
 .as-svc-cta__headline {
  font-family: var(--font-display);
+ font-size: clamp(1.6rem, 3vw, 2.4rem);
  font-weight: 400;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -1852,9 +1635,9 @@
 
 .as-svc-cta__body {
  font-family: var(--font-body);
- font-size: 16px;
- font-weight: 400;
- line-height: 1.70;
+ font-size: 0.95rem;
+ font-weight: 300;
+ line-height: 1.7;
  color: var(--as-text-secondary);
  margin: 0;
  max-width: 520px;
@@ -2131,7 +1914,7 @@
 
 .as-sell-hook__body {
  font-family: var(--font-body);
- font-weight: 400;
+ font-weight: 300;
  font-size: 1.05rem;
  line-height: 1.7;
  color: #e2e2e2;
@@ -2170,7 +1953,7 @@
 
 .as-sell-promise__body {
  font-family: var(--font-body);
- font-weight: 400;
+ font-weight: 300;
  font-size: 1rem;
  line-height: 1.75;
  color: var(--as-text-secondary);
@@ -2216,7 +1999,7 @@
  padding: 1rem 1.4rem;
  font-family: var(--font-body);
  font-size: 0.9rem;
- font-weight: 400;
+ font-weight: 300;
  color: var(--as-text-body);
  text-align: center;
  border-bottom: 1px solid var(--as-border);
@@ -2284,7 +2067,7 @@
 
 .as-sell-speed__body {
  font-family: var(--font-body);
- font-weight: 400;
+ font-weight: 300;
  font-size: 1.05rem;
  line-height: 1.7;
  color: rgba(0, 49, 44, 0.72);
@@ -2323,7 +2106,7 @@
 
 .as-sell-upgrade__body {
  font-family: var(--font-body);
- font-weight: 400;
+ font-weight: 300;
  font-size: 1.05rem;
  line-height: 1.7;
  color: var(--as-pink-ink);
@@ -2382,7 +2165,7 @@
 
 .as-cs-hero__inner {
  display: grid;
- grid-template-columns: 1.15fr 1fr;
+ grid-template-columns: 1fr 360px;
  gap: 6rem;
  align-items: start;
 }
@@ -2390,7 +2173,53 @@
 .as-cs-hero__left {
  display: flex;
  flex-direction: column;
- gap: 32px;
+ gap: 1.8rem;
+}
+
+.as-cs-hero__back {
+ display: inline-flex;
+ align-items: center;
+ gap: 0.5rem;
+ font-family: var(--font-body);
+ font-size: 0.82rem;
+ font-weight: 400;
+ color: var(--as-mid);
+ text-decoration: none;
+ transition: color var(--transition);
+}
+
+.as-cs-hero__back:hover {
+ color: var(--as-black);
+}
+
+.as-cs-hero__back i {
+ font-size: 0.75rem;
+}
+
+.as-cs-hero__tags {
+ display: flex;
+ align-items: center;
+ gap: 0.6rem;
+ flex-wrap: wrap;
+}
+
+.as-cs-hero__tag {
+ display: inline-flex;
+ align-items: center;
+ gap: 0.4rem;
+ background: var(--as-purple-light);
+ border-radius: 100px;
+ padding: 0.3rem 0.8rem;
+ font-family: var(--font-mono);
+ font-size: 0.7rem;
+ font-weight: 500;
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ color: var(--as-purple);
+}
+
+.as-cs-hero__tag i {
+ font-size: 0.65rem;
 }
 
 .as-cs-hero__headline {
@@ -2410,33 +2239,20 @@
 
 .as-cs-hero__desc {
  font-family: var(--font-body);
- font-size: 18px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 1.05rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-body);
- margin: 0;
-}
-
-/* Shared by the case-study hero and the About hero - one declaration block, two pages. */
-.as-cs-hero__spec,
-.as-about-hero__spec {
- font-family: var(--font-body);
- font-size: 15px;
- font-weight: 700;
- line-height: 1.6;
- color: var(--grey-500);
- padding-top: 0;
  margin: 0;
 }
 
 .as-cs-hero__link {
  display: inline-flex;
- align-self: flex-start;
  align-items: center;
  gap: 0.5rem;
  font-family: var(--font-body);
- font-size: 14px;
- font-weight: 600;
+ font-size: 0.88rem;
+ font-weight: 500;
  color: var(--as-purple);
  text-decoration: none;
  transition: gap var(--transition);
@@ -2453,6 +2269,54 @@
 .as-cs-hero__right {
  display: flex;
  flex-direction: column;
+ gap: 1px;
+ border: 1px solid var(--as-border);
+ border-radius: var(--radius-md);
+ overflow: hidden;
+}
+
+.as-cs-hero__meta-item {
+ background: var(--white);
+ padding: 1.2rem 1.6rem;
+ display: flex;
+ align-items: center;
+ gap: 1.2rem;
+ border-bottom: 1px solid var(--as-border);
+}
+
+.as-cs-hero__meta-item:last-child {
+ border-bottom: none;
+}
+
+.as-cs-hero__meta-icon {
+ color: var(--as-purple);
+ font-size: 1.2rem;
+ margin-top: 0.1rem;
+ width: 1.4rem;
+ text-align: center;
+ flex-shrink: 0;
+}
+
+.as-cs-hero__meta-content {
+ display: flex;
+ flex-direction: column;
+ gap: 0.1rem;
+}
+
+.as-cs-hero__meta-label {
+ font-family: var(--font-mono);
+ font-size: 0.7rem;
+ font-weight: 500;
+ letter-spacing: 0.1em;
+ text-transform: uppercase;
+ color: var(--as-mid);
+}
+
+.as-cs-hero__meta-value {
+ font-family: var(--font-body);
+ font-size: 0.88rem;
+ font-weight: 400;
+ color: var(--as-black);
 }
 
 .as-cs-stats {
@@ -2469,7 +2333,7 @@
 
 .as-cs-stats__item {
  background: var(--as-black);
- padding: 32px;
+ padding: 2.4rem 2rem;
  display: flex;
  flex-direction: column;
  gap: 0.4rem;
@@ -2517,12 +2381,12 @@
 .as-cs-challenge__left {
  display: flex;
  flex-direction: column;
- gap: 24px;
+ gap: 1rem;
 }
 
 .as-cs-section-headline {
  font-family: var(--font-heading);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.6rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -2568,7 +2432,7 @@
  gap: 0.7rem;
  font-family: var(--font-body);
  font-size: 0.9rem;
- font-weight: 400;
+ font-weight: 300;
  color: var(--as-text-secondary);
  line-height: 1.55;
 }
@@ -2582,6 +2446,7 @@
 
 .as-cs-solution {
  background: var(--white);
+ padding: var(--as-space-section) var(--as-space-section-side);
 }
 
 .as-cs-solution__inner {
@@ -2590,8 +2455,8 @@
 .as-cs-solution__header {
  display: flex;
  flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
+ gap: 0.8rem;
+ margin-bottom: 3.5rem;
 }
 
 .as-cs-solution__grid {
@@ -2652,10 +2517,10 @@
  align-items: flex-start;
  gap: 0.6rem;
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
+ font-size: 0.83rem;
+ font-weight: 300;
  color: var(--as-text-body);
- line-height: 1.60;
+ line-height: 1.5;
 }
 
 .as-cs-phase__list li i {
@@ -2668,9 +2533,9 @@
 /* Challenge section intro paragraph */
 .as-cs-challenge__intro {
  font-family: var(--font-body);
- font-size: 16px;
- font-weight: 400;
- line-height: 1.70;
+ font-size: 0.95rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-secondary);
  margin: 0.4rem 0 0;
 }
@@ -2703,8 +2568,8 @@
 .as-cs-beforeafter__header {
  display: flex;
  flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
+ gap: 0.8rem;
+ margin-bottom: 3.5rem;
 }
 
 .as-cs-beforeafter__grid {
@@ -2778,10 +2643,10 @@
 
 .as-cs-beforeafter__caption {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
+ font-size: 0.82rem;
+ font-weight: 300;
  color: var(--as-mid);
- line-height: 1.60;
+ line-height: 1.5;
 }
 
 .as-cs-testimonial {
@@ -2868,12 +2733,13 @@
 .as-cs-page-cta__left {
  display: flex;
  flex-direction: column;
- gap: 24px;
+ gap: 0.8rem;
  max-width: 560px;
 }
 
 .as-cs-page-cta__headline {
  font-family: var(--font-heading);
+ font-size: clamp(1.8rem, 3vw, 2.6rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -2883,9 +2749,9 @@
 
 .as-cs-page-cta__body {
  font-family: var(--font-body);
- font-size: 16px;
- font-weight: 400;
- line-height: 1.70;
+ font-size: 0.95rem;
+ font-weight: 300;
+ line-height: 1.7;
  color: var(--as-text-body);
  margin: 0;
 }
@@ -2952,7 +2818,7 @@
 .as-about-hero__left {
  display: flex;
  flex-direction: column;
- gap: 32px;
+ gap: 1.8rem;
 }
 
 .as-about-hero__headline {
@@ -2972,9 +2838,9 @@
 
 .as-about-hero__body {
  font-family: var(--font-body);
- font-size: 18px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 1.05rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-secondary);
  margin: 0;
 }
@@ -2992,7 +2858,7 @@
  gap: 0.7rem;
  font-family: var(--font-body);
  font-size: 0.88rem;
- font-weight: 400;
+ font-weight: 300;
  color: var(--as-mid);
 }
 
@@ -3045,20 +2911,10 @@
  letter-spacing: 0.04em;
 }
 
-@media (min-width: 481px) {
-  .as-about-hero {
-    padding-top: 8px;
-  }
-
-  .as-about-hero__photo {
-    max-height: 480px;
-  }
-}
-
 /* Shared about section eyebrow / headline / body */
 .as-about-section-headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.6rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -3069,8 +2925,8 @@
 .as-about-section-body {
  font-family: var(--font-body);
  font-size: 1rem;
- font-weight: 400;
- line-height: 1.70;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-body);
  margin: 0;
 }
@@ -3098,7 +2954,7 @@
 .as-about-background__left {
  display: flex;
  flex-direction: column;
- gap: 24px;
+ gap: 1.2rem;
 }
 
 .as-about-background__right {
@@ -3112,7 +2968,7 @@
 
 .as-about-role {
  background: #fff;
- padding: 32px;
+ padding: 2rem;
  display: flex;
  gap: 1.4rem;
  align-items: flex-start;
@@ -3150,16 +3006,15 @@
 
 .as-about-role__title {
  font-family: var(--font-body);
- font-size: 17px;
+ font-size: 0.92rem;
  font-weight: 600;
- line-height: 1.40;
  color: var(--as-black);
  margin: 0;
 }
 
 .as-about-role__period {
- font-family: var(--font-mono);
- font-size: 12.5px;
+ font-family: var(--font-body);
+ font-size: 0.75rem;
  font-weight: 400;
  color: var(--as-mid);
  white-space: nowrap;
@@ -3167,31 +3022,31 @@
 
 .as-about-role__company {
  font-family: var(--font-body);
- font-size: 14px;
+ font-size: 0.82rem;
  font-weight: 500;
- line-height: 1.50;
  color: var(--as-purple);
  margin: 0;
 }
 
 .as-about-role__desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
+ font-size: 0.85rem;
+ font-weight: 300;
  color: var(--as-text-body);
- line-height: 1.60;
+ line-height: 1.6;
  margin: 0.4rem 0 0;
 }
 
 /* Why Solo */
 .as-about-solo {
  background: var(--as-black);
+ padding: var(--as-space-section) var(--as-space-section-side);
 }
 
 .as-about-solo__inner {
  display: grid;
  grid-template-columns: 1fr 1fr; /* fr, not %  — % + gap overflows the container */
- gap: 96px;
+ gap: 80px;
  align-items: start;
 }
 
@@ -3207,7 +3062,7 @@
 
 .as-about-solo__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.8rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -3218,7 +3073,7 @@
 .as-about-solo__body {
  font-family: var(--font-body);
  font-size: 1rem;
- font-weight: 400;
+ font-weight: 300;
  line-height: 1.75;
  color: rgba(255, 255, 255, 0.55);
  margin: 0 0 24px;
@@ -3254,15 +3109,14 @@
  font-family: var(--font-body);
  font-size: 17px;
  font-weight: 600;
- line-height: 1.40;
  margin: 0 0 6px;
 }
 
 .as-about-solo__reason-desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 14.5px;
+ font-weight: 300;
+ line-height: 1.65;
  margin: 0;
 }
 
@@ -3279,8 +3133,8 @@
 .as-about-work__header {
  display: flex;
  flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
+ gap: 0.8rem;
+ margin-bottom: 3.5rem;
 }
 
 .as-about-work__grid {
@@ -3293,7 +3147,7 @@
  background: var(--white);
  border: 1px solid var(--as-border);
  border-radius: var(--radius-md);
- padding: 32px;
+ padding: 2.2rem;
  display: flex;
  flex-direction: column;
  gap: 1rem;
@@ -3306,18 +3160,17 @@
 
 .as-about-work__card-title {
  font-family: var(--font-body);
- font-size: 17px;
+ font-size: 1rem;
  font-weight: 600;
- line-height: 1.40;
  color: var(--as-black);
  margin: 0;
 }
 
 .as-about-work__card-desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 0.88rem;
+ font-weight: 300;
+ line-height: 1.7;
  color: var(--as-text-body);
  margin: 0;
 }
@@ -3325,6 +3178,7 @@
 /* Skills */
 .as-about-skills {
  background: var(--white);
+ padding: var(--as-space-section) var(--as-space-section-side);
 }
 
 .as-about-skills__inner {
@@ -3337,7 +3191,7 @@
 
 .as-about-skills__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.8rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -3348,7 +3202,7 @@
 .as-about-skills__intro {
  font-family: var(--font-body);
  font-size: 1rem;
- font-weight: 400;
+ font-weight: 300;
  line-height: 1.75;
  color: var(--as-text-body);
  max-width: 760px;
@@ -3383,18 +3237,18 @@
 
 .as-about-skills__group-title {
  font-family: var(--font-display);
- font-size: 24px;
+ font-size: 22px;
  font-weight: 800;
- line-height: 1.20;
+ line-height: 1.15;
  color: var(--as-black);
  margin: 0 0 18px;
 }
 
 .as-about-skills__group-list {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 0.86rem;
+ font-weight: 300;
+ line-height: 1.7;
  color: var(--as-text-secondary);
  margin: 0;
 }
@@ -3427,6 +3281,88 @@
  }
 }
 
+/* Current Focus */
+.as-about-focus {
+ background: var(--as-white);
+ padding: var(--as-space-section) var(--as-space-section-side);
+}
+
+.as-about-focus__inner {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 1.5rem;
+}
+
+.as-about-focus__card {
+ background: var(--white);
+ border: 1px solid var(--as-border);
+ border-radius: var(--radius-md);
+ padding: 2.4rem;
+ display: flex;
+ flex-direction: column;
+ gap: 1.2rem;
+}
+
+.as-about-focus__card-icon {
+ width: 44px;
+ height: 44px;
+ border-radius: var(--radius-sm);
+ background: var(--as-purple-light);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: var(--as-purple);
+ font-size: 1.1rem;
+}
+
+.as-about-focus__card-title {
+ font-family: var(--font-display);
+ font-size: 1.5rem;
+ font-weight: 400;
+ line-height: 1.15;
+ letter-spacing: -0.01em;
+ color: var(--as-black);
+ margin: 0;
+}
+
+.as-about-focus__card-desc {
+ font-family: var(--font-body);
+ font-size: 0.9rem;
+ font-weight: 300;
+ line-height: 1.7;
+ color: var(--as-text-body);
+ margin: 0;
+}
+
+.as-about-focus__card--dark .as-about-focus__card-desc {
+ color: rgba(255, 255, 255, 0.5);
+}
+
+.as-about-focus__tag {
+ display: inline-flex;
+ align-items: center;
+ gap: 0.4rem;
+ background: var(--as-purple-light);
+ border-radius: 100px;
+ padding: 0.35rem 0.8rem;
+ font-family: var(--font-body);
+ font-size: 0.72rem;
+ font-weight: 500;
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ color: var(--as-purple);
+ width: fit-content;
+}
+
+.as-about-focus__tag i {
+ font-size: 0.65rem;
+}
+
+.as-about-focus__tag--light {
+ background: rgba(107, 79, 187, 0.2);
+ color: rgba(180, 160, 230, 1);
+}
+
 @media (max-width: 960px) {
  .as-about-hero__inner,
  .as-about-background__inner {
@@ -3434,7 +3370,8 @@
  gap: 3.5rem;
  }
 
- .as-about-solo__inner {
+ .as-about-solo__inner,
+ .as-about-focus__inner {
  grid-template-columns: 1fr;
  gap: 2rem;
  }
@@ -3463,7 +3400,8 @@
  .as-about-background,
  .as-about-solo,
  .as-about-work,
- .as-about-skills {
+ .as-about-skills,
+ .as-about-focus {
  padding: var(--as-space-section-mobile) var(--as-space-section-side-mobile);
  }
 }
@@ -3504,9 +3442,9 @@
 
 .as-hub-hero__desc {
  font-family: var(--font-body);
- font-size: 18px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 1.05rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-body);
  max-width: 640px;
  margin: 0;
@@ -3520,10 +3458,11 @@
  Only the 70/74px padding refinement is .as-allsorts-scoped below. */
 .as-hub-bar {
  background: var(--liquorice);
+ padding: var(--as-space-section) var(--as-space-section-side);
 }
 
 .as-hub-bar__header {
- margin-bottom: 56px;
+ margin-bottom: 48px;
 }
 
 .as-hub-bar__header .as-eyebrow {
@@ -3532,7 +3471,7 @@
 
 .as-hub-bar__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.8rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -3568,18 +3507,18 @@
 
 .as-hub-bar__col-title {
  font-family: var(--font-display);
- font-size: 24px;
+ font-size: 21px;
  font-weight: 800;
- line-height: 1.20;
+ line-height: 1.15;
  color: #fff;
  margin: 0 0 10px;
 }
 
 .as-hub-bar__col-desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 14.5px;
+ font-weight: 300;
+ line-height: 1.65;
  color: rgba(255, 255, 255, 0.55);
  margin: 0;
 }
@@ -3624,13 +3563,13 @@
 .as-hub-services__header {
  display: flex;
  flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
+ gap: 0.8rem;
+ margin-bottom: 3.5rem;
 }
 
 .as-hub-services__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.6rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -3657,10 +3596,10 @@
 }
 
 .as-hub-card__top {
- padding: 28px 26px 0;
+ padding: 2.4rem 2.4rem 2rem;
  display: flex;
  flex-direction: column;
- gap: 0;
+ gap: 1.2rem;
  flex-grow: 1;
 }
 
@@ -3669,13 +3608,12 @@
 }
 
 .as-hub-card__tag {
- font-family: var(--font-mono);
- font-size: 11.5px;
- font-weight: 500;
- letter-spacing: var(--ls-label);
+ font-family: var(--font-body);
+ font-size: 0.7rem;
+ font-weight: 600;
+ letter-spacing: 0.12em;
  text-transform: uppercase;
  color: var(--as-purple);
- margin: 20px 0 9px;
 }
 
 .as-hub-card__title {
@@ -3685,45 +3623,42 @@
  line-height: 1.15;
  letter-spacing: -0.01em;
  color: var(--as-black);
- margin: 0 0 12.8px;
+ margin: 0;
 }
 
 .as-hub-card__price {
  font-family: var(--font-body);
- font-size: 14px;
- font-weight: 500;
- line-height: 1.50;
+ font-size: 0.82rem;
+ font-weight: 400;
  color: var(--as-mid);
- margin: 16px 0 0;
 }
 
 .as-hub-card__price strong {
- font-family: var(--font-mono);
- font-weight: 500;
+ font-weight: 700;
  color: var(--as-black);
  font-size: 0.9rem;
 }
 
 .as-hub-card__desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 0.9rem;
+ font-weight: 300;
+ line-height: 1.7;
  color: var(--as-text-body);
- margin: 16px 0 20px;
+ margin: 0;
 }
 
 .as-hub-card__divider {
  height: 1px;
  background: var(--as-border);
- margin: 0 26px;
+ margin: 0 2.4rem;
 }
 
 .as-hub-card__features {
- padding: 18px 26px 38.4px;
+ padding: 1.4rem 2.4rem;
  display: flex;
  flex-direction: column;
- gap: 11px;
+ gap: 0.55rem;
  list-style: none;
  margin: 0;
 }
@@ -3733,20 +3668,19 @@
  align-items: center;
  gap: 0.6rem;
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 0.83rem;
+ font-weight: 300;
  color: var(--as-text-secondary);
 }
 
 .as-hub-card__features li i {
  color: var(--as-purple);
- font-size: 12px;
+ font-size: 0.72rem;
  flex-shrink: 0;
 }
 
 .as-hub-card__footer {
- padding: 24px 26px 28px;
+ padding: 1.4rem 2.4rem;
  border-top: 1px solid var(--as-border);
  display: flex;
  align-items: center;
@@ -3755,8 +3689,8 @@
 
 .as-hub-card__link {
  font-family: var(--font-body);
- font-size: 14px;
- font-weight: 600;
+ font-size: 0.88rem;
+ font-weight: 500;
  color: var(--as-black);
  display: flex;
  align-items: center;
@@ -3781,7 +3715,7 @@
 .as-hub-notsure__left {
  display: flex;
  flex-direction: column;
- gap: 24px;
+ gap: 1rem;
 }
 
 .as-hub-notsure__tag {
@@ -3792,10 +3726,10 @@
  border: 1px solid rgba(255, 255, 255, 0.1);
  border-radius: 100px;
  padding: 0.4rem 0.9rem;
- font-family: var(--font-mono);
- font-size: 11.5px;
+ font-family: var(--font-body);
+ font-size: 0.72rem;
  font-weight: 500;
- letter-spacing: var(--ls-label);
+ letter-spacing: 0.1em;
  text-transform: uppercase;
  color: rgba(255, 255, 255, 0.5);
  width: fit-content;
@@ -3807,7 +3741,7 @@
 
 .as-hub-notsure__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.6rem, 3vw, 2.4rem);
  font-weight: 400;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -3817,9 +3751,9 @@
 
 .as-hub-notsure__body {
  font-family: var(--font-body);
- font-size: 16px;
- font-weight: 400;
- line-height: 1.70;
+ font-size: 0.95rem;
+ font-weight: 300;
+ line-height: 1.7;
  color: var(--as-text-secondary);
  margin: 0;
  max-width: 520px;
@@ -3874,7 +3808,7 @@
 .as-cs-hub-hero__inner {
  display: flex;
  flex-direction: column;
- gap: 32px;
+ gap: 1.4rem;
 }
 
 .as-cs-hub-hero__headline {
@@ -3894,15 +3828,16 @@
 
 .as-cs-hub-hero__desc {
  font-family: var(--font-body);
- font-size: 18px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 1.05rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-body);
  margin: 0;
 }
 
 .as-cs-hub-grid {
  background: var(--white);
+ padding: var(--as-space-section) var(--as-space-section-side);
 }
 
 .as-cs-hub-grid__inner {
@@ -3932,11 +3867,12 @@
 .as-cs-hub-cta__left {
  display: flex;
  flex-direction: column;
- gap: 24px;
+ gap: 0.8rem;
 }
 
 .as-cs-hub-cta__headline {
  font-family: var(--font-display);
+ font-size: clamp(1.6rem, 3vw, 2.4rem);
  font-weight: 400;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -3946,9 +3882,9 @@
 
 .as-cs-hub-cta__body {
  font-family: var(--font-body);
- font-size: 16px;
- font-weight: 400;
- line-height: 1.70;
+ font-size: 0.95rem;
+ font-weight: 300;
+ line-height: 1.7;
  color: var(--as-text-secondary);
  margin: 0;
 }
@@ -4012,9 +3948,9 @@
 
 .as-contact-hero__intro {
  font-family: var(--font-body);
- font-size: 18px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 1.05rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-body);
  max-width: 640px;
  margin: 0;
@@ -4029,10 +3965,11 @@
  refinement is .as-allsorts-scoped below. */
 .as-contact-bar {
  background: var(--as-black);
+ padding: var(--as-space-section) var(--as-space-section-side);
 }
 
 .as-contact-bar__header {
- margin-bottom: 56px;
+ margin-bottom: 48px;
 }
 
 .as-contact-bar__header .as-eyebrow {
@@ -4041,7 +3978,7 @@
 
 .as-contact-bar__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.8rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -4077,18 +4014,18 @@
 
 .as-contact-bar__col-title {
  font-family: var(--font-display);
- font-size: 24px;
+ font-size: 21px;
  font-weight: 800;
- line-height: 1.20;
+ line-height: 1.15;
  color: #fff;
  margin: 0 0 10px;
 }
 
 .as-contact-bar__col-desc {
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 14.5px;
+ font-weight: 300;
+ line-height: 1.65;
  color: rgba(255, 255, 255, 0.55);
  margin: 0;
 }
@@ -4102,7 +4039,7 @@
 .as-contact-bar__col-links a {
  font-family: var(--font-body);
  font-size: 14.5px;
- font-weight: 400;
+ font-weight: 300;
  text-decoration: none;
  color: rgba(255, 255, 255, 0.55);
 }
@@ -4150,12 +4087,12 @@
 .as-contact-form__left {
  display: flex;
  flex-direction: column;
- gap: 24px;
+ gap: 1.4rem;
 }
 
 .as-contact-form__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.6rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -4165,9 +4102,9 @@
 
 .as-contact-form__desc {
  font-family: var(--font-body);
- font-size: 16px;
- font-weight: 400;
- line-height: 1.70;
+ font-size: 0.95rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-body);
  margin: 0;
 }
@@ -4184,9 +4121,8 @@
  align-items: center;
  gap: 0.6rem;
  font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- line-height: 1.60;
+ font-size: 0.83rem;
+ font-weight: 300;
  color: var(--as-text-body);
 }
 
@@ -4197,11 +4133,10 @@
 }
 
 .as-cf-wrap {
- font-family: var(--font-body);
  background: #fff;
  border: 1px solid var(--as-border);
  border-radius: var(--radius-md);
- padding: 48px;
+ padding: 2.8rem;
 }
 
 .as-cf-row {
@@ -4216,10 +4151,10 @@
 
 .as-cf-field label {
  display: block;
- font-family: var(--font-mono);
- font-size: 12.5px;
- font-weight: 500;
- letter-spacing: 2px;
+ font-family: var(--font-body);
+ font-size: 0.78rem;
+ font-weight: 600;
+ letter-spacing: 0.06em;
  text-transform: uppercase;
  color: var(--as-black);
  margin-bottom: 0.4rem;
@@ -4230,8 +4165,8 @@
 .as-cf-field textarea {
  width: 100%;
  font-family: var(--font-body);
- font-size: 16px;
- font-weight: 400;
+ font-size: 0.92rem;
+ font-weight: 300;
  color: var(--as-black);
  background: #fff;
  border: 1.5px solid var(--as-border);
@@ -4263,8 +4198,8 @@
 
 .as-cf-gdpr {
  font-family: var(--font-body);
- font-size: 13px;
- font-weight: 400;
+ font-size: 0.75rem;
+ font-weight: 300;
  color: #999;
  line-height: 1.55;
  margin-bottom: 1.4rem;
@@ -4280,7 +4215,7 @@
  font-family: var(--font-body);
  font-size: 0.9rem;
  font-weight: 500;
- background: var(--ink-900);
+ background: var(--as-black);
  color: #fff;
  border: none;
  border-radius: 100px;
@@ -4288,6 +4223,7 @@
  cursor: pointer;
  transition: background var(--transition);
  letter-spacing: 0.01em;
+ width: 100%;
  box-sizing: border-box;
 }
 
@@ -4303,8 +4239,7 @@
 .as-cf-submit-error {
  display: none;
  font-family: var(--font-body);
- font-size: 14px;
- font-weight: 500;
+ font-size: 0.75rem;
  color: #cc0000;
  text-align: center;
  margin-top: 0.8rem;
@@ -4317,13 +4252,12 @@
 }
 
 .as-cf-success-icon {
- font-family: var(--font-body);
- font-size: 36px;
+ font-size: 2.2rem;
  margin-bottom: 1rem;
  color: var(--as-purple);
 }
 
-.as-cf-success h3 {
+.as-cf-success h4 {
  font-family: var(--font-display);
  font-size: 1.6rem;
  font-weight: 400;
@@ -4335,7 +4269,7 @@
 .as-cf-success p {
  font-family: var(--font-body);
  font-size: 0.9rem;
- font-weight: 400;
+ font-weight: 300;
  color: var(--as-text-body);
  line-height: 1.65;
  margin: 0;
@@ -4379,7 +4313,6 @@
 .as-privacy,
 .as-tos,
 .as-cookie {
- font-family: var(--font-body);
  padding: 80px 0 120px;
  background: var(--as-white);
 }
@@ -4838,7 +4771,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 .as-breadcrumb {
  background: var(--as-white);
- padding: 1.5rem 0 0 0;
+ padding: 4rem 0 0 0;
 }
 
 .as-breadcrumb__inner {
@@ -4893,7 +4826,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  ============================================================= */
 
 .as-footer {
- background-color: var(--liquorice);
+ background-color: var(--as-black);
  padding: 64px 40px 48px;
 }
 
@@ -4914,9 +4847,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 .as-footer__tagline {
  font-family: var(--font-heading);
- font-weight: 700;
- font-size: 20px;
- line-height: 1.35;
+ font-size: 1rem;
  color: #fff;
  margin: 0 0 16px;
  letter-spacing: 0.01em;
@@ -4946,11 +4877,10 @@ a.cky-banner-element.as-cookie__btn:hover {
 }
 
 .as-footer__link-heading {
- font-family: var(--font-mono);
- font-weight: 500;
- font-size: 12.5px;
+ font-family: var(--font-heading);
+ font-size: 0.75rem;
  text-transform: uppercase;
- letter-spacing: var(--ls-label);
+ letter-spacing: 0.12em;
  color: rgba(255,255,255,0.35);
  margin: 0 0 16px;
 }
@@ -5010,7 +4940,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  gap: 0.75rem;
  font-family: var(--font-display);
  font-weight: 800;
- font-style: normal;
+ font-style: italic;
  font-size: 1.6rem;
  color: var(--as-white);
  text-decoration: none;
@@ -5059,13 +4989,13 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-faq__header {
  display: flex;
  flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
+ gap: 0.8rem;
+ margin-bottom: 3rem;
 }
 
 .as-faq__headline {
  font-family: var(--font-display);
- font-size: clamp(2rem, 3.5vw, 3rem);
+ font-size: clamp(1.8rem, 3vw, 2.6rem);
  font-weight: 800;
  line-height: 1.1;
  letter-spacing: -0.02em;
@@ -5095,14 +5025,14 @@ a.cky-banner-element.as-cookie__btn:hover {
  align-items: center;
  justify-content: space-between;
  gap: 2rem;
- padding: 24px 32px;
+ padding: 1.6rem 2rem;
  font-family: var(--font-body);
- font-size: 17px;
+ font-size: 0.95rem;
  font-weight: 600;
- line-height: 1.40;
  color: var(--as-black);
  cursor: pointer;
  list-style: none;
+ transition: background var(--transition);
 }
 
 .as-faq__question::-webkit-details-marker {
@@ -5112,7 +5042,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-faq__question::after {
  content: '\002B';
  font-size: 1.2rem;
- font-weight: 400;
+ font-weight: 300;
  color: var(--as-purple);
  flex-shrink: 0;
  transition: transform var(--transition);
@@ -5122,11 +5052,15 @@ a.cky-banner-element.as-cookie__btn:hover {
  content: '\2212';
 }
 
+.as-faq__question:hover {
+ background: var(--grey-050);
+}
+
 .as-faq__answer {
  font-family: var(--font-body);
- font-size: 16px;
- font-weight: 400;
- line-height: 1.70;
+ font-size: 0.92rem;
+ font-weight: 300;
+ line-height: 1.75;
  color: var(--as-text-secondary);
  padding: 0 2rem 1.6rem;
  margin: 0;
@@ -5164,6 +5098,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  .as-about-solo,
  .as-about-work,
  .as-about-skills,
+ .as-about-focus,
  .as-hub-services,
  .as-cs-hub-grid,
  .as-cs-challenge,
@@ -5269,12 +5204,12 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--home { aspect-ratio: 2880 / 300; }
 .as-hero--home-high-mid { aspect-ratio: 2880 / 300; background-color: var(--white);}
 .as-hero--home-low-mid { aspect-ratio: 2880 / 300; background-color: var(--white);}
-.as-hero--home-footer { aspect-ratio: 2880 / 200; border-top: none; border-bottom: 5px solid var(--liquorice); }
-.as-hero--about { aspect-ratio: 2880 / 216; }
+.as-hero--home-footer { aspect-ratio: 2880 / 200; border-top: none; border-bottom: 5px solid #000; }
+.as-hero--about { aspect-ratio: 2880 / 300; }
 .as-hero--services { aspect-ratio: 2880 / 300; }
-.as-hero--foundation-build { aspect-ratio: 2880 / 255; }
-.as-hero--site-refresh { aspect-ratio: 2880 / 255; }
-.as-hero--ongoing-support { aspect-ratio: 2880 / 255; }
+.as-hero--foundation-build { aspect-ratio: 2880 / 300; }
+.as-hero--site-refresh { aspect-ratio: 2880 / 300; }
+.as-hero--ongoing-support { aspect-ratio: 2880 / 300; }
 .as-hero--contact { aspect-ratio: 2880 / 300; }
 .as-hero--case-studies { aspect-ratio: 2880 / 300; }
 .as-hero--case-study-terracotta { aspect-ratio: 2880 / 300; }
@@ -5621,12 +5556,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  --radius-sm: 8px;
  --radius-md: 12px;
  --radius-lg: 16px;
- --as-pad-band: 80px;
- --as-pad-ink: 72px;
- --as-pad-cta-top: 80px;
- --as-pad-side: 32px;
- --as-clear-wave: 224px;
- --as-clear-wave-banner: 128px;
 }
 
 /* ============================================================
@@ -5660,6 +5589,23 @@ a.cky-banner-element.as-cookie__btn:hover {
  background-position: 0 0, 5px 3px, 2px 7px, 4px 1px;
 }
 
+/* --- Layered "sandwich": hard-stop candy bands --- */
+.surface-sandwich {
+ background: linear-gradient(#fff 0 24%, var(--liquorice) 24% 38%, var(--candy-pink) 38% 62%, var(--liquorice) 62% 76%, #fff 76% 100%);
+}
+.surface-sandwich-yellow {
+ background: linear-gradient(var(--sunshine) 0 34%, var(--liquorice) 34% 50%, #f6f2e7 50% 66%, var(--liquorice) 66% 82%, var(--tangerine) 82% 100%);
+}
+
+/* --- Sugar-matte fondant (coconut) --- */
+.surface-sugar {
+ background-color: #f6f2e7;
+ background-image:
+ radial-gradient(circle at 30% 30%, rgba(0,0,0,.035) 0 40%, transparent 60%),
+ radial-gradient(circle, rgba(0,0,0,.04) 0 0.6px, transparent 1px);
+ background-size: 100% 100%, 4px 4px;
+}
+
 /* Legibility helper: white label text over a speckle/candy surface */
 .on-speckle { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
 
@@ -5667,7 +5613,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 /* Eyebrow / mono label (shared: hero, form, FAQ) */
 .as-allsorts .as-eyebrow__dot { width: 10px; height: 10px; background: var(--candy-pink); }
-.as-allsorts .as-label { color: var(--bead-blue); font-weight: 500; font-size: 12.5px; letter-spacing: var(--ls-label); }
+.as-allsorts .as-label { color: var(--bead-blue); font-weight: 500; letter-spacing: var(--ls-label); }
 
 /* Breadcrumb — explicit remap off legacy --as-mid/--as-black so it doesn't
  just inherit whatever DM Mono + stale colour tokens happen to cascade to */
@@ -5676,23 +5622,11 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-allsorts .as-breadcrumb__item a:hover,
 .as-allsorts .as-breadcrumb__item--current { color: var(--ink-900); }
 
-.as-allsorts .as-breadcrumb__inner {
- justify-content: flex-start;
-}
-
-.as-allsorts .as-breadcrumb__separator {
- font-family: var(--font-mono);
- font-size: 11.5px;
- color: #c4c4cc;
- padding: 0 4px;
- line-height: 1;
-}
-
 /* Display headings: Fraunces 900 (was DM Serif Display's only weight, 400) */
 .as-allsorts .as-contact-hero__headline,
 .as-allsorts .as-contact-form__headline,
 .as-allsorts .as-faq__headline,
-.as-allsorts .as-cf-success h3,
+.as-allsorts .as-cf-success h4,
 .as-allsorts .as-hub-hero__headline {
  font-weight: var(--fw-display);
  letter-spacing: var(--ls-heading);
@@ -5729,39 +5663,20 @@ a.cky-banner-element.as-cookie__btn:hover {
  line-height: 1;
  --fa-secondary-opacity: 1;
 }
-
-/* Duo colour rotation modifiers - pink/blue/tangerine/sunshine. Explicit
-   classes on the icon <i>, not nth-child: nth-child counts every sibling,
-   so a topper inserted as the container's first child shifts the whole
-   rotation by one slot (Phase 5b regression, fixed here). Shared by
-   .as-row-item__icon and .as-about-role__icon. */
-.as-allsorts .as-icon--pink {
+.as-allsorts .as-row-item:nth-child(1) .as-row-item__icon i {
  --fa-primary-color: #ec4d97;
  --fa-secondary-color: #f6aed0;
  color: #ec4d97;
 }
-.as-allsorts .as-icon--blue {
+.as-allsorts .as-row-item:nth-child(2) .as-row-item__icon i {
  --fa-primary-color: #4f7cc9;
  --fa-secondary-color: #afc4e6;
  color: #4f7cc9;
 }
-.as-allsorts .as-icon--tangerine {
+.as-allsorts .as-row-item:nth-child(3) .as-row-item__icon i {
  --fa-primary-color: #f07d2e;
  --fa-secondary-color: #f8c4a0;
  color: #f07d2e;
-}
-/* SUNSHINE IS A DELIBERATE EXCEPTION to the derived duotone ratio.
-   The other three pairs are: locked palette hex on the shape, fill mixed 54.2 percent
-   toward white. That collapses on yellow, because #f4cf3b is already near-white in value
-   and the derived fill left the icon washed out on a white card.
-   So the SHAPE is darkened toward amber (#d69d1c) and the FILL is left alone.
-   Approved live 14 July 2026 against a #deab24 alternative. Do not restore #f4cf3b here.
-   The palette token --sunshine is still #f4cf3b and is still correct everywhere else,
-   including every fa-slab-press icon on the ink bands. */
-.as-allsorts .as-icon--sunshine {
- --fa-primary-color: #d69d1c;
- --fa-secondary-color: #fae9a6;
- color: #d69d1c;
 }
 
 /* Form "expects" pink-check list */
@@ -5777,23 +5692,19 @@ a.cky-banner-element.as-cookie__btn:hover {
  background: #fff;
 }
 
-/* Submit button — chunky pop, ink (end of the journey, not an invitation -
-   pink would compete with "Get in touch"). Background stays ink-900 on
-   hover, matching the no-colour-change-on-hover pattern every other button
-   in this file uses; only shadow+transform move. */
+/* Submit button — chunky pop, pink (primary action) */
 .as-allsorts .as-cf-submit {
  font-weight: 700;
- font-size: 16px;
- letter-spacing: normal;
- padding: 15px 34px;
- border-radius: 999px;
- background: var(--ink-900);
+ font-size: 15px;
+ background: var(--candy-pink);
  border: 2px solid var(--ink-900);
  box-shadow: var(--pop-md);
  transition: transform var(--dur-fast) var(--ease-pop),
- box-shadow var(--dur-fast) var(--ease-pop);
+ box-shadow var(--dur-fast) var(--ease-pop),
+ background var(--dur-fast);
 }
 .as-allsorts .as-cf-submit:hover {
+ background: var(--candy-pink-deep);
  transform: translate(-1px, -1px);
  box-shadow: var(--pop-lg);
 }
@@ -5843,62 +5754,40 @@ a.cky-banner-element.as-cookie__btn:hover {
 @media (min-width: 481px) {
   .as-allsorts .as-contact-form,
   .as-allsorts .as-faq {
-    padding-top: var(--as-pad-band);
-    padding-bottom: var(--as-pad-band);
+    padding-top: 84px;
+    padding-bottom: 84px;
   }
 }
 
 /* === ALLSORTS DISPLAY HEADINGS — full-weight render, reference line-height ===
-   .as-cf-success h3 added here (was missing before the Fraunces pass - it
-   sets font-family: var(--font-display) too, css:cf-success h3 base rule,
+   .as-cf-success h4 added here (was missing before the Fraunces pass - it
+   sets font-family: var(--font-display) too, css:cf-success h4 base rule,
    so it needs the same line-height/smoothing fix as the other three). */
 .as-allsorts .as-contact-hero__headline,
 .as-allsorts .as-contact-form__headline,
 .as-allsorts .as-faq__headline,
-.as-allsorts .as-cf-success h3,
+.as-allsorts .as-cf-success h4,
 .as-allsorts .as-hub-hero__headline {
  line-height: var(--lh-tight);
  -webkit-font-smoothing: auto;
  -moz-osx-font-smoothing: auto;
 }
 
-/* FAQ - dark editorial variant (services hub, custom build, site refresh,
-   ongoing support only). Scoped under .as-faq--dark so the shared light-
-   accordion .as-faq rules above stay untouched for about/contact/case-
-   studies/one-page-website, which also use the bare .as-faq component. */
-.as-allsorts .as-faq.as-faq--dark { background: rgb(23,23,26); padding: 96px 32px 104px; }
-.as-allsorts .as-faq--dark .as-faq__inner { max-width: 1160px; margin: 0 auto; }
-.as-allsorts .as-faq--dark .as-faq__header { margin: 0 0 56px; max-width: 720px; }
-.as-allsorts .as-faq--dark .as-faq__headline { margin: 0 0 18px; font-family: var(--font-display); font-weight: 900; font-size: 48px; line-height: 1.02; color: #fff; }
-.as-allsorts .as-faq--dark .as-faq__intro { margin: 0; font-family: var(--font-body); font-size: 17px; line-height: 1.6; color: rgb(198,198,206); max-width: 56ch; }
-
-.as-allsorts .as-faq--dark .as-faq__qa { column-count: 2; column-gap: 64px; }
-.as-allsorts .as-faq--dark .as-faq__pair { break-inside: avoid; padding: 0 0 34px; margin: 0 0 34px; border-bottom: 1px solid rgba(255,255,255,.16); }
-.as-allsorts .as-faq--dark .as-faq__pair:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-.as-allsorts .as-faq--dark .as-faq__q { margin: 0 0 12px; font-family: var(--font-display); font-weight: 400; font-style: normal; font-size: 23px; line-height: 1.3; color: #fff; }
-.as-allsorts .as-faq--dark .as-faq__a { margin: 0; font-family: var(--font-body); font-size: 16px; line-height: 1.72; color: rgb(198,198,206); }
-
-@media (max-width: 860px) {
-  .as-allsorts .as-faq--dark .as-faq__qa { column-count: 1; }
-  .as-allsorts .as-faq--dark .as-faq__headline { font-size: 38px; }
-  .as-allsorts .as-faq--dark .as-faq__header { margin-bottom: 40px; }
+/* Row-item 4th colour (sunshine) - global addition, contact's row-list only
+   ever had 3 items. Bare duotone glyph now, not a chip - ink-glyph fallback
+   dropped since the sunshine hue now sits on the shape itself. */
+.as-allsorts .as-row-item:nth-child(4) .as-row-item__icon i {
+ --fa-primary-color: #f4cf3b;
+ --fa-secondary-color: #fae9a6;
+ color: #f4cf3b;
 }
 
 /* Hero H1 fixed size - can't add font-size to the shared headline group
-   above (.as-contact-form__headline / .as-faq__headline / .as-cf-success h3
+   above (.as-contact-form__headline / .as-faq__headline / .as-cf-success h4
    all share that selector and must not pick up a 64px override). Standalone
    rule instead. */
 .as-allsorts .as-contact-hero__headline {
   font-size: 64px;
-}
-
-/* H3 token (24px/900/lh1.20) for .as-cf-success h3 - can't join the shared
-   group above either, since that group sets lh-tight (1.05) for its other
-   3 H2-tier members and h3 needs a different line-height. Standalone rule,
-   same pattern as the H1 override just above. */
-.as-allsorts .as-cf-success h3 {
-  font-size: 24px;
-  line-height: 1.20;
 }
 
 /* Same fixed-size treatment for the services hub - brings .as-hub-hero__headline
@@ -5925,15 +5814,7 @@ a.cky-banner-element.as-cookie__btn:hover {
    ============================================================ */
 .as-allsorts .as-contact-bar {
   background-color: var(--liquorice);
-}
-
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
-@media (min-width: 481px) {
-.as-allsorts .as-contact-bar {
-  padding: var(--as-pad-ink) var(--as-pad-side);
-}
+  padding: 70px 0 74px;
 }
 
 .as-allsorts .as-contact-bar .as-label {
@@ -5942,6 +5823,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 .as-allsorts .as-contact-bar__headline {
   font-weight: var(--fw-display);
+  font-size: 48px;
   line-height: var(--lh-tight);
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
@@ -5978,7 +5860,9 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 /* Display headings: Fraunces 900, tight line-height, full-weight render.
  .as-about-solo__headline is white-on-black — smoothing/line-height/weight
- fixed, colour left untouched (would vanish on black otherwise). */
+ fixed, colour left untouched (would vanish on black otherwise).
+ .as-about-focus__card-title's base rule (css:3514) is font-weight: 400 -
+ now needs the weight bump explicitly too, not just smoothing/line-height. */
 .as-allsorts .as-about-hero__headline,
 .as-allsorts .as-about-section-headline {
  font-weight: var(--fw-display);
@@ -5995,11 +5879,19 @@ a.cky-banner-element.as-cookie__btn:hover {
    that selector and must not pick up an 820px cap). Standalone rule,
    same pattern as the hub/contact fixed-size split at css:6452/:6461. */
 .as-allsorts .as-about-hero__headline {
-  font-size: clamp(2.6rem, 5vw, 3.5rem);
+  font-size: clamp(2.6rem, 5vw, 4rem);
   max-width: 820px;
 }
 
 .as-allsorts .as-about-solo__headline {
+ font-weight: var(--fw-display);
+ font-size: 48px;
+ line-height: var(--lh-tight);
+ -webkit-font-smoothing: auto;
+ -moz-osx-font-smoothing: auto;
+}
+
+.as-allsorts .as-about-focus__card-title {
  font-weight: var(--fw-display);
  line-height: var(--lh-tight);
  -webkit-font-smoothing: auto;
@@ -6011,7 +5903,8 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-allsorts .as-about-section-body,
 .as-allsorts .as-about-hero__meta-item,
 .as-allsorts .as-about-role__desc,
-.as-allsorts .as-about-work__card-desc {
+.as-allsorts .as-about-work__card-desc,
+.as-allsorts .as-about-focus__card-desc {
  font-weight: 400;
  color: var(--grey-500);
 }
@@ -6020,7 +5913,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  the legacy rgba(255,255,255,0.55) any more. */
 .as-allsorts .as-about-solo__body {
  font-weight: 400;
- font-size: 16px;
+ font-size: 17px;
  color: #b4b4bc;
 }
 
@@ -6067,7 +5960,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  color: inherit !important;
  justify-content: flex-start !important;
  align-self: flex-start !important;
- margin-bottom: 0;
 }
 .as-allsorts .as-about-work__card-icon i {
  font-size: 52px;
@@ -6075,10 +5967,25 @@ a.cky-banner-element.as-cookie__btn:hover {
  --fa-secondary-opacity: 1;
 }
 
-/* About-role rotation converted to .as-icon--* modifier classes (see
-   .as-row-item__icon block above) - was nth-child, broken by the topper
-   insertion. .as-about-work__card below is unaffected (not a topper
-   host) and keeps its nth-child rotation as-is. */
+/* Duo colour rotation, per group: pink -> blue -> tangerine -> sunshine
+ (Phase 2, 12 July 2026). Chips removed from both groups above - glyph now
+ carries the colour directly via --fa-primary-color/--fa-secondary-color,
+ no more forced white/ink text colour for contrast against a fill. */
+.as-allsorts .as-about-background__right .as-about-role:nth-child(1) .as-about-role__icon i {
+ --fa-primary-color: #ec4d97;
+ --fa-secondary-color: #f6aed0;
+ color: #ec4d97;
+}
+.as-allsorts .as-about-background__right .as-about-role:nth-child(2) .as-about-role__icon i {
+ --fa-primary-color: #4f7cc9;
+ --fa-secondary-color: #afc4e6;
+ color: #4f7cc9;
+}
+.as-allsorts .as-about-background__right .as-about-role:nth-child(3) .as-about-role__icon i {
+ --fa-primary-color: #f07d2e;
+ --fa-secondary-color: #f8c4a0;
+ color: #f07d2e;
+}
 
 .as-allsorts .as-about-work__grid .as-about-work__card:nth-child(1) .as-about-work__card-icon i {
  --fa-primary-color: #ec4d97;
@@ -6095,11 +6002,61 @@ a.cky-banner-element.as-cookie__btn:hover {
  --fa-secondary-color: #f8c4a0;
  color: #f07d2e;
 }
-/* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
 .as-allsorts .as-about-work__grid .as-about-work__card:nth-child(4) .as-about-work__card-icon i {
- --fa-primary-color: #d69d1c;
+ --fa-primary-color: #f4cf3b;
  --fa-secondary-color: #fae9a6;
- color: #d69d1c;
+ color: #f4cf3b;
+}
+
+/* Focus-card icon -> bare duotone glyph, matches the row-item / about-role
+ precedent (Phase 2 fix, 12 July 2026 - missed in the original Group B
+ pass, the last surviving chip on the site). Base rule (css:3297-3307) has
+ no !important guard, so a plain override wins on specificity. Sized to
+ the role-icon scale (32px), matching .as-about-role__icon. Shared by both
+ cards - card 2's glyph colour is overridden separately below (Phase 2
+ fix, FIX 3). justify-content/align-self added (Phase 2 fix, FIX 4): same
+ chip-removal centring bug as the FIX 2 wrappers - this wrapper is full
+ card width and was centring the bare glyph in the middle instead of
+ collapsing to it, misaligning it from the tag/title above. */
+.as-allsorts .as-about-focus__card-icon {
+ width: auto;
+ height: auto;
+ background: transparent;
+ border-radius: 0;
+ justify-content: flex-start;
+ align-self: flex-start;
+}
+.as-allsorts .as-about-focus__card-icon i {
+ font-size: 32px;
+ line-height: 1;
+ --fa-secondary-opacity: 1;
+ --fa-primary-color: #ec4d97;
+ --fa-secondary-color: #f6aed0;
+ color: #ec4d97;
+}
+
+/* Focus tag (light card) — candy-pink tint, matches the accent-tint pattern */
+.as-allsorts .as-about-focus__tag {
+ background: var(--candy-pink-050);
+ color: var(--candy-pink);
+}
+
+/* Focus card 2 icon colour (Phase 2 fix, 12 July 2026) - reverted back to
+ Tier 1 duo, slot-2 blue. FIX 3 (same pass) deleted .as-about-focus__card--
+ dark's background rule (was css:3292), so the card no longer sits on ink
+ and the press treatment from the earlier fix no longer applies - it's a
+ light card like every other Tier 1 card now. Chip-strip (width/height/
+ background/radius/font-size/opacity) is already handled for both cards by
+ the shared .as-allsorts .as-about-focus__card-icon rule above; this only
+ overrides the glyph's own colour to blue instead of card 1's pink. */
+.as-allsorts .as-about-focus__card--dark .as-about-focus__card-icon i {
+ --fa-primary-color: #4f7cc9;
+ --fa-secondary-color: #afc4e6;
+ color: #4f7cc9;
+}
+.as-allsorts .as-about-focus__tag--light {
+ background: var(--blue-050) !important;
+ color: var(--bead-blue) !important;
 }
 
 /* Container treatment: light cards get ink border + pop-shadow + radius-lg;
@@ -6107,30 +6064,25 @@ a.cky-banner-element.as-cookie__btn:hover {
  .as-row-list--dark is excluded — already dark-safe translucent border, an
  ink border or pop-shadow would be as invisible there as on a solid black box */
 .as-allsorts .as-about-background__right,
-.as-allsorts .as-about-work__card {
+.as-allsorts .as-about-work__card,
+.as-allsorts .as-about-focus__card {
  border: var(--bw) solid var(--ink-900);
  border-radius: var(--radius-lg);
  box-shadow: var(--pop-md);
 }
-
-/* .as-about-work__card topper - host is padded (2.2rem, css:3106) and was
-   overflow:visible. Nothing in the card relies on overflowing (no negative
-   margins, no absolute-positioned children beyond icon/title/desc), and
-   the pop-shadow above paints outside the border box regardless of
-   overflow, so it is unaffected. Icon rotation (css:5932-5951) keys off
-   the card's own nth-child position in .as-about-work__grid, not off
-   anything inside the card, so this insertion does not shift it. */
-.as-allsorts .as-about-work__card {
- overflow: hidden;
-}
-.as-allsorts .as-about-work__card .as-topper {
- margin: -2.2rem -2.2rem 16px;
-}
+/* .as-allsorts .as-about-focus__card--dark's own container rule removed
+ (Phase 2 fix, 12 July 2026, FIX 3) - it only ever duplicated the radius/
+ shadow already applied via the combined .as-about-focus__card selector
+ above; now that the dark variant's background override is gone too, it
+ was a true no-op. */
+/* DEAD CODE as of Phase 3 item 2 (12 July 2026) - .as-row-list--dark has
+ zero remaining HTML consumers (see css:302). Flagged, not deleted. */
+.as-allsorts .as-row-list--dark { border-radius: var(--radius-lg); }
 
 /* Inner hairline divider, remapped off legacy --as-border */
 .as-allsorts .as-about-role { border-bottom-color: var(--grey-200); }
 
-/* Phase 1 white-out: .as-about-work__card /
+/* Phase 1 white-out: .as-about-focus__card / .as-about-work__card /
  .as-about-background / .as-about-skills all go to white at their base
  rules directly now - the overrides that used to force it here (or force
  coconut, in .as-about-skills' case) are gone. */
@@ -6143,9 +6095,10 @@ a.cky-banner-element.as-cookie__btn:hover {
   .as-allsorts .as-about-background,
   .as-allsorts .as-about-solo,
   .as-allsorts .as-about-work,
-  .as-allsorts .as-about-skills {
-    padding-top: var(--as-pad-band);
-    padding-bottom: var(--as-pad-band);
+  .as-allsorts .as-about-skills,
+  .as-allsorts .as-about-focus {
+    padding-top: 84px;
+    padding-bottom: 84px;
   }
 }
 
@@ -6168,15 +6121,7 @@ a.cky-banner-element.as-cookie__btn:hover {
    ============================================================ */
 .as-allsorts .as-about-skills {
   background-color: var(--liquorice);
-}
-
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
-@media (min-width: 481px) {
-.as-allsorts .as-about-skills {
-  padding: var(--as-pad-ink) var(--as-pad-side);
-}
+  padding: 70px 0 74px;
 }
 
 .as-allsorts .as-about-skills .as-label {
@@ -6185,6 +6130,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 .as-allsorts .as-about-skills__headline {
   font-weight: var(--fw-display);
+  font-size: 48px;
   line-height: var(--lh-tight);
   color: var(--white);
   -webkit-font-smoothing: auto;
@@ -6193,7 +6139,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 .as-allsorts .as-about-skills__intro {
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   color: #b4b4bc;
 }
 
@@ -6216,7 +6162,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 .as-allsorts .as-about-skills__group-list {
   font-weight: 400;
-  line-height: 1.60;
+  line-height: 1.95;
   color: var(--grey-400);
 }
 
@@ -6235,8 +6181,8 @@ a.cky-banner-element.as-cookie__btn:hover {
    section used to run on computed near-black text on a near-black
    band (.as-row-item__title / __desc never got re-coloured for dark
    surfaces). Rebuilt off dedicated .as-about-solo__reason* classes
-   instead - .as-row-list--dark was deleted entirely in the Phase 4
-   dead-code pass.
+   instead - .as-row-list--dark is now dead code (flagged, not deleted,
+   see the pre-flight note near its definition, css:302).
 
    Must land AFTER the 84px section-rhythm rule above - equal
    specificity, so file order decides the winner. Padding here
@@ -6244,15 +6190,7 @@ a.cky-banner-element.as-cookie__btn:hover {
    ============================================================ */
 .as-allsorts .as-about-solo {
   background-color: var(--liquorice);
-}
-
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
-@media (min-width: 481px) {
-.as-allsorts .as-about-solo {
-  padding: var(--as-pad-ink) var(--as-pad-side);
-}
+  padding: 70px 0 74px;
 }
 
 /* Eyebrow label goes sunshine on ink, matching .as-creds / .as-svc-process.
@@ -6360,8 +6298,8 @@ casestudy client name keep their existing colour. */
 
 /* Tighter description copy, per reference .svc spec */
 .as-allsorts .as-services__card-desc {
-  font-size: 15px;
-  line-height: 1.60;
+  font-size: 14.5px;
+  line-height: 1.55;
   margin: 16px 0 20px;
 }
 
@@ -6384,8 +6322,8 @@ casestudy client name keep their existing colour. */
 
 /* "Learn more" - bold, per reference .svc .more */
 .as-allsorts .as-services__card-link {
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: var(--fw-bold);
+  font-size: 15px;
 }
 
 /* Body copy: DM Sans 400, remapped off legacy greys. Dark-card copy
@@ -6410,25 +6348,18 @@ left untouched. */
  to force coconut + suppress the base border-bottom, both now redundant. */
 @media (min-width: 481px) {
   .as-allsorts .as-positioning {
-    padding-top: var(--as-pad-band);
-    padding-bottom: var(--as-pad-band);
+    padding-top: 84px;
+    padding-bottom: 84px;
   }
 }
 
 /* Tighter section rhythm - base .as-services is var(--as-space-section)
    (7rem/112px) top and bottom. Desktop-only values guarded below; mobile
-   (<=480px) falls back to the unscoped 64px mobile token rhythm.
-   Top uses --as-pad-band (80px), same token every other white section
-   uses coming off an ink band (see .as-about-*, .as-contact-form/.as-faq
-   above) - this gives the "WHAT I DO" eyebrow proper clearance below
-   .as-backstory instead of sitting flush against it. Paired with
-   .as-backstory's own bottom padding (--as-pad-ink, 72px, css:8517-8519),
-   the two together total 152px, matching every other ink-to-white gap
-   on this page. */
+   (<=480px) falls back to the unscoped 64px mobile token rhythm. */
 @media (min-width: 481px) {
   .as-allsorts .as-services {
-    padding-top: var(--as-pad-band);
-    padding-bottom: 96px;
+    padding-top: 8px;
+    padding-bottom: 100px;
   }
 }
 
@@ -6441,19 +6372,11 @@ left untouched. */
 .as-allsorts .as-casestudy {
   display: block;
   background: var(--liquorice);
+  padding: 70px 0 74px;
   color: #ffffff;
   text-decoration: none;
   transition: background 0.18s ease;
   overflow-x: hidden;
-}
-
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
-@media (min-width: 481px) {
-.as-allsorts .as-casestudy {
-  padding: var(--as-pad-ink) var(--as-pad-side);
-}
 }
 
 .as-allsorts .as-casestudy:hover {
@@ -6467,26 +6390,26 @@ left untouched. */
 .as-allsorts .as-casestudy__client {
   font-family: var(--font-display);
   font-weight: 900;
+  font-size: 36px;
   line-height: 1.05;
   margin: 10px 0 20px;
   color: #ffffff;
 }
 
 .as-allsorts .as-casestudy__desc {
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.70;
+  font-size: 17px;
+  line-height: 1.66;
   color: #b4b4bc;
   margin: 0 0 24px;
   max-width: 58ch;
 }
 
 .as-allsorts .as-casestudy__quote {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
+  font-weight: 900;
   font-style: italic;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.55;
+  font-size: 22px;
+  line-height: 1.4;
   margin: 0 0 12px;
   padding-left: 22px;
   border-left: 3px solid #f26cae;
@@ -6495,9 +6418,8 @@ left untouched. */
 }
 
 .as-allsorts .as-casestudy__attribution {
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.50;
+  font-size: 13px;
+  line-height: 1.5;
   color: #8a8a94;
   margin: 0 0 26px;
   padding-left: 25px;
@@ -6507,15 +6429,20 @@ left untouched. */
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
+  border: 1px solid #ffffff;
+  border-radius: 999px;
+  padding: 12px 24px;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 14px;
   line-height: 1;
   color: #ffffff;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.as-allsorts .as-casestudy:hover .as-casestudy__cta {
+  background: #ffffff;
+  color: #17171a;
 }
 
 /* Image zone: overlapping device pair, desktop + phone.
@@ -6587,6 +6514,10 @@ left untouched. */
     align-items: center;
   }
 
+  .as-allsorts .as-casestudy__client {
+    font-size: 52px;
+  }
+
   .as-allsorts .as-casestudy__imgs {
     height: 340px;
     margin-top: 0;
@@ -6606,11 +6537,8 @@ the separating job, and 30px each side doubles as the section's own left/
 right gutter - the leftmost/rightmost items carry it since .as-creds itself
 goes flush (0 horizontal). Mobile keeps its own padding, restated below at
 equal specificity so this doesn't silently override it under 480px. */
-/* Padding extracted to its own min-width:481px rule (was unguarded above). */
-@media (min-width: 481px) {
 .as-allsorts .as-creds {
-  padding: var(--as-pad-ink) var(--as-pad-side);
-}
+  padding: 70px 0 74px;
 }
 .as-allsorts .as-creds__item {
   padding: 0 30px;
@@ -6651,96 +6579,23 @@ sunshine text on white is barely legible; tangerine reads fine. */
   overflow: hidden;
   padding: 28px 26px;
 }
-/* Topper. A lid on a box. Only ever goes on a white card with a 2px ink
-   border, 16px radius and overflow hidden. Never on a full-bleed band.
-   Size and border only. Any bleed is declared by the host, because it
-   depends on the host's padding.
-   No width declaration on purpose - width:100% resolves against the
-   padding box, so on a padded host it falls short of the border box and
-   the negative-margin bleed never reaches the edge. auto stretches to
-   fill the flex column AND absorbs the negative margins correctly. */
-.as-allsorts .as-topper {
-  height: 14px;
+/* Card topper - 12px strip bled to the card edges via negative margin.
+   Margin matches the card's own padding (28px 26px, set above - was 2.4rem
+   before the reference-spec tightening pass), clipped to the card's rounded
+   corners by the overflow:hidden above. Bottom margin restores the gap
+   before the icon, so nothing below the topper shifts.
+   Card 2's fill is the .surface-speckle-blue utility class applied directly
+   in the markup, not a background rule here. */
+.as-allsorts .as-services__card-topper {
+  height: 12px;
+  margin: -28px -26px 28px;
   border-bottom: var(--bw) solid var(--ink-900);
 }
-
-/* Solid fills. */
-.as-allsorts .as-topper--pink      { background: var(--candy-pink); }
-.as-allsorts .as-topper--blue      { background: var(--bead-blue); }
-.as-allsorts .as-topper--tangerine { background: var(--tangerine); }
-.as-allsorts .as-topper--sunshine  { background: var(--sunshine); }
-
-/* Variant 1. The allsort seen from above. Liquorice in slot 2 is the
-   whole point: without the ink break it is just a rainbow. */
-.as-allsorts .as-topper--allsorts {
-  background-image: linear-gradient(90deg,
-    #ec4d97 0%,  #ec4d97 25%,
-    #17171a 25%, #17171a 50%,
-    #f4cf3b 50%, #f4cf3b 75%,
-    #4f7cc9 75%, #4f7cc9 100%);
+.as-allsorts .as-services__card:nth-child(1) .as-services__card-topper {
+  background: var(--candy-pink);
 }
-
-/* Variant 2. The same allsort in cross-section, top to bottom.
-   This is .surface-sandwich-yellow with the coconut band swapped to
-   white. It is the only place tangerine enters the topper system. */
-.as-allsorts .as-topper--sandwich {
-  background-image: linear-gradient(180deg,
-    #f4cf3b 0%,  #f4cf3b 22%,
-    #17171a 22%, #17171a 36%,
-    #ffffff 36%, #ffffff 64%,
-    #17171a 64%, #17171a 78%,
-    #f07d2e 78%, #f07d2e 100%);
-}
-
-/* Layered allsort, pink fondant. */
-.as-allsorts .as-topper--sandwich-pink {
-  background-image: linear-gradient(180deg,
-    #ffffff 0%,  #ffffff 22%,
-    #17171a 22%, #17171a 36%,
-    #ec4d97 36%, #ec4d97 64%,
-    #17171a 64%, #17171a 78%,
-    #ffffff 78%, #ffffff 100%);
-}
-
-/* Layered allsort, blue fondant. */
-.as-allsorts .as-topper--sandwich-blue {
-  background-image: linear-gradient(180deg,
-    #4f7cc9 0%,  #4f7cc9 22%,
-    #17171a 22%, #17171a 36%,
-    #ffffff 36%, #ffffff 64%,
-    #17171a 64%, #17171a 78%,
-    #4f7cc9 78%, #4f7cc9 100%);
-}
-
-/* The plug. A liquorice tube with a fondant core, in cross-section.
-   Ink dominant on purpose. */
-.as-allsorts .as-topper--plug-sunshine {
-  background-image: linear-gradient(180deg,
-    #17171a 0%,  #17171a 30%,
-    #f4cf3b 30%, #f4cf3b 70%,
-    #17171a 70%, #17171a 100%);
-}
-
-/* The blue speckle fill is not a modifier. It stays as the existing
-   .surface-speckle-blue utility applied alongside .as-topper in the
-   markup, exactly as it works on the homepage's card 2. */
-
-/* Homepage service card - bleeds the topper to the card edges via
-   negative margin. Margin matches the card's own padding (28px 26px,
-   set above), clipped to the card's rounded corners by the
-   overflow:hidden above. Bottom margin restores the gap before the
-   icon, so nothing below the topper shifts. */
-.as-allsorts .as-services__card .as-topper {
-  margin: -28px -26px 28px;
-}
-
-/* Service-page pricing box and the about-page background list both use
-   gap: 1px between rows (css:1457, css:2919). Cancel it so the topper's
-   ink border-bottom sits flush against the first row instead of leaving
-   a 1px sliver of the row's own top edge showing through. */
-.as-allsorts .as-svc-pricing .as-topper,
-.as-allsorts .as-about-background__right .as-topper {
-  margin-bottom: -1px;
+.as-allsorts .as-services__card:nth-child(3) .as-services__card-topper {
+  background: var(--sunshine);
 }
 /* Bare duotone "Lucky Charms" glyph - replaces the candy chip box above.
    Neutralises every guarded chip property (width/height/radius/font-size/
@@ -6830,7 +6685,7 @@ sunshine text on white is barely legible; tangerine reads fine. */
   color: inherit !important;
   justify-content: flex-start !important;
   align-self: flex-start !important;
-  margin-bottom: 8px;
+  margin-bottom: 1.8rem;
 }
 .as-allsorts .as-hub-card__icon i {
   font-size: 52px;
@@ -6851,17 +6706,6 @@ sunshine text on white is barely legible; tangerine reads fine. */
   --fa-primary-color: #f07d2e;
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e;
-}
-
-/* Title set in DM Sans, not Fraunces - mirrors .as-services__card-title's
-   allsorts override (css:5978-5986) exactly, per Charles's request to match
-   the card-title language sitewide. */
-.as-allsorts .as-hub-card__title {
-  font-family: var(--font-body);
-  font-weight: var(--fw-semibold);
-  font-size: 22px;
-  line-height: 1.2;
-  color: var(--ink-900);
 }
 
 /* Card tag - uniform muted grey, same as home (css:6904). Not synced to
@@ -6895,15 +6739,7 @@ sunshine text on white is barely legible; tangerine reads fine. */
    ============================================================ */
 .as-allsorts .as-hub-bar {
   background-color: var(--liquorice);
-}
-
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
-@media (min-width: 481px) {
-.as-allsorts .as-hub-bar {
-  padding: var(--as-pad-ink) var(--as-pad-side);
-}
+  padding: 70px 0 74px;
 }
 
 .as-allsorts .as-hub-bar .as-label {
@@ -6912,6 +6748,7 @@ sunshine text on white is barely legible; tangerine reads fine. */
 
 .as-allsorts .as-hub-bar__headline {
   font-weight: var(--fw-display);
+  font-size: 48px;
   line-height: var(--lh-tight);
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
@@ -6942,15 +6779,9 @@ sunshine text on white is barely legible; tangerine reads fine. */
    (<=480px) falls back to the existing unscoped 64px mobile token rule. */
 @media (min-width: 481px) {
   .as-allsorts .as-hub-services {
-    padding-top: var(--as-pad-band);
-    padding-bottom: var(--as-pad-band);
+    padding-top: 84px;
+    padding-bottom: 84px;
   }
-}
-
-/* H2 token weight bump - size comes from the shared base clamp(2rem,3.5vw,3rem),
-   this class just had no allsorts override before this pass. */
-.as-allsorts .as-hub-services__headline {
-  font-weight: var(--fw-display);
 }
 
 /* Mid-page wave cleanup - hide the low-mid illustration band (sits at
@@ -6970,8 +6801,8 @@ live, card bottom 4634 vs wave top 4600). 128px cleared the card; bumped to
 guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 @media (min-width: 481px) {
   .as-allsorts .as-cta {
-    padding-top: var(--as-pad-cta-top);
-    padding-bottom: var(--as-clear-wave);
+    padding-top: 84px;
+    padding-bottom: 168px;
   }
 }
 
@@ -7025,10 +6856,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   box-shadow: var(--pop-md);
   border-radius: var(--radius-pill);
   transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: normal;
-  padding: 15px 34px;
 }
 .as-allsorts .as-btn:hover {
   transform: translate(-1px, -1px);
@@ -7119,6 +6946,45 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
+/* Partner line - replaces the old card/badge treatment (.as-hero-
+   combined__partner / __partner-badge, removed Phase 4 dead-code pass -
+   they only ever served home-draft-2.html's pre-topper markup). No
+   --as-purple fallback: that token's last consumer (.as-svc-hero__meta-item)
+   was removed earlier this session and this is a brand-new component, not a
+   legacy one needing a pre-candy fallback tier. Colour lives entirely
+   under .as-allsorts, same split every other icon in this file uses. */
+.as-hero-combined__partnerline {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.as-hero-combined__partnerline i {
+  flex-shrink: 0;
+}
+.as-hero-combined__partnerline span {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+.as-hero-combined__partnerline strong {
+  font-weight: 600;
+}
+
+.as-allsorts .as-hero-combined__partnerline i {
+  font-size: 16px;
+  --fa-primary-color: #ec4d97;
+  --fa-secondary-color: #f6aed0;
+  --fa-secondary-opacity: 1;
+  color: var(--candy-pink);
+}
+.as-allsorts .as-hero-combined__partnerline span {
+  color: var(--grey-500);
+}
+.as-allsorts .as-hero-combined__partnerline strong {
+  color: var(--ink-900);
+}
+
 /* ============================================================
    Off-white sweep - card/panel surfaces to pure white
    ============================================================
@@ -7154,24 +7020,9 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    and must not pick up an 820px cap or the H1's ink). Standalone rule,
    same pattern as the hub/contact fixed-size split at css:6452/:6461. */
 .as-allsorts .as-svc-hero__headline {
-  font-size: clamp(2.6rem, 5vw, 3.5rem);
+  font-size: clamp(2.6rem, 5vw, 4rem);
   color: var(--ink-900);
   max-width: 820px;
-}
-
-/* Exo retirement (13 July 2026 typography pass) - .as-svc-hero__price was
-   still reading var(--font-heading), which stays Exo 2 (never remapped by
-   the .as-allsorts token block). Family later moved off Fraunces to DM Mono
-   (Charles's call after live preview) - tabular figures keep the pricing
-   tiers aligned down the column; rhymes with the mono numeral layer
-   (.as-cs-stats__label, .as-cs-phase__number, .as-svc-hero__price-label
-   directly above this element). 500 is the heaviest real DM Mono weight -
-   700 has no face. */
-.as-allsorts .as-svc-hero__price {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  font-size: 48px;
 }
 
 /* Hero meta-row icons (Phase 2, 12 July 2026) - first allsorts treatment
@@ -7198,17 +7049,15 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e;
 }
-/* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
 .as-allsorts .as-svc-hero__meta-item:nth-child(4) i {
-  --fa-primary-color: #d69d1c;
+  --fa-primary-color: #f4cf3b;
   --fa-secondary-color: #fae9a6;
-  color: #d69d1c;
+  color: #f4cf3b;
 }
 
 /* .as-svc-cta__headline already reads var(--font-display) via its base
    rule (css:1890) - render fix only, no font-family change needed. */
 .as-allsorts .as-svc-cta__headline {
-  font-weight: var(--fw-display);
   letter-spacing: var(--ls-heading);
   line-height: var(--lh-tight);
   -webkit-font-smoothing: auto;
@@ -7222,12 +7071,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    in one place. Eyebrow centres under the new centred content. */
 .as-allsorts .as-cta-banner__inner .as-eyebrow {
   justify-content: center;
-}
-
-/* H2 token weight bump - .as-hub-notsure__headline had no allsorts override
-   before this pass; size comes from the shared base clamp(2rem,3.5vw,3rem). */
-.as-allsorts .as-hub-notsure__headline {
-  font-weight: var(--fw-display);
 }
 
 /* Deep-page CTA headline em - matches homepage .as-cta__headline em
@@ -7250,8 +7093,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   .as-allsorts .as-svc-cta,
   .as-allsorts .as-hub-notsure,
   .as-allsorts .as-cs-hub-cta {
-    padding-top: var(--as-pad-cta-top);
-    padding-bottom: var(--as-clear-wave-banner);
+    padding-top: 80px;
+    padding-bottom: 100px;
   }
 }
 
@@ -7307,11 +7150,10 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e;
 }
-/* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
 .as-allsorts .as-svc-included__item:nth-child(4) .as-svc-included__item-icon i {
-  --fa-primary-color: #d69d1c;
+  --fa-primary-color: #f4cf3b;
   --fa-secondary-color: #fae9a6;
-  color: #d69d1c;
+  color: #f4cf3b;
 }
 
 /* === ALLSORTS CONTAINER TREATMENT - service pages (ongoing_support,
@@ -7333,34 +7175,10 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   box-shadow: var(--pop-md);
 }
 
-/* .as-svc-hero__right topper - host is padded (2.2rem, css:1044) and was
-   overflow:visible, so it could not clip a topper strip. overflow:hidden
-   is safe here: nothing in the block relies on overflowing (no negative
-   margins, no absolute-positioned children), and the pop-shadow paints
-   outside the border box regardless of overflow, so it is unaffected. */
-.as-allsorts .as-svc-hero__right {
-  overflow: hidden;
-}
-.as-allsorts .as-svc-hero__right .as-topper {
-  margin: -2.2rem -2.2rem 0;
-}
-
 /* Internal pricing rows stay hairline - recolour off the legacy --as-border
    token only, same technique as .as-row-item / .as-faq__item above. */
 .as-allsorts .as-svc-pricing__tier {
   border-bottom-color: var(--grey-200);
-}
-
-/* Exo retirement (13 July 2026 typography pass) - same "Exo trap" as
-   .as-svc-hero__price above, .as-svc-pricing__tier-price was still reading
-   var(--font-heading) (stays Exo 2, never remapped). Family later moved off
-   Fraunces to DM Mono (Charles's call after live preview) - tabular figures
-   keep the three pricing tiers aligned; they drifted in Fraunces. */
-.as-allsorts .as-svc-pricing__tier-price {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  font-size: 22px;
 }
 
 /* .as-faq intentionally NOT boxed here - it's a section wrapper (border-top
@@ -7376,8 +7194,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   .as-allsorts .as-svc-included,
   .as-allsorts .as-svc-process,
   .as-allsorts .as-svc-bottom {
-    padding-top: var(--as-pad-band);
-    padding-bottom: var(--as-pad-band);
+    padding-top: 84px;
+    padding-bottom: 84px;
   }
 }
 
@@ -7400,15 +7218,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    ============================================================ */
 .as-allsorts .as-svc-process {
   background-color: rgb(23, 23, 26);
-}
-
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
-@media (min-width: 481px) {
-.as-allsorts .as-svc-process {
-  padding: var(--as-pad-ink) var(--as-pad-side);
-}
+  padding: 70px 0 74px;
 }
 
 /* Eyebrow label goes sunshine on ink, matching .as-creds. Dot stays pink. */
@@ -7421,6 +7231,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    so the white doesn't leak onto the still-ink sections either side. */
 .as-allsorts .as-svc-process .as-svc-section-headline {
   color: var(--white);
+  font-size: 48px;
 }
 
 /* Grey horizontal timeline line (base .as-svc-process__steps::before) is a
@@ -7448,25 +7259,9 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-allsorts .as-svc-process__step-desc  { color: var(--grey-400); }
 
 /* Step numbers: luminous candy rotation, same order as .as-creds. Class
-   is now fa-slab-press - fa-1..fa-4 are plain numerals, swapped from
-   fa-slab fa-regular for a heavier weight, so the colour rules below
-   still apply unchanged regardless of family. */
+   stays fa-slab fa-regular - fa-1..fa-4 are plain numerals, byte-identical
+   across Slab/Slab Press/Slab Duo, so only the colour needs to change. */
 .as-allsorts .as-svc-process__step-number i { font-size: 32px; }
-
-/* The 56px size below belongs to the Slab Press digits only, not the
-   container - one-page-website.html shares this same container class
-   with fa-sharp fa-thin fa-circle-N icons and must not be resized.
-   text-align: left corrects Font Awesome's fixed 1.25em icon box
-   (70px at 56px font-size) centring the narrower digit glyph inside
-   it, which otherwise reads as a 21px indent against the text below.
-   Shared by the service-page process steps and the case-study hub rows -
-   same glyph treatment, two components. */
-.as-allsorts .as-svc-process__step-number i.fa-slab-press,
-.as-allsorts .as-cs-row__number i.fa-slab-press {
-  font-size: 56px;
-  text-align: left;
-}
-
 .as-allsorts .as-svc-process__step:nth-child(1) .as-svc-process__step-number i { color: var(--candy-pink-lt); }
 .as-allsorts .as-svc-process__step:nth-child(2) .as-svc-process__step-number i { color: var(--bead-blue-lt); }
 .as-allsorts .as-svc-process__step:nth-child(3) .as-svc-process__step-number i { color: var(--tangerine); }
@@ -7516,12 +7311,11 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
 }
-/* cs-hub-cta__headline is now part of the unified H2 token (13 July 2026
-   typography pass) - weight bumped to var(--fw-display) along with every
-   other H2-tier class, reversing the earlier "intentionally lighter"
-   decision noted here previously. */
+/* cs-hub-cta__headline is base font-weight 400 (not var(--fw-display)) -
+   same tier as .as-svc-cta__headline, which already got a render fix
+   WITHOUT a weight bump for the same reason (intentionally lighter
+   weight, not the full display weight). Matching that treatment here. */
 .as-allsorts .as-cs-hub-cta__headline {
-  font-weight: var(--fw-display);
   letter-spacing: var(--ls-heading);
   line-height: var(--lh-tight);
   -webkit-font-smoothing: auto;
@@ -7563,30 +7357,15 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   font-family: var(--font-display);
   font-weight: var(--fw-display);
   letter-spacing: var(--ls-heading);
-  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-size: 48px;
   line-height: 1.08;
   margin: 0 0 20px;
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
 }
 
-/* New intro paragraph, 12 July 2026 - h2 dropped its hard-coded count
-   ("Three builds, three outcomes" -> "Recent builds") since Charles will
-   be adding a new case study soon; this intro carries the sector list
-   instead so nothing needs editing when a study is added. Same treatment
-   as .as-about-skills__intro - #b4b4bc, 17px, capped at 640px so it does
-   not run the full 1160 container. */
-.as-allsorts .as-cs-hub-grid__intro {
-  font-family: var(--font-body);
-  color: #b4b4bc;
-  font-size: 18px;
-  line-height: 1.60;
-  margin: 0;
-  max-width: 640px;
-}
-
 .as-allsorts .as-cs-hub-grid__rows {
-  margin-top: 48px;
+  margin-top: 36px;
 }
 
 /* Row: the WHOLE row is the link. 2-col grid - copy one side, device
@@ -7631,76 +7410,42 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   padding: 5px 12px;
 }
 
-/* One candy hue per case study, not per stat (12 July 2026) - with the
-   stats bars gone, tags are the only place colour lives on this page.
-   Walks the candy array by nth-child so a 4th study picks up sunshine
-   automatically. Provisional - Charles: "not sure on the pills, but leave
-   it like this for now." */
-.as-allsorts .as-cs-row:nth-child(1) .as-cs-row__tag {
-  color: var(--candy-pink-lt);
-  border-color: rgba(242, 108, 174, 0.45);
-}
-.as-allsorts .as-cs-row:nth-child(2) .as-cs-row__tag {
-  color: var(--bead-blue-lt);
-  border-color: rgba(127, 163, 221, 0.45);
-}
-.as-allsorts .as-cs-row:nth-child(3) .as-cs-row__tag {
-  color: var(--tangerine);
-  border-color: rgba(240, 125, 46, 0.45);
-}
-.as-allsorts .as-cs-row:nth-child(4) .as-cs-row__tag {
-  color: var(--sunshine);
-  border-color: rgba(244, 207, 59, 0.45);
-}
-
-/* Tags replaced by a single candy-coloured number above each title, 14 July
-   2026 - reuses the service-page process step-number glyph exactly (shared
-   font-size/text-align rule, see .as-svc-process__step-number above). No
-   centring here - left-aligned to sit flush with the title/desc/cta column
-   below it. margin-bottom matches the old .as-cs-row__tags gap (16px) so the
-   vertical rhythm to the title is unchanged. */
-.as-allsorts .as-cs-row__number {
-  line-height: 1;
-  margin-bottom: 16px;
-}
-
-.as-allsorts .as-cs-row:nth-child(1) .as-cs-row__number i { color: var(--candy-pink-lt); }
-.as-allsorts .as-cs-row:nth-child(2) .as-cs-row__number i { color: var(--bead-blue-lt); }
-.as-allsorts .as-cs-row:nth-child(3) .as-cs-row__number i { color: var(--tangerine); }
-
-/* Titles reverted to Fraunces 900, 14 July 2026 - the DM Sans experiment
-   noted below (12 July 2026) is superseded now that a number sits above
-   the title instead of the tag pills. Size stays 30px, not the card's
-   22px - a hub row heading next to a full device-pair shot needs more
-   presence than a card title. Titles moved off the heavy Fraunces serif
-   onto the same DM Sans used by .as-services__card-title (homepage),
-   12 July 2026 - Charles: "bring the Case Study titles out of the heavy
-   serif" - this note is kept for history, the DM Sans swap is reverted
-   above. */
 .as-allsorts .as-cs-row__title {
   color: #fff;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 30px;
-  line-height: 1.2;
-  letter-spacing: -0.3px;
+  font-size: 34px;
+  line-height: 1.1;
   margin: 0 0 14px;
 }
 
-/* Stats bars removed entirely, 12 July 2026 (markup deleted from
-   case-studies-hub.html, not display:none) - Charles: "stats bars can go
-   here, kinda meaningless, gets repeated on individual pages". Same
-   reasoning that killed the homepage hero stats panel the same day: every
-   number here reappears on the detail page this row links to. Section
-   height is unaffected - rows are held at ~453px by the device pair, not
-   the copy, so reclaiming this space costs nothing vertically. */
 .as-allsorts .as-cs-row__desc {
-  font-family: var(--font-body);
   color: #9a9aa2;
-  font-size: 16px;
-  line-height: 1.70;
-  margin: 0 0 28px;
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0 0 26px;
   max-width: 460px;
+}
+
+.as-allsorts .as-cs-row__stats {
+  display: flex;
+  gap: 36px;
+  margin-bottom: 26px;
+}
+.as-allsorts .as-cs-row__stat-number {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.as-allsorts .as-cs-row__stat:nth-child(1) .as-cs-row__stat-number { color: var(--candy-pink-lt); }
+.as-allsorts .as-cs-row__stat:nth-child(2) .as-cs-row__stat-number { color: var(--bead-blue-lt); }
+.as-allsorts .as-cs-row__stat:nth-child(3) .as-cs-row__stat-number { color: var(--tangerine); }
+.as-allsorts .as-cs-row__stat-label {
+  color: #9a9aa2;
+  font-size: 12.5px;
+  line-height: 1.35;
 }
 
 .as-allsorts .as-cs-row__cta {
@@ -7708,7 +7453,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   align-items: center;
   gap: 9px;
   color: #fff;
-  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
 }
@@ -7791,7 +7535,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    untouched). */
 @media (min-width: 481px) {
   .as-allsorts .as-cs-hub-grid {
-    padding: var(--as-pad-ink) var(--as-pad-side);
+    padding: 70px 0 74px;
   }
 }
 
@@ -7858,6 +7602,14 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    (--font-body / --font-mono, both remap to DM Sans / DM Mono
    automatically under .as-allsorts) and neither has the Exo trap or a
    legacy purple reference. Already clean. */
+
+/* --- hero tags - single tag per page, not a per-card rotation.
+   Uniform candy-pink across all 3 pages (approved pick over the
+   per-page hub-rotation-continuity alternative). */
+.as-allsorts .as-cs-hero__tag {
+  background: var(--candy-pink-050);
+  color: var(--candy-pink);
+}
 
 /* --- stats dark band - synced to home's live .as-creds pattern.
    Background swept from --as-black to --liquorice; icon rotation is
@@ -7973,7 +7725,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 24px;
-  line-height: 1.20;
+  line-height: 1.15;
   margin: 8px 0 14px;
 }
 
@@ -8141,44 +7893,30 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: var(--ink-900);
 }
 
-/* Hero device pair - landscape + portrait, mirrors .as-cs-phase__image /
-   __phone verbatim (css:7630-7678), expressed for a position:relative
-   parent instead of the phase's grid-column/grid-row placement. Single
-   instance per page, no alternation needed. */
-.as-allsorts .as-cs-hero__media {
-  position: relative;
-  display: flex;
-  align-items: center;
+.as-allsorts .as-cs-hero__meta-icon i {
+  --fa-secondary-opacity: 1;
 }
-.as-allsorts .as-cs-hero__media-desktop {
-  position: relative;
-  z-index: 1;
-  width: 88%;
-  aspect-ratio: 16 / 10;
-  border: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
-  transform: rotate(-3deg);
+.as-allsorts .as-cs-hero__meta-item:nth-child(1) .as-cs-hero__meta-icon i,
+.as-allsorts .as-cs-hero__meta-item:nth-child(5) .as-cs-hero__meta-icon i {
+  --fa-primary-color: #ec4d97;
+  --fa-secondary-color: #f6aed0;
+  color: #ec4d97;
 }
-.as-allsorts .as-cs-hero__media-phone {
-  position: absolute;
-  z-index: 2;
-  right: -6%;
-  bottom: 0;
-  width: 34%;
-  aspect-ratio: 9 / 17;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
-  transform: rotate(5deg) translateY(28px);
+.as-allsorts .as-cs-hero__meta-item:nth-child(2) .as-cs-hero__meta-icon i,
+.as-allsorts .as-cs-hero__meta-item:nth-child(6) .as-cs-hero__meta-icon i {
+  --fa-primary-color: #4f7cc9;
+  --fa-secondary-color: #afc4e6;
+  color: #4f7cc9;
 }
-.as-allsorts .as-cs-hero__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
+.as-allsorts .as-cs-hero__meta-item:nth-child(3) .as-cs-hero__meta-icon i {
+  --fa-primary-color: #f07d2e;
+  --fa-secondary-color: #f8c4a0;
+  color: #f07d2e;
+}
+.as-allsorts .as-cs-hero__meta-item:nth-child(4) .as-cs-hero__meta-icon i {
+  --fa-primary-color: #f4cf3b;
+  --fa-secondary-color: #fae9a6;
+  color: #f4cf3b;
 }
 
 .as-allsorts .as-cs-challenge__group-title {
@@ -8200,8 +7938,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 @media (min-width: 481px) {
   .as-allsorts .as-cs-challenge,
   .as-allsorts .as-cs-beforeafter {
-    padding-top: var(--as-pad-band);
-    padding-bottom: var(--as-pad-band);
+    padding-top: 84px;
+    padding-bottom: 84px;
   }
 }
 
@@ -8211,7 +7949,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    specificity, so file order decides the winner. Do not add !important. */
 @media (min-width: 481px) {
   .as-allsorts .as-cs-solution {
-    padding: var(--as-pad-ink) var(--as-pad-side);
+    padding: 70px 0 74px;
   }
 }
 
@@ -8221,8 +7959,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    intrusion, matching the deep-page CTA banner treatment above. */
 @media (min-width: 481px) {
   .as-allsorts .as-cs-page-cta {
-    padding-top: var(--as-pad-cta-top);
-    padding-bottom: var(--as-clear-wave);
+    padding-top: 84px;
+    padding-bottom: 100px;
   }
 }
 
@@ -8239,7 +7977,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
 }
@@ -8272,7 +8010,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
 }
@@ -8303,7 +8041,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
 }
@@ -8315,33 +8053,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   display:block;
 }
 .as-hero--custom-build-footer .as-hero__stroke{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  pointer-events:none;
-  z-index:1;
-}
-
-/* ============================================================
-   ONE-PAGE FOOTER STRIP - inverted top-edge cosmos, same recipe
-   as Custom Build Footer. Additive only.
-   ============================================================ */
-.as-hero--one-page-footer{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  width:100%; height:102px;
-  border-top:0;
-  border-bottom:5px solid var(--liquorice);
-  overflow:hidden;
-  background:transparent;
-}
-.as-hero--one-page-footer .as-hero__img{
-  width:100%; height:100%;
-  object-fit:cover;
-  object-position:50% 15%;
-  clip-path:url(#wave-clip-one-page-footer);
-  display:block;
-}
-.as-hero--one-page-footer .as-hero__stroke{
   position:absolute; inset:0;
   width:100%; height:100%;
   pointer-events:none;
@@ -8361,7 +8072,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
 }
@@ -8392,7 +8103,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
 }
@@ -8423,7 +8134,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
 }
@@ -8441,33 +8152,14 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* Contact: lift FAQ so the footer wave has white clearance above it.
-   PENDING mobile pass - re-guarded to mobile only (was unguarded). Desktop
-   clearance now comes from the min-width:481px rule below instead. */
-@media (max-width: 480px) {
+/* Contact: lift FAQ so the footer wave has white clearance above it */
 .as-faq:has(~ .as-hero--contact-footer){
-  margin-bottom: 160px;
-}
+  margin-bottom:160px;
 }
 
-/* Case-study pages: lift the page CTA so the footer wave has white clearance.
-   PENDING mobile pass - re-guarded to mobile only (was unguarded). Desktop
-   clearance now comes from the min-width:481px rule below instead. */
-@media (max-width: 480px) {
+/* Case-study pages: lift the page CTA so the footer wave has white clearance */
 .as-cs-page-cta:has(~ .as-hero[class*="-footer"]){
-  margin-bottom: 160px;
-}
-}
-
-/* Desktop footer-wave clearance exception - guarded to min-width:481px so
-   this does not out-specify the mobile rule above (same specificity bug the
-   ink-band fix elsewhere in this pass exists to correct: 3-class :has()
-   selectors beat a 1-class mobile fallback regardless of media guard, so
-   both sides must be explicitly scoped). The homepage .as-cta:has(~ .as-hero
-   --home-footer) exception is gone - the homepage now takes the standard
-   var(--as-clear-wave) like every other bare CTA, confirmed live. */
-@media (min-width: 481px) {
-.as-allsorts .as-faq:has(~ .as-hero--contact-footer) { padding-bottom: var(--as-clear-wave); }
+  margin-bottom:160px;
 }
 
 /* ============================================================
@@ -8484,10 +8176,9 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
-  
 }
 .as-hero--casestudies-hub-footer .as-hero__img{
   width:100%; height:100%;
@@ -8521,7 +8212,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
 }
@@ -8557,7 +8248,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
 }
@@ -8598,7 +8289,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:102px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid #0d0d0d;
   overflow:hidden;
   background:transparent;
 }
@@ -8614,295 +8305,4 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   width:100%; height:100%;
   pointer-events:none;
   z-index:1;
-}
-
-/* ==========================================================
-   POSITIONING SECTION - CARD GRID
-   New family. Shares no selector with .as-row-item, which is
-   still live in .as-cta on the homepage and on About.
-   ========================================================== */
-
-/* Base: everything stacked, one column of cards. */
-.as-allsorts .as-positioning__inner {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-
-.as-allsorts .as-pos-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-}
-
-.as-allsorts .as-pos-card {
-  background: var(--white);
-  border: var(--bw) solid var(--ink-900);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--pop-md);
-  padding: 26px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* --fa-secondary-opacity MUST be declared here. The .as-icon--* classes at css:5557-5576
-   set the two colours only. The opacity was coming from .as-allsorts .as-row-item__icon i
-   at css:5546-5549, which this markup no longer uses. Omit it and every duotone fill
-   silently renders at FA's 40 percent default, which looks like a design decision rather
-   than a bug. */
-.as-allsorts .as-pos-card__icon {
-  font-size: 36px;
-  line-height: 1;
-  --fa-secondary-opacity: 1;
-}
-
-.as-allsorts .as-pos-card__title {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 17px;
-  line-height: 1.3;
-  color: var(--ink-900);
-  margin: 0;
-}
-
-.as-allsorts .as-pos-card__body {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--grey-500);
-  margin: 0;
-}
-
-/* Cards pair up only once there is room for them. Measured: pairing from 481px gives
-   234px columns on a 560px viewport, too narrow for a 300-character body. */
-@media (min-width: 700px) {
-
-  .as-allsorts .as-pos-cards {
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-
-}
-
-/* The two-column split. FRACTIONS, not a fixed column. A fixed 400px against a fr
-   remainder produced 147px cards at 800px viewport. Fractions subtract the gap before
-   dividing. At the capped 1160px container this yields copy 401px and cards 337px,
-   within a pixel of the approved 400 / 338. */
-@media (min-width: 1100px) {
-
-  .as-allsorts .as-positioning__inner {
-    display: grid;
-    grid-template-columns: 1fr 1.75fr;
-    gap: 56px;
-    align-items: start;
-  }
-
-}
-
-/* ==========================================================
-   HOMEPAGE BACKGROUND STORY - editorial ink band
-   Sits between .as-positioning and .as-services. Prose-led, NOT a
-   card section - zero borders, zero radius, zero shadow by design,
-   unlike every .as-pos-card / .as-services__card sibling on this page.
-   Locked to .as-creds / .as-hub-bar / .as-contact-bar for the dark
-   band itself; the stat rail and two-column prose are a genuinely
-   new layout, no existing precedent to sync to.
-   ========================================================== */
-
-/* Padding extracted to its own min-width:481px rule, same technique as
-   every other ink band (.as-creds / .as-hub-bar / .as-svc-process /
-   .as-cs-solution) - background/color stay unguarded since they're
-   correct at every width; only the desktop-scale padding is guarded.
-   Mobile falls back to the unscoped .as-backstory 480px rule above.
-
-   Bottom matches every other ink-band transition on this page: the gap
-   splits two-sided, ink-band bottom (--as-pad-ink, 72px) plus the next
-   section's own top padding (--as-pad-band, 80px), total 152px. Formerly
-   .as-services carried padding-top:0, so this rule had to solo-supply
-   the full 152px via calc(ink + band) - that made the "WHAT I DO"
-   eyebrow sit flush against the ink band. .as-services now carries its
-   own --as-pad-band top padding (see the .as-allsorts .as-services rule
-   above), so bottom here reverts to the plain ink value like every other
-   ink band on the page. Top is untouched at the plain ink value - the
-   positioning->backstory gap (80 + 72) is already correct and must not
-   change. */
-@media (min-width: 481px) {
-.as-allsorts .as-backstory {
-  padding: var(--as-pad-ink) var(--as-pad-side);
-  padding-bottom: var(--as-pad-ink);
-}
-}
-
-/* Eyebrow uses the shared .as-eyebrow/.as-eyebrow--on-dark/.as-eyebrow__dot/
-   .as-label markup verbatim (same as .as-casestudy below it) - the earlier
-   one-off .as-backstory__eyebrow (DM Mono, sunshine, no dot) matched
-   nothing else on the site and has been removed; no CSS override needed
-   here, the shared rules already render it correctly on this dark band. */
-
-/* Shared .as-eyebrow carries no bottom margin of its own - the old one-off
-   .as-backstory__eyebrow (now removed) had margin: 0 0 22px, so swapping to
-   the shared component dropped the eyebrow-to-headline gap to 0. Restored
-   here, scoped to .as-backstory only - do not touch the shared .as-eyebrow
-   rule, it is sitewide. */
-.as-allsorts .as-backstory .as-eyebrow--on-dark {
-  margin-bottom: 22px;
-}
-
-.as-allsorts .as-backstory__headline {
-  font-family: var(--font-display);
-  font-weight: var(--fw-display);
-  font-size: clamp(2.6rem, 4.4vw, 3.4rem);
-  line-height: var(--lh-tight);
-  letter-spacing: var(--ls-heading);
-  color: #ffffff;
-  max-width: 20ch;
-  margin: 0 0 14px;
-  -webkit-font-smoothing: auto;
-  -moz-osx-font-smoothing: auto;
-}
-
-.as-allsorts .as-backstory__standfirst {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.55;
-  color: #b4b4bc;
-  max-width: 60ch;
-  margin: 0 0 52px;
-}
-
-/* Base (mobile-first): stats stack above prose, single column - matches
-   the min-width-guarded-override idiom used everywhere else in this
-   file rather than a max-width teardown. */
-.as-allsorts .as-backstory__body {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 44px;
-}
-
-.as-allsorts .as-backstory__stats {
-  display: flex;
-  flex-direction: column;
-  gap: 34px;
-}
-
-/* The figure-wrap shrink-wraps to the figure so the bar can match the
-   number's width, NOT the label's - a typographic device (the strings
-   just happen to sort in the right order), not a data chart. inline-
-   block is the shrink-wrap; the label lives OUTSIDE this wrap so it
-   never stretches the box. Do not hardcode pixel widths here - this
-   must recompute if a figure is edited. */
-.as-allsorts .as-backstory__figure-wrap {
-  display: inline-block;
-}
-
-.as-allsorts .as-backstory__bar {
-  display: block;
-  width: 100%;
-  height: 5px;
-  margin-bottom: 12px;
-}
-
-.as-allsorts .as-backstory__bar--pink      { background: var(--candy-pink); }
-.as-allsorts .as-backstory__bar--blue      { background: var(--bead-blue); }
-.as-allsorts .as-backstory__bar--tangerine { background: var(--tangerine); }
-
-.as-allsorts .as-backstory__figure {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: var(--fw-display);
-  font-size: clamp(2.2rem, 3.6vw, 3rem);
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-  white-space: nowrap;
-  -webkit-font-smoothing: auto;
-  -moz-osx-font-smoothing: auto;
-}
-
-.as-allsorts .as-backstory__stat-label {
-  display: block;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 11.5px;
-  line-height: 1.3;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: #8a8a94;
-  margin-top: 8px;
-}
-
-/* Grid, not CSS columns - columns can't anchor a child under one specific
-   column, and the CTA must sit under the LEFT prose column only, beneath
-   its own paragraph, not spanning both. Base (mobile-first): both
-   .as-backstory__prose-col cells stack in a single column; the CTA still
-   follows its own paragraph correctly at every width since it lives
-   inside that column's own markup, not a spanning sibling. */
-.as-allsorts .as-backstory__prose {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 28px;
-  columns: auto;
-}
-
-.as-allsorts .as-backstory__prose-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.as-allsorts .as-backstory__prose p {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #b4b4bc;
-  margin: 0 0 1em;
-}
-
-/* CTA - matches .as-casestudy__cta exactly: bare text link, no
-   underline, no border, no padding, arrow icon. text-decoration:none
-   is required here (unlike .as-casestudy__cta, which sits nested
-   inside an outer <a>) since this CTA is itself the anchor. Sits inside
-   .as-backstory__prose-col (left column only), not a spanning sibling -
-   no column-span needed under the grid model. */
-.as-allsorts .as-backstory__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 36px;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1;
-  color: #ffffff;
-  text-decoration: none;
-}
-
-/* Desktop: fixed stat-rail gutter beside the prose, prose runs 2 columns.
-   700px chosen to match .as-pos-cards' own pairing breakpoint just above -
-   narrower and the 230px rail leaves too little room for the prose column. */
-@media (min-width: 700px) {
-
-  .as-allsorts .as-backstory__body {
-    grid-template-columns: 230px 1fr;
-    gap: 64px;
-    align-items: start;
-  }
-
-  .as-allsorts .as-backstory__stats {
-    padding-top: 6px;
-  }
-
-  .as-allsorts .as-backstory__prose {
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
-    align-items: start;
-  }
-
 }

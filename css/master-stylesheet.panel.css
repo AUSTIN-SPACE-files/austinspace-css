@@ -1,12 +1,4 @@
-/* =============================================
- AUSTIN_SPACE — Master Stylesheet
- Last consolidated: 2026-03
- ============================================= */
 
-
-/* =============================================
- 1. DESIGN TOKENS
- ============================================= */
 
 :root {
  --as-black: #0d0d0d;
@@ -52,20 +44,11 @@
  --sticky-top: 2rem;
 }
 
-
-/* =============================================
- 2. BASE
- ============================================= */
-
 .as-inner {
  max-width: var(--max-width);
  margin: 0 auto;
  width: 100%;
 }
-
-/* =============================================
- 3. TYPOGRAPHY UTILITIES
- ============================================= */
 
 .as-label {
  font-family: var(--font-mono);
@@ -76,19 +59,16 @@
  color: var(--as-mid);
 }
 
-/* Sticky column utility */
 .as-sticky-col {
  position: sticky;
  top: var(--sticky-top);
 }
 
-/* Centred container utility */
 .as-container {
  max-width: 1160px;
  margin: 0 auto;
 }
 
-/* Card hover lift utilities */
 .as-card-lift-sm:hover {
  box-shadow: var(--shadow-card-sm);
  transform: translateY(-2px);
@@ -98,11 +78,6 @@
  box-shadow: var(--shadow-card-md);
  transform: translateY(-3px);
 }
-
-
-/* =============================================
- 4. BUTTONS
- ============================================= */
 
 .as-btn {
  display: inline-flex;
@@ -177,11 +152,6 @@
  transform: translateY(-1px);
 }
 
-
-/* =============================================
- 5. SHARED COMPONENTS
- ============================================= */
-
 .as-divider {
  width: 100%;
  height: 1px;
@@ -204,7 +174,6 @@
  flex-shrink: 0;
 }
 
-/* Row list — stacked icon/text rows */
 .as-row-list {
  display: flex;
  flex-direction: column;
@@ -268,16 +237,6 @@
  margin: 0;
 }
 
-/* .as-row-list--dark and .as-row-list--icon-box removed in the Phase 4
- dead-code pass - both had been flagged dead since Phase 3 (items 2 and
- 4: /about's Why Solo and /contact's trust-signal list were their only
- consumers, both since rebuilt off dedicated classes) with zero HTML
- consumers remaining. */
-
-/* =============================================
- 6. SQUARESPACE OVERRIDES
- ============================================= */
-
 .header-nav-folder-content {
  border-radius: 2px;
  border: none !important;
@@ -289,7 +248,6 @@
  text-decoration: none;
 }
 
-
 @media (max-width: 767px) {
  .header .header-announcement-bar-wrapper {
  border-bottom-width: 3px;
@@ -299,11 +257,6 @@
  --stroke-thickness: 3px !important;
  }
 }
-
-
-/* =============================================
- 7. ICON COLOUR OVERRIDES
- ============================================= */
 
 .as-creds__icon,
 .as-casestudy__stat-icon,
@@ -335,21 +288,11 @@
  flex-shrink: 0;
 }
 
-/* =============================================
- 8. ICON SIZE OVERRIDES
- ============================================= */
-
 .as-creds__icon,
 .as-casestudy__stat-icon,
 .as-cs-stats__icon {
  font-size: 2.0rem !important;
 }
-
-
-
-/* =============================================
- HOME — HERO
- ============================================= */
 
 .as-hero-combined {
  position: relative;
@@ -368,14 +311,6 @@
  pointer-events: none;
 }
 
-/* Horizontal padding removed (Phase 3, item 1 follow-up, 12 July 2026) -
-   was "0 2rem 5rem", adding 32px on each side on top of max-width:1160px
-   and misaligning the hero content 32px right of every other section's
-   .as-container-based inner (which carries zero padding of its own).
-   Only affects >1024px: the max-width:1024px query below (css:~575) sets
-   its own full "1.5rem 1.2rem 3rem" padding unconditionally and wins that
-   whole range regardless of this rule, so mobile/tablet gutter (19.2px)
-   is untouched. Bottom padding (5rem) kept as-is. */
 .as-hero-combined__content {
  position: relative;
  z-index: 2;
@@ -447,14 +382,6 @@
  }
 }
 
-/* ==========================================================
-   HERO TRUST ROW
-   Google rating + Squarespace Circle Silver Partner badge.
-   Sits as the last flex child of .as-hero-combined__left,
-   which supplies the 32px top gap from its own row-gap.
-   Do not add margin-top here.
-   ========================================================== */
-
 .as-allsorts .as-hero-combined__trust {
   display: flex;
   align-items: center;
@@ -469,11 +396,6 @@
   text-decoration: none;
 }
 
-/* The Google G source PNG is a square canvas and the glyph fills only
-   33.6 percent of it, so a plain img renders a tiny G in a big empty box.
-   background-size 298 percent scales the image until the glyph height
-   equals the box height. If the asset is ever re-cropped to its ink box,
-   replace the span with a plain img and delete this whole rule. */
 .as-allsorts .as-hero-combined__trust-g {
   width: 34px;
   height: 34px;
@@ -490,15 +412,11 @@
   gap: 3px;
 }
 
-/* Duotone sunshine. Locked hex on the SHAPE, derived tint on the FILL behind.
-   Same treatment as the service-card icons. Ratio matches the shipped pairs.
-   Class MUST be fa-slab-duo. fa-duotone fa-slab silently falls back to plain
-   black in this kit. */
 .as-allsorts .as-hero-combined__trust-stars i {
   font-size: 20px;
   line-height: 1;
-  --fa-primary-color: #d69d1c;    /* was #f4cf3b - match .as-icon--sunshine */
-  --fa-secondary-color: #fae9a6;  /* was #fae9a5 - one digit off, a rounding artefact */
+  --fa-primary-color: #d69d1c;
+  --fa-secondary-color: #fae9a6;
   --fa-secondary-opacity: 1;
 }
 
@@ -519,8 +437,6 @@
   color: var(--grey-500);
 }
 
-/* Hidden by default. The row wraps to two lines on narrow screens and a
-   stranded vertical rule looks like a bug. Restored at the desktop guard. */
 .as-allsorts .as-hero-combined__trust-rule {
   display: none;
   width: 1px;
@@ -547,11 +463,6 @@
   }
 
 }
-
-
-/* =============================================
- HOME — CREDENTIALS BAR
- ============================================= */
 
 .as-creds {
  background: var(--as-black);
@@ -641,11 +552,6 @@
  }
 }
 
-
-/* =============================================
- HOME — POSITIONING
- ============================================= */
-
 .as-positioning {
  background: var(--white);
  padding: var(--as-space-section) var(--as-space-section-side);
@@ -664,13 +570,6 @@
  gap: 24px;
 }
 
-/* Base layout fix, not a skin rule - unscoped. Column flex containers with
-   no explicit align-items default to stretch, which would pull the new
-   .as-btn (an auto-width inline-flex item) full width of the column. Every
-   other .as-btn on this page sits inside its own flex-row wrapper
-   (.as-cta__actions, .as-hero-combined__cta) which sidesteps this; this is
-   the first button placed as a direct child of a column flex, so it needs
-   its own align-self. */
 .as-positioning__left .as-btn {
   align-self: flex-start;
 }
@@ -721,14 +620,6 @@
  }
 }
 
-
-/* =============================================
- HOME — BACKGROUND STORY
- ============================================= */
-
-/* NEW - .as-backstory is always dark by design, no white legacy version
- ever existed - same category as .as-creds / .as-hub-bar / .as-contact-bar,
- so the dark background sits here, unscoped. */
 .as-backstory {
  background: var(--liquorice);
 }
@@ -741,11 +632,6 @@
  padding: var(--as-space-section-mobile) var(--as-space-section-side-mobile);
  }
 }
-
-
-/* =============================================
- HOME — SERVICES
- ============================================= */
 
 .as-services {
  background: var(--as-white);
@@ -801,7 +687,6 @@
  color: inherit;
 }
 
-
 .as-services__card-icon {
  display: flex;
  flex-shrink: 0;
@@ -825,7 +710,7 @@
  letter-spacing: -0.01em;
  color: var(--as-black);
  margin: 0 0 0.8rem;
- min-height: 3.45rem; /* 2 lines × 1.5rem × 1.15 — aligns images across row */
+ min-height: 3.45rem;
 }
 
 .as-services__card-price {
@@ -930,21 +815,6 @@
  }
 }
 
-
-/* =============================================
- HOME — CASE STUDY FEATURE
- ============================================= */
-
-/* Base (non-Allsorts) fallback. Uses var(--liquorice) rather than
- var(--as-black) so it matches the Allsorts background exactly (#17171a,
- not #0d0d0d) - no flash of a different dark on the class swap. Only the
- elements that survive the redesign get a fallback here (.as-casestudy
- itself, __client, __quote); __copy/__desc/__img/__cta/__attribution are
- new, Allsorts-only classes with no base rule, matching how every other
- post-Allsorts addition in this file works (e.g. .as-services__card-topper).
- display:block + text-decoration:none are
- needed regardless of Allsorts since the element changed from <section> to
- <a>, which defaults to inline and would otherwise show an underline. */
 .as-casestudy {
  display: block;
  background: var(--liquorice);
@@ -968,13 +838,6 @@
  color: rgba(255, 255, 255, 0.75);
 }
 
-/* __quote-source: LOAD-BEARING for the two individual case-study detail
- pages (Terracotta, DDR) - it styles their locked "View on Google" links
- and has no Allsorts-scoped override anywhere in this file (confirmed by
- the "no CSS rule at all" note further down, css:7613 area). Kept
- byte-for-byte unchanged. The homepage no longer uses this class - its
- attribution line uses .as-casestudy__attribution instead, see the
- Allsorts block below. */
 .as-casestudy__quote-source {
  display: inline-flex;
  align-items: center;
@@ -996,11 +859,6 @@
 .as-casestudy__quote-source i {
  font-size: 0.65rem;
 }
-
-
-/* =============================================
- HOME — CTA
- ============================================= */
 
 .as-cta {
  background: var(--as-white);
@@ -1069,11 +927,6 @@
  padding: var(--as-space-section-mobile) var(--as-space-section-side-mobile);
  }
 }
-
-
-/* =============================================
- SERVICE PAGES
- ============================================= */
 
 .as-svc-hero {
  background: var(--as-white);
@@ -1263,17 +1116,13 @@
  margin: 0;
 }
 
-/* Flip-card modifier for as-svc-included (used by the One-Page Website page).
- Sits on a solid purple panel now (as-solid-band + as-solid-band--purple,
- added alongside this class in the HTML) rather than a dimmed cosmos
- backdrop — --as-purple-deep stays as the flip-card back-face colour. */
 .as-svc-included--flip {
  position: relative;
  overflow: hidden;
  border-bottom: none;
- --as-purple-deep: #3d0582; /* darkened var(--as-purple), scoped to this section */
- padding-top: 60px; /* straight top border now, just a comfortable gap, tune live */
- padding-bottom: 100px; /* clears the 72px deep bottom cap + breathing room, tune live */
+ --as-purple-deep: #3d0582;
+ padding-top: 60px;
+ padding-bottom: 100px;
 }
 
 .as-svc-included--flip .as-svc-included__inner {
@@ -1310,7 +1159,7 @@
 .as-svc-included__item--flip:focus-within .as-svc-included__flip-inner,
 .as-svc-included__item--flip.is-flipped .as-svc-included__flip-inner {
  transform: translateY(-5px) rotateY(180deg);
- box-shadow: 0 18px 40px rgba(81, 7, 173, 0.28); /* rgba of --as-purple #5107ad */
+ box-shadow: 0 18px 40px rgba(81, 7, 173, 0.28);
 }
 
 .as-svc-included__flip-face {
@@ -1421,12 +1270,6 @@
  }
 }
 
-/* ---- SERVICE PAGE: INK EDITORIAL BAND ---- */
-/* Ink band, matching the homepage as-creds treatment.
-   Sits between the white hero and the white included grid so
-   the page alternates ink and white the way the homepage does.
-   Padding is 72px to match the other ink bands, NOT the
-   as-space-section token, which nothing on the site uses. */
 .as-allsorts .as-svc-editorial {
   background-color: rgb(23, 23, 26);
   padding: 72px 0;
@@ -1442,19 +1285,12 @@
   color: rgb(183, 183, 191);
 }
 
-/* as-row-list is flex by default and only becomes a grid inside
-   the CTA, so the layout is declared here rather than inherited.
-   Two columns, because these descriptions are prose and would
-   be too cramped in the four-column creds grid. */
 .as-allsorts .as-svc-editorial .as-row-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 40px;
 }
 
-/* Row items carry a white card treatment because they were built
-   for the CTA on white. On ink they must be bare type, matching
-   the as-backstory editorial band on the homepage. */
 .as-allsorts .as-svc-editorial .as-row-item {
   background: transparent;
   border: 0;
@@ -1478,11 +1314,6 @@
   }
 }
 
-/* ---- SERVICE PAGE: TIER FIT BAND ---- */
-/* White band splitting the process and proof ink sections.
-   Reuses the homepage as-pos-card component. That grid is
-   declared inside the positioning section only, so the
-   columns are declared again here rather than inherited. */
 .as-allsorts .as-svc-fit {
   background-color: var(--white);
   padding: 80px 0;
@@ -1514,7 +1345,6 @@
   }
 }
 
-/* ---- SERVICE PAGE: PROOF BAND ---- */
 .as-allsorts .as-svc-proof {
   background-color: rgb(23, 23, 26);
   padding: 72px 0;
@@ -1600,7 +1430,7 @@
 .as-svc-process__steps::before {
  content: '';
  position: absolute;
- top: 24px; /* was 21px */
+ top: 24px;
  left: 21px;
  right: 23%;
  height: 1px;
@@ -1769,20 +1599,12 @@
 
 .as-svc-cta--dark {
  background: var(--as-black);
- /* No border-top here — pink's own border-bottom (as-solid-band--edge-bottom)
- already draws the visible seam; a black border against this section's
- own black background would be invisible anyway. Bottom edge is owned by
- the cosmos-break footer bookend directly below (its clip-path traces the
- wavy seam instead). */
+
 }
 
-/* One-Page Website's CTA — white, not the shared floating black banner the
- other 3 service pages use. Scoped under --light so .as-cta-banner__inner
- itself (shared with as-hub-notsure__inner / as-cs-hub-cta__inner) is never
- touched directly. */
 .as-svc-cta--light {
  position: relative;
- padding-bottom: 100px; /* clears the new 72px deep bottom wave cap + breathing room, tune live */
+ padding-bottom: 100px;
 }
 
 .as-svc-cta--light .as-cta-banner__inner {
@@ -1792,11 +1614,6 @@
 
 .as-svc-cta--light .as-svc-cta__headline { color: var(--as-black); }
 .as-svc-cta--light .as-svc-cta__body { color: var(--as-text-secondary); }
-
-/* ============================================================
- CTA BANNER — shared inner utility
- Used by: .as-svc-cta__inner, .as-hub-notsure__inner, .as-cs-hub-cta__inner
- ============================================================ */
 
 .as-cta-banner__inner {
  max-width: 640px;
@@ -1832,9 +1649,6 @@
  gap: 24px;
 }
 
-/* Deep-page centred-CTA headline size - shared by services + case-study
-   CTAs only. NOT homepage/About (.as-cta__headline), which stays at the
-   original clamp(2rem, 3.5vw, 3rem). */
 .as-svc-cta__headline,
 .as-cs-page-cta__headline,
 .as-cs-hub-cta__headline {
@@ -1930,15 +1744,6 @@
  }
 }
 
-
-/* =============================================
- ONE-PAGE WEBSITE — SELL SECTIONS
- Solid colour band + signature wave divider, reused
- across as-sell-hook / as-sell-speed / as-sell-upgrade.
- .as-cosmos-band below is kept for the cosmos backdrop
- used elsewhere on this page (cards section, hero).
- ============================================= */
-
 .as-solid-band {
  position: relative;
  overflow: hidden;
@@ -1946,15 +1751,9 @@
  padding: var(--as-space-section) var(--as-space-section-side);
 }
 
-/* Top/bottom outline only — no vertical side borders, per feedback.
- Applied per the seam map on whichever edge of a given panel is NOT the
- wavy one (the wavy edge's outline comes from its .as-wave-cap stroke
- instead, so it isn't duplicated here). */
 .as-solid-band--edge-top { border-top: 5px solid var(--as-black); }
 .as-solid-band--edge-bottom { border-bottom: 5px solid var(--as-black); }
 
-/* Tone-on-tone patterns sit under the content, above the base colour —
- subtle texture, not decoration, so text contrast is unaffected. */
 .as-solid-band--purple {
  background-color: var(--as-purple);
  background-image: repeating-linear-gradient(90deg, rgba(61, 5, 130, 0.35) 0 2px, transparent 2px 30px);
@@ -1969,13 +1768,6 @@
  background-size: 70px 70px;
 }
 
-/* Wave cap — fixed-pixel-height wave accent layered over a section edge.
- Depth is set by height (36px shallow / 72px deep), never by a percentage
- of section height, so the same wave reads identically regardless of how
- tall the section's content makes it (a clip-path keyed to objectBoundingBox
- scales with element height, which is exactly what breaks the wave rhythm
- across sections of different heights). Top vs bottom is the same markup,
- mirrored with scaleY(-1). */
 .as-wave-cap {
  --cap-fill: var(--as-white);
  position: absolute;
@@ -1992,21 +1784,10 @@
 .as-wave-cap--shallow { height: 36px; }
 .as-wave-cap--deep { height: 72px; }
 
-/* Fill modifiers — the cap's fill paints the colour of whichever section is
- on the OTHER side of the curve, so a wave between two colour bands (not
- just colour-to-white) needs an explicit fill rather than the white default. */
 .as-wave-cap--fill-teal { --cap-fill: var(--as-teal); }
 .as-wave-cap--fill-pink { --cap-fill: var(--as-pink); }
 .as-wave-cap--fill-purple { --cap-fill: var(--as-purple); }
 
-/* Cosmos break — a slim (~120px), pure-graphic strip. No dimming, no text,
- no overlay: just the cosmos image, clipped to a wave on one edge, with a
- black stroke tracing that same curve. The clip-path cuts pixels from the
- IMAGE only, so the container's own flat background (whichever colour
- sits directly above it in the page) shows through the missing corner —
- --fill-black for the one that follows the black CTA, plain white default
- for the one that follows a white section. Top/bottom outline only, same
- as .as-solid-band, no vertical side borders. */
 .as-cosmos-break {
  position: relative;
  height: 120px;
@@ -2025,7 +1806,7 @@
  width: 100%;
  height: 100%;
  object-fit: cover;
- object-position: center 50%; /* tune live */
+ object-position: center 50%;
 }
 
 .as-cosmos-break--wave-top .as-cosmos-break__img {
@@ -2077,21 +1858,14 @@
  linear-gradient(180deg, rgba(13, 13, 13, 0.45), rgba(13, 13, 13, 0.7));
 }
 
-/* Wave edges — clip the whole band to the signature curve (reuses the site's
- existing wave-clip defs from footer-injection.html; do not add new defs).
- Clipping the parent (not just the image/overlay) carries the band's own
- background along with it, so the carved sliver reveals page white instead
- of the band's black backdrop, with no change to the locked opacity/gradient
- blend elsewhere on the band. */
-
 .as-cosmos-band--wave-bottom {
  clip-path: url(#wave-clip-one-page);
- padding-bottom: 250px; /* clears the wave trough from content — first pass, tune live */
+ padding-bottom: 250px;
 }
 
 .as-cosmos-band--wave-top {
  clip-path: url(#wave-clip-home-footer);
- padding-top: 250px; /* clears the wave trough from content — first pass, tune live */
+ padding-top: 250px;
 }
 
 .as-cosmos-band__inner {
@@ -2108,10 +1882,8 @@
  color: #c9b8ff;
 }
 
-/* HOOK (the problem/hook, purple) */
-
 .as-sell-hook {
- padding-bottom: 60px; /* clears the 36px shallow wave cap + breathing room, tune live */
+ padding-bottom: 60px;
 }
 
 .as-sell-hook .as-eyebrow__dot {
@@ -2138,8 +1910,6 @@
  max-width: 54ch;
  margin: 0;
 }
-
-/* PROMISE (giant numeral, white) */
 
 .as-sell-promise {
  background: var(--as-white);
@@ -2184,8 +1954,6 @@
  gap: 1.5rem;
  }
 }
-
-/* COMPARE (agency / DIY / us table, white) */
 
 .as-sell-compare {
  background: var(--as-white);
@@ -2258,11 +2026,9 @@
  }
 }
 
-/* SPEED (giant knockout figure) */
-
 .as-sell-speed {
- padding-top: 24px; /* straight top border now, just a comfortable gap, tune live */
- padding-bottom: 60px; /* clears the 36px shallow wave cap (now on the bottom edge) + breathing room, tune live */
+ padding-top: 24px;
+ padding-bottom: 60px;
 }
 
 .as-sell-speed__figure {
@@ -2300,10 +2066,8 @@
  background: var(--as-teal-ink);
 }
 
-/* UPGRADE (founding-client promise, pink) */
-
 .as-sell-upgrade {
- padding-bottom: var(--as-space-section); /* straight bottom border now, no deep-cap clearance needed */
+ padding-bottom: var(--as-space-section);
 }
 
 .as-sell-upgrade__headline {
@@ -2345,35 +2109,27 @@
  }
 
  .as-cosmos-band--wave-bottom {
- padding-bottom: 190px; /* first pass, tune live */
+ padding-bottom: 190px;
  }
 
  .as-cosmos-band--wave-top {
- padding-top: 190px; /* first pass, tune live */
+ padding-top: 190px;
  }
 }
 
 @media (max-width: 480px) {
- /* Side padding only — top/bottom stay put since wave caps are fixed-px
- and don't need percentage-style mobile shrinking. */
+
  .as-solid-band {
  padding-left: var(--as-space-section-side-mobile);
  padding-right: var(--as-space-section-side-mobile);
  }
 
- /* .as-svc-included--flip shares the base .as-svc-included class, which an
- earlier 480px rule resets to a flat 4rem padding — placed here, after
- that rule, so this wins and the deep-cap clearance survives on mobile. */
+
  .as-svc-included--flip {
  padding-top: 90px;
  padding-bottom: 90px;
  }
 }
-
-
-/* =============================================
- CASE STUDY PAGES
- ============================================= */
 
 .as-cs-hero {
  background: var(--as-white);
@@ -2417,7 +2173,6 @@
  margin: 0;
 }
 
-/* Shared by the case-study hero and the About hero - one declaration block, two pages. */
 .as-cs-hero__spec,
 .as-about-hero__spec {
  font-family: var(--font-body);
@@ -2665,7 +2420,6 @@
  flex-shrink: 0;
 }
 
-/* Challenge section intro paragraph */
 .as-cs-challenge__intro {
  font-family: var(--font-body);
  font-size: 16px;
@@ -2674,8 +2428,8 @@
  color: var(--as-text-secondary);
  margin: 0.4rem 0 0;
 }
- 
-/* Phase card image slot */
+
+
 .as-cs-phase__image {
  margin-top: auto;
  border-radius: var(--radius-sm);
@@ -2683,7 +2437,7 @@
  border: 1px solid var(--as-border);
  line-height: 0;
 }
- 
+
 .as-cs-phase__image img {
  width: 100%;
  height: auto;
@@ -2932,11 +2686,6 @@
  }
 }
 
-
-/* =============================================
- ABOUT PAGE
- ============================================= */
-
 .as-about-hero {
  background: var(--as-white);
  padding: 2rem 2rem 5rem;
@@ -3055,7 +2804,6 @@
   }
 }
 
-/* Shared about section eyebrow / headline / body */
 .as-about-section-headline {
  font-family: var(--font-display);
  font-size: clamp(2rem, 3.5vw, 3rem);
@@ -3075,14 +2823,10 @@
  margin: 0;
 }
 
-/* Paragraph spacing in multi-paragraph sections (e.g. section 2.12 "How I think").
- Adjacent sibling selector fires only when two body paragraphs follow each other,
- leaving single-paragraph uses (sections 2.2, 2.4) unaffected. */
 .as-about-section-body + .as-about-section-body {
  margin-top: 1.5rem;
 }
 
-/* Background / Work History */
 .as-about-background {
  background: var(--white);
  padding: var(--as-space-section) var(--as-space-section-side);
@@ -3183,14 +2927,13 @@
  margin: 0.4rem 0 0;
 }
 
-/* Why Solo */
 .as-about-solo {
  background: var(--as-black);
 }
 
 .as-about-solo__inner {
  display: grid;
- grid-template-columns: 1fr 1fr; /* fr, not %  — % + gap overflows the container */
+ grid-template-columns: 1fr 1fr;
  gap: 96px;
  align-items: start;
 }
@@ -3198,7 +2941,7 @@
 .as-about-solo__left {
  display: flex;
  flex-direction: column;
- gap: 0; /* spacing comes from each child's own margin below, not a shared gap */
+ gap: 0;
 }
 
 .as-about-solo__left .as-eyebrow {
@@ -3266,8 +3009,6 @@
  margin: 0;
 }
 
-
-/* How I Work */
 .as-about-work {
  background: var(--as-white);
  padding: var(--as-space-section) var(--as-space-section-side);
@@ -3322,7 +3063,6 @@
  margin: 0;
 }
 
-/* Skills */
 .as-about-skills {
  background: var(--white);
 }
@@ -3468,11 +3208,6 @@
  }
 }
 
-
-/* =============================================
- SERVICES HUB
- ============================================= */
-
 .as-hub-hero {
  background: var(--as-white);
  padding: 2rem 2rem 5rem;
@@ -3512,12 +3247,6 @@
  margin: 0;
 }
 
-/* NEW - .as-hub-bar mirrors .as-contact-bar: always dark by design, no
- white legacy version ever existed - same category as .as-creds /
- .as-contact-bar / .as-cs-testimonial, so the dark background is set
- directly here, unscoped (--liquorice, not --as-black - the old
- pre-system ink token, retired alongside .as-contact-hero__direct).
- Only the 70/74px padding refinement is .as-allsorts-scoped below. */
 .as-hub-bar {
  background: var(--liquorice);
 }
@@ -3611,7 +3340,6 @@
  padding: 0;
  }
 }
-
 
 .as-hub-services {
  background: var(--white);
@@ -3861,11 +3589,6 @@
 
 }
 
-
-/* =============================================
- CASE STUDIES HUB
- ============================================= */
-
 .as-cs-hub-hero {
  background: var(--as-white);
  padding: 2rem 2rem 5rem;
@@ -3911,7 +3634,6 @@
  gap: 1.5rem;
 }
 
-/* Responsive - grid step-down, card itself stays a single column always */
 @media (max-width: 960px) {
  .as-cs-hub-grid__inner {
  grid-template-columns: 1fr 1fr;
@@ -3960,13 +3682,11 @@
  flex-wrap: wrap;
 }
 
-
 @media (max-width: 960px) {
  .as-cs-hub-cta__actions {
  flex-direction: row;
  }
 }
-
 
 @media (max-width: 480px) {
  .as-cs-hub-hero,
@@ -3975,11 +3695,6 @@
  padding: var(--as-space-section-mobile) var(--as-space-section-side-mobile);
  }
 }
-
-
-/* =============================================
- CONTACT PAGE
- ============================================= */
 
 .as-contact-hero {
  background: var(--as-white);
@@ -4020,13 +3735,6 @@
  margin: 0;
 }
 
-/* NEW - .as-contact-bar consolidates the old __direct / __location /
- row-list trio into one full-width ink band. Always dark by design, no
- white legacy version ever existed (unlike .as-svc-process / .as-about-
- skills, which were white sections being converted) - same category as
- .as-creds / .as-cs-testimonial, so the dark background is set directly
- here, unscoped, matching that precedent. Only the liquorice/70-74px
- refinement is .as-allsorts-scoped below. */
 .as-contact-bar {
  background: var(--as-black);
 }
@@ -4370,12 +4078,6 @@
  }
 }
 
-
-/* =============================================
- LEGAL PAGES — SHARED
- (Privacy Policy, Terms of Service, Cookie Policy)
- ============================================= */
-
 .as-privacy,
 .as-tos,
 .as-cookie {
@@ -4392,7 +4094,6 @@
  padding: 0 24px;
 }
 
-/* Page header */
 .as-privacy__header,
 .as-tos__header,
 .as-cookie__header {
@@ -4468,7 +4169,6 @@
  color: var(--as-black);
 }
 
-/* Section blocks */
 .as-privacy__section,
 .as-tos__section,
 .as-cookie__section {
@@ -4551,7 +4251,6 @@
  font-weight: 600;
 }
 
-/* Lists */
 .as-privacy__list,
 .as-tos__list {
  list-style: none;
@@ -4587,7 +4286,6 @@
  margin-top: 7px;
 }
 
-/* Contact callout */
 .as-privacy__contact,
 .as-tos__contact {
  margin-top: 56px;
@@ -4632,7 +4330,6 @@
  text-underline-offset: 3px;
 }
 
-/* Footer notes */
 .as-privacy__footer-note,
 .as-tos__disclaimer,
 .as-cookie__footer-note {
@@ -4649,11 +4346,6 @@
 .as-cookie__footer-note a {
  color: #888;
 }
-
-
-/* =============================================
- LEGAL PAGES — PRIVACY SPECIFIC
- ============================================= */
 
 .as-privacy__intro,
 .as-tos__intro {
@@ -4684,11 +4376,6 @@
  border-radius: 4px;
 }
 
-
-/* =============================================
- LEGAL PAGES — TOS SPECIFIC
- ============================================= */
-
 .as-tos__callout {
  margin: 20px 0;
  padding: 20px 24px;
@@ -4711,11 +4398,6 @@
  display: block;
  margin-bottom: 6px;
 }
-
-
-/* =============================================
- LEGAL PAGES — COOKIE SPECIFIC
- ============================================= */
 
 .as-cookie__table-wrapper {
  margin-top: 20px;
@@ -4791,7 +4473,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  line-height: 1.5;
 }
 
-/* Legal pages — responsive */
 @media (max-width: 600px) {
  .as-privacy,
  .as-tos,
@@ -4831,10 +4512,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  min-width: unset;
  }
 }
-
-/* =============================================
- BREADCRUMBS
- ============================================= */
 
 .as-breadcrumb {
  background: var(--as-white);
@@ -4888,10 +4565,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  }
 }
 
-/* =============================================================
- FOOTER — Redesign
- ============================================================= */
-
 .as-footer {
  background-color: var(--liquorice);
  padding: 64px 40px 48px;
@@ -4906,7 +4579,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  align-items: start;
 }
 
-/* Brand column */
 .as-footer__logo {
  display: block;
  margin-bottom: 20px;
@@ -4938,7 +4610,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  margin: 0;
 }
 
-/* Links column */
 .as-footer__links {
  display: grid;
  grid-template-columns: 1fr 1fr;
@@ -4977,7 +4648,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  color: #fff;
 }
 
-/* Mobile */
 @media (max-width: 767px) {
  .as-footer {
  padding: 48px 24px 40px;
@@ -4994,7 +4664,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  }
 }
 
-/* === FOOTER BOTTOM BAR === */
 .as-footer__bottom {
  display: flex;
  align-items: center;
@@ -5041,10 +4710,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  align-self: flex-start;
  }
 }
-
-/* =============================================
- FAQ
- ============================================= */
 
 .as-faq {
  background: var(--white);
@@ -5146,13 +4811,9 @@ a.cky-banner-element.as-cookie__btn:hover {
  }
 }
 
-/* =============================================
- MEDIUM SCREENS (13-inch / 1280px)
- ============================================= */
-
 @media (max-width: 1280px) {
 
- /* Section padding: 7rem → 4rem */
+
  .as-positioning,
  .as-services,
  .as-casestudy,
@@ -5175,7 +4836,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  padding-bottom: 4rem;
  }
 
- /* Hero sections with asymmetric padding */
+
  .as-svc-hero,
  .as-about-hero,
  .as-hub-hero,
@@ -5186,7 +4847,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  padding-bottom: 2rem;
  }
 
- /* Internal two-column gaps: 6rem → 3.5rem */
+
  .as-positioning__inner,
  .as-cta__inner,
  .as-svc-hero__inner,
@@ -5198,7 +4859,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  gap: 3.5rem;
  }
 
- /* Section header bottom margin: 3.5rem → 2rem */
+
  .as-services__header,
  .as-svc-included__header,
  .as-svc-process__header,
@@ -5210,17 +4871,9 @@ a.cky-banner-element.as-cookie__btn:hover {
  }
 }
 
-/* =============================================
- SHORT VIEWPORTS (MacBook Air M2 / max-height: 1000px)
- Targets wide viewports with constrained height — height-based
- so the 1470px width on MacBook Air M2 does not trigger this.
- min-width guard keeps mobile landscape unaffected.
- ============================================= */
-
 @media (max-height: 1000px) and (min-width: 1025px) {
 
- /* Part A: Shrink top hero image ~35% so H1 sits above the fold.
- aspect-ratio 2880/600 renders ~306px at 1470px wide; capped to 200px. */
+
  .as-hero--home,
  .as-hero--services,
  .as-hero--foundation-build,
@@ -5229,24 +4882,17 @@ a.cky-banner-element.as-cookie__btn:hover {
  max-height: 200px;
  }
 
- /* Part B: Reduce hero content bottom padding from 5rem to 3rem.
- This tightens the .as-hero-combined section height and pulls
- the H1 higher on the page. The 7rem gap above the content is
- Squarespace's native section wrapper padding — not in this file. */
+
  .as-hero-combined__content {
  padding-bottom: 3rem;
  }
 
 }
 
-/* ============================================
- 9. HERO IMAGES
- ============================================ */
-
 .as-hero {
  display: block;
  width: 100%;
- line-height: 0; /* removes phantom gap below image */
+ line-height: 0;
  overflow: hidden;
 }
 
@@ -5265,7 +4911,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  overflow: hidden;
 }
 
-/* Per-page heights */
 .as-hero--home { aspect-ratio: 2880 / 300; }
 .as-hero--home-high-mid { aspect-ratio: 2880 / 300; background-color: var(--white);}
 .as-hero--home-low-mid { aspect-ratio: 2880 / 300; background-color: var(--white);}
@@ -5293,7 +4938,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  object-fit: cover;
 }
 
-/* Per-page clip and crop */
 .as-hero--home .as-hero__img { clip-path: url(#wave-clip-home); object-position: center 33%; }
 .as-hero--home-high-mid .as-hero__img { clip-path: url(#wave-clip-home-high-mid); object-position: 0 100%; }
 .as-hero--home-low-mid .as-hero__img { clip-path: url(#wave-clip-home-low-mid); object-position: 0 95%; }
@@ -5313,7 +4957,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--policy-cookies .as-hero__img { clip-path: url(#wave-clip-policy-cookies); object-position: center 60%; }
 .as-hero--one-page .as-hero__img { clip-path: url(#wave-clip-one-page); object-position: center 20%; }
 
-/* Stroke overlay sits on top of the whole hero */
 .as-hero__stroke {
  position: absolute;
  inset: 0;
@@ -5343,58 +4986,30 @@ a.cky-banner-element.as-cookie__btn:hover {
  padding-top: 0 !important;
 }
 
-/* === ALLSORTS TOKENS — added 2026-07-09 ===
- Source: AUSTIN_SPACE Design System (tokens + textures), pasted into Squarespace
- Design > Custom CSS. @import stripped — fonts load via a <link> in Header Code
- Injection instead (Phase 1a).
-
- NOTE ON SCOPE: --font-display and --radius-sm/md/lg collide by NAME with tokens
- already declared in the DESIGN TOKENS :root block above (line 11) and already
- consumed unscoped, site-wide, today (--font-display: 34 uses, --radius-sm: 8,
- --radius-md: 22, --radius-lg: 5). Because :root declarations cascade by source
- order regardless of selector, redeclaring them here on :root would silently
- swap headings/radii on every live page the moment this lands — not gated by
- .as-allsorts. So those 4 declarations are deliberately left OUT of the :root
- block below and instead live in the .as-allsorts override block further down,
- where they only take effect on pages carrying that class. Everything else
- below is a genuinely new token name — no collision, safe globally as-is.
- --font-body and --font-mono also collide by name but resolve to the identical
- font-family already (IBM Plex Sans / IBM Plex Mono), so redeclaring them is a
- harmless no-op — left in place for fidelity to the source file. */
-
-/* ============================================================
- tokens/colors.css
- ============================================================ */
-
-/* AUSTIN_SPACE — Color tokens
- The UI is a clean monochrome system — near-black ink, white, and greys —
- with a liquorice-allsorts candy accent (pink = the action, bead blue = the
- emphasis; sunshine/tangerine as support). The neon spectrum lives inside the
- cosmic illustration bands (and a few dark-surface accents). */
 :root {
- /* ---- Neutral scale (the workhorse UI palette) ---- */
- --ink-900: #101014; /* primary text / black pill buttons */
- --ink-800: #1c1c22; /* black stats band surface */
+
+ --ink-900: #101014;
+ --ink-800: #1c1c22;
  --grey-700: #3f3f46;
- --grey-600: #52525b; /* strong secondary text */
- --grey-500: #6b6b72; /* body copy */
- --grey-400: #9a9aa2; /* muted / captions */
+ --grey-600: #52525b;
+ --grey-500: #6b6b72;
+ --grey-400: #9a9aa2;
  --grey-300: #c9c9cf;
- --grey-200: #e9e9ec; /* borders / dividers */
+ --grey-200: #e9e9ec;
  --grey-100: #f2f2f4;
- --grey-050: #f7f7f8; /* card / inset surface */
+ --grey-050: #f7f7f8;
  --white: #ffffff;
 
- /* ---- Violet (LEGACY — no longer the UI accent; kept for back-compat) ---- */
- --violet-700: #5b21b6; /* accent hover / deep */
- --violet-600: #6d28d9; /* primary accent */
- --violet-500: #7c3aed;
- --violet-400: #7c5cff; /* eyebrow dot / lighter accent */
- --violet-050: #f1ecfe; /* accent tint surface (partner pill icon) */
 
- /* ---- Cosmic / neon spectrum (illustration + dark-surface accents) ---- */
- --void-900: #120935; /* deepest space */
- --void-800: #1b0e4b; /* deep indigo (illustration) */
+ --violet-700: #5b21b6;
+ --violet-600: #6d28d9;
+ --violet-500: #7c3aed;
+ --violet-400: #7c5cff;
+ --violet-050: #f1ecfe;
+
+
+ --void-900: #120935;
+ --void-800: #1b0e4b;
  --void-700: #2a1873;
  --magenta-500: #ff2e9a;
  --magenta-600: #e01f84;
@@ -5403,42 +5018,42 @@ a.cky-banner-element.as-cookie__btn:hover {
  --purple-600: #8f37c9;
  --teal-500: #24d6be;
  --teal-600: #14b6a0;
- --teal-700: #0f9384; /* accent hover (deep teal) */
- --teal-050: #e6faf6; /* accent tint surface */
+ --teal-700: #0f9384;
+ --teal-050: #e6faf6;
  --blue-500: #37b6ff;
  --blue-600: #1f95e0;
- --blue-700: #1578bd; /* emphasis hover */
- --blue-050: #e8f5ff; /* emphasis tint surface */
+ --blue-700: #1578bd;
+ --blue-050: #e8f5ff;
  --orange-500: #ff7a33;
  --orange-600: #ef631c;
- --orange-700: #cf5311; /* accent hover (deep coral) */
- --orange-050: #fff0e6; /* accent tint surface */
- --yellow-400: #ffd23f; /* icons on the black stats band */
+ --orange-700: #cf5311;
+ --orange-050: #fff0e6;
+ --yellow-400: #ffd23f;
 
- /* ---- Candy / liquorice-allsorts (committed accent palette) ---- */
- --candy-pink: #ec4d97; /* primary accent — the action */
- --candy-pink-deep: #d23c83; /* accent hover */
- --candy-pink-lt: #f26cae; /* luminous pink for dark surfaces */
- --candy-pink-050: #fdeaf3; /* accent tint surface */
+
+ --candy-pink: #ec4d97;
+ --candy-pink-deep: #d23c83;
+ --candy-pink-lt: #f26cae;
+ --candy-pink-050: #fdeaf3;
  --sunshine: #f4cf3b;
  --tangerine: #f07d2e;
- --bead-blue: #4f7cc9; /* emphasis */
- --bead-blue-lt: #7fa3dd; /* luminous emphasis for dark surfaces */
- --liquorice: #17171a; /* candy black */
+ --bead-blue: #4f7cc9;
+ --bead-blue-lt: #7fa3dd;
+ --liquorice: #17171a;
 
- /* legacy paper aliases (kept for back-compat) */
+
  --paper-000: var(--white);
  --paper-050: var(--grey-050);
  --paper-100: var(--grey-100);
  --paper-200: var(--grey-200);
 
- /* ---- Semantic aliases ---- */
- --surface-canvas: var(--white); /* pages are white */
- --surface-inset: var(--grey-050); /* stat cards, insets */
+
+ --surface-canvas: var(--white);
+ --surface-inset: var(--grey-050);
  --surface-card: var(--white);
  --surface-card-alt: var(--grey-050);
- --surface-ink: var(--ink-800); /* black bands / dark cards */
- --surface-cosmos: var(--void-800); /* behind illustration bands */
+ --surface-ink: var(--ink-800);
+ --surface-cosmos: var(--void-800);
 
  --text-strong: var(--ink-900);
  --text-body: var(--grey-500);
@@ -5447,15 +5062,15 @@ a.cky-banner-element.as-cookie__btn:hover {
  --text-invert-muted: #a9a9b4;
 
  --border-subtle: var(--grey-200);
- --border-strong: var(--ink-900); /* the illustration's black outline */
+ --border-strong: var(--ink-900);
 
- /* Split accent: PINK = the action · BEAD BLUE = the emphasis (liquorice allsorts). */
- --accent: var(--candy-pink); /* links, accent buttons, focus, eyebrow text */
+
+ --accent: var(--candy-pink);
  --accent-hover: var(--candy-pink-deep);
  --accent-tint: var(--candy-pink-050);
- --accent-dot: var(--bead-blue); /* eyebrow dot — the bead-blue emphasis */
- --accent-lum: var(--candy-pink-lt); /* luminous pink for dark surfaces */
- /* bead blue is the reserved emphasis (key stat, badges, hover pops) */
+ --accent-dot: var(--bead-blue);
+ --accent-lum: var(--candy-pink-lt);
+
  --accent-secondary: var(--bead-blue);
  --accent-secondary-lum: var(--bead-blue-lt);
  --accent-tertiary: var(--sunshine);
@@ -5465,40 +5080,27 @@ a.cky-banner-element.as-cookie__btn:hover {
 
  --focus-ring: var(--candy-pink);
 
- /* ---- Status ---- */
+
  --success: var(--teal-600);
  --info: var(--blue-600);
  --warning: var(--yellow-400);
  --danger: var(--magenta-600);
 
- /* ---- Link ---- */
+
  --link: var(--candy-pink);
  --link-hover: var(--candy-pink-deep);
 }
 
-/* ============================================================
- tokens/typography.css
- ============================================================ */
-
-/* AUSTIN_SPACE — Typography tokens
- DM Serif Display carries the display voice (high-contrast serif); DM Sans
- keeps body warm & legible; DM Mono tags labels & code. (Brand fonts, loaded via fonts.css.)
- --font-display, --font-body and --font-mono are deliberately NOT redeclared here —
- all three collide by name with tokens already live, unscoped, in the original
- DESIGN TOKENS :root (line 11: --font-body was 'IBM Plex Sans', 104 uses;
- --font-mono was 'IBM Plex Mono', 23 uses). Redeclaring DM Sans/DM Mono here
- would silently swap body and label fonts site-wide on every live page. All
- three live only inside the .as-allsorts override block below. */
 :root {
- /* ---- Weights ---- */
- --fw-regular: 400; /* @kind font */
- --fw-medium: 500; /* @kind font */
- --fw-semibold:600; /* @kind font */
- --fw-bold: 700; /* @kind font */
- --fw-display: 900; /* @kind font */ /* Fraunces has real weights - was 400 for DM Serif Display (single-weight face); every .as-allsorts rule below that sets font-weight on a var(--font-display) element now reads this token instead of hardcoding 400, so this is the one place to retune if the face changes again */
 
- /* ---- Type scale (fluid-ish, px) ---- */
- --fs-display: 76px; /* hero */
+ --fw-regular: 400;
+ --fw-medium: 500;
+ --fw-semibold:600;
+ --fw-bold: 700;
+ --fw-display: 900;
+
+
+ --fs-display: 76px;
  --fs-h1: 54px;
  --fs-h2: 40px;
  --fs-h3: 28px;
@@ -5506,27 +5108,21 @@ a.cky-banner-element.as-cookie__btn:hover {
  --fs-body-lg: 19px;
  --fs-body: 16px;
  --fs-sm: 14px;
- --fs-label: 12px; /* mono, uppercase */
+ --fs-label: 12px;
 
- /* ---- Line heights ---- */
- --lh-tight: 1.05; /* @kind font */ /* was 1.02 for DM Serif Display 400; Fraunces at weight 900 sits heavier and 1.02 risked clipping descenders (g/y/p) - loosened slightly. Only consumer sitewide is the Fraunces heading set below - tune live if any face still clips */
- --lh-heading: 1.1; /* @kind font */
- --lh-snug: 1.35; /* @kind font */
- --lh-body: 1.6; /* @kind font */
 
- /* ---- Letter spacing ---- */
+ --lh-tight: 1.05;
+ --lh-heading: 1.1;
+ --lh-snug: 1.35;
+ --lh-body: 1.6;
+
+
  --ls-display: -0.03em;
- --ls-heading: -0.01em; /* was -0.02em for DM Serif Display 400; Fraunces at weight 900 is visually denser at the same tracking, so loosened one notch - only consumer sitewide is the Fraunces heading set below, tune live */
+ --ls-heading: -0.01em;
  --ls-body: 0em;
- --ls-label: 0.16em; /* wide, uppercase mono labels */
+ --ls-label: 0.16em;
 }
 
-/* ============================================================
- tokens/spacing.css
- ============================================================ */
-
-/* AUSTIN_SPACE — Spacing & layout tokens
- Base unit is 4px. Generous, chunky rhythm to match the bold outlines. */
 :root {
  --space-0: 0;
  --space-1: 4px;
@@ -5543,78 +5139,56 @@ a.cky-banner-element.as-cookie__btn:hover {
  --space-24: 96px;
  --space-32: 128px;
 
- /* ---- Container widths ---- */
+
  --container-sm: 640px;
  --container-md: 880px;
  --container-lg: 1120px;
  --container-xl: 1320px;
 
- /* ---- Section rhythm ---- */
+
  --gutter: 24px;
  --section-y: 96px;
 }
 
-/* ============================================================
- tokens/effects.css
- ============================================================ */
-
-/* AUSTIN_SPACE — Effects: borders, radii, shadows, motion
- Two shadow systems: soft --shadow-* for floating overlays, and hard offset
- --pop-* (ink, no blur) for the chunky button/card treatment that echoes the
- illustration's heavy black linework and collapses on press.
- --radius-sm/md/lg are deliberately NOT redeclared here — see scope note at the
- top of this section. They're set only inside the .as-allsorts override block
- below; --radius-xl and --radius-pill are new names, safe globally. */
 :root {
- /* ---- Border widths ---- */
+
  --bw-hair: 1px;
- --bw: 2px; /* control / card outline */
+ --bw: 2px;
  --bw-bold: 2px;
- --bw-xl: 6px; /* the illustration's black wave outline */
+ --bw-xl: 6px;
 
- /* ---- Corner radii ---- */
- --radius-xl: 22px; /* large panels / stat card */
- --radius-pill: 999px; /* buttons, tags, badges */
 
- /* ---- Soft shadows: for floating/overlay surfaces (dialog, toast, menus) ---- */
+ --radius-xl: 22px;
+ --radius-pill: 999px;
+
+
  --shadow-xs: 0 1px 2px rgba(16, 16, 20, 0.05);
  --shadow-sm: 0 2px 8px rgba(16, 16, 20, 0.06);
  --shadow-md: 0 8px 24px rgba(16, 16, 20, 0.08);
  --shadow-lg: 0 20px 48px rgba(16, 16, 20, 0.12);
 
- /* ---- Hard offset "pop" shadows: the chunky control/card treatment ---- */
- /* ink-colored, no blur; echo the illustration's black linework. Collapse on press. */
+
+
  --pop-xs: 2px 2px 0 0 var(--ink-900);
  --pop-sm: 3px 3px 0 0 var(--ink-900);
  --pop-md: 5px 5px 0 0 var(--ink-900);
  --pop-lg: 7px 7px 0 0 var(--ink-900);
- --press-shift: 3px; /* @kind other */
+ --press-shift: 3px;
 
- /* glow reserved for neon elements on dark surfaces only */
+
  --glow-teal: 0 0 24px -4px var(--teal-500);
  --glow-magenta: 0 0 28px -4px var(--magenta-500);
 
- /* ---- Motion ---- */
- --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1); /* @kind other */
- --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* @kind other */
- --dur-fast: 120ms; /* @kind other */
- --dur: 200ms; /* @kind other */
- --dur-slow: 340ms; /* @kind other */
+
+ --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+ --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+ --dur-fast: 120ms;
+ --dur: 200ms;
+ --dur-slow: 340ms;
 }
 
-/* ---- .as-allsorts override block ----
- The 6 declarations that collide by name with the original DESIGN TOKENS :root
- (line 11). Scoped to .as-allsorts so they only resolve on pages carrying that
- class; every other page keeps its current Exo 2 / IBM Plex Sans / IBM Plex Mono
- headings and 6/14/28px radii untouched. This is also exactly the gating
- Phase 2's component layer assumes (type binds to var(--font-display) /
- var(--font-body) / var(--font-mono) expecting DM Serif Display / DM Sans /
- DM Mono under .as-allsorts). */
 .as-allsorts {
- /* Fraunces replaces DM Serif Display as the display face - DM Serif Display
-    kept as the fallback link in the stack (not dropped) in case Fraunces
-    fails to load; loaded at opsz 9..144 wght 900 via the Google Fonts link
-    in Header Code Injection. */
+
  --font-display: "Fraunces", "DM Serif Display", Georgia, "Times New Roman", serif;
  --font-body: "DM Sans", system-ui, sans-serif;
  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", monospace;
@@ -5629,16 +5203,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  --as-clear-wave-banner: 128px;
 }
 
-/* ============================================================
- tokens/textures.css
- ============================================================ */
-
-/* AUSTIN_SPACE — Textured surfaces (liquorice-allsorts)
- Nonpareil speckle (hundreds & thousands), the layered "sandwich", and sugar-matte
- fondant. Utility classes — pair with a `--bw` ink border + `--pop-*` offset shadow
- for the chunky candy treatment. Colours come from the candy tokens in colors.css. */
-
-/* --- Nonpareil speckle: multi-colour beads over a candy base --- */
 .surface-speckle-blue {
  background-color: var(--bead-blue);
  background-image:
@@ -5660,17 +5224,11 @@ a.cky-banner-element.as-cookie__btn:hover {
  background-position: 0 0, 5px 3px, 2px 7px, 4px 1px;
 }
 
-/* Legibility helper: white label text over a speckle/candy surface */
 .on-speckle { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
 
-/* === ALLSORTS COMPONENTS — contact page — added 2026-07-09 === */
-
-/* Eyebrow / mono label (shared: hero, form, FAQ) */
 .as-allsorts .as-eyebrow__dot { width: 10px; height: 10px; background: var(--candy-pink); }
 .as-allsorts .as-label { color: var(--bead-blue); font-weight: 500; font-size: 12.5px; letter-spacing: var(--ls-label); }
 
-/* Breadcrumb — explicit remap off legacy --as-mid/--as-black so it doesn't
- just inherit whatever DM Mono + stale colour tokens happen to cascade to */
 .as-allsorts .as-breadcrumb__item,
 .as-allsorts .as-breadcrumb__item a { color: var(--grey-400); }
 .as-allsorts .as-breadcrumb__item a:hover,
@@ -5688,7 +5246,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  line-height: 1;
 }
 
-/* Display headings: Fraunces 900 (was DM Serif Display's only weight, 400) */
 .as-allsorts .as-contact-hero__headline,
 .as-allsorts .as-contact-form__headline,
 .as-allsorts .as-faq__headline,
@@ -5700,7 +5257,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 }
 .as-allsorts .as-contact-hero__headline em { font-style: normal; color: var(--candy-pink); }
 
-/* Body copy: DM Sans loaded at 400-700, drop the old 300 to avoid weight-matching oddities */
 .as-allsorts .as-contact-hero__intro,
 .as-allsorts .as-contact-form__desc,
 .as-allsorts .as-faq__answer,
@@ -5713,9 +5269,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 }
 .as-allsorts .as-row-item__title { color: var(--ink-900); }
 
-/* Row-item icons -> bare duotone glyphs, matches .as-services__card-icon.
-   Chip removed: width/height/border/radius/background all dropped (was a
-   48px chip with candy fill, no !important to beat). */
 .as-allsorts .as-row-item__icon {
  width: auto;
  height: auto;
@@ -5730,11 +5283,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  --fa-secondary-opacity: 1;
 }
 
-/* Duo colour rotation modifiers - pink/blue/tangerine/sunshine. Explicit
-   classes on the icon <i>, not nth-child: nth-child counts every sibling,
-   so a topper inserted as the container's first child shifts the whole
-   rotation by one slot (Phase 5b regression, fixed here). Shared by
-   .as-row-item__icon and .as-about-role__icon. */
 .as-allsorts .as-icon--pink {
  --fa-primary-color: #ec4d97;
  --fa-secondary-color: #f6aed0;
@@ -5750,24 +5298,15 @@ a.cky-banner-element.as-cookie__btn:hover {
  --fa-secondary-color: #f8c4a0;
  color: #f07d2e;
 }
-/* SUNSHINE IS A DELIBERATE EXCEPTION to the derived duotone ratio.
-   The other three pairs are: locked palette hex on the shape, fill mixed 54.2 percent
-   toward white. That collapses on yellow, because #f4cf3b is already near-white in value
-   and the derived fill left the icon washed out on a white card.
-   So the SHAPE is darkened toward amber (#d69d1c) and the FILL is left alone.
-   Approved live 14 July 2026 against a #deab24 alternative. Do not restore #f4cf3b here.
-   The palette token --sunshine is still #f4cf3b and is still correct everywhere else,
-   including every fa-slab-press icon on the ink bands. */
+
 .as-allsorts .as-icon--sunshine {
  --fa-primary-color: #d69d1c;
  --fa-secondary-color: #fae9a6;
  color: #d69d1c;
 }
 
-/* Form "expects" pink-check list */
 .as-allsorts .as-contact-form__expect i { color: var(--candy-pink); }
 
-/* Form field focus — ring, not just border colour */
 .as-allsorts .as-cf-field input:focus,
 .as-allsorts .as-cf-field select:focus,
 .as-allsorts .as-cf-field textarea:focus {
@@ -5777,10 +5316,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  background: #fff;
 }
 
-/* Submit button — chunky pop, ink (end of the journey, not an invitation -
-   pink would compete with "Get in touch"). Background stays ink-900 on
-   hover, matching the no-colour-change-on-hover pattern every other button
-   in this file uses; only shadow+transform move. */
 .as-allsorts .as-cf-submit {
  font-weight: 700;
  font-size: 16px;
@@ -5810,12 +5345,8 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 .as-allsorts .as-cf-success-icon { color: var(--candy-pink); }
 
-/* FAQ marker */
 .as-allsorts .as-faq__question::after { color: var(--candy-pink); font-weight: 400; }
 
-/* === ALLSORTS CONTAINER TREATMENT — contact page — added 2026-07-09 ===
- Outer containers get chunky ink border + pop-shadow; inner row/item
- dividers stay hairline (remapped off legacy --as-border to --grey-200). */
 .as-allsorts .as-row-list,
 .as-allsorts .as-faq__list,
 .as-allsorts .as-cf-wrap {
@@ -5829,17 +5360,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  border-bottom-color: var(--grey-200);
 }
 
-/* === ALLSORTS SECTION BACKGROUNDS — contact page — added 2026-07-09 ===
- Phase 1 white-out (2026-07-12): both .as-contact-form and .as-faq now go
- to white at the base rule directly - these overrides were fighting a
- --coconut / --as-off-white base that no longer exists, so removed. */
-
-/* Tighter section rhythm - base .as-contact-form and .as-faq are both
-   var(--as-space-section) (7rem/112px) top and bottom. Desktop-only,
-   guarded below; mobile (<=480px) falls back to the existing unscoped
-   64px mobile token rule. .as-faq is a single shared rule used by every
-   page that includes this stylesheet, so this one change covers all of
-   them, not just contact. */
 @media (min-width: 481px) {
   .as-allsorts .as-contact-form,
   .as-allsorts .as-faq {
@@ -5848,10 +5368,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   }
 }
 
-/* === ALLSORTS DISPLAY HEADINGS — full-weight render, reference line-height ===
-   .as-cf-success h3 added here (was missing before the Fraunces pass - it
-   sets font-family: var(--font-display) too, css:cf-success h3 base rule,
-   so it needs the same line-height/smoothing fix as the other three). */
 .as-allsorts .as-contact-hero__headline,
 .as-allsorts .as-contact-form__headline,
 .as-allsorts .as-faq__headline,
@@ -5862,10 +5378,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  -moz-osx-font-smoothing: auto;
 }
 
-/* FAQ - dark editorial variant (services hub, custom build, site refresh,
-   ongoing support only). Scoped under .as-faq--dark so the shared light-
-   accordion .as-faq rules above stay untouched for about/contact/case-
-   studies/one-page-website, which also use the bare .as-faq component. */
 .as-allsorts .as-faq.as-faq--dark { background: rgb(23,23,26); padding: 96px 32px 104px; }
 .as-allsorts .as-faq--dark .as-faq__inner { max-width: 1160px; margin: 0 auto; }
 .as-allsorts .as-faq--dark .as-faq__header { margin: 0 0 56px; max-width: 720px; }
@@ -5884,52 +5396,23 @@ a.cky-banner-element.as-cookie__btn:hover {
   .as-allsorts .as-faq--dark .as-faq__header { margin-bottom: 40px; }
 }
 
-/* Hero H1 fixed size - can't add font-size to the shared headline group
-   above (.as-contact-form__headline / .as-faq__headline / .as-cf-success h3
-   all share that selector and must not pick up a 64px override). Standalone
-   rule instead. */
 .as-allsorts .as-contact-hero__headline {
   font-size: 64px;
 }
 
-/* H3 token (24px/900/lh1.20) for .as-cf-success h3 - can't join the shared
-   group above either, since that group sets lh-tight (1.05) for its other
-   3 H2-tier members and h3 needs a different line-height. Standalone rule,
-   same pattern as the H1 override just above. */
 .as-allsorts .as-cf-success h3 {
   font-size: 24px;
   line-height: 1.20;
 }
 
-/* Same fixed-size treatment for the services hub - brings .as-hub-hero__headline
-   up to the contact spec (was font-weight 800 / clamp-sized / no max-width,
-   the only 800 H1 on the site). H1 normalisation across the other two H1
-   specs (service pages, about) is logged as a separate future item, not
-   done here. */
 .as-allsorts .as-hub-hero__headline {
   font-size: 64px;
 }
 
-/* ============================================================
-   PHASE 3 ITEM 4 - contact page: .as-contact-hero splits into a plain
-   white intro + a new .as-contact-bar ink band. Locked to .as-creds /
-   .as-svc-process / .as-about-solo / .as-about-skills - same object,
-   different job. Consolidates 3 separate boxes (.as-row-list trust
-   signals, .as-contact-hero__direct, .as-contact-hero__location) that
-   were fighting each other in white space into one full-width band.
-   Breaks the last unbroken white run on the site (2521px, contact).
-
-   .as-contact-form and .as-faq are NOT part of this change. Zero
-   markup or CSS edits inside either - every asCf* id, name attribute,
-   and select value survives verbatim.
-   ============================================================ */
 .as-allsorts .as-contact-bar {
   background-color: var(--liquorice);
 }
 
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
 @media (min-width: 481px) {
 .as-allsorts .as-contact-bar {
   padding: var(--as-pad-ink) var(--as-pad-side);
@@ -5959,26 +5442,15 @@ a.cky-banner-element.as-cookie__btn:hover {
   color: var(--grey-400);
 }
 
-/* Column 4: email is the primary action - pure white, not the muted grey
-   every other link/desc in this band uses. Phone stays muted grey so email
-   reads as primary, phone as secondary. Charles was explicit: white, not
-   pink. */
 .as-allsorts .as-contact-bar__col:nth-child(4) .as-contact-bar__col-links a:first-child {
   color: var(--white);
 }
 
-/* Icon rotation: fa-slab-press (dark band), same 4-stop luminous sequence
-   as .as-creds / .as-svc-process / .as-about-solo / .as-about-skills. */
 .as-allsorts .as-contact-bar__col:nth-child(1) i { color: var(--candy-pink-lt); }
 .as-allsorts .as-contact-bar__col:nth-child(2) i { color: var(--bead-blue-lt); }
 .as-allsorts .as-contact-bar__col:nth-child(3) i { color: var(--tangerine); }
 .as-allsorts .as-contact-bar__col:nth-child(4) i { color: var(--sunshine); }
 
-/* === ALLSORTS COMPONENTS — about page — added 2026-07-09 === */
-
-/* Display headings: Fraunces 900, tight line-height, full-weight render.
- .as-about-solo__headline is white-on-black — smoothing/line-height/weight
- fixed, colour left untouched (would vanish on black otherwise). */
 .as-allsorts .as-about-hero__headline,
 .as-allsorts .as-about-section-headline {
  font-weight: var(--fw-display);
@@ -5990,10 +5462,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 }
 .as-allsorts .as-about-hero__headline em { font-style: normal; color: var(--candy-pink); }
 
-/* H1 normalisation, 12 July 2026 - font-size/max-width can't join the
-   shared display-heading group above (.as-about-section-headline shares
-   that selector and must not pick up an 820px cap). Standalone rule,
-   same pattern as the hub/contact fixed-size split at css:6452/:6461. */
 .as-allsorts .as-about-hero__headline {
   font-size: clamp(2.6rem, 5vw, 3.5rem);
   max-width: 820px;
@@ -6006,7 +5474,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  -moz-osx-font-smoothing: auto;
 }
 
-/* Body copy: DM Sans 400, remapped off legacy greys */
 .as-allsorts .as-about-hero__body,
 .as-allsorts .as-about-section-body,
 .as-allsorts .as-about-hero__meta-item,
@@ -6015,9 +5482,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  font-weight: 400;
  color: var(--grey-500);
 }
-/* .as-about-solo__body colour now DOES change - #b4b4bc, the same value
- the homepage .as-casestudy__desc uses on ink (css:7620ish), not left at
- the legacy rgba(255,255,255,0.55) any more. */
+
 .as-allsorts .as-about-solo__body {
  font-weight: 400;
  font-size: 16px;
@@ -6029,17 +5494,8 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-allsorts .as-about-role__period { color: var(--grey-400); }
 .as-allsorts .as-about-role__company { color: var(--bead-blue); }
 
-/* Icons: plain inline (bead-blue) vs candy-pink checklist vs candy chips */
 .as-allsorts .as-about-hero__meta-item i { color: var(--bead-blue); }
 
-/* Role icons -> bare duotone glyph, matches the homepage row-item precedent
- (Phase 2, 12 July 2026). Chip removed. Base rule (css:398-409) guards
- background/border-radius/width/height/font-size/color/justify-content/
- align-items with !important, so every one of those still needs !important
- here too or the override silently loses. Bare glyph sized to occupy the
- space the 40px chip did, scaled down from the 52px card-icon treatment in
- the same ratio the row-item migration used (48px chip -> 39px glyph,
- ~0.81x): 40px * 0.81 ~ 32px. */
 .as-allsorts .as-about-role__icon {
  width: auto !important;
  height: auto !important;
@@ -6075,11 +5531,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  --fa-secondary-opacity: 1;
 }
 
-/* About-role rotation converted to .as-icon--* modifier classes (see
-   .as-row-item__icon block above) - was nth-child, broken by the topper
-   insertion. .as-about-work__card below is unaffected (not a topper
-   host) and keeps its nth-child rotation as-is. */
-
 .as-allsorts .as-about-work__grid .as-about-work__card:nth-child(1) .as-about-work__card-icon i {
  --fa-primary-color: #ec4d97;
  --fa-secondary-color: #f6aed0;
@@ -6095,17 +5546,13 @@ a.cky-banner-element.as-cookie__btn:hover {
  --fa-secondary-color: #f8c4a0;
  color: #f07d2e;
 }
-/* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
+
 .as-allsorts .as-about-work__grid .as-about-work__card:nth-child(4) .as-about-work__card-icon i {
  --fa-primary-color: #d69d1c;
  --fa-secondary-color: #fae9a6;
  color: #d69d1c;
 }
 
-/* Container treatment: light cards get ink border + pop-shadow + radius-lg;
- dark/solid card gets shadow+radius only (border would be invisible on black);
- .as-row-list--dark is excluded — already dark-safe translucent border, an
- ink border or pop-shadow would be as invisible there as on a solid black box */
 .as-allsorts .as-about-background__right,
 .as-allsorts .as-about-work__card {
  border: var(--bw) solid var(--ink-900);
@@ -6113,13 +5560,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  box-shadow: var(--pop-md);
 }
 
-/* .as-about-work__card topper - host is padded (2.2rem, css:3106) and was
-   overflow:visible. Nothing in the card relies on overflowing (no negative
-   margins, no absolute-positioned children beyond icon/title/desc), and
-   the pop-shadow above paints outside the border box regardless of
-   overflow, so it is unaffected. Icon rotation (css:5932-5951) keys off
-   the card's own nth-child position in .as-about-work__grid, not off
-   anything inside the card, so this insertion does not shift it. */
 .as-allsorts .as-about-work__card {
  overflow: hidden;
 }
@@ -6127,18 +5567,8 @@ a.cky-banner-element.as-cookie__btn:hover {
  margin: -2.2rem -2.2rem 16px;
 }
 
-/* Inner hairline divider, remapped off legacy --as-border */
 .as-allsorts .as-about-role { border-bottom-color: var(--grey-200); }
 
-/* Phase 1 white-out: .as-about-work__card /
- .as-about-background / .as-about-skills all go to white at their base
- rules directly now - the overrides that used to force it here (or force
- coconut, in .as-about-skills' case) are gone. */
-
-/* Tighter section rhythm - base .as-about-* sections are all
-   var(--as-space-section) (7rem/112px) top and bottom. Desktop-only,
-   guarded below; mobile (<=480px) falls back to the existing unscoped
-   64px mobile token rule. */
 @media (min-width: 481px) {
   .as-allsorts .as-about-background,
   .as-allsorts .as-about-solo,
@@ -6149,30 +5579,10 @@ a.cky-banner-element.as-cookie__btn:hover {
   }
 }
 
-/* ============================================================
-   PHASE 3 ITEM 3 - about page: .as-about-skills becomes the second
-   editorial ink band. Locked to .as-creds / .as-svc-process / the
-   .as-about-solo rebuild - same object, different job. Second break in
-   the 2633px unbroken white run left after Item 2.
-
-   Unlike .as-svc-process / .as-about-solo, this component's BASE (pre-
-   allsorts) tier sits on white with dark text - it is being converted
-   TO an ink band for the first time here, not already dark pre-redesign.
-   So every text/icon colour below is set explicitly, not just weight/
-   line-height/smoothing - there is no white-on-black base to inherit
-   from.
-
-   Must land AFTER the 84px section-rhythm rule above - equal
-   specificity, so file order decides the winner. Padding here
-   overrides that rule intentionally; do not add !important.
-   ============================================================ */
 .as-allsorts .as-about-skills {
   background-color: var(--liquorice);
 }
 
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
 @media (min-width: 481px) {
 .as-allsorts .as-about-skills {
   padding: var(--as-pad-ink) var(--as-pad-side);
@@ -6197,16 +5607,10 @@ a.cky-banner-element.as-cookie__btn:hover {
   color: #b4b4bc;
 }
 
-/* Vertical column dividers only - no horizontal hairlines under the
-   group titles (Charles: "no horizontal hairlines"). */
 .as-allsorts .as-about-skills__group {
   border-left-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Group titles: Fraunces 900, same role as the big numerals in .as-creds,
-   just words instead of digits. DM Mono was tried and rejected - read as
-   a label, not a heading. No border-bottom - that lived on the base rule
-   pre-redesign and is dropped entirely, not overridden here. */
 .as-allsorts .as-about-skills__group-title {
   font-weight: var(--fw-display);
   color: var(--white);
@@ -6220,47 +5624,21 @@ a.cky-banner-element.as-cookie__btn:hover {
   color: var(--grey-400);
 }
 
-/* Icon rotation: fa-slab-press (verified present - see the tofu note at
-   the HTML markup), same 4-stop luminous sequence as .as-creds /
-   .as-svc-process / .as-about-solo. */
 .as-allsorts .as-about-skills__group:nth-child(1) i { color: var(--candy-pink-lt); }
 .as-allsorts .as-about-skills__group:nth-child(2) i { color: var(--bead-blue-lt); }
 .as-allsorts .as-about-skills__group:nth-child(3) i { color: var(--tangerine); }
 .as-allsorts .as-about-skills__group:nth-child(4) i { color: var(--sunshine); }
 
-/* ============================================================
-   PHASE 3 ITEM 2 - about page: .as-about-solo rebuild (Option A).
-   Locked to .as-creds / .as-svc-process - same ink band, same job.
-   Fixes a live contrast bug: the old .as-row-list--dark variant this
-   section used to run on computed near-black text on a near-black
-   band (.as-row-item__title / __desc never got re-coloured for dark
-   surfaces). Rebuilt off dedicated .as-about-solo__reason* classes
-   instead - .as-row-list--dark was deleted entirely in the Phase 4
-   dead-code pass.
-
-   Must land AFTER the 84px section-rhythm rule above - equal
-   specificity, so file order decides the winner. Padding here
-   overrides that rule intentionally; do not add !important.
-   ============================================================ */
 .as-allsorts .as-about-solo {
   background-color: var(--liquorice);
 }
 
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
 @media (min-width: 481px) {
 .as-allsorts .as-about-solo {
   padding: var(--as-pad-ink) var(--as-pad-side);
 }
 }
 
-/* Eyebrow label goes sunshine on ink, matching .as-creds / .as-svc-process.
-   Dot is NOT touched here - it stays candy-pink via the general
-   .as-allsorts .as-eyebrow__dot rule now that the two legacy !important
-   overrides forcing it to sunshine (css:372, css:6431 pre-removal) are
-   gone. Verified live: the dot is pink on every surface sitewide, ink
-   bands included - only the label switches blue -> sunshine on ink. */
 .as-allsorts .as-about-solo .as-label {
   color: var(--sunshine);
 }
@@ -6268,20 +5646,11 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-allsorts .as-about-solo__reason-title { color: var(--white); }
 .as-allsorts .as-about-solo__reason-desc  { color: var(--grey-400); }
 
-/* Icon rotation: fa-slab-press (not fa-slab-duo) - dark band, duotone's
-   secondary layer disappears on ink. Same 4-stop luminous sequence as
-   .as-creds / .as-svc-process. */
 .as-allsorts .as-about-solo__reason:nth-child(1) i { color: var(--candy-pink-lt); }
 .as-allsorts .as-about-solo__reason:nth-child(2) i { color: var(--bead-blue-lt); }
 .as-allsorts .as-about-solo__reason:nth-child(3) i { color: var(--tangerine); }
 .as-allsorts .as-about-solo__reason:nth-child(4) i { color: var(--sunshine); }
 
-/* === ALLSORTS COMPONENTS - home page - added 2026-07-09 === */
-
-/* Display headings: Fraunces 900 (was DM Serif Display's only weight, 400).
-Full render fix (weight, line-height, letter-spacing, smoothing) on the
-5 confirmed section headings; colour goes to ink-900 across the board - none
-of these five sit on a dark band. */
 .as-allsorts .as-hero-combined__headline,
 .as-allsorts .as-positioning__headline,
 .as-allsorts .as-services__headline,
@@ -6299,7 +5668,6 @@ of these five sit on a dark band. */
   color: var(--candy-pink);
 }
 
-/* By the Numbers heading - same render fix, white text preserved (dark band) */
 .as-allsorts .as-creds__headline {
   font-weight: var(--fw-display);
   line-height: var(--lh-tight);
@@ -6311,22 +5679,11 @@ of these five sit on a dark band. */
 .as-allsorts .as-eyebrow--on-dark .as-label {
   color: var(--sunshine);
 }
-/* Wrapper-level restate, same colour, same reasoning. The rule above targets
-   .as-label directly (3 classes), which beats the global .as-allsorts .as-label
-   rule (2 classes, color: bead-blue) on specificity regardless of source order,
-   so it should already be the one winning. This targets .as-eyebrow--on-dark
-   itself in case something is reading the wrapper's own color rather than the
-   label span's. Harmless either way: .as-label always sets its own explicit
-   color, so it never inherits from this wrapper. Dot is untouched by both
-   (uses background, not color) and stays candy-pink via the global dot rule. */
+
 .as-allsorts .as-creds .as-eyebrow--on-dark {
   color: var(--sunshine);
 }
 
-/* Other var(--font-display) elements on the page - not full headings, but
-Fraunces at 900 needs the same weight bump here too. Weight + line-height +
-smoothing only - the white-on-dark numerals (creds/casestudy) and the
-casestudy client name keep their existing colour. */
 .as-allsorts .as-creds__number,
 .as-allsorts .as-casestudy__client {
   font-weight: var(--fw-display);
@@ -6334,8 +5691,7 @@ casestudy client name keep their existing colour. */
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
 }
-/* Title set in DM Sans, not DM Serif Display - base rule (css:859-868) has
-   no !important on any property, so this wins on source order alone. */
+
 .as-allsorts .as-services__card-title {
   font-family: var(--font-body);
   font-weight: var(--fw-semibold);
@@ -6346,51 +5702,35 @@ casestudy client name keep their existing colour. */
   -moz-osx-font-smoothing: auto;
 }
 
-/* Tag/eyebrow spacing, per reference .svc margins */
 .as-allsorts .as-services__card-tag {
   margin: 20px 0 9px;
 }
 
-/* Price spacing - top gap only; the gap before the description now comes
-   from the description's own top margin (see .as-services__card-desc below),
-   not from this element's bottom margin. */
 .as-allsorts .as-services__card-price {
   margin: 16px 0 0;
 }
 
-/* Tighter description copy, per reference .svc spec */
 .as-allsorts .as-services__card-desc {
   font-size: 15px;
   line-height: 1.60;
   margin: 16px 0 20px;
 }
 
-/* Checklist spacing, per reference .svc spec */
 .as-allsorts .as-services__card-features {
   padding-top: 18px;
   gap: 11px;
 }
 
-/* Gap above "Learn more" - card-cta keeps margin-top: auto (base css:927,
-   pushes the CTA to the card bottom regardless of description length);
-   the padding-top above the link text stays at the reference .svc's 24px.
-   border-top removed - reference has only ONE divider per card (above the
-   checklist, css:894-903), not a second one here. Spacing is unchanged,
-   only the hairline itself is gone. */
 .as-allsorts .as-services__card-cta {
   padding-top: 24px;
   border-top: none;
 }
 
-/* "Learn more" - bold, per reference .svc .more */
 .as-allsorts .as-services__card-link {
   font-weight: 600;
   font-size: 14px;
 }
 
-/* Body copy: DM Sans 400, remapped off legacy greys. Dark-card copy
-(casestudy client-desc / stat-label) is already muted-white and correct -
-left untouched. */
 .as-allsorts .as-hero-combined__subline,
 .as-allsorts .as-positioning__body,
 .as-allsorts .as-services__subline,
@@ -6405,9 +5745,6 @@ left untouched. */
   color: #b7b7bf;
 }
 
-/* Phase 1 white-out: .as-positioning's background and border-bottom are
- both handled at the base rule now (var(--white), no border) - this used
- to force coconut + suppress the base border-bottom, both now redundant. */
 @media (min-width: 481px) {
   .as-allsorts .as-positioning {
     padding-top: var(--as-pad-band);
@@ -6415,28 +5752,12 @@ left untouched. */
   }
 }
 
-/* Tighter section rhythm - base .as-services is var(--as-space-section)
-   (7rem/112px) top and bottom. Desktop-only values guarded below; mobile
-   (<=480px) falls back to the unscoped 64px mobile token rhythm.
-   Top uses --as-pad-band (80px), same token every other white section
-   uses coming off an ink band (see .as-about-*, .as-contact-form/.as-faq
-   above) - this gives the "WHAT I DO" eyebrow proper clearance below
-   .as-backstory instead of sitting flush against it. Paired with
-   .as-backstory's own bottom padding (--as-pad-ink, 72px, css:8517-8519),
-   the two together total 152px, matching every other ink-to-white gap
-   on this page. */
 @media (min-width: 481px) {
   .as-allsorts .as-services {
     padding-top: var(--as-pad-band);
     padding-bottom: 96px;
   }
 }
-
-/* ============================================
-   HOMEPAGE CASE STUDY - editorial black band
-   Single study, 2fr/1fr, whole band is a link.
-   Sibling of .as-creds (ink bg, Fraunces, eyebrow).
-   ============================================ */
 
 .as-allsorts .as-casestudy {
   display: block;
@@ -6447,9 +5768,6 @@ left untouched. */
   overflow-x: hidden;
 }
 
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
 @media (min-width: 481px) {
 .as-allsorts .as-casestudy {
   padding: var(--as-pad-ink) var(--as-pad-side);
@@ -6518,9 +5836,6 @@ left untouched. */
   color: #ffffff;
 }
 
-/* Image zone: overlapping device pair, desktop + phone.
-   Shadow-only separation, no border by design. */
-
 .as-allsorts .as-casestudy__imgs {
   position: relative;
   height: 260px;
@@ -6577,7 +5892,6 @@ left untouched. */
   transform: rotate(7deg) translateY(-8px);
 }
 
-/* Desktop: 2fr/1fr side by side */
 @media (min-width: 481px) {
 
   .as-allsorts .as-casestudy__inner {
@@ -6599,14 +5913,6 @@ left untouched. */
   background-color: var(--liquorice);
 }
 
-/* By the Numbers polish - locked as the canonical dark-band pattern (Why Solo
-syncs to this next). Section padding bumped for breathing room; item padding
-goes horizontal-only (0 vertical) since the column-divider borders now do
-the separating job, and 30px each side doubles as the section's own left/
-right gutter - the leftmost/rightmost items carry it since .as-creds itself
-goes flush (0 horizontal). Mobile keeps its own padding, restated below at
-equal specificity so this doesn't silently override it under 480px. */
-/* Padding extracted to its own min-width:481px rule (was unguarded above). */
 @media (min-width: 481px) {
 .as-allsorts .as-creds {
   padding: var(--as-pad-ink) var(--as-pad-side);
@@ -6624,26 +5930,11 @@ equal specificity so this doesn't silently override it under 480px. */
   }
 }
 
-/* By the Numbers icons - plain coloured outline glyphs, no chips (this is the
-canonical dark-band-points pattern; About's Why Solo syncs to it later).
-Beats the legacy yellow (css:374-378, !important) the same way the about
-overrides above beat their guarded legacy properties. Rotation: pink -> blue
--> tangerine -> sunshine, luminous -lt variants where they exist (dark ground). */
 .as-allsorts .as-creds__item:nth-child(1) .as-creds__icon { color: var(--candy-pink-lt) !important; }
 .as-allsorts .as-creds__item:nth-child(2) .as-creds__icon { color: var(--bead-blue-lt) !important; }
 .as-allsorts .as-creds__item:nth-child(3) .as-creds__icon { color: var(--tangerine) !important; }
 .as-allsorts .as-creds__item:nth-child(4) .as-creds__icon { color: var(--sunshine) !important; }
 
-/* Services cards - chunky container + candy icon chips, off the legacy
-purple (css:398-411 guards background/radius/width/height/size/colour with
-!important on .as-services__card-icon - every one of those needs
-!important here too, same technique as as-about-role__icon/
-as-about-work__card-icon above). Tags keep the pink/blue/tangerine
-text-colour rotation (unrelated legacy purple, no !important guard) -
-deliberately NOT synced to the icon fill's sunshine on card 3, since flat
-sunshine text on white is barely legible; tangerine reads fine. */
-/* Card fill is pure white at its own base rule (Phase 1 white-out) - no
-   override needed here. */
 .as-allsorts .as-services__card {
   border: var(--bw) solid var(--ink-900);
   border-radius: var(--radius-lg);
@@ -6651,27 +5942,17 @@ sunshine text on white is barely legible; tangerine reads fine. */
   overflow: hidden;
   padding: 28px 26px;
 }
-/* Topper. A lid on a box. Only ever goes on a white card with a 2px ink
-   border, 16px radius and overflow hidden. Never on a full-bleed band.
-   Size and border only. Any bleed is declared by the host, because it
-   depends on the host's padding.
-   No width declaration on purpose - width:100% resolves against the
-   padding box, so on a padded host it falls short of the border box and
-   the negative-margin bleed never reaches the edge. auto stretches to
-   fill the flex column AND absorbs the negative margins correctly. */
+
 .as-allsorts .as-topper {
   height: 14px;
   border-bottom: var(--bw) solid var(--ink-900);
 }
 
-/* Solid fills. */
 .as-allsorts .as-topper--pink      { background: var(--candy-pink); }
 .as-allsorts .as-topper--blue      { background: var(--bead-blue); }
 .as-allsorts .as-topper--tangerine { background: var(--tangerine); }
 .as-allsorts .as-topper--sunshine  { background: var(--sunshine); }
 
-/* Variant 1. The allsort seen from above. Liquorice in slot 2 is the
-   whole point: without the ink break it is just a rainbow. */
 .as-allsorts .as-topper--allsorts {
   background-image: linear-gradient(90deg,
     #ec4d97 0%,  #ec4d97 25%,
@@ -6680,9 +5961,6 @@ sunshine text on white is barely legible; tangerine reads fine. */
     #4f7cc9 75%, #4f7cc9 100%);
 }
 
-/* Variant 2. The same allsort in cross-section, top to bottom.
-   This is .surface-sandwich-yellow with the coconut band swapped to
-   white. It is the only place tangerine enters the topper system. */
 .as-allsorts .as-topper--sandwich {
   background-image: linear-gradient(180deg,
     #f4cf3b 0%,  #f4cf3b 22%,
@@ -6692,7 +5970,6 @@ sunshine text on white is barely legible; tangerine reads fine. */
     #f07d2e 78%, #f07d2e 100%);
 }
 
-/* Layered allsort, pink fondant. */
 .as-allsorts .as-topper--sandwich-pink {
   background-image: linear-gradient(180deg,
     #ffffff 0%,  #ffffff 22%,
@@ -6702,7 +5979,6 @@ sunshine text on white is barely legible; tangerine reads fine. */
     #ffffff 78%, #ffffff 100%);
 }
 
-/* Layered allsort, blue fondant. */
 .as-allsorts .as-topper--sandwich-blue {
   background-image: linear-gradient(180deg,
     #4f7cc9 0%,  #4f7cc9 22%,
@@ -6712,8 +5988,6 @@ sunshine text on white is barely legible; tangerine reads fine. */
     #4f7cc9 78%, #4f7cc9 100%);
 }
 
-/* The plug. A liquorice tube with a fondant core, in cross-section.
-   Ink dominant on purpose. */
 .as-allsorts .as-topper--plug-sunshine {
   background-image: linear-gradient(180deg,
     #17171a 0%,  #17171a 30%,
@@ -6721,33 +5995,15 @@ sunshine text on white is barely legible; tangerine reads fine. */
     #17171a 70%, #17171a 100%);
 }
 
-/* The blue speckle fill is not a modifier. It stays as the existing
-   .surface-speckle-blue utility applied alongside .as-topper in the
-   markup, exactly as it works on the homepage's card 2. */
-
-/* Homepage service card - bleeds the topper to the card edges via
-   negative margin. Margin matches the card's own padding (28px 26px,
-   set above), clipped to the card's rounded corners by the
-   overflow:hidden above. Bottom margin restores the gap before the
-   icon, so nothing below the topper shifts. */
 .as-allsorts .as-services__card .as-topper {
   margin: -28px -26px 28px;
 }
 
-/* Service-page pricing box and the about-page background list both use
-   gap: 1px between rows (css:1457, css:2919). Cancel it so the topper's
-   ink border-bottom sits flush against the first row instead of leaving
-   a 1px sliver of the row's own top edge showing through. */
 .as-allsorts .as-svc-pricing .as-topper,
 .as-allsorts .as-about-background__right .as-topper {
   margin-bottom: -1px;
 }
-/* Bare duotone "Lucky Charms" glyph - replaces the candy chip box above.
-   Neutralises every guarded chip property (width/height/radius/font-size/
-   color were !important on the old rule; background per-card was
-   !important too) with matching !important so this wins regardless of
-   source order. Colour now lives on the <i> itself via --fa-primary-color/
-   --fa-secondary-color (duotone), not on this wrapper. */
+
 .as-allsorts .as-services__card-icon {
   width: auto !important;
   height: auto !important;
@@ -6785,41 +6041,17 @@ sunshine text on white is barely legible; tangerine reads fine. */
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e !important;
 }
-/* Subtitles uniform muted grey, not per-card colour - reference .svc .ce.
-   !important needed: this single-class selector is lower specificity than
-   the nth-child rules it replaces, and this file's cascade order can't be
-   relied on alone once .as-allsorts grows. Mono font, uppercase, tracking,
-   size and weight are untouched (still set on the base .as-services__card-tag
-   rule, css:849-857) - only the colour changes here. */
+
 .as-allsorts .as-services__card-tag { color: var(--grey-400) !important; }
 .as-allsorts .as-services__card-features li i { color: var(--candy-pink); }
 .as-allsorts .as-services__card:hover .as-services__card-link { color: var(--candy-pink); }
 
-/* ============================================================
-   Services hub (/services/view-all) - allsorts pass, added 2026-07-10.
-   .as-hub-* classes are unique to services-hub.html (no shared blast
-   radius). No topper strip here - deferred to a whole-site combo pass
-   with every other card's topper, not a hub-only decision. No
-   overflow:hidden - not needed, no child fill reaches the rounded
-   corners without a topper.
-   ============================================================ */
-
-/* Card container - chunky pop treatment, ports home's .as-services__card
-   border/radius/shadow (css:6857-6862). */
 .as-allsorts .as-hub-card {
   border: var(--bw) solid var(--ink-900);
   border-radius: var(--radius-lg);
   box-shadow: var(--pop-md);
 }
 
-/* Icon -> bare duotone glyph, matches the homepage service-card / row-item
-   precedent (Phase 2, 12 July 2026). Chip removed: still overrides the
-   legacy shared rule (css:398-411) that also guards .as-services__card-icon
-   / .as-about-role__icon / .as-about-work__card-icon, so background/border-
-   radius/width/height/font-size/color all still need !important to beat
-   it. Bare glyph sized to occupy the space the 52px chip did. Card order
-   (Custom Build / Site Refresh / Ongoing Support) keeps home's pink / blue
-   / tangerine rotation, now on the glyph itself rather than a chip fill. */
 .as-allsorts .as-hub-card__icon {
   width: auto !important;
   height: auto !important;
@@ -6853,9 +6085,6 @@ sunshine text on white is barely legible; tangerine reads fine. */
   color: #f07d2e;
 }
 
-/* Title set in DM Sans, not Fraunces - mirrors .as-services__card-title's
-   allsorts override (css:5978-5986) exactly, per Charles's request to match
-   the card-title language sitewide. */
 .as-allsorts .as-hub-card__title {
   font-family: var(--font-body);
   font-weight: var(--fw-semibold);
@@ -6864,42 +6093,21 @@ sunshine text on white is barely legible; tangerine reads fine. */
   color: var(--ink-900);
 }
 
-/* Card tag - uniform muted grey, same as home (css:6904). Not synced to
-   the icon fill's tangerine on card 3 - flat tangerine text on white
-   reads worse than grey, same call home made for sunshine. */
 .as-allsorts .as-hub-card__tag { color: var(--grey-400); }
 
-/* Feature ticks - uniform candy-pink, same as home (css:6905). */
 .as-allsorts .as-hub-card__features li i { color: var(--candy-pink); }
 
-/* Footer link hover - candy-pink, same as home (css:6906). */
 .as-allsorts .as-hub-card:hover .as-hub-card__link { color: var(--candy-pink); }
 
-/* Hero em accent - candy-pink, italic dropped to match the established
-   em pattern on contact/detail hero headlines (css:6344). */
 .as-allsorts .as-hub-hero__headline em {
   font-style: normal;
   color: var(--candy-pink);
 }
 
-/* ============================================================
-   PHASE 3 ITEM 5 - services hub page: .as-hub-hero splits into a plain
-   white intro + a new .as-hub-bar ink band. Locked to .as-creds /
-   .as-contact-bar - same object, different job. Consolidates the
-   .as-row-list trust signals (stranded beside the h1, doing nothing) into
-   one full-width band with its own argument: whichever service you pick,
-   this is what doesn't change.
-
-   .as-hub-services / .as-faq / .as-hub-notsure are NOT part of this
-   change. Zero markup or CSS edits inside any of them.
-   ============================================================ */
 .as-allsorts .as-hub-bar {
   background-color: var(--liquorice);
 }
 
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
 @media (min-width: 481px) {
 .as-allsorts .as-hub-bar {
   padding: var(--as-pad-ink) var(--as-pad-side);
@@ -6928,18 +6136,11 @@ sunshine text on white is barely legible; tangerine reads fine. */
   color: var(--grey-400);
 }
 
-/* Icon rotation: fa-slab-press (dark band), same 4-stop luminous sequence
-   as .as-creds / .as-contact-bar. Order changed from the old row-list -
-   credential first, differentiator second, then the two service promises;
-   "end-to-end ownership" no longer buried last. */
 .as-allsorts .as-hub-bar__col:nth-child(1) i { color: var(--candy-pink-lt); }
 .as-allsorts .as-hub-bar__col:nth-child(2) i { color: var(--bead-blue-lt); }
 .as-allsorts .as-hub-bar__col:nth-child(3) i { color: var(--tangerine); }
 .as-allsorts .as-hub-bar__col:nth-child(4) i { color: var(--sunshine); }
 
-/* Tighter section rhythm - base .as-hub-services is var(--as-space-section)
-   (7rem/112px) top and bottom. Desktop-only, guarded below; mobile
-   (<=480px) falls back to the existing unscoped 64px mobile token rule. */
 @media (min-width: 481px) {
   .as-allsorts .as-hub-services {
     padding-top: var(--as-pad-band);
@@ -6947,27 +6148,14 @@ sunshine text on white is barely legible; tangerine reads fine. */
   }
 }
 
-/* H2 token weight bump - size comes from the shared base clamp(2rem,3.5vw,3rem),
-   this class just had no allsorts override before this pass. */
 .as-allsorts .as-hub-services__headline {
   font-weight: var(--fw-display);
 }
 
-/* Mid-page wave cleanup - hide the low-mid illustration band (sits at
-services' bottom edge, between services and case studies). Top/tail
-bookends (--home, --home-footer) and the other mid-page slice
-(--home-high-mid) are untouched. display:none collapses its border-top
-too, so no stray gap is left behind. */
 .as-allsorts .as-hero--home-low-mid {
   display: none;
 }
 
-/* Bottom breathing room - was 160px (too much dead air), then cut to 72px
-(too aggressive: the right-column row-list card runs taller than the left
-copy column, so at 72px it overlapped the footer wave by 34px - verified
-live, card bottom 4634 vs wave top 4600). 128px cleared the card; bumped to
-148px, then 168px for further clearance above the wave. Desktop-only,
-guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 @media (min-width: 481px) {
   .as-allsorts .as-cta {
     padding-top: var(--as-pad-cta-top);
@@ -6975,11 +6163,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
-/* CTA row-list -> four individual pop-shadow cards (Option D). Unframes the
-   shared .as-row-list panel and gives each .as-row-item its own ink border +
-   offset shadow instead, scoped to .as-cta only so the contact page's
-   row-list (and .as-faq__item, which shares the divider-color rule) are
-   unaffected. Desktop-only; mobile falls back to the base unscoped rules. */
 @media (min-width: 481px) {
   .as-allsorts .as-cta .as-row-list {
     background: transparent;
@@ -7000,9 +6183,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
-/* Staged for future rollout - swaps the CTA's two columns via order, not
-   applied to any live HTML yet. .as-cta--flipped does not appear in
-   home.html, so this has zero effect until it's added there or elsewhere. */
 @media (min-width: 481px) {
   .as-allsorts .as-cta--flipped .as-cta__left {
     order: 2;
@@ -7012,14 +6192,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
-/* Buttons - chunky pop treatment. Base .as-btn/.as-btn--primary/.as-btn--outline
-   (css:127-165) carry no !important, so this wins on specificity alone (2
-   classes vs 1) with no override tricks needed. Fills untouched - primary
-   stays black/white, outline stays white/ink; this only adds the border,
-   shadow, and press mechanics. No button on home currently sits on a dark
-   band (By the Numbers has none), so no white-border variant is needed yet -
-   if one shows up later, it needs the same treatment as the dark-card fixes
-   above: an ink-900 border is invisible on a dark fill, use white instead. */
 .as-allsorts .as-btn {
   border: var(--bw) solid var(--ink-900);
   box-shadow: var(--pop-md);
@@ -7039,13 +6211,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   box-shadow: 0 0 0 0 var(--ink-900);
 }
 
-/* Primary button fill - candy-pink, not the legacy --as-purple that was
-   firing on hover (css:149, .as-btn--primary:hover). Note: the actual
-   culprit token is --as-purple (#5107ad, the original design-tokens
-   purple), not --violet-* - those violet tokens are defined but never
-   referenced anywhere in this file, so there was nothing to remove there.
-   Hover changes shadow+transform only (from the generic rule above),
-   background stays pink - this rule only needs to override the color. */
 .as-allsorts .as-btn--primary {
   background: var(--candy-pink);
   color: #fff;
@@ -7054,11 +6219,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   background: var(--candy-pink);
 }
 
-/* Blue button variant - bead-blue fill, same no-color-change-on-hover
-   pattern as primary. This class does not exist in the base stylesheet;
-   nothing to override, just a new variant. Not yet applied anywhere in
-   home.html - see chat note, no button currently lives in .as-positioning
-   to attach it to. */
 .as-allsorts .as-btn--blue {
   background: var(--bead-blue);
   color: #fff;
@@ -7067,11 +6227,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   background: var(--bead-blue);
 }
 
-/* White button variant flipped to pink primary fill - used only in the 5
-   deep-page CTA banners (.as-svc-cta / .as-hub-notsure / .as-cs-hub-cta),
-   now light-background sections where a white fill would be invisible.
-   Border/shadow/pill-radius/hover-lift already come from the generic
-   .as-allsorts .as-btn rule above - only the fill needs changing here. */
 .as-allsorts .as-btn--white {
   background: var(--candy-pink);
   color: #fff;
@@ -7080,9 +6235,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   background: var(--candy-pink);
 }
 
-/* Button arrow icon - slides right on hover. Icon is a plain <i>, inline
-   by default, transform: translateX still applies fine without changing
-   display. */
 .as-allsorts .as-btn .arw {
   transition: transform var(--dur) var(--ease-out);
 }
@@ -7090,24 +6242,10 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   transform: translateX(4px);
 }
 
-/* Outline buttons never show the sliding arrow - coloured buttons (primary
-   pink, blue) keep it. One rule, covers See the work / View all work /
-   Explore services now and any future outline button automatically. */
 .as-allsorts .as-btn--outline .arw {
   display: none;
 }
 
-/* Hero single-column layout, Silver Partner demoted to a line (Phase 3,
-   item 1, 12 July 2026). Right-column stats panel removed - duplicated
-   the Track Record band below and out-decorated the H1. box-sizing:
-   border-box fixes a pre-existing bug: .as-hero-combined__content had
-   padding added on top of its own max-width:1160px (content-box
-   default), rendering 1224px wide - 32px wider than every other section
-   on each side. Same fix already used at the existing max-width:1024px
-   breakpoint (css:579); this brings the desktop rule into line with it.
-   Adding .as-container was considered and rejected - it declares no
-   box-sizing of its own (max-width + margin only), so it would not have
-   fixed the padding maths. */
 @media (min-width: 481px) {
   .as-hero-combined__content {
     grid-template-columns: 1fr;
@@ -7119,26 +6257,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
-/* ============================================================
-   Off-white sweep - card/panel surfaces to pure white
-   ============================================================
-   Phase 1 white-out (2026-07-12): --as-off-white and --coconut are gone
-   from the whole stylesheet - every consumer now reads var(--white) (or
-   an equivalent) at its own base rule directly. .as-hero--home-high-mid,
-   .as-services__card and .as-row-list:not(.as-row-list--dark) .as-row-item
-   dropped out of this sweep as a result - their bases already resolve to
-   white with nothing left to override. .as-hero-combined__stat and
-   .as-hero-combined__partner's entry in this sweep was removed in the
-   Phase 4 dead-code pass along with the rest of that component. */
-
-/* === ALLSORTS COMPONENTS - service pages (ongoing_support, site_refresh,
-   custom_build) - added 2026-07-10 ===
-   .as-svc-hero__headline and .as-svc-section-headline are shared verbatim
-   across all three service detail pages (h1/h2 only, no other role) and
-   currently read var(--font-heading), which still resolves to the legacy
-   Exo font - not var(--font-display) - so they were staying Exo while every
-   other allsorts page moved to Fraunces. Remap font-family plus the usual
-   full-weight render fix (Squarespace's antialiased default reads thin). */
 .as-allsorts .as-svc-hero__headline,
 .as-allsorts .as-svc-section-headline {
   font-family: var(--font-display);
@@ -7149,24 +6267,12 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   -moz-osx-font-smoothing: auto;
 }
 
-/* H1 normalisation, 12 July 2026 - font-size/max-width/colour can't join
-   the shared group above (.as-svc-section-headline shares that selector
-   and must not pick up an 820px cap or the H1's ink). Standalone rule,
-   same pattern as the hub/contact fixed-size split at css:6452/:6461. */
 .as-allsorts .as-svc-hero__headline {
   font-size: clamp(2.6rem, 5vw, 3.5rem);
   color: var(--ink-900);
   max-width: 820px;
 }
 
-/* Exo retirement (13 July 2026 typography pass) - .as-svc-hero__price was
-   still reading var(--font-heading), which stays Exo 2 (never remapped by
-   the .as-allsorts token block). Family later moved off Fraunces to DM Mono
-   (Charles's call after live preview) - tabular figures keep the pricing
-   tiers aligned down the column; rhymes with the mono numeral layer
-   (.as-cs-stats__label, .as-cs-phase__number, .as-svc-hero__price-label
-   directly above this element). 500 is the heaviest real DM Mono weight -
-   700 has no face. */
 .as-allsorts .as-svc-hero__price {
   font-family: var(--font-mono);
   font-weight: 500;
@@ -7174,12 +6280,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   font-size: 48px;
 }
 
-/* Hero meta-row icons (Phase 2, 12 July 2026) - first allsorts treatment
-   this selector has ever had; it was still rendering the legacy --as-purple
-   flat colour (base rule css:1209-1213), never swept to candy at all. Bare
-   duotone glyph, same colour-only recipe as the rest of Tier 1, no chip to
-   remove so the existing 22.4px size is kept. 4 items per page, clean 1:1
-   nth-child mapping, no wraparound needed. */
 .as-allsorts .as-svc-hero__meta-item i {
   --fa-secondary-opacity: 1;
 }
@@ -7198,15 +6298,13 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e;
 }
-/* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
+
 .as-allsorts .as-svc-hero__meta-item:nth-child(4) i {
   --fa-primary-color: #d69d1c;
   --fa-secondary-color: #fae9a6;
   color: #d69d1c;
 }
 
-/* .as-svc-cta__headline already reads var(--font-display) via its base
-   rule (css:1890) - render fix only, no font-family change needed. */
 .as-allsorts .as-svc-cta__headline {
   font-weight: var(--fw-display);
   letter-spacing: var(--ls-heading);
@@ -7215,24 +6313,14 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   -moz-osx-font-smoothing: auto;
 }
 
-/* Deep-page CTA banners flipped from a dark horizontal banner to a light
-   centred stack - .as-cta-banner__inner is shared by .as-svc-cta (3 service
-   pages + one-page-website's --light variant), .as-hub-notsure (services
-   hub) and .as-cs-hub-cta (case-studies hub), so this covers all of them
-   in one place. Eyebrow centres under the new centred content. */
 .as-allsorts .as-cta-banner__inner .as-eyebrow {
   justify-content: center;
 }
 
-/* H2 token weight bump - .as-hub-notsure__headline had no allsorts override
-   before this pass; size comes from the shared base clamp(2rem,3.5vw,3rem). */
 .as-allsorts .as-hub-notsure__headline {
   font-weight: var(--fw-display);
 }
 
-/* Deep-page CTA headline em - matches homepage .as-cta__headline em
-   treatment exactly (upright, candy-pink) instead of falling through to
-   browser-default italic + inherited ink-black. */
 .as-allsorts .as-svc-cta__headline em,
 .as-allsorts .as-hub-notsure__headline em,
 .as-allsorts .as-cs-hub-cta__headline em,
@@ -7241,11 +6329,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: var(--candy-pink);
 }
 
-/* Section padding - base .as-svc-cta / .as-hub-notsure / .as-cs-hub-cta all
-   use var(--as-space-section-cta) (5rem/80px) top and bottom. Bottom bumped
-   to 100px to clear the 107px footer wave's ~60px intrusion, with headroom
-   for the taller centred stack. Desktop-only, guarded below; mobile
-   (<=480px) falls back to the existing unscoped 64px mobile token rule. */
 @media (min-width: 481px) {
   .as-allsorts .as-svc-cta,
   .as-allsorts .as-hub-notsure,
@@ -7255,18 +6338,12 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
-/* Em keyword - upright pink, matches home's verified .as-positioning__headline em */
 .as-allsorts .as-svc-hero__headline em,
 .as-allsorts .as-svc-section-headline em {
   font-style: normal;
   color: var(--candy-pink);
 }
 
-/* What's-available card icons -> bare duotone glyphs, matches the
-   homepage service-card / row-item precedent (Phase 2, 12 July 2026).
-   Chip removed: background/border/radius/forced white colour all dropped
-   (was a 52px chip with candy fill). Bare glyph sized to occupy the space
-   the chip did (52px). */
 .as-allsorts .as-svc-included__item-icon {
   width: auto;
   height: auto;
@@ -7284,12 +6361,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   --fa-secondary-opacity: 1;
 }
 
-/* Duo colour rotation - pink/blue/tangerine/sunshine, cycles every 4.
-   Confirmed the six .as-svc-included__item cards are direct siblings of
-   one parent (.as-svc-included__grid), so nth-child(1..6) maps to visual
-   order 1-6: SEO, Advanced Dev, Performance, Monthly Reviews, Strategic,
-   Content. No more sunshine ink-glyph special case - sunshine is now the
-   glyph's own colour on a white card, not white text on a yellow chip. */
 .as-allsorts .as-svc-included__item:nth-child(1) .as-svc-included__item-icon i,
 .as-allsorts .as-svc-included__item:nth-child(5) .as-svc-included__item-icon i {
   --fa-primary-color: #ec4d97;
@@ -7307,24 +6378,13 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e;
 }
-/* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
+
 .as-allsorts .as-svc-included__item:nth-child(4) .as-svc-included__item-icon i {
   --fa-primary-color: #d69d1c;
   --fa-secondary-color: #fae9a6;
   color: #d69d1c;
 }
 
-/* === ALLSORTS CONTAINER TREATMENT - service pages (ongoing_support,
-   site_refresh, custom_build) - added 2026-07-10 ===
-   Outer containers get chunky ink border + pop-shadow. Radius/shadow tier
-   matches home's own large-panel equivalents (.as-services__card - both
-   --radius-lg + --pop-md, not the --radius-xl/--pop-lg large-panel tier) -
-   .as-svc-pricing follows the same lg/md tier.
-   .as-svc-hero__right keeps its off-white fill: same pattern as
-   .as-contact-hero__location (also off-white + thin border, already boxed
-   without a white override at css:6423) - background left untouched here,
-   matching that precedent and the "off-white sweep" note above which names
-   this class as deliberate section rhythm, not a trap. */
 .as-allsorts .as-svc-included__item,
 .as-allsorts .as-svc-hero__right,
 .as-allsorts .as-svc-pricing {
@@ -7333,11 +6393,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   box-shadow: var(--pop-md);
 }
 
-/* .as-svc-hero__right topper - host is padded (2.2rem, css:1044) and was
-   overflow:visible, so it could not clip a topper strip. overflow:hidden
-   is safe here: nothing in the block relies on overflowing (no negative
-   margins, no absolute-positioned children), and the pop-shadow paints
-   outside the border box regardless of overflow, so it is unaffected. */
 .as-allsorts .as-svc-hero__right {
   overflow: hidden;
 }
@@ -7345,17 +6400,10 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: -2.2rem -2.2rem 0;
 }
 
-/* Internal pricing rows stay hairline - recolour off the legacy --as-border
-   token only, same technique as .as-row-item / .as-faq__item above. */
 .as-allsorts .as-svc-pricing__tier {
   border-bottom-color: var(--grey-200);
 }
 
-/* Exo retirement (13 July 2026 typography pass) - same "Exo trap" as
-   .as-svc-hero__price above, .as-svc-pricing__tier-price was still reading
-   var(--font-heading) (stays Exo 2, never remapped). Family later moved off
-   Fraunces to DM Mono (Charles's call after live preview) - tabular figures
-   keep the three pricing tiers aligned; they drifted in Fraunces. */
 .as-allsorts .as-svc-pricing__tier-price {
   font-family: var(--font-mono);
   font-weight: 500;
@@ -7363,15 +6411,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   font-size: 22px;
 }
 
-/* .as-faq intentionally NOT boxed here - it's a section wrapper (border-top
-   only, off-white section fill), not a card. Its child .as-faq__list already
-   carries the box treatment from the contact-page container pass
-   (.as-allsorts .as-faq__list, css:6425). */
-
-/* Tighter section rhythm - base .as-svc-included / .as-svc-process /
-   .as-svc-bottom are all var(--as-space-section) (7rem/112px) top and
-   bottom. Desktop-only, guarded below; mobile (<=480px) falls back to
-   the existing unscoped 64px mobile token rule. */
 @media (min-width: 481px) {
   .as-allsorts .as-svc-included,
   .as-allsorts .as-svc-process,
@@ -7381,57 +6420,28 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
-/* ============================================================
-   PHASE 3 ITEM 1 - service pages: .as-svc-process becomes the
-   editorial ink band. Locked to .as-creds on the homepage - same
-   object, different job. Breaks the ~3736px unbroken white run on
-   the 3 service pages (custom-build / site-refresh / ongoing-support).
-   No topper: toppers require a white card with an ink border to be
-   the lid of, and this is a full-bleed band.
-
-   Deliberately unscoped by page (simple .as-allsorts .as-svc-process,
-   not sibling-scoped to hero modifiers) - .as-svc-process also exists
-   on one-page-website.html, but that page is being rebuilt solo and
-   is not a page we need to protect from this change.
-
-   Must land AFTER the 84px section-rhythm rule above - equal
-   specificity, so file order decides the winner. Padding here
-   overrides that rule intentionally; do not add !important.
-   ============================================================ */
 .as-allsorts .as-svc-process {
   background-color: rgb(23, 23, 26);
 }
 
-/* Padding extracted to its own min-width:481px rule (was unguarded on the
-   block above). Background/color/etc stay unguarded on purpose - they are
-   correct at every width; only the desktop-scale padding is guarded. */
 @media (min-width: 481px) {
 .as-allsorts .as-svc-process {
   padding: var(--as-pad-ink) var(--as-pad-side);
 }
 }
 
-/* Eyebrow label goes sunshine on ink, matching .as-creds. Dot stays pink. */
 .as-allsorts .as-svc-process .as-label {
   color: var(--sunshine);
 }
 
-/* Headline to creds spec: white, 48px. .as-svc-section-headline is SHARED
-   with .as-svc-included / .as-svc-bottom - scoped to .as-svc-process only
-   so the white doesn't leak onto the still-ink sections either side. */
 .as-allsorts .as-svc-process .as-svc-section-headline {
   color: var(--white);
 }
 
-/* Grey horizontal timeline line (base .as-svc-process__steps::before) is a
-   leftover from the white design - on ink it becomes a dim grey stripe
-   crossing the candy-coloured step numbers. The 1px grid gap + per-step
-   border-left below do the divider job instead, same as .as-creds. */
 .as-allsorts .as-svc-process__steps::before {
   display: none;
 }
 
-/* 1px gap + hairline dividers, matching the creds grid. */
 .as-allsorts .as-svc-process__steps {
   gap: 1px;
 }
@@ -7447,20 +6457,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-allsorts .as-svc-process__step-title { color: var(--white); }
 .as-allsorts .as-svc-process__step-desc  { color: var(--grey-400); }
 
-/* Step numbers: luminous candy rotation, same order as .as-creds. Class
-   is now fa-slab-press - fa-1..fa-4 are plain numerals, swapped from
-   fa-slab fa-regular for a heavier weight, so the colour rules below
-   still apply unchanged regardless of family. */
 .as-allsorts .as-svc-process__step-number i { font-size: 32px; }
 
-/* The 56px size below belongs to the Slab Press digits only, not the
-   container - one-page-website.html shares this same container class
-   with fa-sharp fa-thin fa-circle-N icons and must not be resized.
-   text-align: left corrects Font Awesome's fixed 1.25em icon box
-   (70px at 56px font-size) centring the narrower digit glyph inside
-   it, which otherwise reads as a 21px indent against the text below.
-   Shared by the service-page process steps and the case-study hub rows -
-   same glyph treatment, two components. */
 .as-allsorts .as-svc-process__step-number i.fa-slab-press,
 .as-allsorts .as-cs-row__number i.fa-slab-press {
   font-size: 56px;
@@ -7472,11 +6470,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-allsorts .as-svc-process__step:nth-child(3) .as-svc-process__step-number i { color: var(--tangerine); }
 .as-allsorts .as-svc-process__step:nth-child(4) .as-svc-process__step-number i { color: var(--sunshine); }
 
-/* Stacked-grid stray divider fix: at <=960px the grid drops to 2 columns
-   (css:1740) and at <=600px to 1 (css:1777). An unconditional border-left
-   would draw a divider mid-row at 2-col and a stray line down every
-   stacked item at 1-col. Reset at the same breakpoint the existing
-   ::before divider already resets at (css:1745). */
 @media (max-width: 960px) {
   .as-allsorts .as-svc-process__step {
     border-left: 0;
@@ -7484,28 +6477,11 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
-/* ============================================================
-   ALLSORTS COMPONENTS - case studies hub (/case-studies) - added 2026-07-10
-   .as-cs-card* removed in the Phase 4 dead-code pass (retired by the
-   .as-cs-row rebuild below, orphaned base+allsorts rules deleted
-   entirely rather than left flagged). .as-cs-hub-* remains page-unique
-   to case-studies-hub.html.
-   ============================================================ */
-
-/* Hero em accent - drop italic + legacy purple for the established
-   upright-pink em pattern used on every other migrated headline
-   (.as-positioning__headline em, .as-svc-hero__headline em, etc). */
 .as-allsorts .as-cs-hub-hero__headline em {
   font-style: normal;
   color: var(--candy-pink);
 }
 
-/* Render fix - .as-cs-hub-hero__headline reads var(--font-display) at the
-   base CSS level already - no font-family remap needed, only the
-   weight/line-height/smoothing fix every other Fraunces heading on the
-   site already gets. (.as-cs-card__title / __stat-number had matching
-   render-fix rules here too, removed with the rest of .as-cs-card* in
-   the Phase 4 dead-code pass.) */
 .as-allsorts .as-cs-hub-hero__headline {
   font-size: clamp(2.6rem, 5vw, 4rem);
   font-weight: var(--fw-display);
@@ -7516,10 +6492,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
 }
-/* cs-hub-cta__headline is now part of the unified H2 token (13 July 2026
-   typography pass) - weight bumped to var(--fw-display) along with every
-   other H2-tier class, reversing the earlier "intentionally lighter"
-   decision noted here previously. */
+
 .as-allsorts .as-cs-hub-cta__headline {
   font-weight: var(--fw-display);
   letter-spacing: var(--ls-heading);
@@ -7528,23 +6501,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   -moz-osx-font-smoothing: auto;
 }
 
-/* ============================================================
-   PHASE 3 ITEM 7 - case studies hub (/case-studies/view-all):
-   .as-cs-hub-grid becomes editorial ink rows, replacing the three
-   .as-cs-card trading cards. Same object as the detail-page phase
-   rows (Item 6) - click from hub into a case study and the visual
-   language doesn't change. Last page on the site with zero ink
-   bands; breaks the 2689px unbroken white run. Approved from live
-   DOM-injection preview, 12 July 2026 - Charles's own idea, logged
-   as a follow-up note on Item 6.
-
-   .as-cs-card* was retired by this rebuild and has since been deleted
-   entirely (Phase 4 dead-code pass). New .as-cs-row* markup replaced it;
-   the two families never interacted.
-
-   .as-cs-hub-hero / .as-faq / .as-cs-hub-cta are NOT part of this
-   change - zero markup or CSS edits inside any of them.
-   ============================================================ */
 .as-allsorts .as-cs-hub-grid {
   background-color: rgb(23, 23, 26);
 }
@@ -7552,8 +6508,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: var(--sunshine);
 }
 
-/* __inner reused as a plain container (eyebrow + h2 + rows wrapper) -
-   the old 3-col card grid is gone, __rows below is the real grid now. */
 .as-allsorts .as-cs-hub-grid__inner {
   display: block;
 }
@@ -7570,12 +6524,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   -moz-osx-font-smoothing: auto;
 }
 
-/* New intro paragraph, 12 July 2026 - h2 dropped its hard-coded count
-   ("Three builds, three outcomes" -> "Recent builds") since Charles will
-   be adding a new case study soon; this intro carries the sector list
-   instead so nothing needs editing when a study is added. Same treatment
-   as .as-about-skills__intro - #b4b4bc, 17px, capped at 640px so it does
-   not run the full 1160 container. */
 .as-allsorts .as-cs-hub-grid__intro {
   font-family: var(--font-body);
   color: #b4b4bc;
@@ -7589,9 +6537,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin-top: 48px;
 }
 
-/* Row: the WHOLE row is the link. 2-col grid - copy one side, device
-   pair the other - divided by a top hairline, same recipe as the
-   detail-page phase (Item 6). */
 .as-allsorts .as-cs-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -7631,11 +6576,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   padding: 5px 12px;
 }
 
-/* One candy hue per case study, not per stat (12 July 2026) - with the
-   stats bars gone, tags are the only place colour lives on this page.
-   Walks the candy array by nth-child so a 4th study picks up sunshine
-   automatically. Provisional - Charles: "not sure on the pills, but leave
-   it like this for now." */
 .as-allsorts .as-cs-row:nth-child(1) .as-cs-row__tag {
   color: var(--candy-pink-lt);
   border-color: rgba(242, 108, 174, 0.45);
@@ -7653,12 +6593,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   border-color: rgba(244, 207, 59, 0.45);
 }
 
-/* Tags replaced by a single candy-coloured number above each title, 14 July
-   2026 - reuses the service-page process step-number glyph exactly (shared
-   font-size/text-align rule, see .as-svc-process__step-number above). No
-   centring here - left-aligned to sit flush with the title/desc/cta column
-   below it. margin-bottom matches the old .as-cs-row__tags gap (16px) so the
-   vertical rhythm to the title is unchanged. */
 .as-allsorts .as-cs-row__number {
   line-height: 1;
   margin-bottom: 16px;
@@ -7668,15 +6602,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-allsorts .as-cs-row:nth-child(2) .as-cs-row__number i { color: var(--bead-blue-lt); }
 .as-allsorts .as-cs-row:nth-child(3) .as-cs-row__number i { color: var(--tangerine); }
 
-/* Titles reverted to Fraunces 900, 14 July 2026 - the DM Sans experiment
-   noted below (12 July 2026) is superseded now that a number sits above
-   the title instead of the tag pills. Size stays 30px, not the card's
-   22px - a hub row heading next to a full device-pair shot needs more
-   presence than a card title. Titles moved off the heavy Fraunces serif
-   onto the same DM Sans used by .as-services__card-title (homepage),
-   12 July 2026 - Charles: "bring the Case Study titles out of the heavy
-   serif" - this note is kept for history, the DM Sans swap is reverted
-   above. */
 .as-allsorts .as-cs-row__title {
   color: #fff;
   font-family: var(--font-display);
@@ -7687,13 +6612,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 14px;
 }
 
-/* Stats bars removed entirely, 12 July 2026 (markup deleted from
-   case-studies-hub.html, not display:none) - Charles: "stats bars can go
-   here, kinda meaningless, gets repeated on individual pages". Same
-   reasoning that killed the homepage hero stats panel the same day: every
-   number here reappears on the detail page this row links to. Section
-   height is unaffected - rows are held at ~453px by the device pair, not
-   the copy, so reclaiming this space costs nothing vertically. */
 .as-allsorts .as-cs-row__desc {
   font-family: var(--font-body);
   color: #9a9aa2;
@@ -7716,10 +6634,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   font-size: 12px;
 }
 
-/* Image zone - the homepage .as-casestudy__card / Item 6 recipe
-   verbatim: shadow-only separation, no border. Longhand grid-row -
-   Squarespace strips the slash form (grid-row: 1 / 2) silently, see
-   the Item 6 postmortem. */
 .as-allsorts .as-cs-row__image {
   grid-column: 2;
   grid-row-start: 1;
@@ -7764,8 +6678,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   object-position: top center;
 }
 
-/* Alternation - row 2 mirrors. Rotation mirrors too, so the device
-   pair always leans INTO the copy. */
 .as-allsorts .as-cs-row:nth-child(even) .as-cs-row__copy {
   grid-column: 2;
 }
@@ -7784,32 +6696,12 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   transform: rotate(-5deg) translateY(28px);
 }
 
-/* Tighter section rhythm - locked to the .as-creds padding recipe
-   (css:7202), same as every other ink band on the site. Desktop-only,
-   guarded below; mobile (<=480px) falls back to the existing unscoped
-   64px mobile token rule (css:4164-4170, shared with hub-hero/hub-cta,
-   untouched). */
 @media (min-width: 481px) {
   .as-allsorts .as-cs-hub-grid {
     padding: var(--as-pad-ink) var(--as-pad-side);
   }
 }
 
-/* ============================================================
-   ALLSORTS COMPONENTS - case study template (shared across
-   austin-space, terracotta-property, ddr-ltd) - added 2026-07-10
-   Every .as-cs-* rule below lands on all 3 pages simultaneously.
-   LOCKED, no rules written: .as-cs-testimonial__quote/__name/__role
-   TEXT (typography only, below), .as-casestudy__quote-source (icon
-   family swap only, done in HTML, no CSS rule at all), DDR's
-   __before-screens / __screens-grid / __screen (out of scope,
-   separate future work).
-   ============================================================ */
-
-/* --- heading remap - the Exo trap, full remap not render-fix only.
-   All five classes were reading var(--font-heading), which is never
-   remapped under .as-allsorts (only var(--font-display) is), so they
-   need font-family changed here too, not just weight/line-height. */
 .as-allsorts .as-cs-hero__headline,
 .as-allsorts .as-cs-section-headline,
 .as-allsorts .as-cs-phase__title,
@@ -7827,25 +6719,11 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: var(--candy-pink);
 }
 
-/* H1 normalisation, 12 July 2026 - max-width/colour can't join the shared
-   heading-remap group above (.as-cs-section-headline / __phase__title /
-   __stats__number / __page-cta__headline all share that selector and
-   must not pick up an 820px cap or the H1's ink). Standalone rule, same
-   pattern as the hub/contact fixed-size split at css:6452/:6461.
-   font-size is untouched - clamp(2.4rem, 5vw, 4rem) in the base rule
-   (css:2312) already tops out at 64px, matching every other page. */
 .as-allsorts .as-cs-hero__headline {
   color: var(--ink-900);
   max-width: 820px;
 }
 
-/* --- testimonial quote - same font-display token, DIFFERENT weight
-   (400, not fw-display/900) - matches home's live .as-casestudy__quote p
-   exactly. Only Fraunces 900 is loaded today, so this currently still
-   renders at 900 in practice - known, accepted, matches home's existing
-   behaviour. Loading a lighter Fraunces weight is separate future work,
-   not part of this pass. Text content is completely untouched -
-   presentation only. */
 .as-allsorts .as-cs-testimonial__quote {
   font-family: var(--font-display);
   font-weight: 400;
@@ -7854,21 +6732,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
 }
-/* __name / __role: no change - both already read correct tokens
-   (--font-body / --font-mono, both remap to DM Sans / DM Mono
-   automatically under .as-allsorts) and neither has the Exo trap or a
-   legacy purple reference. Already clean. */
 
-/* --- stats dark band - synced to home's live .as-creds pattern.
-   Background swept from --as-black to --liquorice; icon rotation is
-   the same 4-stop sequence used on .as-creds__icon and
-   .as-casestudy__stat-icon (pink-lt / blue-lt / tangerine / sunshine)
-   with !important, needed to beat the legacy guard shared with those
-   two siblings (css: "ICON COLOUR OVERRIDES" section, #f6d847
-   !important on .as-cs-stats__icon); label colour matches
-   .as-creds__text's allsorts value verbatim (#b7b7bf). No eyebrow
-   exists on this component (unlike .as-creds__header), so there's
-   nothing to colour sunshine here. */
 .as-allsorts .as-cs-stats,
 .as-allsorts .as-cs-stats__item {
   background-color: var(--liquorice);
@@ -7882,21 +6746,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: #b7b7bf;
 }
 
-/* ============================================================
-   PHASE 3 ITEM 6 - case study detail pages: .as-cs-solution becomes
-   the editorial ink band (shared template: austin-space,
-   terracotta-property, ddr-ltd). Splits the 3550px unbroken white
-   run in the middle of the page. Locked to .as-creds / .as-svc-process
-   - same ink band, same job. Rhymes with Item 1 (.as-svc-process on
-   the service pages) - same content type ("how it works"), same
-   treatment, two page families. Approved from live DOM-injection
-   preview, 12 July 2026.
-
-   Supersedes the white-card phase treatment above (chunky box +
-   circular candy-chip numeral): the card is gone, copy sits directly
-   on the ink, and the numeral becomes a DM Mono label instead of a
-   filled chip.
-   ============================================================ */
 .as-allsorts .as-cs-solution {
   background-color: rgb(23, 23, 26);
 }
@@ -7907,18 +6756,11 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: #fff;
 }
 
-/* 2x2 card grid -> vertical stack. Phases divided by a top hairline,
-   the horizontal equivalent of the vertical column dividers used on
-   every other ink band (.as-creds, .as-svc-process). */
 .as-allsorts .as-cs-solution__grid {
   display: block;
   margin-top: 44px;
 }
 
-/* Phase: white card removed (background/border/radius/shadow all
-   reset). Each phase becomes a 2-col grid - copy one side, device
-   pair the other - divided by the top hairline instead of its own box.
-   No hover rule - these are plain divs, not links. */
 .as-allsorts .as-cs-phase {
   background: transparent;
   border: 0;
@@ -7940,9 +6782,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   padding-bottom: 0;
 }
 
-/* Numeral chip is gone entirely - .as-cs-phase__number becomes a bare
-   label, matching the eyebrow language, rotating through the same
-   luminous-on-dark candy sequence as .as-svc-process__step-number. */
 .as-allsorts .as-cs-phase__icon {
   display: none;
 }
@@ -7991,16 +6830,11 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   line-height: 1.55;
   padding: 0 0 7px 0;
 }
-/* Ticks removed - matches the tick-free treatment on .as-cs-phase__list
-   li i's only sibling context that mattered here: the copy sits on ink
-   with no card to frame a bullet against. */
+
 .as-allsorts .as-cs-phase__list li i {
   display: none;
 }
 
-/* Image zone - the homepage .as-casestudy__card recipe verbatim:
-   shadow-only separation, no border. A mount/border here was tried
-   and rejected - it reads as a hole rather than an object. */
 .as-allsorts .as-cs-phase__image {
   grid-column: 2;
   grid-row-start: 1;
@@ -8024,10 +6858,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   object-position: top center;
 }
 
-/* NEW element - overlapping phone, leaning out past the container
-   edge. For now shares the desktop screenshot's src cropped to 9:17
-   (Charles: "just use a double up for now") - built so only the src
-   needs swapping when real mobile screenshots exist. */
 .as-allsorts .as-cs-phase__phone {
   grid-column: 2;
   grid-row-start: 1;
@@ -8051,8 +6881,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   object-position: top center;
 }
 
-/* Alternation - even phases mirror. Devices swap sides, rotation
-   mirrors too, so the pair always leans INTO the copy. */
 .as-allsorts .as-cs-phase:nth-child(even) .as-cs-phase__number,
 .as-allsorts .as-cs-phase:nth-child(even) .as-cs-phase__title,
 .as-allsorts .as-cs-phase:nth-child(even) .as-cs-phase__list {
@@ -8073,13 +6901,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   transform: rotate(-5deg) translateY(28px);
 }
 
-/* --- before/after frames - ink + pop, same tier as the phase cards
-   above (bumped from the base's --radius-md to --radius-lg for
-   consistency with every other boxed component on this template).
-   Covers both the "Before" and "After" columns automatically, since
-   both share the one .as-cs-beforeafter__img class - austin-space's
-   fa-triangle-exclamation placeholder gets the identical frame with no
-   extra selector needed. */
 .as-allsorts .as-cs-beforeafter__img {
   border: var(--bw) solid var(--ink-900);
   border-radius: var(--radius-lg);
@@ -8088,30 +6909,15 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-allsorts .as-cs-beforeafter__img img {
   border-radius: var(--radius-lg);
 }
-/* Placeholder icon/text - was --as-border (very faint), bumped to
-   --grey-400 so the "no online presence" placeholder actually reads
-   instead of nearly vanishing against its own off-white fill. */
+
 .as-allsorts .as-cs-beforeafter__img-placeholder {
   color: var(--grey-400);
 }
 
-/* --- challenge list xmarks - muted grey, not candy-pink. These mark
-   problems/constraints (a negative); the checklist ticks above mark
-   solutions (a positive) - keeping them visually distinct keeps the
-   challenge-vs-solution narrative reading clearly. */
 .as-allsorts .as-cs-challenge__list li i {
   color: var(--grey-500);
 }
 
-/* --- testimonial band - frame only, quote typography is above, text is
-   locked. Background swept from --as-black to --liquorice (same
-   technique as .as-cs-stats above and .as-casestudy__card elsewhere).
-   Icon goes sunshine, matching the established "single accent icon on a
-   black band" precedent (.as-about-solo .as-eyebrow__dot) rather than a
-   pink/blue/tangerine rotation - there's only one icon here, not four,
-   so a rotation doesn't apply. Opacity raised from the base's 0.6 to
-   full strength since this is now a deliberate accent colour, not a
-   muted purple wash. */
 .as-allsorts .as-cs-testimonial {
   background-color: var(--liquorice);
 }
@@ -8120,31 +6926,10 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   opacity: 1;
 }
 
-/* --- page-cta: no container CSS - it's a flush, unbordered band by
-   design (flex row directly in the section, no card wrapper ever
-   existed here), unlike .as-cta-banner__inner (a different component,
-   out of scope). Its heading is already covered by the remap above;
-   its buttons already get the chunky pop treatment globally via
-   .as-allsorts .as-btn. */
-
-/* --- purple cleanup pass - 4 elements missed by the main plan, all
-   remap to neutral ink-900 (informational/plain-label elements, not
-   action elements - no candy applied). Confirmed via grep: these are
-   the only remaining var(--as-purple) consumers left in the whole
-   case-study block after the main pass. */
-
-/* No border exists on this element (text-only link, .as-cs-hero__link
-   has no border property in the base rule) - just the text colour.
-   No hover colour state exists either (:hover only widens the gap) -
-   nothing to neutralise there. */
 .as-allsorts .as-cs-hero__link {
   color: var(--ink-900);
 }
 
-/* Hero device pair - landscape + portrait, mirrors .as-cs-phase__image /
-   __phone verbatim (css:7630-7678), expressed for a position:relative
-   parent instead of the phase's grid-column/grid-row placement. Single
-   instance per page, no alternation needed. */
 .as-allsorts .as-cs-hero__media {
   position: relative;
   display: flex;
@@ -8185,18 +6970,10 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: var(--ink-900);
 }
 
-/* Base .as-cs-beforeafter__label is already neutral (--as-mid) -
-   only the --after modifier carries purple. */
 .as-allsorts .as-cs-beforeafter__label--after {
   color: var(--ink-900);
 }
 
-/* Tighter section rhythm - base .as-cs-challenge / .as-cs-solution /
-   .as-cs-beforeafter are all var(--as-space-section) (7rem/112px) top and
-   bottom. Desktop-only, guarded below; mobile (<=480px) falls back to the
-   existing unscoped 64px mobile token rule.
-   .as-cs-solution pulled out by Item 6 below - it's now the ink band and
-   takes the .as-creds padding recipe instead of the shared 84/84. */
 @media (min-width: 481px) {
   .as-allsorts .as-cs-challenge,
   .as-allsorts .as-cs-beforeafter {
@@ -8205,20 +6982,12 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
-/* .as-cs-solution pulled out of the group above by Item 6 - ink band,
-   locked to the .as-creds padding recipe (css:7202) instead of the
-   shared 84/84. Must land AFTER the group rule above - equal
-   specificity, so file order decides the winner. Do not add !important. */
 @media (min-width: 481px) {
   .as-allsorts .as-cs-solution {
     padding: var(--as-pad-ink) var(--as-pad-side);
   }
 }
 
-/* .as-cs-page-cta pulled out of the group above - now centred as a light
-   CTA stack (see .as-cs-page-cta__inner, css:2991), so its bottom padding
-   is bumped past the shared 84px to clear the 107px footer wave's ~60px
-   intrusion, matching the deep-page CTA banner treatment above. */
 @media (min-width: 481px) {
   .as-allsorts .as-cs-page-cta {
     padding-top: var(--as-pad-cta-top);
@@ -8226,14 +6995,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
-/* ============================================================
-   ABOUT PAGE FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Matches the homepage's .as-hero--home-footer pattern (base .as-hero /
-   .as-hero__img / .as-hero__stroke rules already exist and are reused
-   as-is - this only adds the footer-specific geometry: fixed height,
-   top-edge clip, border-bottom, slice). Additive only - no existing
-   hero, clip, or the homepage footer touched.
-   ============================================================ */
 .as-hero--about-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8257,16 +7018,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ============================================================
-   SERVICES HUB FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Mirrors .as-hero--about-footer exactly (border-top:0 and
-   background:transparent baked in to avoid the two bugs About hit).
-   Pins absolute bottom:0 to the same .sqs-block context as About - the
-   page's true last section is the white .as-faq, confirmed via live
-   Y-position measurement, so the strip meets white ground, same clean
-   case as About. Additive only - no existing hero, clip, the About
-   footer, or the homepage footer touched.
-   ============================================================ */
 .as-hero--services-hub-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8290,14 +7041,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ============================================================
-   CUSTOM BUILD FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Same recipe as About/Services Hub. Page's true last element before
-   this strip is the BLACK .as-svc-cta banner (confirmed via live
-   Y-position: bottom 4640 -> footer 4949), not a white section, so the
-   stroke is black-on-black at the top edge until the CTA banner is
-   whitened. Accepted temporary state. Additive only.
-   ============================================================ */
 .as-hero--custom-build-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8321,10 +7064,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ============================================================
-   ONE-PAGE FOOTER STRIP - inverted top-edge cosmos, same recipe
-   as Custom Build Footer. Additive only.
-   ============================================================ */
 .as-hero--one-page-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8348,14 +7087,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ============================================================
-   SITE REFRESH FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Same recipe as About/Services Hub/Custom Build. Page's true last
-   element before this strip is the BLACK .as-svc-cta banner (confirmed
-   via live Y-position: bottom 4530 -> footer 4610), so the stroke is
-   black-on-black at the top edge until the CTA banner is whitened.
-   Accepted temporary state. Additive only.
-   ============================================================ */
 .as-hero--site-refresh-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8379,14 +7110,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ============================================================
-   ONGOING SUPPORT FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Same recipe as About/Services Hub/Custom Build/Site Refresh. Page's
-   true last element before this strip is the BLACK .as-svc-cta banner
-   (confirmed via live Y-position: bottom 4505 -> footer), so the stroke
-   is black-on-black at the top edge until the CTA banner is whitened.
-   Accepted temporary state. Additive only.
-   ============================================================ */
 .as-hero--ongoing-support-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8410,14 +7133,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ============================================================
-   CONTACT FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Same recipe as About/Services Hub. Page's true last element before
-   this strip is the white .as-faq (confirmed via live Y-position:
-   bottom 3120, flush to footer) - no CTA banner on this page, so this
-   is a clean case like About/Services Hub, fully resolved on deploy.
-   Additive only.
-   ============================================================ */
 .as-hero--contact-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8441,44 +7156,22 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* Contact: lift FAQ so the footer wave has white clearance above it.
-   PENDING mobile pass - re-guarded to mobile only (was unguarded). Desktop
-   clearance now comes from the min-width:481px rule below instead. */
 @media (max-width: 480px) {
 .as-faq:has(~ .as-hero--contact-footer){
   margin-bottom: 160px;
 }
 }
 
-/* Case-study pages: lift the page CTA so the footer wave has white clearance.
-   PENDING mobile pass - re-guarded to mobile only (was unguarded). Desktop
-   clearance now comes from the min-width:481px rule below instead. */
 @media (max-width: 480px) {
 .as-cs-page-cta:has(~ .as-hero[class*="-footer"]){
   margin-bottom: 160px;
 }
 }
 
-/* Desktop footer-wave clearance exception - guarded to min-width:481px so
-   this does not out-specify the mobile rule above (same specificity bug the
-   ink-band fix elsewhere in this pass exists to correct: 3-class :has()
-   selectors beat a 1-class mobile fallback regardless of media guard, so
-   both sides must be explicitly scoped). The homepage .as-cta:has(~ .as-hero
-   --home-footer) exception is gone - the homepage now takes the standard
-   var(--as-clear-wave) like every other bare CTA, confirmed live. */
 @media (min-width: 481px) {
 .as-allsorts .as-faq:has(~ .as-hero--contact-footer) { padding-bottom: var(--as-clear-wave); }
 }
 
-/* ============================================================
-   CASE-STUDY HUB FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Same recipe as prior pages. Page's true last element before this strip
-   is the BLACK .as-cs-hub-cta__inner .as-cta-banner__inner (confirmed via
-   live Y-position: bottom 3632), so the stroke is black-on-black at the
-   top edge until the CTA banner is whitened. Accepted temporary state.
-   Scoped to /case-studies/view-all (the reskinned hub) - the plain
-   unreskinned /case-studies blog collection is untouched. Additive only.
-   ============================================================ */
 .as-hero--casestudies-hub-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8487,7 +7180,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
   background:transparent;
-  
+
 }
 .as-hero--casestudies-hub-footer .as-hero__img{
   width:100%; height:100%;
@@ -8503,19 +7196,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ============================================================
-   CS AUSTIN-SPACE FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Scoped to /case-studies/austin-space ONLY - the 3 case-study pages
-   share the .as-cs-* template classes, but this footer strip's markup
-   lives only in this page's own HTML, not in the shared template, so it
-   does not appear on terracotta-property or ddr-ltd. Page's true last
-   element before this strip is the LIGHT off-white .as-cs-page-cta
-   (confirmed via live Y-position), not the black CTA banner used
-   elsewhere - so the wave emerges from off-white, a clean case fully
-   resolved on deploy, not a temporary black state. No testimonial
-   section exists on this page (own company, no client quote). Additive
-   only - .as-cs-testimonial and any review-link markup untouched.
-   ============================================================ */
 .as-hero--cs-austin-space-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8539,19 +7219,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ============================================================
-   CS TERRACOTTA FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Scoped to /case-studies/terracotta-property ONLY - the footer strip's
-   markup lives only in this page's own HTML, not the shared .as-cs-*
-   template, so it does not appear on austin-space or ddr-ltd. Page's
-   true last element before this strip is the LIGHT off-white
-   .as-cs-page-cta (confirmed via live Y-position), so the wave emerges
-   from off-white, a clean case fully resolved on deploy. This page's
-   LOCKED testimonial (.as-cs-testimonial, Charlie Crocker quote) and
-   LOCKED Google review link (maps.app.goo.gl/DiL3qV9RftvfoZxa7 on
-   .as-casestudy__quote-source) sit earlier in the page and are entirely
-   untouched by this addition. Additive only.
-   ============================================================ */
 .as-hero--cs-terracotta-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8575,24 +7242,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ============================================================
-   CS DDR FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   LAST page of the footer rollout. Scoped to /case-studies/ddr-ltd
-   ONLY - the footer strip's markup lives only in this page's own
-   HTML, not the shared .as-cs-* template, so it does not appear on
-   austin-space or terracotta-property. Page's true last element
-   before this strip is the LIGHT off-white .as-cs-page-cta (confirmed
-   via live Y-position), so the wave emerges from off-white, a clean
-   case fully resolved on deploy. No new spacing rule needed here -
-   the shared .as-cs-page-cta:has(~ .as-hero[class*="-footer"]) rule
-   (added earlier in this file) already covers every case-study page,
-   this one included, automatically. This page's LOCKED testimonial
-   (.as-cs-testimonial, Sarah Hart quote) and LOCKED Google review link
-   (maps.app.goo.gl/sTPZ39R2rhWhNFNJA on .as-casestudy__quote-source),
-   plus the undesigned .as-cs-challenge__before-screens block, sit
-   earlier in the page and are entirely untouched by this addition.
-   Additive only.
-   ============================================================ */
 .as-hero--cs-ddr-footer{
   position:absolute;
   left:0; right:0; bottom:0;
@@ -8616,13 +7265,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* ==========================================================
-   POSITIONING SECTION - CARD GRID
-   New family. Shares no selector with .as-row-item, which is
-   still live in .as-cta on the homepage and on About.
-   ========================================================== */
-
-/* Base: everything stacked, one column of cards. */
 .as-allsorts .as-positioning__inner {
   display: flex;
   flex-direction: column;
@@ -8646,11 +7288,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   gap: 12px;
 }
 
-/* --fa-secondary-opacity MUST be declared here. The .as-icon--* classes at css:5557-5576
-   set the two colours only. The opacity was coming from .as-allsorts .as-row-item__icon i
-   at css:5546-5549, which this markup no longer uses. Omit it and every duotone fill
-   silently renders at FA's 40 percent default, which looks like a design decision rather
-   than a bug. */
 .as-allsorts .as-pos-card__icon {
   font-size: 36px;
   line-height: 1;
@@ -8675,8 +7312,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0;
 }
 
-/* Cards pair up only once there is room for them. Measured: pairing from 481px gives
-   234px columns on a 560px viewport, too narrow for a 300-character body. */
 @media (min-width: 700px) {
 
   .as-allsorts .as-pos-cards {
@@ -8686,10 +7321,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 }
 
-/* The two-column split. FRACTIONS, not a fixed column. A fixed 400px against a fr
-   remainder produced 147px cards at 800px viewport. Fractions subtract the gap before
-   dividing. At the capped 1160px container this yields copy 401px and cards 337px,
-   within a pixel of the approved 400 / 338. */
 @media (min-width: 1100px) {
 
   .as-allsorts .as-positioning__inner {
@@ -8701,33 +7332,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 }
 
-/* ==========================================================
-   HOMEPAGE BACKGROUND STORY - editorial ink band
-   Sits between .as-positioning and .as-services. Prose-led, NOT a
-   card section - zero borders, zero radius, zero shadow by design,
-   unlike every .as-pos-card / .as-services__card sibling on this page.
-   Locked to .as-creds / .as-hub-bar / .as-contact-bar for the dark
-   band itself; the stat rail and two-column prose are a genuinely
-   new layout, no existing precedent to sync to.
-   ========================================================== */
-
-/* Padding extracted to its own min-width:481px rule, same technique as
-   every other ink band (.as-creds / .as-hub-bar / .as-svc-process /
-   .as-cs-solution) - background/color stay unguarded since they're
-   correct at every width; only the desktop-scale padding is guarded.
-   Mobile falls back to the unscoped .as-backstory 480px rule above.
-
-   Bottom matches every other ink-band transition on this page: the gap
-   splits two-sided, ink-band bottom (--as-pad-ink, 72px) plus the next
-   section's own top padding (--as-pad-band, 80px), total 152px. Formerly
-   .as-services carried padding-top:0, so this rule had to solo-supply
-   the full 152px via calc(ink + band) - that made the "WHAT I DO"
-   eyebrow sit flush against the ink band. .as-services now carries its
-   own --as-pad-band top padding (see the .as-allsorts .as-services rule
-   above), so bottom here reverts to the plain ink value like every other
-   ink band on the page. Top is untouched at the plain ink value - the
-   positioning->backstory gap (80 + 72) is already correct and must not
-   change. */
 @media (min-width: 481px) {
 .as-allsorts .as-backstory {
   padding: var(--as-pad-ink) var(--as-pad-side);
@@ -8735,17 +7339,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 }
 
-/* Eyebrow uses the shared .as-eyebrow/.as-eyebrow--on-dark/.as-eyebrow__dot/
-   .as-label markup verbatim (same as .as-casestudy below it) - the earlier
-   one-off .as-backstory__eyebrow (DM Mono, sunshine, no dot) matched
-   nothing else on the site and has been removed; no CSS override needed
-   here, the shared rules already render it correctly on this dark band. */
-
-/* Shared .as-eyebrow carries no bottom margin of its own - the old one-off
-   .as-backstory__eyebrow (now removed) had margin: 0 0 22px, so swapping to
-   the shared component dropped the eyebrow-to-headline gap to 0. Restored
-   here, scoped to .as-backstory only - do not touch the shared .as-eyebrow
-   rule, it is sitewide. */
 .as-allsorts .as-backstory .as-eyebrow--on-dark {
   margin-bottom: 22px;
 }
@@ -8773,9 +7366,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 52px;
 }
 
-/* Base (mobile-first): stats stack above prose, single column - matches
-   the min-width-guarded-override idiom used everywhere else in this
-   file rather than a max-width teardown. */
 .as-allsorts .as-backstory__body {
   display: grid;
   grid-template-columns: 1fr;
@@ -8788,12 +7378,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   gap: 34px;
 }
 
-/* The figure-wrap shrink-wraps to the figure so the bar can match the
-   number's width, NOT the label's - a typographic device (the strings
-   just happen to sort in the right order), not a data chart. inline-
-   block is the shrink-wrap; the label lives OUTSIDE this wrap so it
-   never stretches the box. Do not hardcode pixel widths here - this
-   must recompute if a figure is edited. */
 .as-allsorts .as-backstory__figure-wrap {
   display: inline-block;
 }
@@ -8834,12 +7418,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin-top: 8px;
 }
 
-/* Grid, not CSS columns - columns can't anchor a child under one specific
-   column, and the CTA must sit under the LEFT prose column only, beneath
-   its own paragraph, not spanning both. Base (mobile-first): both
-   .as-backstory__prose-col cells stack in a single column; the CTA still
-   follows its own paragraph correctly at every width since it lives
-   inside that column's own markup, not a spanning sibling. */
 .as-allsorts .as-backstory__prose {
   display: grid;
   grid-template-columns: 1fr;
@@ -8861,12 +7439,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 1em;
 }
 
-/* CTA - matches .as-casestudy__cta exactly: bare text link, no
-   underline, no border, no padding, arrow icon. text-decoration:none
-   is required here (unlike .as-casestudy__cta, which sits nested
-   inside an outer <a>) since this CTA is itself the anchor. Sits inside
-   .as-backstory__prose-col (left column only), not a spanning sibling -
-   no column-span needed under the grid model. */
 .as-allsorts .as-backstory__cta {
   display: inline-flex;
   align-items: center;
@@ -8884,9 +7456,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   text-decoration: none;
 }
 
-/* Desktop: fixed stat-rail gutter beside the prose, prose runs 2 columns.
-   700px chosen to match .as-pos-cards' own pairing breakpoint just above -
-   narrower and the 230px rail leaves too little room for the prose column. */
 @media (min-width: 700px) {
 
   .as-allsorts .as-backstory__body {

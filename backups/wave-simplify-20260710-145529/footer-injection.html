@@ -1,0 +1,556 @@
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPCMBQQC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Gallery Section Autoplay -->
+<script>
+(function() {
+    var nextArrowGallery = document.querySelector('.gallery-reel-control-btn[data-slide="next"]');
+    function clickNextGallery() {
+        if(nextArrowGallery) nextArrowGallery.click();
+    }
+    setInterval(clickNextGallery, 3000);
+})();
+</script>
+
+<!-- AUSTIN_SPACE ENQUIRY LIGHTBOX FORM -->
+<!-- Triggered by any <a href="#as-enquiry-form"> link anywhere on the site -->
+
+<style>
+  /* ── Overlay ───────────────────────────────────────────── */
+  .as-lb-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.80);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 20px;
+  }
+
+  .as-lb-overlay.active {
+    display: flex;
+  }
+
+  /* ── Modal ─────────────────────────────────────────────── */
+  .as-lb-modal {
+    background: #ffffff;
+    border-radius: 0px;
+    padding: 44px 40px 40px;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+    animation: asSlideUp 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    max-height: 92vh;
+    overflow-y: auto;
+    border-top: 4px solid #000000;
+  }
+
+  @keyframes asSlideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  /* ── Close ─────────────────────────────────────────────── */
+  .as-lb-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: #999;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: color 0.15s;
+    font-family: inherit;
+  }
+
+  .as-lb-close:hover {
+    color: #000000;
+  }
+
+  /* ── Header ────────────────────────────────────────────── */
+  .as-lb-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 8px 0;
+  }
+
+  .as-lb-modal h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #000000;
+    margin: 0 0 6px 0;
+    padding-right: 28px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  .as-lb-sub {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 28px 0;
+  }
+
+  /* ── Fields ────────────────────────────────────────────── */
+  .as-lb-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .as-lb-field {
+    margin-bottom: 14px;
+  }
+
+  .as-lb-field label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 400;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+
+  .as-lb-field input,
+  .as-lb-field select,
+  .as-lb-field textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #000;
+    background: #f7f7f7;
+    transition: border-color 0.2s, background 0.2s;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+  }
+
+  .as-lb-field input:focus,
+  .as-lb-field select:focus,
+  .as-lb-field textarea:focus {
+    outline: none;
+    border-color: #000;
+    background: #ffffff;
+  }
+
+  .as-lb-field input.as-lb-error,
+  .as-lb-field select.as-lb-error,
+  .as-lb-field textarea.as-lb-error {
+    border-color: #cc0000;
+  }
+
+  .as-lb-field textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  /* ── GDPR ──────────────────────────────────────────────── */
+  .as-lb-gdpr {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    color: #999;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  .as-lb-gdpr a {
+    color: #666;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* ── Submit ────────────────────────────────────────────── */
+  .as-lb-submit {
+    width: 100%;
+    background: #000000;
+    color: #ffffff;
+    padding: 15px;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    box-sizing: border-box;
+  }
+
+  .as-lb-submit:hover {
+    background: #222;
+  }
+
+  .as-lb-submit:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+  }
+
+  /* ── Submit error ──────────────────────────────────────── */
+  .as-lb-submit-error {
+    display: none;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    color: #cc0000;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* ── Success ───────────────────────────────────────────── */
+  .as-lb-success {
+    display: none;
+    text-align: center;
+    padding: 32px 0 20px;
+  }
+
+  .as-lb-success-icon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 36px;
+    margin-bottom: 16px;
+    color: #000;
+  }
+
+  .as-lb-success h4 {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.01em;
+  }
+
+  .as-lb-success p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.65;
+  }
+
+  /* ── Mobile ────────────────────────────────────────────── */
+  @media (max-width: 540px) {
+    .as-lb-modal {
+      padding: 36px 24px 28px;
+    }
+    .as-lb-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<!-- Lightbox HTML -->
+<div class="as-lb-overlay" id="asLightbox">
+  <div class="as-lb-modal">
+    <button class="as-lb-close" id="asLightboxClose" aria-label="Close">&times;</button>
+
+    <!-- Form -->
+    <div id="asLbFormWrap">
+      <p class="as-lb-eyebrow">// Let's talk</p>
+      <h3>Start Your Project</h3>
+      <p class="as-lb-sub">Send me your details and I'll come back within one business day.</p>
+
+      <form id="asLbForm" novalidate>
+
+        <div class="as-lb-row">
+          <div class="as-lb-field">
+            <label for="asFirstName">First Name *</label>
+            <input type="text" id="asFirstName" name="first_name" placeholder="First name" required>
+          </div>
+          <div class="as-lb-field">
+            <label for="asLastName">Last Name *</label>
+            <input type="text" id="asLastName" name="last_name" placeholder="Last name" required>
+          </div>
+        </div>
+
+        <div class="as-lb-field">
+          <label for="asEmail">Email Address *</label>
+          <input type="email" id="asEmail" name="email" placeholder="you@example.com" required>
+        </div>
+
+        <!--
+        <div class="as-lb-field">
+          <label for="asPhone">Phone Number</label>
+          <input type="tel" id="asPhone" name="phone" placeholder="07700 900000">
+        </div>
+        -->
+
+        <div class="as-lb-field">
+          <label for="asWebsite">Website URL</label>
+          <input type="url" id="asWebsite" name="website_url" placeholder="https://yoursite.com">
+        </div>
+
+        <div class="as-lb-field">
+          <label for="asService">Service Interested In *</label>
+          <select id="asService" name="service" required>
+            <option value="" disabled selected>Select a service...</option>
+            <option value="foundation_build">Squarespace Custom Website Design</option>
+            <option value="site_refresh">Squarespace Site Refresh</option>
+            <option value="ongoing_support">Ongoing Support &amp; Development</option>
+            <option value="not_sure">Not sure yet / General enquiry</option>
+          </select>
+        </div>
+
+        <div class="as-lb-field">
+          <label for="asMessage">Tell Me About Your Project *</label>
+          <textarea id="asMessage" name="message" placeholder="A bit about your business, what you're looking for, any deadlines..." required></textarea>
+        </div>
+
+        <p class="as-lb-gdpr">
+          By submitting this form you agree to my <a href="/policies/privacy" target="_blank">Privacy Policy</a>. Your details will only be used to respond to your enquiry and will not be shared with third parties.
+        </p>
+
+        <button type="submit" class="as-lb-submit" id="asLbSubmitBtn">
+          Send Enquiry →
+        </button>
+
+        <p class="as-lb-submit-error" id="asLbError">
+          Something went wrong. Please try again, or email charles@austinspace.co.uk directly.
+        </p>
+
+      </form>
+    </div>
+
+    <!-- Success message -->
+    <div class="as-lb-success" id="asLbSuccess">
+      <div class="as-lb-success-icon">✓</div>
+      <h4>Message Received.</h4>
+      <p>I'll be in touch within one business day.<br>Expect a reply from charles@austinspace.co.uk.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+
+    var overlay   = document.getElementById('asLightbox');
+    var closeBtn  = document.getElementById('asLightboxClose');
+    var form      = document.getElementById('asLbForm');
+    var formWrap  = document.getElementById('asLbFormWrap');
+    var success   = document.getElementById('asLbSuccess');
+    var submitBtn = document.getElementById('asLbSubmitBtn');
+    var errorMsg  = document.getElementById('asLbError');
+
+    var FORMSPREE_URL = 'https://formspree.io/f/mreyvwga';
+
+    /* ── Trigger: any <a href="#as-enquiry-form"> on the page ── */
+    document.addEventListener('click', function (e) {
+      var target = e.target.closest('a[href="#as-enquiry-form"]');
+      if (target) {
+        e.preventDefault();
+        openLightbox();
+      }
+    });
+
+    /* ── Close handlers ─────────────────────────────────────── */
+    closeBtn.addEventListener('click', closeLightbox);
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    function openLightbox() {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      formWrap.style.display = 'block';
+      success.style.display  = 'none';
+      errorMsg.style.display = 'none';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Enquiry →';
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    /* ── Form submission ────────────────────────────────────── */
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Validation
+      var required = form.querySelectorAll('[required]');
+      var valid = true;
+      required.forEach(function (field) {
+        if (!field.value.trim()) {
+          valid = false;
+          field.classList.add('as-lb-error');
+        } else {
+          field.classList.remove('as-lb-error');
+        }
+      });
+
+      if (!valid) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      errorMsg.style.display = 'none';
+
+      // GA4 / GTM event
+      if (typeof dataLayer !== 'undefined') {
+        dataLayer.push({
+          'event': 'as_form_submission',
+          'form_location': window.location.pathname,
+          'service_selected': document.getElementById('asService').value || 'not_specified',
+          'form_type': 'lightbox_enquiry'
+        });
+      }
+
+      // Formspree submission
+      fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+      .then(function (response) {
+        if (response.ok) {
+          formWrap.style.display = 'none';
+          success.style.display  = 'block';
+        } else {
+          return response.json().then(function (data) {
+            throw new Error(data.error || 'Submission failed');
+          });
+        }
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Enquiry →';
+        errorMsg.style.display = 'block';
+      });
+
+    });
+
+    // Clear error state on input
+    form.querySelectorAll('[required]').forEach(function (field) {
+      field.addEventListener('input', function () {
+        if (field.value.trim()) {
+          field.classList.remove('as-lb-error');
+        }
+      });
+    });
+
+  })();
+</script>
+</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="wave-clip-about" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.43 C0.97,0.43 0.85,0.76 0.82,0.76 S0.67,0.41 0.63,0.41 S0.53,0.79 0.50,0.79 S0.40,0.40 0.36,0.40 S0.29,0.71 0.26,0.71 S0.20,0.41 0.16,0.41 S0.11,0.58 0.08,0.58 S0.03,0.44 0,0.44 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.41 C0.97,0.41 0.84,0.75 0.81,0.75 S0.66,0.40 0.62,0.40 S0.52,0.80 0.49,0.80 S0.40,0.39 0.36,0.39 S0.29,0.68 0.26,0.68 S0.20,0.40 0.16,0.40 S0.11,0.55 0.08,0.55 S0.03,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home-high-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.42 C0.96,0.42 0.84,0.74 0.80,0.74 S0.66,0.41 0.62,0.41 S0.52,0.78 0.48,0.78 S0.38,0.40 0.34,0.40 S0.26,0.70 0.22,0.70 S0.14,0.41 0.10,0.41 S0.04,0.56 0,0.56 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.41 C0.95,0.41 0.83,0.77 0.79,0.77 S0.64,0.40 0.60,0.40 S0.49,0.79 0.45,0.79 S0.34,0.40 0.30,0.40 S0.22,0.72 0.18,0.72 S0.10,0.41 0.06,0.41 S0.02,0.55 0,0.55 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.30 C0.03,0.30 0.07,0.06 0.10,0.06 S0.17,0.33 0.22,0.33 S0.32,0.04 0.36,0.04 S0.45,0.31 0.50,0.31 S0.59,0.07 0.64,0.07 S0.74,0.36 0.78,0.36 S0.86,0.05 0.90,0.05 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-services" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.43 C0.98,0.43 0.94,0.72 0.92,0.72 C0.89,0.72 0.86,0.40 0.83,0.40 C0.80,0.40 0.78,0.78 0.75,0.78 C0.72,0.78 0.70,0.42 0.67,0.42 C0.64,0.42 0.61,0.74 0.58,0.74 C0.55,0.74 0.53,0.41 0.50,0.41 C0.47,0.41 0.45,0.76 0.42,0.76 C0.39,0.76 0.36,0.40 0.33,0.40 C0.30,0.40 0.28,0.77 0.25,0.77 C0.22,0.77 0.20,0.41 0.17,0.41 C0.14,0.41 0.11,0.74 0.08,0.74 C0.05,0.74 0.03,0.42 0,0.42 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-foundation-build" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.42 C0.95,0.42 0.88,0.77 0.82,0.77 C0.74,0.77 0.64,0.40 0.58,0.40 C0.47,0.40 0.37,0.79 0.28,0.79 C0.19,0.79 0.09,0.44 0,0.44 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-site-refresh" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.47 C0.97,0.47 0.95,0.68 0.92,0.68 C0.89,0.68 0.87,0.46 0.84,0.46 C0.81,0.46 0.77,0.73 0.74,0.73 C0.70,0.73 0.67,0.44 0.63,0.44 C0.60,0.44 0.56,0.78 0.53,0.78 C0.49,0.78 0.44,0.43 0.40,0.43 C0.36,0.43 0.32,0.77 0.28,0.77 C0.24,0.77 0.20,0.45 0.16,0.45 C0.13,0.45 0.11,0.72 0.08,0.72 C0.05,0.72 0.03,0.46 0,0.46 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-ongoing-support" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.44 C0.96,0.44 0.91,0.72 0.88,0.72 C0.85,0.72 0.83,0.41 0.81,0.41 C0.78,0.41 0.76,0.78 0.74,0.78 C0.71,0.78 0.69,0.43 0.67,0.43 C0.65,0.43 0.62,0.75 0.60,0.75 C0.57,0.75 0.55,0.42 0.53,0.42 C0.51,0.42 0.48,0.76 0.46,0.76 C0.43,0.76 0.41,0.40 0.39,0.40 C0.37,0.40 0.35,0.74 0.33,0.74 C0.31,0.74 0.28,0.42 0.26,0.42 C0.24,0.42 0.22,0.77 0.20,0.77 C0.17,0.77 0.15,0.41 0.13,0.41 C0.11,0.41 0.09,0.75 0.07,0.75 C0.05,0.75 0.02,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-contact" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.98,0.45 0.95,0.72 0.93,0.72 C0.89,0.72 0.86,0.44 0.83,0.44 C0.79,0.44 0.75,0.77 0.70,0.77 C0.65,0.77 0.60,0.41 0.55,0.41 C0.50,0.41 0.45,0.79 0.40,0.79 C0.35,0.79 0.30,0.43 0.25,0.43 C0.21,0.43 0.17,0.76 0.13,0.76 C0.09,0.76 0.04,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-case-studies" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.43 C0.96,0.43 0.92,0.75 0.88,0.75 C0.82,0.75 0.76,0.40 0.72,0.40 C0.66,0.40 0.61,0.80 0.55,0.80 C0.49,0.80 0.42,0.42 0.35,0.42 C0.30,0.42 0.24,0.77 0.18,0.77 C0.12,0.77 0.06,0.44 0,0.44 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-case-study-terracotta" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.42 C0.97,0.42 0.94,0.71 0.91,0.71 C0.88,0.71 0.84,0.41 0.82,0.41 C0.79,0.41 0.77,0.77 0.74,0.77 C0.71,0.77 0.68,0.43 0.65,0.43 C0.62,0.43 0.60,0.74 0.57,0.74 C0.54,0.74 0.52,0.39 0.49,0.39 C0.46,0.39 0.44,0.75 0.41,0.75 C0.38,0.75 0.35,0.42 0.32,0.42 C0.29,0.42 0.27,0.76 0.24,0.76 C0.21,0.76 0.19,0.40 0.16,0.40 C0.13,0.40 0.11,0.73 0.08,0.73 C0.05,0.73 0.03,0.41 0,0.41 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-case-study-ddr" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.98,0.45 0.95,0.72 0.92,0.72 C0.88,0.72 0.84,0.42 0.80,0.42 C0.76,0.42 0.72,0.76 0.68,0.76 C0.64,0.76 0.60,0.44 0.55,0.44 C0.50,0.44 0.45,0.79 0.40,0.79 C0.36,0.79 0.31,0.41 0.26,0.41 C0.23,0.41 0.19,0.77 0.14,0.77 C0.09,0.77 0.05,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-case-study-austin-space" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.47 C0.98,0.47 0.95,0.72 0.93,0.72 C0.90,0.72 0.87,0.42 0.84,0.42 C0.81,0.42 0.77,0.79 0.73,0.79 C0.69,0.79 0.65,0.43 0.62,0.43 C0.58,0.43 0.55,0.76 0.51,0.76 C0.47,0.76 0.43,0.41 0.39,0.41 C0.35,0.41 0.31,0.77 0.28,0.77 C0.25,0.77 0.21,0.43 0.17,0.43 C0.14,0.43 0.11,0.73 0.08,0.73 C0.05,0.73 0.03,0.45 0,0.45 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-policy-privacy" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.44 C0.97,0.44 0.94,0.72 0.90,0.72 C0.84,0.72 0.78,0.40 0.75,0.40 C0.70,0.40 0.64,0.77 0.58,0.77 C0.52,0.77 0.45,0.41 0.38,0.41 C0.32,0.41 0.27,0.75 0.20,0.75 C0.13,0.75 0.07,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-policy-tos" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.43 C0.94,0.43 0.87,0.76 0.80,0.76 C0.71,0.76 0.62,0.41 0.55,0.41 C0.48,0.41 0.40,0.79 0.30,0.79 C0.20,0.79 0.10,0.45 0,0.45 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-policy-cookies" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.46 C0.98,0.46 0.96,0.71 0.94,0.71 C0.91,0.71 0.87,0.44 0.84,0.44 C0.80,0.44 0.76,0.75 0.72,0.75 C0.67,0.75 0.62,0.41 0.58,0.41 C0.53,0.41 0.48,0.79 0.43,0.79 C0.38,0.79 0.32,0.43 0.27,0.43 C0.23,0.43 0.19,0.76 0.14,0.76 C0.09,0.76 0.05,0.44 0,0.44 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-one-page" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.42 C0.95,0.42 0.88,0.77 0.82,0.77 C0.74,0.77 0.64,0.40 0.58,0.40 C0.47,0.40 0.37,0.79 0.28,0.79 C0.19,0.79 0.09,0.44 0,0.44 Z"/>
+    </clipPath>
+    <!-- About footer (inverted top-edge) -->
+    <clipPath id="wave-clip-about-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.06 0.1,0.06 S0.17,0.32 0.22,0.32 S0.3,0.04 0.34,0.04 S0.41,0.33 0.46,0.33 S0.52,0.05 0.56,0.05 S0.63,0.31 0.68,0.31 S0.74,0.06 0.78,0.06 S0.83,0.33 0.88,0.33 S0.9,0.07 0.93,0.07 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Services hub footer (inverted top-edge, 6 lobes) -->
+    <clipPath id="wave-clip-services-hub-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.05 0.08,0.05 S0.11,0.33 0.16,0.33 S0.21,0.05 0.25,0.05 S0.26,0.32 0.31,0.32 S0.34,0.06 0.38,0.06 S0.42,0.34 0.47,0.34 S0.49,0.05 0.53,0.05 S0.57,0.33 0.62,0.33 S0.66,0.05 0.7,0.05 S0.73,0.32 0.78,0.32 S0.79,0.05 0.83,0.05 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Custom build footer (inverted top-edge, 7 lobes) -->
+    <clipPath id="wave-clip-custom-build-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.06 0.06,0.06 S0.09,0.31 0.13,0.31 S0.16,0.06 0.2,0.06 S0.23,0.31 0.27,0.31 S0.3,0.06 0.34,0.06 S0.37,0.31 0.41,0.31 S0.44,0.06 0.48,0.06 S0.51,0.31 0.55,0.31 S0.58,0.06 0.62,0.06 S0.65,0.31 0.69,0.31 S0.72,0.06 0.76,0.06 S0.79,0.31 0.83,0.31 S0.86,0.06 0.9,0.06 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Site refresh footer (inverted top-edge, 4 lobes) -->
+    <clipPath id="wave-clip-site-refresh-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.04 0.11,0.04 S0.18,0.34 0.23,0.34 S0.3,0.04 0.34,0.04 S0.39,0.34 0.44,0.34 S0.52,0.04 0.56,0.04 S0.63,0.34 0.68,0.34 S0.75,0.04 0.79,0.04 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Ongoing support footer (inverted top-edge, 8 lobes) -->
+    <clipPath id="wave-clip-ongoing-support-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.05 0.06,0.05 S0.08,0.32 0.12,0.32 S0.14,0.05 0.18,0.05 S0.2,0.32 0.24,0.32 S0.26,0.05 0.3,0.05 S0.32,0.32 0.36,0.32 S0.38,0.05 0.42,0.05 S0.44,0.32 0.48,0.32 S0.5,0.05 0.54,0.05 S0.56,0.32 0.6,0.32 S0.62,0.05 0.66,0.05 S0.68,0.32 0.72,0.32 S0.74,0.05 0.78,0.05 S0.8,0.32 0.84,0.32 S0.86,0.05 0.9,0.05 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Contact footer (inverted top-edge, 5 lobes) -->
+    <clipPath id="wave-clip-contact-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.07 0.07,0.07 S0.15,0.33 0.2,0.33 S0.22,0.07 0.26,0.07 S0.32,0.33 0.37,0.33 S0.43,0.07 0.47,0.07 S0.51,0.33 0.56,0.33 S0.59,0.07 0.63,0.07 S0.67,0.33 0.72,0.33 S0.79,0.07 0.83,0.07 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Case-study hub footer (inverted top-edge, 9 lobes) -->
+    <clipPath id="wave-clip-casestudies-hub-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.05 0.06,0.05 S0.08,0.3 0.11,0.3 S0.13,0.05 0.17,0.05 S0.19,0.3 0.22,0.3 S0.24,0.05 0.27,0.05 S0.29,0.3 0.32,0.3 S0.34,0.05 0.38,0.05 S0.4,0.3 0.43,0.3 S0.45,0.05 0.48,0.05 S0.5,0.3 0.53,0.3 S0.55,0.05 0.58,0.05 S0.6,0.3 0.64,0.3 S0.66,0.05 0.69,0.05 S0.71,0.3 0.74,0.3 S0.76,0.05 0.8,0.05 S0.82,0.3 0.85,0.3 S0.87,0.05 0.9,0.05 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- CS austin-space footer (inverted top-edge, 6 lobes) -->
+    <clipPath id="wave-clip-cs-austin-space-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.03 0.09,0.03 S0.1,0.34 0.15,0.34 S0.18,0.04 0.22,0.04 S0.27,0.33 0.32,0.33 S0.33,0.04 0.37,0.04 S0.41,0.34 0.46,0.34 S0.5,0.04 0.54,0.04 S0.57,0.33 0.62,0.33 S0.63,0.03 0.67,0.03 S0.73,0.33 0.78,0.33 S0.81,0.04 0.85,0.04 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- CS terracotta footer (inverted top-edge, 7 lobes) -->
+    <clipPath id="wave-clip-cs-terracotta-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.06 0.06,0.06 S0.09,0.32 0.13,0.32 S0.16,0.06 0.2,0.06 S0.23,0.32 0.27,0.32 S0.3,0.06 0.34,0.06 S0.37,0.32 0.41,0.32 S0.44,0.06 0.48,0.06 S0.51,0.32 0.55,0.32 S0.58,0.06 0.62,0.06 S0.65,0.32 0.69,0.32 S0.72,0.06 0.76,0.06 S0.79,0.32 0.83,0.32 S0.86,0.06 0.9,0.06 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- CS ddr footer (inverted top-edge, 5 lobes) -->
+    <clipPath id="wave-clip-cs-ddr-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.3 C0.03,0.3 0.07,0.05 0.09,0.05 S0.12,0.34 0.17,0.34 S0.22,0.05 0.26,0.05 S0.31,0.34 0.36,0.34 S0.42,0.05 0.46,0.05 S0.49,0.34 0.54,0.34 S0.59,0.05 0.63,0.05 S0.68,0.34 0.73,0.34 S0.78,0.05 0.82,0.05 S0.97,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+  </defs>
+</svg>

@@ -1,0 +1,69 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.austinspace.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://www.austinspace.co.uk/contact"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What happens after I send an enquiry?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You'll hear back within 24 hours, usually sooner. The first conversation is straightforward. Understanding where you are, what you're trying to achieve, and taking a look at the current site if you have one. The aim is to work out whether there's a fit, not to talk you into anything."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to know exactly what I want before getting in touch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not at all. Most people come with an existing site that isn't working as well as it should, or a problem they can't quite pin down. That's exactly what the first conversation is for: working out what's actually needed before anything else."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there any obligation when I get in touch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "None. The initial review and conversation are free. If there's a good fit and a clear way I can help, I'll tell you. If not, I'll tell you that too."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you prefer to communicate once a project is underway?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "However works best for you. Most clients use a combination of email and Asana for task management, keeping everything documented and easy to track. The relationship builds from there at whatever pace suits you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I just have a quick question rather than a full project in mind?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Send it anyway. A quick question often turns into a useful conversation, and at worst you get a straight answer. No minimum commitment to reach out."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

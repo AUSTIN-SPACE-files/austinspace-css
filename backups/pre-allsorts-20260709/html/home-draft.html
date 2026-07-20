@@ -1,0 +1,370 @@
+<!-- ============================================================
+     AUSTIN_SPACE — HOMEPAGE DRAFT (frontier concept)
+     Draft only — DO NOT publish to live homepage.
+     Live homepage: html/home.html
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 1 — HERO (full-height dark, unified)
+     .as-fhero holds the image, scrim, copy, and scroll cue.
+     The thin .as-hero--home band is removed.
+     Goo-divider moves below this section (dark-to-white wave).
+     FLAGS:
+       - object-position values to fine-tune once real art loads.
+       - Confirm Squarespace nav is overlay (hero slides under it)
+         or takes its own space; adjust .as-fhero__inner padding-top
+         after live preview if needed.
+     ============================================================ -->
+
+<section class="as-fhero">
+  <!-- ASSET: hero, full-height dark frontier, coral planet right, Midjourney TBC -->
+  <img class="as-fhero__img"
+       srcset="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/66a4e536-6dfa-4cc9-b838-dfe896e5e153/austin_space_retro-futurist_travel_poster_edge_of_an_open_front_768.webp?content-type=image%2Fwebp 768w,
+               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/62be3f37-c823-4cb7-9b0e-50a74034d963/austin_space_retro-futurist_travel_poster_edge_of_an_open_front_1280.webp?content-type=image%2Fwebp 1280w,
+               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/08dfa9d7-76be-48da-8903-9f25ce0b386a/austin_space_retro-futurist_travel_poster_edge_of_an_open_front_1920.webp?content-type=image%2Fwebp 1920w,
+               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/57114179-f55a-4b51-a5d1-3dc40098fb87/austin_space_retro-futurist_travel_poster_edge_of_an_open_front_2880.webp?content-type=image%2Fwebp 2880w"
+       sizes="100vw"
+       src="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/08dfa9d7-76be-48da-8903-9f25ce0b386a/austin_space_retro-futurist_travel_poster_edge_of_an_open_front_1920.webp?content-type=image%2Fwebp"
+       alt="Dark frontier sky with coral planet to the right. Hero artwork for AUSTIN_SPACE, custom Squarespace website design."
+       fetchpriority="high"
+       decoding="async">
+  <div class="as-fhero__scrim" aria-hidden="true"></div>
+  <div class="as-fhero__inner as-container">
+    <div class="as-fhero__copy">
+      <h1 class="as-fhero__headline">The frontier is open.</h1>
+      <p class="as-fhero__body">Out here, your business can be anything. A storefront the whole galaxy can find. A landmark on the right avenue. Somewhere built so well it's still standing in ten years.</p>
+      <p class="as-fhero__body">AUSTIN_SPACE builds it, and knows the way. Come and see where you'll land.</p>
+    </div>
+  </div>
+  <div class="as-fhero__scroll-cue" aria-hidden="true">
+    <i class="fa-sharp fa-thin fa-chevron-down"></i>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2 — PROOF: lead-in line
+     New block: .as-proof-lead
+     ============================================================ -->
+
+<section class="as-proof-lead">
+  <div class="as-container">
+    <p class="as-proof-lead__text">Ten years building on this frontier. Here's what that buys you.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2 — PROOF: stats bar
+     Reusing: .as-creds (new content, same structure)
+     ============================================================ -->
+
+<section class="as-creds">
+  <div class="as-creds__inner as-container">
+
+    <div class="as-creds__item">
+      <span class="as-creds__icon">
+        <i class="fa-sharp fa-thin fa-hourglass"></i>
+      </span>
+      <p class="as-creds__number">10+</p>
+      <p class="as-creds__text">
+        <strong>Years building out here</strong>
+      </p>
+    </div>
+
+    <div class="as-creds__item">
+      <span class="as-creds__icon">
+        <i class="fa-sharp fa-thin fa-browsers"></i>
+      </span>
+      <p class="as-creds__number">200+</p>
+      <p class="as-creds__text">
+        <strong>Sites raised and still standing</strong>
+      </p>
+    </div>
+
+    <div class="as-creds__item">
+      <span class="as-creds__icon">
+        <i class="fa-sharp fa-thin fa-circle-dollar"></i>
+      </span>
+      <p class="as-creds__number">£0</p>
+      <p class="as-creds__text">
+        <strong>Agency overhead, ever</strong>
+      </p>
+    </div>
+
+    <div class="as-creds__item">
+      <span class="as-creds__icon">
+        <i class="fa-sharp fa-thin fa-person"></i>
+      </span>
+      <p class="as-creds__number">1</p>
+      <p class="as-creds__text">
+        <strong>Builder, start to finish, then staying on</strong>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2 — PROOF: credentials grid
+     New block: .as-proof-creds
+     Cards reuse: .as-about-work__card + elements
+     ============================================================ -->
+
+<section class="as-proof-creds">
+  <div class="as-proof-creds__inner as-container">
+    <div class="as-proof-creds__grid">
+
+      <div class="as-about-work__card">
+        <p class="as-about-work__card-title">Quick off the mark</p>
+        <p class="as-about-work__card-desc">Fast to load, smooth on every device. Visitors decide in seconds out here. Your site wins them before they've finished blinking.</p>
+      </div>
+
+      <div class="as-about-work__card">
+        <p class="as-about-work__card-title">Foundations first</p>
+        <p class="as-about-work__card-desc">Clean structure, schema, search visibility, built in from the first day, not bolted on after. What's a beautiful property nobody can find?</p>
+      </div>
+
+      <div class="as-about-work__card">
+        <p class="as-about-work__card-title">Built by hand, every time</p>
+        <p class="as-about-work__card-desc">No templates, no shortcuts, no junior doing the real work while someone senior takes the call. AUSTIN_SPACE builds your site itself.</p>
+      </div>
+
+      <div class="as-about-work__card">
+        <p class="as-about-work__card-title">Worcester, building UK-wide</p>
+        <p class="as-about-work__card-desc">Based on solid ground in Worcester. Building for clients right across the territory.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3 — WHO THIS IS FOR
+     Reusing: .as-positioning, .as-positioning__inner, __left, __headline, __body
+     New right column: .as-threshold-grid + .as-threshold-card elements
+     ============================================================ -->
+
+<section class="as-positioning">
+  <div class="as-positioning__inner as-container">
+
+    <div class="as-positioning__left">
+      <div class="as-eyebrow">
+        <div class="as-eyebrow__dot"></div>
+        <span class="as-label">Who this is for</span>
+      </div>
+      <h2 class="as-positioning__headline">You can see it<br>from here.</h2>
+      <p class="as-positioning__body">Your business has outgrown the site it started with. You already know that. The interesting part isn't what's wrong with the old place. It's what's waiting out here.</p>
+      <p class="as-positioning__body">A site that loads before anyone gets impatient. That turns up when your customers go looking. That looks like you meant it, on every screen, for years. Established businesses come out to the frontier when they're ready for the website to finally match the company. If that's you, you're in the right place.</p>
+    </div>
+
+    <div class="as-threshold-grid">
+
+      <div class="as-threshold-card">
+        <p class="as-threshold-card__title">Built for a smaller version of you</p>
+        <p class="as-threshold-card__body">The site made sense three years ago. The business has moved on. The website hasn't caught up. Time it did.</p>
+      </div>
+
+      <div class="as-threshold-card">
+        <p class="as-threshold-card__title">Nobody actually owns it</p>
+        <p class="as-threshold-card__body">It works, mostly, until something breaks and there's no one whose job it is to fix it. Out here, one builder owns the whole thing.</p>
+      </div>
+
+      <div class="as-threshold-card">
+        <p class="as-threshold-card__title">Phone-shaped, not desktop-squeezed</p>
+        <p class="as-threshold-card__body">More than half your visitors are on a phone. A site that only really works on a laptop is losing the room. This is built the other way round.</p>
+      </div>
+
+      <div class="as-threshold-card">
+        <p class="as-threshold-card__title">You want a builder, not a department</p>
+        <p class="as-threshold-card__body">Agency prices buy agency overhead: account managers, handoffs, layers between you and whoever's actually doing the work. Sometimes that's what you need. Often it isn't.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4 — SERVICES
+     Reusing: .as-services, grid, card classes
+     New element per card: .as-services__card-asset (placeholder)
+     ============================================================ -->
+
+<section class="as-services">
+  <div class="as-services__inner as-container">
+
+    <div class="as-services__header">
+      <div class="as-eyebrow">
+        <div class="as-eyebrow__dot"></div>
+        <span class="as-label">What I do</span>
+      </div>
+      <h2 class="as-services__headline">Three ways to build out here.</h2>
+      <p class="as-services__subline">A site raised from nothing, an existing one brought back to its best, or a guide who stays on long after the keys change hands. Whichever fits where you are right now.</p>
+    </div>
+
+    <div class="as-services__grid">
+
+      <div class="as-services__card as-card-lift-md">
+        <div class="as-services__card-icon">
+          <i class="fa-sharp fa-thin fa-hammer-brush"></i>
+        </div>
+        <p class="as-services__card-tag">Breaking ground</p>
+        <h3 class="as-services__card-title"><em>Custom Squarespace build</em></h3>
+        <img class="as-services__card-asset"
+             src="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/40abffc5-194d-4941-a0a9-c29d6311f678/austin_space_retro-futurist_travel_poster_a_modernist_structure_breaking_ground.webp?content-type=image%2Fwebp"
+             alt="Modernist structure under construction on a frontier world, coral sun behind. Custom Squarespace build.">
+        <p class="as-services__card-desc">A site raised from nothing, on a plot that's yours alone. Foundations laid properly: clean structure, built-in search visibility, beautiful from every angle. Not a template. Somewhere built to last.</p>
+        <p class="as-services__card-price">From <span>£2,500</span></p>
+        <div class="as-services__card-cta">
+          <a href="/services/squarespace-custom-build" class="as-services__card-link">
+            Learn more <i class="fa-sharp fa-thin fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="as-services__card as-card-lift-md">
+        <div class="as-services__card-icon">
+          <i class="fa-sharp fa-thin fa-brush"></i>
+        </div>
+        <p class="as-services__card-tag">Taking it over</p>
+        <h3 class="as-services__card-title"><em>Squarespace site refresh</em></h3>
+        <img class="as-services__card-asset"
+             src="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/e0787bf8-e686-4392-92e9-1e741865dd4a/austin_space_retro-futurist_travel_take_over.webp?content-type=image%2Fwebp"
+             alt="Existing frontier building wrapped in scaffolding, being renovated. Squarespace site refresh.">
+        <p class="as-services__card-desc">Already built, but not pulling its weight? Good bones are worth keeping. AUSTIN_SPACE strips back what's failing, fixes the structure, and makes it somewhere worth landing again. No demolition required.</p>
+        <p class="as-services__card-price">From <span>£1,500</span></p>
+        <div class="as-services__card-cta">
+          <a href="/services/squarespace-site-refresh" class="as-services__card-link">
+            Learn more <i class="fa-sharp fa-thin fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="as-services__card as-card-lift-md">
+        <div class="as-services__card-icon">
+          <i class="fa-sharp fa-thin fa-hand-holding-seedling"></i>
+        </div>
+        <p class="as-services__card-tag">Keeping it standing</p>
+        <h3 class="as-services__card-title"><em>Ongoing support retainer</em></h3>
+        <img class="as-services__card-asset"
+             src="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/906b9f58-6a2c-4666-a38c-57691de90d95/austin_space_retro-futurist_travel_poster_a_single_complete_keep_standing.webp?content-type=image%2Fwebp"
+             alt="Complete, settled frontier habitat at dusk. Ongoing support retainer.">
+        <p class="as-services__card-desc">The frontier keeps moving. Search shifts, performance drifts, the territory develops around you. A monthly retainer keeps your site sharp, found, and improving long after the keys change hands. The guide who stays.</p>
+        <p class="as-services__card-price">From <span>£300/month</span></p>
+        <div class="as-services__card-cta">
+          <a href="/services/ongoing-support" class="as-services__card-link">
+            Learn more <i class="fa-sharp fa-thin fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5 — CASE STUDY (TERRACOTTA)
+     Reusing: .as-casestudy + left-column classes
+     Right column replaced: .as-casestudy__img-slot (new, no stat grid)
+     Testimonial: real Charlie Crocker MRICS text from live home.html
+     ============================================================ -->
+
+<section class="as-casestudy">
+  <div class="as-casestudy__inner as-container">
+
+    <div class="as-casestudy__header">
+      <div class="as-casestudy__header-left">
+        <div class="as-eyebrow">
+          <div class="as-eyebrow__dot"></div>
+          <span class="as-label">Featured work</span>
+        </div>
+        <h2 class="as-casestudy__headline">Someone's already out here.</h2>
+      </div>
+      <a href="/case-studies/view-all" class="as-btn as-btn--outline">View all work</a>
+    </div>
+
+    <div class="as-casestudy__card">
+
+      <div class="as-casestudy__card-left">
+        <div class="as-casestudy__card-top">
+          <div class="as-casestudy__tag">
+            <i class="fa-sharp fa-thin fa-building-columns"></i>
+            Chartered surveying · London
+          </div>
+          <h3 class="as-casestudy__client">Terracotta Property</h3>
+          <p class="as-casestudy__client-desc">A growing London surveying firm came to the frontier with a site that wasn't doing the company justice. AUSTIN_SPACE built it again from the ground up, then stayed on: SEO, performance, compliance, and visibility in AI search, improved on an on-going basis. 250+ hours and counting. The kind of property you build once and keep.</p>
+
+          <blockquote class="as-casestudy__quote">
+            <p>Charles is a great guy and a pleasure to work with. We receive detailed updates, he delivers on time and makes great recommendations. He has become an asset to our organisation. Its a 10 out of 10 from us.</p>
+            <cite>
+              Charlie Crocker MRICS, Director, Terracotta Property
+              <a href="https://g.page/r/CcqSXNy4hGNGEBM" target="_blank" rel="noopener" class="as-casestudy__quote-source">View on Google <i class="fa-sharp fa-thin fa-arrow-up-right-from-square"></i></a>
+            </cite>
+          </blockquote>
+        </div>
+
+        <div class="as-casestudy__card-bottom">
+          <a href="/case-studies/terracotta-property" class="as-casestudy__card-link">
+            See the build <i class="fa-sharp fa-thin fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="as-casestudy__img-slot">
+        <!-- ASSET: Terracotta before/after, real screenshots TBC -->
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 6 — CTA
+     Reusing: .as-cta, .as-cta__inner, .as-cta__left, .as-row-list/item
+     New: .as-cta__right wrapper, .as-cta__credential
+     ============================================================ -->
+
+<section class="as-cta">
+  <div class="as-cta__inner as-container">
+
+    <div class="as-cta__left">
+      <h2 class="as-cta__headline">Come and see<br><em>where you'll land.</em></h2>
+      <p class="as-cta__body">No lengthy proposals. No account managers. Just a straight conversation about what you're building and whether AUSTIN_SPACE is the one to build it.</p>
+      <div class="as-cta__actions">
+        <a href="#as-enquiry-form" class="as-btn as-btn--primary">Start the conversation</a>
+        <a href="mailto:charles@austinspace.co.uk" class="as-btn as-btn--outline">charles@austinspace.co.uk</a>
+      </div>
+    </div>
+
+    <div class="as-cta__right">
+      <div class="as-row-list">
+        <div class="as-row-item">
+          <div class="as-row-item__icon"><i class="fa-sharp fa-thin fa-comment-lines"></i></div>
+          <div class="as-row-item__content">
+            <p class="as-row-item__title">Answers within 24 hours</p>
+            <p class="as-row-item__desc">Usually the same day.</p>
+          </div>
+        </div>
+        <div class="as-row-item">
+          <div class="as-row-item__icon"><i class="fa-sharp fa-thin fa-head-side-gear"></i></div>
+          <div class="as-row-item__content">
+            <p class="as-row-item__title">Free look at your current site</p>
+            <p class="as-row-item__desc">Send a URL. You'll get a straight answer on what's worth doing first. No charge, no obligation.</p>
+          </div>
+        </div>
+        <div class="as-row-item">
+          <div class="as-row-item__icon"><i class="fa-sharp fa-thin fa-handshake"></i></div>
+          <div class="as-row-item__content">
+            <p class="as-row-item__title">Worcester, building UK-wide</p>
+            <p class="as-row-item__desc">Most clients are remote. We work over video call.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="as-cta__credential">Squarespace Silver Partner, working toward Gold.</p>
+    </div>
+
+  </div>
+</section>
+

@@ -1,0 +1,104 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.austinspace.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://www.austinspace.co.uk/services/view-all"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Ongoing Support & Development",
+          "item": "https://www.austinspace.co.uk/services/ongoing-support"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Ongoing Squarespace Support & Development",
+      "description": "A monthly Squarespace support and maintenance retainer covering development, SEO and AI search optimisation, performance improvements, monthly reviews, strategic input, and content updates. Flexible hours scale with the workload. No lock-in contracts. Managed through Asana. Starting at £300/month.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "AUSTIN_SPACE",
+        "url": "https://www.austinspace.co.uk"
+      },
+      "areaServed": "United Kingdom",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "GBP",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": "300",
+          "maxPrice": "800",
+          "priceCurrency": "GBP"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is a retainer best suited for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Businesses that want the site to keep improving after launch. New features, better search rankings, ongoing performance work, content updates, or a mix. The retainer suits anyone who wants senior input without hiring in-house, and it can be as hands-on or hands-off as you want it to be."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the work get agreed each month?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Everything is managed through Asana. I set up a project, invite you in, and outline tasks and suggestions. You can add your own requests, upload screenshots of things you want changed, and see what's being worked on at any time. Hours are estimated per task and agreed before any work starts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kind of work can retainer hours be used for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Development of new features, SEO and AI search improvements, performance optimisation, content updates, strategic consultation, or a mix of all of them. Each month we agree where the hours are best spent based on the current priorities and what's budgeted."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you keep track of time and budget?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All time is logged and tracked, and you're kept informed throughout the month. There are no surprise invoices. Estimates are agreed upfront per task, so you always know what you're committing to before work begins."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a minimum contract or lock-in period?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No minimum commitment and no lock-in. The retainer runs month to month, with the first month's hours agreed at the start. If it's working, it continues. If it isn't, it ends. Either way the budget stays in your control."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this a website maintenance retainer or something more?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This is something more. Squarespace handles the standard maintenance work (security patches, hosting, platform updates) as part of the platform itself, so the retainer isn't there to babysit. It's there to keep the site improving after launch. New pages, SEO work, performance tuning, custom development. If the site is genuinely fine and just needs the lights kept on, you don't need this. If you want it to keep getting better, this is the service."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

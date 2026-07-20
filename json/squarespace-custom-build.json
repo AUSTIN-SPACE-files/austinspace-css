@@ -1,0 +1,105 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.austinspace.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://www.austinspace.co.uk/services/view-all"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Custom Squarespace Builds",
+          "item": "https://www.austinspace.co.uk/services/custom-squarespace-builds"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Custom Squarespace Website Design",
+      "description": "A custom Squarespace website built end-to-end. Covers strategy, design, mobile-first development, SEO foundation, content migration, and launch. Two-to-four-week typical timeline. Thirty days of post-launch support included. Built by one person from the discovery conversation through to handover. Starting at £2,500.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "AUSTIN_SPACE",
+        "url": "https://www.austinspace.co.uk"
+      },
+      "areaServed": "United Kingdom",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "GBP",
+        "price": "2500",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": "2500",
+          "maxPrice": "4500",
+          "priceCurrency": "GBP"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why build on Squarespace rather than another platform?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Squarespace's native tools are powerful, well-maintained, and remove the overhead of plugins, security scans, and constant updates. Built properly from the ground up, it's a streamlined, professional platform that's easy to manage long-term."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can't I just build it myself on Squarespace?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can. Squarespace makes it possible for someone without a design background to launch a workable site, and that's a real strength of the platform. What a custom build adds is the strategic and technical work that's hard to do well without years of experience. Schema markup, image optimisation, conversion-focused layout, analytics setup. None of it is glamorous. All of it matters. If you can do that work yourself, you don't need this service."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do I need to have ready before the project starts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A rough idea of what the business does and who it's for is enough to start the conversation. Copy and images can be developed during the project, but having them finalised early keeps things moving and avoids the timeline slipping. I'll guide you through what's needed before we start."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a build take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Typically two to four weeks from project start to launch. The biggest variable is content. If copy and images are ready when discovery completes, the build moves fast. If content needs to be created during the build, the timeline extends. Rush delivery is available for time-sensitive projects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens at the end of the project?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You get full access to the site and a handover, either a recorded walkthrough video or a live call, covering all areas of the site so you understand how to manage and update it yourself going forward."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my site rank for the keywords my clients actually search?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SEO foundation work is included in every build (clean URL structure, meta data, schema, image alt text, sitemap). What I can't promise is a top-three ranking, because that depends on competition, content depth, and time. What I can promise is that nothing on the technical side will be holding you back. For sectors where ranking matters most, ongoing SEO work as part of a support retainer compounds the foundation over time."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

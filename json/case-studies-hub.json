@@ -1,0 +1,69 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.austinspace.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Case Studies",
+          "item": "https://www.austinspace.co.uk/case-studies/view-all"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why should I look at case studies before getting in touch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because talk is cheap. Case studies show exactly how a project was approached, what problems were solved, and what the results looked like. Attention to detail, end-to-end process, and the outcomes, all there to judge for yourself."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know the results are genuine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every case study is from a real client with a real site you can visit. Testimonials are from the people involved in the project, not anonymous reviews. Word of mouth is how most clients find AUSTIN_SPACE, and that's not something you can fake. Every site linked from these case studies is live and searchable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kind of experience backs this up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A decade building and maintaining websites at scale, including senior roles managing 200+ Shopify and eCommerce stores in the music industry. The same rigour applied to major commercial operations gets applied to every Squarespace project, regardless of budget."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will there be more case studies added?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Each completed project gets documented properly. The aim is to build a body of work that covers different industries, services, and challenges so you can find something relevant to your situation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you only work with certain industries?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The case studies here cover chartered surveying, defence contracting, and web design consultancy, three very different sectors. The common thread is established UK SMEs that need their Squarespace website to work properly as a business tool. If that's you, the industry doesn't matter."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

@@ -1,0 +1,75 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.austinspace.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Case Studies",
+          "item": "https://www.austinspace.co.uk/case-studies/view-all"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DDR Limited",
+          "item": "https://www.austinspace.co.uk/case-studies/ddr-ltd"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do you handle a client who already has strong ideas about what they want?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That's actually the best starting point. DDR came with a detailed slideshow, a clear sense of their brand direction, and specific functionality requests. The job is to take that vision and execute it properly, filling the gaps, advising where needed, and delivering something that looks and works better than what was sketched out."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "DDR operates in the defence sector. How do you make that credible on a website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Through clarity and confidence. MoD credentials, certifications, and a track record of specialist work need to be front and centre, not buried. The site was structured to lead with authority, with a clean professional aesthetic that reflects the seriousness of the sector."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a 14-page Squarespace build involve in practice?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every page planned, designed, and built to a consistent standard, with all the content organised, a clear navigation structure, and the Squarespace technical foundation in place from day one. For DDR that meant migrating to a new domain, building out their full service offering, and making the site work as a credible business tool for the first time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How quickly can a Squarespace project like this be turned around?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The DDR project ran from discovery to launch in six weeks. Timeline depends on content readiness and complexity. Having a clear brief and assets ready makes a significant difference to how quickly things move."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "My site is in a similar state to DDR's old one — where do I start?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Send me your URL. I'll review your current site, tell you honestly what the issues are, and outline what a Squarespace project would look like. No charge, no commitment required."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
