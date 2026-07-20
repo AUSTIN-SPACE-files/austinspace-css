@@ -2375,21 +2375,6 @@
  color: rgba(255, 255, 255, 0.4);
 }
 
-.as-cs-testimonial__placeholder {
- border: 2px dashed rgba(255, 255, 255, 0.1);
- border-radius: var(--radius-md);
- padding: 2rem;
- width: 100%;
- text-align: center;
-}
-
-.as-cs-testimonial__placeholder p {
- font-family: var(--font-body);
- font-size: 0.82rem;
- color: rgba(255, 255, 255, 0.2);
- margin: 0;
-}
-
 .as-cs-page-cta {
  background: var(--white);
  padding: var(--as-space-section) var(--as-space-section-side);
@@ -2519,30 +2504,6 @@
  margin: 0;
 }
 
-.as-about-hero__meta {
- display: flex;
- flex-direction: column;
- gap: 0.5rem;
- padding-top: 0.5rem;
-}
-
-.as-about-hero__meta-item {
- display: flex;
- align-items: center;
- gap: 0.7rem;
- font-family: var(--font-body);
- font-size: 0.88rem;
- font-weight: 400;
- color: var(--as-mid);
-}
-
-.as-about-hero__meta-item i {
- color: var(--as-purple);
- font-size: 0.9rem;
- width: 16px;
- text-align: center;
-}
-
 .as-about-hero__photo {
  width: 100%;
  aspect-ratio: 3 / 4;
@@ -2564,25 +2525,6 @@
  object-fit: cover;
  border-radius: var(--radius-lg);
  display: block;
-}
-
-.as-about-hero__photo-placeholder {
- display: flex;
- flex-direction: column;
- align-items: center;
- gap: 0.6rem;
-}
-
-.as-about-hero__photo-placeholder i {
- font-size: 2rem;
- color: var(--as-border);
-}
-
-.as-about-hero__photo-placeholder span {
- font-family: var(--font-body);
- font-size: 0.78rem;
- color: var(--as-border);
- letter-spacing: 0.04em;
 }
 
 @media (min-width: 481px) {
@@ -5549,7 +5491,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 /* Body copy: DM Sans 400, remapped off legacy greys */
 .as-allsorts .as-about-hero__body,
 .as-allsorts .as-about-section-body,
-.as-allsorts .as-about-hero__meta-item,
 .as-allsorts .as-about-role__desc,
 .as-allsorts .as-about-work__card-desc {
  font-weight: 400;
@@ -5570,8 +5511,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-allsorts .as-about-role__company { color: var(--bead-blue); }
 
 /* Icons: plain inline (bead-blue) vs candy-pink checklist vs candy chips */
-.as-allsorts .as-about-hero__meta-item i { color: var(--bead-blue); }
-
 /* Role icons -> bare duotone glyph, matches the homepage row-item precedent
  (Phase 2, 12 July 2026). Chip removed. Base rule (css:398-409) guards
  background/border-radius/width/height/font-size/color/justify-content/
@@ -7150,47 +7089,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-allsorts .as-cs-row__copy {
   grid-column: 1;
   grid-row: 1;
-}
-
-.as-allsorts .as-cs-row__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-.as-allsorts .as-cs-row__tag {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 10.4px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #9a9aa2;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  padding: 5px 12px;
-}
-
-/* One candy hue per case study, not per stat (12 July 2026) - with the
-   stats bars gone, tags are the only place colour lives on this page.
-   Walks the candy array by nth-child so a 4th study picks up sunshine
-   automatically. Provisional - Charles: "not sure on the pills, but leave
-   it like this for now." */
-.as-allsorts .as-cs-row:nth-child(1) .as-cs-row__tag {
-  color: var(--candy-pink-lt);
-  border-color: rgba(242, 108, 174, 0.45);
-}
-.as-allsorts .as-cs-row:nth-child(2) .as-cs-row__tag {
-  color: var(--bead-blue-lt);
-  border-color: rgba(127, 163, 221, 0.45);
-}
-.as-allsorts .as-cs-row:nth-child(3) .as-cs-row__tag {
-  color: var(--tangerine);
-  border-color: rgba(240, 125, 46, 0.45);
-}
-.as-allsorts .as-cs-row:nth-child(4) .as-cs-row__tag {
-  color: var(--sunshine);
-  border-color: rgba(244, 207, 59, 0.45);
 }
 
 /* Tags replaced by a single candy-coloured number above each title, 14 July
