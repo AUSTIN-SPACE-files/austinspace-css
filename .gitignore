@@ -1,3 +1,4 @@
 .DS_Store
 .claude/
 css/ROLLBACK-panel-*.css
+css/*.handedited-*.bak
