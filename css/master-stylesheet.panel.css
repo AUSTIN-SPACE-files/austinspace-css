@@ -1,4 +1,3 @@
-
 :root {
  --as-black: #0d0d0d;
  --as-white: #fff;
@@ -6296,27 +6295,14 @@ a.cky-banner-element.as-cookie__btn:hover {
   transform: rotate(-5deg) translateY(28px);
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper */
-/* "View live site" promoted to a button; the shared .as-cs-hero__link rule */
-/* already sets align-self: flex-start, but this pins it explicitly for the */
-/* button treatment on this page since DDR/AUSTIN_SPACE keep the plain link. */
 .as-allsorts .as-cs-terracotta .as-cs-hero__link {
   align-self: flex-start;
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper */
-/* Both hero frames now show the same home page image and merge where they */
-/* overlap, so the pair is resized and repositioned for clearer separation */
-/* rather than left at the shared 88%/34% arrangement. */
 .as-allsorts .as-cs-terracotta .as-cs-hero__media-desktop {
   width: 92%;
 }
 
-/* The as-cs-phase pair uses a much heavier shadow (0 14px 40px rgba(0,0,0,.75)) */
-/* deliberately, since it sits on ink rather than white; this value sits between */
-/* that and the original hero shadow (0 8px 24px rgba(0,0,0,.16)) because the two */
-/* hero frames are now near-identical images and need more separation than the */
-/* original provided. Desktop frame keeps its original light shadow untouched. */
 .as-allsorts .as-cs-terracotta .as-cs-hero__media-phone {
   width: 28%;
   right: -2%;
@@ -6325,8 +6311,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper */
-/* Stat bar header, matching the as-creds "By the Numbers" pattern */
 .as-allsorts .as-cs-terracotta .as-cs-stats__header {
   display: flex;
   flex-direction: column;
@@ -6334,23 +6318,16 @@ a.cky-banner-element.as-cookie__btn:hover {
   margin-bottom: 56px;
 }
 
-/* as-cs-section-headline defaults to --ink-900 for light sections; */
-/* override to white here so it is legible on the dark as-cs-stats band */
 .as-allsorts .as-cs-terracotta .as-cs-stats__header .as-cs-section-headline {
   color: #fff;
 }
 
-/* Deliberately diverges from as-creds__number (Fraunces 800): lighter, */
-/* smaller and tighter-tracked for legibility, rhymes with the Fraunces 400 */
-/* used on the solution step titles and FAQ questions on this page. */
 .as-allsorts .as-cs-terracotta .as-cs-stats__number {
   font-weight: 400;
   font-size: 36px;
   letter-spacing: normal;
 }
 
-/* Two-line label: bold block headline + grey supporting sentence, */
-/* mirroring as-creds__text / as-creds__text strong exactly */
 .as-allsorts .as-cs-terracotta .as-cs-stats__label {
   font-family: var(--font-body);
   font-size: 15px;
@@ -6368,8 +6345,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   margin-bottom: 0.15rem;
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper */
-/* Solution section: numbered vertical spine, replaces the alternating as-cs-phase rows */
 .as-allsorts .as-cs-terracotta .as-cs-solution__spine {
   position: relative;
   padding-left: 96px;
@@ -6495,8 +6470,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   }
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper */
-/* Results section: own white band, sits between as-cs-solution and as-cs-beforeafter */
 .as-allsorts .as-cs-terracotta .as-cs-results {
   background: var(--as-white);
   padding: var(--as-space-section) var(--as-space-section-side);
@@ -6659,8 +6632,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   }
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper */
-/* Selected-pages tabbed gallery, sits between as-cs-results and as-cs-testimonial */
 .as-allsorts .as-cs-terracotta .as-cs-gallery {
   background: var(--as-white);
   padding: var(--as-space-section) var(--as-space-section-side);
@@ -6769,9 +6740,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   }
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper */
-/* Testimonial quote in DM Serif Display instead of the sitewide Fraunces default */
-/* B1 editorial redesign: header + two-column grid, replaces the centered card */
 .as-allsorts .as-cs-terracotta .as-cs-testimonial__inner {
   max-width: 1160px;
   display: block;
@@ -6786,8 +6754,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   margin-bottom: 56px;
 }
 
-/* as-cs-section-headline defaults to --ink-900 for light sections; */
-/* override to white here so it is legible on the dark testimonial band */
 .as-allsorts .as-cs-terracotta .as-cs-testimonial__header .as-cs-section-headline {
   color: #fff;
 }
@@ -6799,7 +6765,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   align-items: start;
 }
 
-/* Opening Press quote mark: block, sits above the quote */
 .as-allsorts .as-cs-terracotta .as-cs-testimonial__mark-open {
   display: block;
   font-size: 52px;
@@ -6820,11 +6785,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   text-align: left;
 }
 
-/* Closing Press quote mark: fa-quote-right is not in the Slab Press pack */
-/* (tofu), so this reuses fa-quote-left mirrored horizontally instead. */
-/* scaleX and translateY act on independent axes so they commute here; */
-/* order does not change the result. translateY(8px) baseline nudge is */
-/* a starting estimate only, still needs live visual check. */
 .as-allsorts .as-cs-terracotta .as-cs-testimonial__mark-close {
   display: inline-block;
   font-size: 32px;
@@ -7480,3 +7440,4 @@ a.cky-banner-element.as-cookie__btn:hover {
   }
 
 }
+.as-build-canary{--as-build-id:"20260723-b8e7a7"}
