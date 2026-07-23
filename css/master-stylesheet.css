@@ -6691,13 +6691,13 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 
 /* Duo colour rotation - pink/blue/tangerine/sunshine, cycles every 4.
-   Confirmed the six .as-svc-included__item cards are direct siblings of
-   one parent (.as-svc-included__grid), so nth-child(1..6) maps to visual
-   order 1-6: SEO, Advanced Dev, Performance, Monthly Reviews, Strategic,
-   Content. No more sunshine ink-glyph special case - sunshine is now the
-   glyph's own colour on a white card, not white text on a yellow chip. */
+   The nine .as-svc-included__item cards are direct siblings of one parent
+   (.as-svc-included__grid), so nth-child(1..9) maps to visual order 1-9.
+   No more sunshine ink-glyph special case - sunshine is now the glyph's
+   own colour on a white card, not white text on a yellow chip. */
 .as-allsorts .as-svc-included__item:nth-child(1) .as-svc-included__item-icon i,
-.as-allsorts .as-svc-included__item:nth-child(5) .as-svc-included__item-icon i {
+.as-allsorts .as-svc-included__item:nth-child(5) .as-svc-included__item-icon i,
+.as-allsorts .as-svc-included__item:nth-child(9) .as-svc-included__item-icon i {
   --fa-primary-color: #ec4d97;
   --fa-secondary-color: #f6aed0;
   color: #ec4d97;
@@ -6708,13 +6708,15 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   --fa-secondary-color: #afc4e6;
   color: #4f7cc9;
 }
-.as-allsorts .as-svc-included__item:nth-child(3) .as-svc-included__item-icon i {
+.as-allsorts .as-svc-included__item:nth-child(3) .as-svc-included__item-icon i,
+.as-allsorts .as-svc-included__item:nth-child(7) .as-svc-included__item-icon i {
   --fa-primary-color: #f07d2e;
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e;
 }
 /* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
-.as-allsorts .as-svc-included__item:nth-child(4) .as-svc-included__item-icon i {
+.as-allsorts .as-svc-included__item:nth-child(4) .as-svc-included__item-icon i,
+.as-allsorts .as-svc-included__item:nth-child(8) .as-svc-included__item-icon i {
   --fa-primary-color: #d69d1c;
   --fa-secondary-color: #fae9a6;
   color: #d69d1c;
@@ -7681,7 +7683,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--custom-build-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 15%;
+  object-position:50% 100%;
   clip-path:url(#wave-clip-custom-build-footer);
   display:block;
 }
@@ -7708,7 +7710,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--one-page-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 15%;
+  object-position:50% 100%;
   clip-path:url(#wave-clip-one-page-footer);
   display:block;
 }
@@ -8015,6 +8017,18 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+/* Candy topper on the tier-fit cards. The topper is a static
+   block with no radius, so the card must clip it. Negative
+   margins cancel the card's 26px padding to make it full bleed.
+   Scoped to as-svc-fit: as-pos-card is shared with the homepage
+   positioning section, which must not get a topper. */
+.as-allsorts .as-svc-fit .as-pos-card {
+  overflow: hidden;
+}
+.as-allsorts .as-svc-fit .as-pos-card .as-topper {
+  margin: -26px -26px 22px;
 }
 
 /* --fa-secondary-opacity MUST be declared here. The .as-icon--* classes at css:5557-5576

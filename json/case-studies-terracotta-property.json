@@ -33,7 +33,7 @@
           "name": "What does a full Squarespace rebuild actually involve?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Every page is designed and built from scratch, not reskinned from a template. That means custom layouts, a considered information architecture, mobile-first development, and all the technical groundwork: SEO, analytics, structured data, and performance optimisation. Everything is done in a staging environment so the live site is never disrupted."
+            "text": "Every page is designed and built from scratch, not reskinned from a template. That means custom layouts, a considered information architecture, mobile-first development, and all the technical groundwork: SEO, analytics, structured data, and performance optimisation. Work is staged carefully and backed up before anything goes live, so the site your customers see is never left broken mid-project."
           }
         },
         {
@@ -41,7 +41,7 @@
           "name": "How long did the Terracotta project take?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The initial rebuild was completed in around 40 hours. From there, the relationship moved into an ongoing retainer covering SEO, AI search optimisation, performance work, and continued development, totalling 250+ hours over the course of the partnership."
+            "text": "The initial rebuild took around 40 hours. From there the relationship moved into ongoing work covering SEO, AI search, performance and continued development. That started in September 2024 and is still running."
           }
         },
         {
@@ -66,6 +66,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Send me your URL and I'll take a look. The first review is free. I'll give you an honest assessment of where things stand and what would have the biggest impact for your Squarespace site. No obligation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Did the rebuild increase their search traffic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Search visibility grew, but I want to be precise about where from. The clearest gains came from content: five articles produced during the period went from 22 clicks to 414 between the first half of 2025 and the first half of 2026. The service pages improved their click-through rate but from a low base. Terracotta's organic search is still heavily brand-driven, which is normal for a professional services firm that gets most of its work through referral. Anyone promising you a traffic multiple from a rebuild alone is guessing."
           }
         }
       ]
