@@ -1,5 +1,5 @@
 /* =============================================
- AUSTIN_SPACE — Master Stylesheet
+ AUSTIN_SPACE - Master Stylesheet
  Last consolidated: 2026-03
  ============================================= */
 
@@ -204,7 +204,7 @@
  flex-shrink: 0;
 }
 
-/* Row list — stacked icon/text rows */
+/* Row list - stacked icon/text rows */
 .as-row-list {
  display: flex;
  flex-direction: column;
@@ -348,7 +348,7 @@
 
 
 /* =============================================
- HOME — HERO
+ HOME - HERO
  ============================================= */
 
 .as-hero-combined {
@@ -550,7 +550,7 @@
 
 
 /* =============================================
- HOME — CREDENTIALS BAR
+ HOME - CREDENTIALS BAR
  ============================================= */
 
 .as-creds {
@@ -643,7 +643,7 @@
 
 
 /* =============================================
- HOME — POSITIONING
+ HOME - POSITIONING
  ============================================= */
 
 .as-positioning {
@@ -723,7 +723,7 @@
 
 
 /* =============================================
- HOME — BACKGROUND STORY
+ HOME - BACKGROUND STORY
  ============================================= */
 
 /* NEW - .as-backstory is always dark by design, no white legacy version
@@ -744,7 +744,7 @@
 
 
 /* =============================================
- HOME — SERVICES
+ HOME - SERVICES
  ============================================= */
 
 .as-services {
@@ -825,7 +825,7 @@
  letter-spacing: -0.01em;
  color: var(--as-black);
  margin: 0 0 0.8rem;
- min-height: 3.45rem; /* 2 lines × 1.5rem × 1.15 — aligns images across row */
+ min-height: 3.45rem; /* 2 lines x 1.5rem x 1.15 - aligns images across row */
 }
 
 .as-services__card-price {
@@ -932,7 +932,7 @@
 
 
 /* =============================================
- HOME — CASE STUDY FEATURE
+ HOME - CASE STUDY FEATURE
  ============================================= */
 
 /* Base (non-Allsorts) fallback. Uses var(--liquorice) rather than
@@ -999,7 +999,7 @@
 
 
 /* =============================================
- HOME — CTA
+ HOME - CTA
  ============================================= */
 
 .as-cta {
@@ -1613,7 +1613,7 @@
 
 .as-svc-cta--dark {
  background: var(--as-black);
- /* No border-top here — pink's own border-bottom (as-solid-band--edge-bottom)
+ /* No border-top here - pink's own border-bottom (as-solid-band--edge-bottom)
  already draws the visible seam; a black border against this section's
  own black background would be invisible anyway. Bottom edge is owned by
  the cosmos-break footer bookend directly below (its clip-path traces the
@@ -1621,7 +1621,7 @@
 }
 
 /* ============================================================
- CTA BANNER — shared inner utility
+ CTA BANNER - shared inner utility
  Used by: .as-svc-cta__inner, .as-hub-notsure__inner, .as-cs-hub-cta__inner
  ============================================================ */
 
@@ -1758,7 +1758,7 @@
 }
 
 
-/* Wave cap — fixed-pixel-height wave accent layered over a section edge.
+/* Wave cap - fixed-pixel-height wave accent layered over a section edge.
  Depth is set by height (36px shallow / 72px deep), never by a percentage
  of section height, so the same wave reads identically regardless of how
  tall the section's content makes it (a clip-path keyed to objectBoundingBox
@@ -1781,7 +1781,7 @@
 .as-wave-cap--shallow { height: 36px; }
 .as-wave-cap--deep { height: 72px; }
 
-/* Fill modifiers — the cap's fill paints the colour of whichever section is
+/* Fill modifiers - the cap's fill paints the colour of whichever section is
  on the OTHER side of the curve, so a wave between two colour bands (not
  just colour-to-white) needs an explicit fill rather than the white default. */
 .as-wave-cap--fill-teal { --cap-fill: var(--as-teal); }
@@ -2553,7 +2553,7 @@
 
 .as-about-solo__inner {
  display: grid;
- grid-template-columns: 1fr 1fr; /* fr, not %  — % + gap overflows the container */
+ grid-template-columns: 1fr 1fr; /* fr, not %  - % + gap overflows the container */
  gap: 96px;
  align-items: start;
 }
@@ -3735,7 +3735,7 @@
 
 
 /* =============================================
- LEGAL PAGES — SHARED
+ LEGAL PAGES - SHARED
  (Privacy Policy, Terms of Service, Cookie Policy)
  ============================================= */
 
@@ -4015,7 +4015,7 @@
 
 
 /* =============================================
- LEGAL PAGES — PRIVACY SPECIFIC
+ LEGAL PAGES - PRIVACY SPECIFIC
  ============================================= */
 
 .as-privacy__intro,
@@ -4049,7 +4049,7 @@
 
 
 /* =============================================
- LEGAL PAGES — TOS SPECIFIC
+ LEGAL PAGES - TOS SPECIFIC
  ============================================= */
 
 .as-tos__callout {
@@ -4077,7 +4077,7 @@
 
 
 /* =============================================
- LEGAL PAGES — COOKIE SPECIFIC
+ LEGAL PAGES - COOKIE SPECIFIC
  ============================================= */
 
 .as-cookie__table-wrapper {
@@ -4154,7 +4154,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  line-height: 1.5;
 }
 
-/* Legal pages — responsive */
+/* Legal pages - responsive */
 @media (max-width: 600px) {
  .as-privacy,
  .as-tos,
@@ -4252,7 +4252,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 }
 
 /* =============================================================
- FOOTER — Redesign
+ FOOTER - Redesign
  ============================================================= */
 
 .as-footer {
@@ -4515,7 +4515,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 @media (max-width: 1280px) {
 
- /* Section padding: 7rem → 4rem */
+ /* Section padding: 7rem -> 4rem */
  .as-positioning,
  .as-services,
  .as-casestudy,
@@ -4549,7 +4549,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  padding-bottom: 2rem;
  }
 
- /* Internal two-column gaps: 6rem → 3.5rem */
+ /* Internal two-column gaps: 6rem -> 3.5rem */
  .as-positioning__inner,
  .as-cta__inner,
  .as-svc-hero__inner,
@@ -4561,7 +4561,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  gap: 3.5rem;
  }
 
- /* Section header bottom margin: 3.5rem → 2rem */
+ /* Section header bottom margin: 3.5rem -> 2rem */
  .as-services__header,
  .as-svc-included__header,
  .as-svc-process__header,
@@ -4575,7 +4575,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 /* =============================================
  SHORT VIEWPORTS (MacBook Air M2 / max-height: 1000px)
- Targets wide viewports with constrained height — height-based
+ Targets wide viewports with constrained height - height-based
  so the 1470px width on MacBook Air M2 does not trigger this.
  min-width guard keeps mobile landscape unaffected.
  ============================================= */
@@ -4595,7 +4595,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  /* Part B: Reduce hero content bottom padding from 5rem to 3rem.
  This tightens the .as-hero-combined section height and pulls
  the H1 higher on the page. The 7rem gap above the content is
- Squarespace's native section wrapper padding — not in this file. */
+ Squarespace's native section wrapper padding - not in this file. */
  .as-hero-combined__content {
  padding-bottom: 3rem;
  }
@@ -4752,9 +4752,9 @@ a.cky-banner-element.as-cookie__btn:hover {
  padding-top: 0 !important;
 }
 
-/* === ALLSORTS TOKENS — added 2026-07-09 ===
+/* === ALLSORTS TOKENS - added 2026-07-09 ===
  Source: AUSTIN_SPACE Design System (tokens + textures), pasted into Squarespace
- Design > Custom CSS. @import stripped — fonts load via a <link> in Header Code
+ Design > Custom CSS. @import stripped - fonts load via a <link> in Header Code
  Injection instead (Phase 1a).
 
  NOTE ON SCOPE: --font-display and --radius-sm/md/lg collide by NAME with tokens
@@ -4762,21 +4762,21 @@ a.cky-banner-element.as-cookie__btn:hover {
  consumed unscoped, site-wide, today (--font-display: 34 uses, --radius-sm: 8,
  --radius-md: 22, --radius-lg: 5). Because :root declarations cascade by source
  order regardless of selector, redeclaring them here on :root would silently
- swap headings/radii on every live page the moment this lands — not gated by
+ swap headings/radii on every live page the moment this lands - not gated by
  .as-allsorts. So those 4 declarations are deliberately left OUT of the :root
  block below and instead live in the .as-allsorts override block further down,
  where they only take effect on pages carrying that class. Everything else
- below is a genuinely new token name — no collision, safe globally as-is.
+ below is a genuinely new token name - no collision, safe globally as-is.
  --font-body and --font-mono also collide by name but resolve to the identical
  font-family already (IBM Plex Sans / IBM Plex Mono), so redeclaring them is a
- harmless no-op — left in place for fidelity to the source file. */
+ harmless no-op - left in place for fidelity to the source file. */
 
 /* ============================================================
  tokens/colors.css
  ============================================================ */
 
-/* AUSTIN_SPACE — Color tokens
- The UI is a clean monochrome system — near-black ink, white, and greys —
+/* AUSTIN_SPACE - Color tokens
+ The UI is a clean monochrome system - near-black ink, white, and greys -
  with a liquorice-allsorts candy accent (pink = the action, bead blue = the
  emphasis; sunshine/tangerine as support). The neon spectrum lives inside the
  cosmic illustration bands (and a few dark-surface accents). */
@@ -4794,7 +4794,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  --grey-050: #f7f7f8; /* card / inset surface */
  --white: #ffffff;
 
- /* ---- Violet (LEGACY — no longer the UI accent; kept for back-compat) ---- */
+ /* ---- Violet (LEGACY - no longer the UI accent; kept for back-compat) ---- */
  --violet-700: #5b21b6; /* accent hover / deep */
  --violet-600: #6d28d9; /* primary accent */
  --violet-500: #7c3aed;
@@ -4825,7 +4825,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  --yellow-400: #ffd23f; /* icons on the black stats band */
 
  /* ---- Candy / liquorice-allsorts (committed accent palette) ---- */
- --candy-pink: #ec4d97; /* primary accent — the action */
+ --candy-pink: #ec4d97; /* primary accent - the action */
  --candy-pink-deep: #d23c83; /* accent hover */
  --candy-pink-lt: #f26cae; /* luminous pink for dark surfaces */
  --candy-pink-050: #fdeaf3; /* accent tint surface */
@@ -4858,11 +4858,11 @@ a.cky-banner-element.as-cookie__btn:hover {
  --border-subtle: var(--grey-200);
  --border-strong: var(--ink-900); /* the illustration's black outline */
 
- /* Split accent: PINK = the action · BEAD BLUE = the emphasis (liquorice allsorts). */
+ /* Split accent: PINK = the action . BEAD BLUE = the emphasis (liquorice allsorts). */
  --accent: var(--candy-pink); /* links, accent buttons, focus, eyebrow text */
  --accent-hover: var(--candy-pink-deep);
  --accent-tint: var(--candy-pink-050);
- --accent-dot: var(--bead-blue); /* eyebrow dot — the bead-blue emphasis */
+ --accent-dot: var(--bead-blue); /* eyebrow dot - the bead-blue emphasis */
  --accent-lum: var(--candy-pink-lt); /* luminous pink for dark surfaces */
  /* bead blue is the reserved emphasis (key stat, badges, hover pops) */
  --accent-secondary: var(--bead-blue);
@@ -4889,10 +4889,10 @@ a.cky-banner-element.as-cookie__btn:hover {
  tokens/typography.css
  ============================================================ */
 
-/* AUSTIN_SPACE — Typography tokens
+/* AUSTIN_SPACE - Typography tokens
  DM Serif Display carries the display voice (high-contrast serif); DM Sans
  keeps body warm & legible; DM Mono tags labels & code. (Brand fonts, loaded via fonts.css.)
- --font-display, --font-body and --font-mono are deliberately NOT redeclared here —
+ --font-display, --font-body and --font-mono are deliberately NOT redeclared here -
  all three collide by name with tokens already live, unscoped, in the original
  DESIGN TOKENS :root (line 11: --font-body was 'IBM Plex Sans', 104 uses;
  --font-mono was 'IBM Plex Mono', 23 uses). Redeclaring DM Sans/DM Mono here
@@ -4934,7 +4934,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  tokens/spacing.css
  ============================================================ */
 
-/* AUSTIN_SPACE — Spacing & layout tokens
+/* AUSTIN_SPACE - Spacing & layout tokens
  Base unit is 4px. Generous, chunky rhythm to match the bold outlines. */
 :root {
  --space-0: 0;
@@ -4967,11 +4967,11 @@ a.cky-banner-element.as-cookie__btn:hover {
  tokens/effects.css
  ============================================================ */
 
-/* AUSTIN_SPACE — Effects: borders, radii, shadows, motion
+/* AUSTIN_SPACE - Effects: borders, radii, shadows, motion
  Two shadow systems: soft --shadow-* for floating overlays, and hard offset
  --pop-* (ink, no blur) for the chunky button/card treatment that echoes the
  illustration's heavy black linework and collapses on press.
- --radius-sm/md/lg are deliberately NOT redeclared here — see scope note at the
+ --radius-sm/md/lg are deliberately NOT redeclared here - see scope note at the
  top of this section. They're set only inside the .as-allsorts override block
  below; --radius-xl and --radius-pill are new names, safe globally. */
 :root {
@@ -5042,9 +5042,9 @@ a.cky-banner-element.as-cookie__btn:hover {
  tokens/textures.css
  ============================================================ */
 
-/* AUSTIN_SPACE — Textured surfaces (liquorice-allsorts)
+/* AUSTIN_SPACE - Textured surfaces (liquorice-allsorts)
  Nonpareil speckle (hundreds & thousands), the layered "sandwich", and sugar-matte
- fondant. Utility classes — pair with a `--bw` ink border + `--pop-*` offset shadow
+ fondant. Utility classes - pair with a `--bw` ink border + `--pop-*` offset shadow
  for the chunky candy treatment. Colours come from the candy tokens in colors.css. */
 
 /* --- Nonpareil speckle: multi-colour beads over a candy base --- */
@@ -5072,13 +5072,13 @@ a.cky-banner-element.as-cookie__btn:hover {
 /* Legibility helper: white label text over a speckle/candy surface */
 .on-speckle { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
 
-/* === ALLSORTS COMPONENTS — contact page — added 2026-07-09 === */
+/* === ALLSORTS COMPONENTS - contact page - added 2026-07-09 === */
 
 /* Eyebrow / mono label (shared: hero, form, FAQ) */
 .as-allsorts .as-eyebrow__dot { width: 10px; height: 10px; background: var(--candy-pink); }
 .as-allsorts .as-label { color: var(--bead-blue); font-weight: 500; font-size: 12.5px; letter-spacing: var(--ls-label); }
 
-/* Breadcrumb — explicit remap off legacy --as-mid/--as-black so it doesn't
+/* Breadcrumb - explicit remap off legacy --as-mid/--as-black so it doesn't
  just inherit whatever DM Mono + stale colour tokens happen to cascade to */
 .as-allsorts .as-breadcrumb__item,
 .as-allsorts .as-breadcrumb__item a { color: var(--grey-400); }
@@ -5176,7 +5176,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 /* Form "expects" pink-check list */
 .as-allsorts .as-contact-form__expect i { color: var(--candy-pink); }
 
-/* Form field focus — ring, not just border colour */
+/* Form field focus - ring, not just border colour */
 .as-allsorts .as-cf-field input:focus,
 .as-allsorts .as-cf-field select:focus,
 .as-allsorts .as-cf-field textarea:focus {
@@ -5186,7 +5186,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  background: #fff;
 }
 
-/* Submit button — chunky pop, ink (end of the journey, not an invitation -
+/* Submit button - chunky pop, ink (end of the journey, not an invitation -
    pink would compete with "Get in touch"). Background stays ink-900 on
    hover, matching the no-colour-change-on-hover pattern every other button
    in this file uses; only shadow+transform move. */
@@ -5222,7 +5222,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 /* FAQ marker */
 .as-allsorts .as-faq__question::after { color: var(--candy-pink); font-weight: 400; }
 
-/* === ALLSORTS CONTAINER TREATMENT — contact page — added 2026-07-09 ===
+/* === ALLSORTS CONTAINER TREATMENT - contact page - added 2026-07-09 ===
  Outer containers get chunky ink border + pop-shadow; inner row/item
  dividers stay hairline (remapped off legacy --as-border to --grey-200). */
 .as-allsorts .as-row-list,
@@ -5238,7 +5238,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  border-bottom-color: var(--grey-200);
 }
 
-/* === ALLSORTS SECTION BACKGROUNDS — contact page — added 2026-07-09 ===
+/* === ALLSORTS SECTION BACKGROUNDS - contact page - added 2026-07-09 ===
  Phase 1 white-out (2026-07-12): both .as-contact-form and .as-faq now go
  to white at the base rule directly - these overrides were fighting a
  --coconut / --as-off-white base that no longer exists, so removed. */
@@ -5257,7 +5257,7 @@ a.cky-banner-element.as-cookie__btn:hover {
   }
 }
 
-/* === ALLSORTS DISPLAY HEADINGS — full-weight render, reference line-height ===
+/* === ALLSORTS DISPLAY HEADINGS - full-weight render, reference line-height ===
    .as-cf-success h3 added here (was missing before the Fraunces pass - it
    sets font-family: var(--font-display) too, css:cf-success h3 base rule,
    so it needs the same line-height/smoothing fix as the other three). */
@@ -5383,10 +5383,10 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-allsorts .as-contact-bar__col:nth-child(3) i { color: var(--tangerine); }
 .as-allsorts .as-contact-bar__col:nth-child(4) i { color: var(--sunshine); }
 
-/* === ALLSORTS COMPONENTS — about page — added 2026-07-09 === */
+/* === ALLSORTS COMPONENTS - about page - added 2026-07-09 === */
 
 /* Display headings: Fraunces 900, tight line-height, full-weight render.
- .as-about-solo__headline is white-on-black — smoothing/line-height/weight
+ .as-about-solo__headline is white-on-black - smoothing/line-height/weight
  fixed, colour left untouched (would vanish on black otherwise). */
 .as-allsorts .as-about-hero__headline,
 .as-allsorts .as-about-section-headline {
@@ -5501,7 +5501,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  --fa-secondary-color: #f8c4a0;
  color: #f07d2e;
 }
-/* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
+/* Duotone sunshine, always on white - SHAPE darkened per the .as-icon--sunshine exception above. */
 .as-allsorts .as-about-work__grid .as-about-work__card:nth-child(4) .as-about-work__card-icon i {
  --fa-primary-color: #d69d1c;
  --fa-secondary-color: #fae9a6;
@@ -5510,7 +5510,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 /* Container treatment: light cards get ink border + pop-shadow + radius-lg;
  dark/solid card gets shadow+radius only (border would be invisible on black);
- .as-row-list--dark is excluded — already dark-safe translucent border, an
+ .as-row-list--dark is excluded - already dark-safe translucent border, an
  ink border or pop-shadow would be as invisible there as on a solid black box */
 .as-allsorts .as-about-background__right,
 .as-allsorts .as-about-work__card {
@@ -6604,7 +6604,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e;
 }
-/* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
+/* Duotone sunshine, always on white - SHAPE darkened per the .as-icon--sunshine exception above. */
 .as-allsorts .as-svc-hero__meta-item:nth-child(4) i {
   --fa-primary-color: #d69d1c;
   --fa-secondary-color: #fae9a6;
@@ -6714,7 +6714,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e;
 }
-/* Duotone sunshine, always on white — SHAPE darkened per the .as-icon--sunshine exception above. */
+/* Duotone sunshine, always on white - SHAPE darkened per the .as-icon--sunshine exception above. */
 .as-allsorts .as-svc-included__item:nth-child(4) .as-svc-included__item-icon i,
 .as-allsorts .as-svc-included__item:nth-child(8) .as-svc-included__item-icon i {
   --fa-primary-color: #d69d1c;
