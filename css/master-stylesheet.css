@@ -7446,19 +7446,19 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   transform: rotate(-5deg) translateY(28px);
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper.
+/* Terracotta case study only, scoped to .as-cs-v2 wrapper.
    "View live site" promoted to a button; the shared .as-cs-hero__link rule
    already sets align-self: flex-start, but this pins it explicitly for the
    button treatment on this page since DDR/AUSTIN_SPACE keep the plain link. */
-.as-allsorts .as-cs-terracotta .as-cs-hero__link {
+.as-allsorts .as-cs-v2 .as-cs-hero__link {
   align-self: flex-start;
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper.
+/* Terracotta case study only, scoped to .as-cs-v2 wrapper.
    Both hero frames now show the same home page image and merge where they
    overlap, so the pair is resized and repositioned for clearer separation
    rather than left at the shared 88%/34% arrangement. */
-.as-allsorts .as-cs-terracotta .as-cs-hero__media-desktop {
+.as-allsorts .as-cs-v2 .as-cs-hero__media-desktop {
   width: 92%;
 }
 
@@ -7467,7 +7467,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    that and the original hero shadow (0 8px 24px rgba(0,0,0,.16)) because the two
    hero frames are now near-identical images and need more separation than the
    original provided. Desktop frame keeps its original light shadow untouched. */
-.as-allsorts .as-cs-terracotta .as-cs-hero__media-phone {
+.as-allsorts .as-cs-v2 .as-cs-hero__media-phone {
   width: 28%;
   right: -2%;
   bottom: -18px;
@@ -7475,9 +7475,9 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper.
+/* Terracotta case study only, scoped to .as-cs-v2 wrapper.
    Stat bar header, matching the as-creds "By the Numbers" pattern */
-.as-allsorts .as-cs-terracotta .as-cs-stats__header {
+.as-allsorts .as-cs-v2 .as-cs-stats__header {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -7486,14 +7486,14 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 /* as-cs-section-headline defaults to --ink-900 for light sections;
    override to white here so it is legible on the dark as-cs-stats band */
-.as-allsorts .as-cs-terracotta .as-cs-stats__header .as-cs-section-headline {
+.as-allsorts .as-cs-v2 .as-cs-stats__header .as-cs-section-headline {
   color: #fff;
 }
 
 /* Deliberately diverges from as-creds__number (Fraunces 800): lighter,
    smaller and tighter-tracked for legibility, rhymes with the Fraunces 400
    used on the solution step titles and FAQ questions on this page. */
-.as-allsorts .as-cs-terracotta .as-cs-stats__number {
+.as-allsorts .as-cs-v2 .as-cs-stats__number {
   font-weight: 400;
   font-size: 36px;
   letter-spacing: normal;
@@ -7501,7 +7501,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 /* Two-line label: bold block headline + grey supporting sentence,
    mirroring as-creds__text / as-creds__text strong exactly */
-.as-allsorts .as-cs-terracotta .as-cs-stats__label {
+.as-allsorts .as-cs-v2 .as-cs-stats__label {
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 400;
@@ -7510,7 +7510,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   letter-spacing: 0.01em;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-stats__label strong {
+.as-allsorts .as-cs-v2 .as-cs-stats__label strong {
   display: block;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
@@ -7518,18 +7518,18 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin-bottom: 0.15rem;
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper.
+/* Terracotta case study only, scoped to .as-cs-v2 wrapper.
    Solution section: numbered vertical spine, replaces the alternating as-cs-phase rows */
-.as-allsorts .as-cs-terracotta .as-cs-solution__spine {
+.as-allsorts .as-cs-v2 .as-cs-solution__spine {
   position: relative;
   padding-left: 96px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-solution__step {
+.as-allsorts .as-cs-v2 .as-cs-solution__step {
   position: relative;
   padding-bottom: 44px;
 }
-.as-allsorts .as-cs-terracotta .as-cs-solution__step::before {
+.as-allsorts .as-cs-v2 .as-cs-solution__step::before {
   content: '';
   position: absolute;
   left: -34px;
@@ -7538,35 +7538,35 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   width: 2px;
   background: rgba(255, 255, 255, 0.20);
 }
-.as-allsorts .as-cs-terracotta .as-cs-solution__step:last-child {
+.as-allsorts .as-cs-v2 .as-cs-solution__step:last-child {
   padding-bottom: 0;
 }
-.as-allsorts .as-cs-terracotta .as-cs-solution__step:last-child::before {
+.as-allsorts .as-cs-v2 .as-cs-solution__step:last-child::before {
   bottom: 0;
 }
-.as-allsorts .as-cs-terracotta .as-cs-solution__step:nth-child(even) {
+.as-allsorts .as-cs-v2 .as-cs-solution__step:nth-child(even) {
   margin-left: 200px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-solution__marker {
+.as-allsorts .as-cs-v2 .as-cs-solution__marker {
   position: absolute;
   left: -96px;
   top: -6px;
   width: 56px;
 }
-.as-allsorts .as-cs-terracotta .as-cs-solution__marker i {
+.as-allsorts .as-cs-v2 .as-cs-solution__marker i {
   display: block;
   font-size: 56px;
   text-align: left;
   line-height: 1;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-solution__step:nth-child(1) .as-cs-solution__marker i { color: var(--candy-pink-lt); }
-.as-allsorts .as-cs-terracotta .as-cs-solution__step:nth-child(2) .as-cs-solution__marker i { color: var(--bead-blue-lt); }
-.as-allsorts .as-cs-terracotta .as-cs-solution__step:nth-child(3) .as-cs-solution__marker i { color: var(--tangerine); }
-.as-allsorts .as-cs-terracotta .as-cs-solution__step:nth-child(4) .as-cs-solution__marker i { color: var(--sunshine); }
+.as-allsorts .as-cs-v2 .as-cs-solution__step:nth-child(1) .as-cs-solution__marker i { color: var(--candy-pink-lt); }
+.as-allsorts .as-cs-v2 .as-cs-solution__step:nth-child(2) .as-cs-solution__marker i { color: var(--bead-blue-lt); }
+.as-allsorts .as-cs-v2 .as-cs-solution__step:nth-child(3) .as-cs-solution__marker i { color: var(--tangerine); }
+.as-allsorts .as-cs-v2 .as-cs-solution__step:nth-child(4) .as-cs-solution__marker i { color: var(--sunshine); }
 
-.as-allsorts .as-cs-terracotta .as-cs-solution__step-title {
+.as-allsorts .as-cs-v2 .as-cs-solution__step-title {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 23px;
@@ -7576,7 +7576,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 10px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-solution__step-lead {
+.as-allsorts .as-cs-v2 .as-cs-solution__step-lead {
   font-family: var(--font-body);
   font-size: 15.5px;
   line-height: 1.6;
@@ -7585,7 +7585,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   max-width: 760px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-solution__step-list {
+.as-allsorts .as-cs-v2 .as-cs-solution__step-list {
   list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -7595,7 +7595,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   padding: 0;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-solution__step-list li {
+.as-allsorts .as-cs-v2 .as-cs-solution__step-list li {
   position: relative;
   font-family: var(--font-body);
   font-size: 14.5px;
@@ -7603,7 +7603,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: rgba(255, 255, 255, 0.5);
   padding-left: 18px;
 }
-.as-allsorts .as-cs-terracotta .as-cs-solution__step-list li::before {
+.as-allsorts .as-cs-v2 .as-cs-solution__step-list li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -7613,7 +7613,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   background: rgba(255, 255, 255, 0.35);
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-solution__step-note {
+.as-allsorts .as-cs-v2 .as-cs-solution__step-note {
   font-style: italic;
   font-family: var(--font-body);
   font-size: 14.5px;
@@ -7624,35 +7624,35 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 
 @media (max-width: 767px) {
-  .as-allsorts .as-cs-terracotta .as-cs-solution__spine {
+  .as-allsorts .as-cs-v2 .as-cs-solution__spine {
     padding-left: 52px;
   }
-  .as-allsorts .as-cs-terracotta .as-cs-solution__step::before {
+  .as-allsorts .as-cs-v2 .as-cs-solution__step::before {
     left: -37px;
   }
-  .as-allsorts .as-cs-terracotta .as-cs-solution__step:nth-child(even) {
+  .as-allsorts .as-cs-v2 .as-cs-solution__step:nth-child(even) {
     margin-left: 0;
   }
-  .as-allsorts .as-cs-terracotta .as-cs-solution__marker {
+  .as-allsorts .as-cs-v2 .as-cs-solution__marker {
     left: -52px;
     width: 32px;
   }
-  .as-allsorts .as-cs-terracotta .as-cs-solution__marker i {
+  .as-allsorts .as-cs-v2 .as-cs-solution__marker i {
     font-size: 32px;
   }
-  .as-allsorts .as-cs-terracotta .as-cs-solution__step-list {
+  .as-allsorts .as-cs-v2 .as-cs-solution__step-list {
     grid-template-columns: 1fr;
   }
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper.
+/* Terracotta case study only, scoped to .as-cs-v2 wrapper.
    Results section: own white band, sits between as-cs-solution and as-cs-beforeafter */
-.as-allsorts .as-cs-terracotta .as-cs-results {
+.as-allsorts .as-cs-v2 .as-cs-results {
   background: var(--as-white);
   padding: var(--as-space-section) var(--as-space-section-side);
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__eyebrow {
+.as-allsorts .as-cs-v2 .as-cs-results__eyebrow {
   font-family: var(--font-mono);
   font-size: 12.5px;
   font-weight: 500;
@@ -7662,7 +7662,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 12px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__title {
+.as-allsorts .as-cs-v2 .as-cs-results__title {
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 32px;
@@ -7671,7 +7671,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 18px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__intro {
+.as-allsorts .as-cs-v2 .as-cs-results__intro {
   font-family: var(--font-body);
   font-size: 16.5px;
   line-height: 1.6;
@@ -7680,14 +7680,14 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 40px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__stats {
+.as-allsorts .as-cs-v2 .as-cs-results__stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   margin: 0 0 16px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__stat {
+.as-allsorts .as-cs-v2 .as-cs-results__stat {
   background: var(--white);
   border: var(--bw) solid var(--ink-900);
   border-radius: var(--radius-lg);
@@ -7700,44 +7700,44 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   transition: box-shadow var(--transition), transform var(--transition);
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__stat .as-topper {
+.as-allsorts .as-cs-v2 .as-cs-results__stat .as-topper {
   margin: -2.2rem -2.2rem 16px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__stat-icon {
+.as-allsorts .as-cs-v2 .as-cs-results__stat-icon {
   display: flex;
   justify-content: flex-start;
   align-self: flex-start;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__stat-icon i {
+.as-allsorts .as-cs-v2 .as-cs-results__stat-icon i {
   font-size: 52px;
   line-height: 1;
   --fa-secondary-opacity: 1;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__stat:nth-child(1) .as-cs-results__stat-icon i {
+.as-allsorts .as-cs-v2 .as-cs-results__stat:nth-child(1) .as-cs-results__stat-icon i {
   --fa-primary-color: #ec4d97;
   --fa-secondary-color: #f6aed0;
   color: #ec4d97;
 }
-.as-allsorts .as-cs-terracotta .as-cs-results__stat:nth-child(2) .as-cs-results__stat-icon i {
+.as-allsorts .as-cs-v2 .as-cs-results__stat:nth-child(2) .as-cs-results__stat-icon i {
   --fa-primary-color: #4f7cc9;
   --fa-secondary-color: #afc4e6;
   color: #4f7cc9;
 }
-.as-allsorts .as-cs-terracotta .as-cs-results__stat:nth-child(3) .as-cs-results__stat-icon i {
+.as-allsorts .as-cs-v2 .as-cs-results__stat:nth-child(3) .as-cs-results__stat-icon i {
   --fa-primary-color: #f07d2e;
   --fa-secondary-color: #f8c4a0;
   color: #f07d2e;
 }
-.as-allsorts .as-cs-terracotta .as-cs-results__stat:nth-child(4) .as-cs-results__stat-icon i {
+.as-allsorts .as-cs-v2 .as-cs-results__stat:nth-child(4) .as-cs-results__stat-icon i {
   --fa-primary-color: #d69d1c;
   --fa-secondary-color: #fae9a6;
   color: #d69d1c;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__stat-number {
+.as-allsorts .as-cs-v2 .as-cs-results__stat-number {
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 34px;
@@ -7746,7 +7746,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__stat-label {
+.as-allsorts .as-cs-v2 .as-cs-results__stat-label {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 15px;
@@ -7754,7 +7754,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__stat-desc {
+.as-allsorts .as-cs-v2 .as-cs-results__stat-desc {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 15px;
@@ -7763,7 +7763,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__source {
+.as-allsorts .as-cs-v2 .as-cs-results__source {
   font-family: var(--font-mono);
   font-size: 12px;
   font-style: italic;
@@ -7771,7 +7771,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 48px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__prose h4 {
+.as-allsorts .as-cs-v2 .as-cs-results__prose h4 {
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 19px;
@@ -7779,7 +7779,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 12px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__prose p {
+.as-allsorts .as-cs-v2 .as-cs-results__prose p {
   font-family: var(--font-body);
   font-size: 14.5px;
   line-height: 1.6;
@@ -7787,15 +7787,15 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 14px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__prose p:last-child {
+.as-allsorts .as-cs-v2 .as-cs-results__prose p:last-child {
   margin-bottom: 0;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__prose + .as-cs-results__prose {
+.as-allsorts .as-cs-v2 .as-cs-results__prose + .as-cs-results__prose {
   margin-top: 32px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-results__prose p.as-cs-results__source {
+.as-allsorts .as-cs-v2 .as-cs-results__prose p.as-cs-results__source {
   font-family: var(--font-mono);
   font-size: 12px;
   font-style: italic;
@@ -7804,19 +7804,19 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 
 @media (max-width: 767px) {
-  .as-allsorts .as-cs-terracotta .as-cs-results__stats {
+  .as-allsorts .as-cs-v2 .as-cs-results__stats {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper.
+/* Terracotta case study only, scoped to .as-cs-v2 wrapper.
    Selected-pages tabbed gallery, sits between as-cs-results and as-cs-testimonial */
-.as-allsorts .as-cs-terracotta .as-cs-gallery {
+.as-allsorts .as-cs-v2 .as-cs-gallery {
   background: var(--as-white);
   padding: var(--as-space-section) var(--as-space-section-side);
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__intro {
+.as-allsorts .as-cs-v2 .as-cs-gallery__intro {
   font-family: var(--font-body);
   font-size: 17px;
   line-height: 1.6;
@@ -7825,20 +7825,20 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 48px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__intro a {
+.as-allsorts .as-cs-v2 .as-cs-gallery__intro a {
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__tabs {
+.as-allsorts .as-cs-v2 .as-cs-gallery__tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
   border-bottom: 1px solid var(--as-border);
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__tab {
+.as-allsorts .as-cs-v2 .as-cs-gallery__tab {
   position: relative;
   font-family: var(--font-mono);
   font-size: 12.5px;
@@ -7853,15 +7853,15 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   transition: color 0.2s ease;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__tab:hover {
+.as-allsorts .as-cs-v2 .as-cs-gallery__tab:hover {
   color: var(--ink-900);
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__tab[aria-selected="true"] {
+.as-allsorts .as-cs-v2 .as-cs-gallery__tab[aria-selected="true"] {
   color: var(--ink-900);
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__tab[aria-selected="true"]::after {
+.as-allsorts .as-cs-v2 .as-cs-gallery__tab[aria-selected="true"]::after {
   content: '';
   position: absolute;
   left: 0;
@@ -7871,7 +7871,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   background: var(--candy-pink);
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__stage {
+.as-allsorts .as-cs-v2 .as-cs-gallery__stage {
   margin-top: 32px;
   border-radius: 16px;
   overflow: hidden;
@@ -7880,15 +7880,15 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   background: #f4f4f4;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__panel {
+.as-allsorts .as-cs-v2 .as-cs-gallery__panel {
   display: none;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__panel:not([hidden]) {
+.as-allsorts .as-cs-v2 .as-cs-gallery__panel:not([hidden]) {
   display: block;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__img {
+.as-allsorts .as-cs-v2 .as-cs-gallery__img {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -7896,7 +7896,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   object-position: top center;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-gallery__cap {
+.as-allsorts .as-cs-v2 .as-cs-gallery__cap {
   font-family: var(--font-mono);
   font-size: 12.5px;
   letter-spacing: 1px;
@@ -7906,30 +7906,30 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 
 @media (max-width: 640px) {
-  .as-allsorts .as-cs-terracotta .as-cs-gallery {
+  .as-allsorts .as-cs-v2 .as-cs-gallery {
     padding-top: 4rem;
     padding-bottom: 4rem;
   }
-  .as-allsorts .as-cs-terracotta .as-cs-gallery .as-cs-section-headline {
+  .as-allsorts .as-cs-v2 .as-cs-gallery .as-cs-section-headline {
     font-size: 32px;
   }
-  .as-allsorts .as-cs-terracotta .as-cs-gallery__tab {
+  .as-allsorts .as-cs-v2 .as-cs-gallery__tab {
     padding: 10px 12px;
     letter-spacing: 1px;
   }
 }
 
-/* Terracotta case study only, scoped to .as-cs-terracotta wrapper.
+/* Terracotta case study only, scoped to .as-cs-v2 wrapper.
    Testimonial quote in DM Serif Display instead of the sitewide Fraunces default.
    B1 editorial redesign: header + two-column grid, replaces the centered card */
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__inner {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__inner {
   max-width: 1160px;
   display: block;
   text-align: left;
   gap: 0;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__header {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__header {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -7938,11 +7938,11 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 /* as-cs-section-headline defaults to --ink-900 for light sections;
    override to white here so it is legible on the dark testimonial band */
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__header .as-cs-section-headline {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__header .as-cs-section-headline {
   color: #fff;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__grid {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__grid {
   display: grid;
   grid-template-columns: 1fr 280px;
   gap: 72px;
@@ -7950,7 +7950,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 
 /* Opening Press quote mark: block, sits above the quote */
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__mark-open {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__mark-open {
   display: block;
   font-size: 52px;
   line-height: 0.6;
@@ -7958,7 +7958,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin: 0 0 18px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__quote {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__quote {
   font-family: "DM Serif Display", Georgia, "Times New Roman", serif;
   font-style: italic;
   font-weight: 400;
@@ -7975,7 +7975,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    scaleX and translateY act on independent axes so they commute here;
    order does not change the result. translateY(8px) baseline nudge is
    a starting estimate only, still needs live visual check. */
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__mark-close {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__mark-close {
   display: inline-block;
   font-size: 32px;
   color: var(--bead-blue-lt);
@@ -7983,7 +7983,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   transform: scaleX(-1) translateY(8px);
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__side {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__side {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -7993,14 +7993,14 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   padding-left: 26px;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__side .as-cs-testimonial__name {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__side .as-cs-testimonial__name {
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 600;
   color: #fff;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__side .as-cs-testimonial__role {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__side .as-cs-testimonial__role {
   font-family: var(--font-mono);
   font-size: 12.5px;
   font-weight: 400;
@@ -8010,17 +8010,17 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   line-height: 1.5;
 }
 
-.as-allsorts .as-cs-terracotta .as-cs-testimonial__side .as-casestudy__quote-source {
+.as-allsorts .as-cs-v2 .as-cs-testimonial__side .as-casestudy__quote-source {
   margin-left: 0;
   margin-top: 10px;
 }
 
 @media (max-width: 767px) {
-  .as-allsorts .as-cs-terracotta .as-cs-testimonial__grid {
+  .as-allsorts .as-cs-v2 .as-cs-testimonial__grid {
     grid-template-columns: 1fr;
     gap: 32px;
   }
-  .as-allsorts .as-cs-terracotta .as-cs-testimonial__side {
+  .as-allsorts .as-cs-v2 .as-cs-testimonial__side {
     border-left: 0;
     padding-left: 0;
     border-top: 2px solid var(--candy-pink);
