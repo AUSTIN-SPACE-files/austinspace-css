@@ -202,10 +202,6 @@
  flex-shrink: 0;
 }
 
-.as-row-item__icon i {
- font-size: 2rem;
-}
-
 .as-row-item:last-child {
  border-bottom: none;
 }
@@ -411,7 +407,6 @@
 }
 
 .as-allsorts .as-hero-combined__trust-stars i {
-  font-size: 20px;
   line-height: 1;
   --fa-primary-color: #d69d1c;
   --fa-secondary-color: #fae9a6;
@@ -761,7 +756,6 @@
 
 .as-services__card-features li i {
  color: var(--as-purple);
- font-size: 0.75rem;
  margin-top: 0.2rem;
  flex-shrink: 0;
 }
@@ -790,10 +784,6 @@
 .as-services__card:hover .as-services__card-link {
  color: var(--as-purple);
  gap: 0.8rem;
-}
-
-.as-services__card-link i {
- font-size: 0.8rem;
 }
 
 @media (max-width: 960px) {
@@ -2102,6 +2092,10 @@
  display: flex;
  gap: 1rem;
  flex-wrap: wrap;
+}
+
+.as-allsorts .as-cs-page-cta .as-eyebrow {
+  justify-content: center;
 }
 
 @media (max-width: 960px) {
@@ -4702,9 +4696,9 @@ a.cky-banner-element.as-cookie__btn:hover {
  border: 0;
  border-radius: 0;
  box-shadow: none;
+ font-size: 1rem;
 }
 .as-allsorts .as-row-item__icon i {
- font-size: 39px;
  line-height: 1;
  --fa-secondary-opacity: 1;
 }
@@ -5433,7 +5427,8 @@ a.cky-banner-element.as-cookie__btn:hover {
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
-  font-size: 52px;
+
+  font-size: 1rem !important;
   color: inherit;
   justify-content: flex-start !important;
   align-items: center !important;
@@ -5445,7 +5440,6 @@ a.cky-banner-element.as-cookie__btn:hover {
   background: transparent !important;
 }
 .as-allsorts .as-services__card-icon i {
-  font-size: 52px;
   line-height: 1;
   --fa-secondary-opacity: 1;
 }
@@ -6475,28 +6469,23 @@ a.cky-banner-element.as-cookie__btn:hover {
   padding: var(--as-space-section) var(--as-space-section-side);
 }
 
-.as-allsorts .as-cs-v2 .as-cs-results__eyebrow {
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  font-weight: 500;
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
-  color: var(--bead-blue);
-  margin: 0 0 12px;
+.as-allsorts .as-cs-v2 .as-cs-results__inner > .as-eyebrow,
+.as-allsorts .as-cs-v2 .as-cs-gallery__inner > .as-eyebrow {
+  margin-bottom: 16px;
 }
 
 .as-allsorts .as-cs-v2 .as-cs-results__title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 32px;
-  line-height: 1.15;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.05;
   color: var(--ink-900);
   margin: 0 0 18px;
 }
 
 .as-allsorts .as-cs-v2 .as-cs-results__intro {
   font-family: var(--font-body);
-  font-size: 16.5px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--grey-500);
   max-width: 640px;
@@ -6561,9 +6550,10 @@ a.cky-banner-element.as-cookie__btn:hover {
 }
 
 .as-allsorts .as-cs-v2 .as-cs-results__stat-number {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 34px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.05;
   letter-spacing: -0.01em;
   color: var(--ink-900);
   margin: 0;
@@ -6571,7 +6561,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 .as-allsorts .as-cs-v2 .as-cs-results__stat-label {
   font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 400;
   font-size: 15px;
   color: var(--ink-900);
   margin: 0;
@@ -6594,17 +6584,22 @@ a.cky-banner-element.as-cookie__btn:hover {
   margin: 0 0 48px;
 }
 
-.as-allsorts .as-cs-v2 .as-cs-results__prose h4 {
+.as-allsorts .as-cs-v2 .as-cs-results__finding-title {
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 19px;
+  line-height: 22.71px;
   color: var(--ink-900);
   margin: 0 0 12px;
 }
 
+.as-allsorts .as-cs-v2 .as-cs-results__prose {
+  max-width: 640px;
+}
+
 .as-allsorts .as-cs-v2 .as-cs-results__prose p {
   font-family: var(--font-body);
-  font-size: 14.5px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--grey-500);
   margin: 0 0 14px;
@@ -7233,7 +7228,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 }
 
 .as-allsorts .as-pos-card__icon {
-  font-size: 36px;
   line-height: 1;
   --fa-secondary-opacity: 1;
 }
@@ -7440,4 +7434,4 @@ a.cky-banner-element.as-cookie__btn:hover {
   }
 
 }
-.as-build-canary{--as-build-id:"20260723-aae272"}
+.as-build-canary{--as-build-id:"20260725-2fbaec"}

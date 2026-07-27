@@ -30,42 +30,50 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Why did you build your own site on Squarespace?",
+          "name": "Why build your own site on Squarespace?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Because it's the platform I specialise in, and the site needed to be a genuine demonstration of what Squarespace is capable of in the right hands, not a showcase built on a different stack. Every technique applied to client projects is applied here first."
+            "text": "Because it is the platform I specialise in, and a showcase built on a different stack would prove nothing. If I am going to tell you what Squarespace can do in the right hands, the honest way to demonstrate it is to be standing on it."
           }
         },
         {
           "@type": "Question",
-          "name": "How long did the AUSTIN_SPACE site take to build?",
+          "name": "What makes this different from a standard Squarespace build?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The visual direction came together early, but the site went through multiple iterations before reaching a point worth publishing. Client work takes priority, and the honest answer is that building your own site as a solo operator is one of the harder projects to find time for."
+            "text": "Almost everything you can see is custom HTML and CSS rather than template layouts or native content blocks. The one exception is the contact form, which is a native Squarespace section, and I would rather tell you that than round it down to zero. The design system, the component library, the analytics, the structured data and the performance work were all built from scratch inside the platform's constraints. You do not have to take my word for any of it. Open the inspector."
           }
         },
         {
           "@type": "Question",
-          "name": "What makes this site technically different from a standard Squarespace build?",
+          "name": "You are a web designer. Does your own site rank?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Everything visible is built with custom HTML and CSS. No native Squarespace content blocks. The design system, the component library, the forms, the analytics tracking, the structured data, the performance optimisation, all built from scratch within Squarespace. It incorporates everything learned across two years of intensive work on Terracotta Property."
+            "text": "Not yet, and I would rather tell you why than dress it up. The site is young, it has very few external links pointing at it, and Google allocates crawl attention according to how established a domain looks. Some of my own service pages have been found by Google and not yet fetched, which is normal for a new site and is fixed with links and time rather than with more keywords. Anyone selling you rankings on a brand new domain is selling you a timeline they do not control."
           }
         },
         {
           "@type": "Question",
-          "name": "How was AI involved in the AUSTIN_SPACE build?",
+          "name": "How was AI involved in this build?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Claude AI was used as a collaborative tool throughout the Squarespace build, working through CSS architecture decisions, drafting and refining copy, generating schema markup, and building out the FAQ content across every page. It's a working example of how AI can accelerate a professional build without replacing the expertise behind it."
+            "text": "Heavily, and openly. AI was used throughout for working through CSS architecture decisions, drafting and refining copy, generating schema markup, and interrogating my own assumptions before they shipped. It does not replace knowing what good looks like, but it is a tireless second opinion, and pretending otherwise would be dishonest about how the work actually gets done."
           }
         },
         {
           "@type": "Question",
-          "name": "Is this site a fair representation of what a client project looks like?",
+          "name": "How long did this site take?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. And in some ways it's a higher bar. Every client project is built with the same rigour, but this site also had to demonstrate that rigour publicly. It's the most complete example of the full service offering in one place."
+            "text": "Longer than it should have, because client work comes first and always will. The visual direction came together early and then went through several iterations before it was worth publishing. If you are wondering whether your project would get the same treatment, it would get better: yours has a deadline and mine does not."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you do the same for my site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Send me your URL and I will take a look. The first review is free. You will get an honest assessment of where things stand, what I would fix first, and whether the work is worth doing at all. No obligation."
           }
         }
       ]
