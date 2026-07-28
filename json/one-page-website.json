@@ -28,7 +28,7 @@
     {
       "@type": "Service",
       "name": "One-Page Website Design",
-      "description": "A single, properly built web page for sole traders and local trades. Covers a local-search check, one-page design, mobile-first build, a working contact form, and hosting and domain setup. Live in about a week. £300 one-off, then £49.99 a year for hosting, domain, and small changes. Built and looked after by one person.",
+      "description": "A single, properly built page for a business that needs to exist online: what you do, where you are, and how to get in touch, in one place. Built on Squarespace Basic and live within one week. £500, one-off, with no monthly fee to AUSTIN_SPACE. The Squarespace subscription is in the client's own name, paid direct at £12 a month. The full £500 is credited toward a Custom Build if upgraded within 18 months.",
       "provider": {
         "@type": "LocalBusiness",
         "name": "AUSTIN_SPACE",
@@ -38,7 +38,7 @@
       "offers": {
         "@type": "Offer",
         "priceCurrency": "GBP",
-        "price": "300"
+        "price": "500"
       }
     },
     {
@@ -46,50 +46,58 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Do I have to update it myself?",
+          "name": "What if I need more than one page later?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. You never touch it. Tell me what's changed and I'll change it."
+            "text": "The full £500 comes off a Custom Build if you upgrade within 18 months. Nothing gets thrown away either: moving from Basic to Core is a plan change on the same site, not a rebuild, so your domain, content and form all carry across and the page you started with becomes the homepage."
           }
         },
         {
           "@type": "Question",
-          "name": "What if I don't have a logo?",
+          "name": "Do I actually own it?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Fine. The page makes your name look good on its own. Most clients start without one."
+            "text": "Yes. The Squarespace subscription is in your name and paid by you from the day it goes live. If you ever want to take it elsewhere, or hand it to someone else, you can. Nothing is held hostage."
           }
         },
         {
           "@type": "Question",
-          "name": "Will people actually find me?",
+          "name": "Who buys the domain?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Every build includes a check of the terms local customers search for, built into the page and the behind-the-scenes detail Google and AI assistants read. It's the best possible start."
+            "text": "You do, and it stays in your name. If you do not have one yet, the simplest route is taking it through Squarespace while the site is being set up, which means it is free for the first year and sits on the same account as everything else. One renewal date, one place to look. If you already own a domain, I will point it at the new site instead. Either way the wiring is my job and it is included."
           }
         },
         {
           "@type": "Question",
-          "name": "Is one page really enough?",
+          "name": "What if I need something changed?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "For most local businesses, yes, and often better. One fast page that answers the obvious questions beats five nobody reads."
+            "text": "Email or text me. Small changes are £45, which covers up to half an hour and is most things. Anything bigger gets a price before I start. There is no monthly fee and no contract."
           }
         },
         {
           "@type": "Question",
-          "name": "What does the £49.99 a year cover?",
+          "name": "Can I have a blog?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Your web address, hosting, security updates, and small changes within reason. Less than a fiver a month to keep the lights on and the page current."
+            "text": "Squarespace can turn one on, so yes if you want it. Honest answer though: a blog only helps if you actually post, and an abandoned one dated eighteen months ago does more harm than not having one at all. If you are serious about publishing regularly, that is usually the point where a Custom Build makes more sense."
           }
         },
         {
           "@type": "Question",
-          "name": "What if I outgrow it?",
+          "name": "Why Squarespace and not something cheaper?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Good. If you move up to a full bespoke site within two years, your whole £300 comes off the price. It's a stepping stone, not a dead end."
+            "text": "Because it stays up and stays current without anyone having to maintain it. No security updates to chase, no plugins to break, nothing that stops working because a version number moved. You pay Squarespace directly at £12 a month, and with my partner discount your first year is £129.60 with the domain included."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it really take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One week from the point your form comes back. The thing that slows it down is never the build, it is waiting on words and photographs."
           }
         }
       ]

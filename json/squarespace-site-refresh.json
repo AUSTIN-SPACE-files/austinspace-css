@@ -38,6 +38,7 @@
       "offers": {
         "@type": "Offer",
         "priceCurrency": "GBP",
+        "price": "1500",
         "priceSpecification": {
           "@type": "PriceSpecification",
           "minPrice": "800",

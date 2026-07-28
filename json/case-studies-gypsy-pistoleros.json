@@ -1,0 +1,83 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.austinspace.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Case Studies",
+          "item": "https://www.austinspace.co.uk/case-studies/view-all"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Gypsy Pistoleros",
+          "item": "https://www.austinspace.co.uk/case-studies/gypsy-pistoleros"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why didn't you just move them off Bandzoogle?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because two things on it were working and earning. Their show scheduling and their fan club subscriptions both run natively on the platform, and the fan base is already inside it. Moving platforms to fix a presentation problem would have meant rebuilding a functioning revenue system for no reason. The right call was to make the platform do more than it wanted to. A migration may make sense later, once there is a reason for it beyond design."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What was actually wrong with the old site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nothing was broken. It was untouched. Zero custom CSS, no analytics, the logo unused, every page on the template defaults, and the entire body of every page centre-aligned at one size. The homepage ran to 12,730 pixels. Content that had never been given a structure was doing all the work on its own."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "You mostly build on Squarespace. Why does this one look different?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the platform was already chosen and staying. Most of my work is Squarespace, but the underlying job is the same either way: work out what the platform will and will not do, then decide what is worth fighting it over. On this one that meant hosting the stylesheet externally and building an override layer, which is not how you would ever start from scratch, and is exactly right when you inherit something that works."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "The site went down after launch. What happened?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "My code, two days in. About half of every page stopped rendering. I found the cause, told the band the same morning before they had spotted it, and rolled the stylesheet back to the last known-good version. Back up within the hour. It is on this page because how a build fails matters more than whether it ever does."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the work finished?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Phase 1 is. Search, performance and analytics are Phase 2 and have not started, which is why there are no traffic or ranking numbers on this page. Anything claiming otherwise would be made up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you take on music and merch clients?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and it is where I started. Before AUSTIN_SPACE I spent close to a decade building and maintaining over 200 eCommerce stores for artists on Shopify and Shopify Plus, including launches that peaked above 30,000 concurrent users."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

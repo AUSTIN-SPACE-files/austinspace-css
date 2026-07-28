@@ -51,7 +51,7 @@
           "name": "Will there be more case studies added?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Each completed project gets documented properly. The aim is to build a body of work that covers different industries, services, and challenges so you can find something relevant to your situation."
+            "text": "Yes, each completed project gets documented properly. The aim is to build a body of work that covers different industries, services, and challenges so you can find something relevant to your situation."
           }
         },
         {
@@ -59,7 +59,7 @@
           "name": "Do you only work with certain industries?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. The case studies here cover chartered surveying, defence contracting, and web design consultancy, three very different sectors. The common thread is established UK SMEs that need their Squarespace website to work properly as a business tool. If that's you, the industry doesn't matter."
+            "text": "No. The case studies here cover chartered surveying, defence contracting, a touring band, and web design consultancy, four very different sectors. The common thread is established UK organisations that need their website working properly as a business tool. Most are on Squarespace. One is not, and that case study explains why."
           }
         }
       ]
