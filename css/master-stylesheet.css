@@ -4283,9 +4283,20 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--case-studies { aspect-ratio: 2880 / 300; }
 .as-hero--casestudies-hub-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--case-study-terracotta { aspect-ratio: 2880 / 300; }
+.as-hero--cs-terracotta-high-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
+.as-hero--cs-terracotta-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
+.as-hero--cs-terracotta-low-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--case-study-ddr { aspect-ratio: 2880 / 300; }
+.as-hero--cs-ddr-high-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
+.as-hero--cs-ddr-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
+.as-hero--cs-ddr-low-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--case-study-austin-space { aspect-ratio: 2880 / 300; }
+.as-hero--cs-austin-space-high-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
+.as-hero--cs-austin-space-low-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--case-study-gypsy-pistoleros { aspect-ratio: 2880 / 300; }
+.as-hero--cs-gypsy-pistoleros-high-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
+.as-hero--cs-gypsy-pistoleros-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
+.as-hero--cs-gypsy-pistoleros-low-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--policy-privacy { aspect-ratio: 2880 / 300; }
 .as-hero--policy-tos { aspect-ratio: 2880 / 300; }
 .as-hero--policy-cookies { aspect-ratio: 2880 / 300; }
@@ -4315,9 +4326,20 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--case-studies .as-hero__img { clip-path: url(#wave-clip-case-studies); object-position: center 75%; }
 .as-hero--casestudies-hub-mid .as-hero__img { clip-path: url(#wave-clip-casestudies-hub-mid); object-position: center 48%; }
 .as-hero--case-study-terracotta .as-hero__img { clip-path: url(#wave-clip-case-study-terracotta); object-position: center 22%; }
+.as-hero--cs-terracotta-high-mid .as-hero__img { clip-path: url(#wave-clip-cs-terracotta-high-mid); object-position: center 38%; }
+.as-hero--cs-terracotta-mid .as-hero__img { clip-path: url(#wave-clip-cs-terracotta-mid); object-position: center 54%; }
+.as-hero--cs-terracotta-low-mid .as-hero__img { clip-path: url(#wave-clip-cs-terracotta-low-mid); object-position: center 69%; }
 .as-hero--case-study-ddr .as-hero__img { clip-path: url(#wave-clip-case-study-ddr); object-position: center 70%; }
+.as-hero--cs-ddr-high-mid .as-hero__img { clip-path: url(#wave-clip-cs-ddr-high-mid); object-position: center 21%; }
+.as-hero--cs-ddr-mid .as-hero__img { clip-path: url(#wave-clip-cs-ddr-mid); object-position: center 36%; }
+.as-hero--cs-ddr-low-mid .as-hero__img { clip-path: url(#wave-clip-cs-ddr-low-mid); object-position: center 51%; }
 .as-hero--case-study-austin-space .as-hero__img { clip-path: url(#wave-clip-case-study-austin-space); object-position: center 28%; }
+.as-hero--cs-austin-space-high-mid .as-hero__img { clip-path: url(#wave-clip-cs-austin-space-high-mid); object-position: center 47%; }
+.as-hero--cs-austin-space-low-mid .as-hero__img { clip-path: url(#wave-clip-cs-austin-space-low-mid); object-position: center 66%; }
 .as-hero--case-study-gypsy-pistoleros .as-hero__img { clip-path: url(#wave-clip-case-study-gypsy-pistoleros); object-position: center 100%; }
+.as-hero--cs-gypsy-pistoleros-high-mid .as-hero__img { clip-path: url(#wave-clip-cs-gypsy-pistoleros-high-mid); object-position: center 32%; }
+.as-hero--cs-gypsy-pistoleros-mid .as-hero__img { clip-path: url(#wave-clip-cs-gypsy-pistoleros-mid); object-position: center 50%; }
+.as-hero--cs-gypsy-pistoleros-low-mid .as-hero__img { clip-path: url(#wave-clip-cs-gypsy-pistoleros-low-mid); object-position: center 68%; }
 .as-hero--policy-privacy .as-hero__img { clip-path: url(#wave-clip-policy-privacy); object-position: center 65%; }
 .as-hero--policy-tos .as-hero__img { clip-path: url(#wave-clip-policy-tos); object-position: center 33%; }
 .as-hero--policy-cookies .as-hero__img { clip-path: url(#wave-clip-policy-cookies); object-position: center 60%; }
@@ -6933,8 +6955,9 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 /* ============================================================
    ALLSORTS COMPONENTS - case study template (shared across
-   austin-space, terracotta-property, ddr-ltd) - added 2026-07-10
-   Every .as-cs-* rule below lands on all 3 pages simultaneously.
+   austin-space, terracotta-property, ddr-ltd, gypsy-pistoleros)
+   - added 2026-07-10
+   Every .as-cs-* rule below lands on all 4 pages simultaneously.
    LOCKED, no rules written: .as-cs-testimonial__quote/__name/__role
    TEXT (typography only, below), .as-casestudy__quote-source (icon
    family swap only, done in HTML, no CSS rule at all), DDR's
@@ -7021,12 +7044,12 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 /* ============================================================
    PHASE 3 ITEM 6 - case study detail pages: .as-cs-solution becomes
    the editorial ink band (shared template: austin-space,
-   terracotta-property, ddr-ltd). Splits the 3550px unbroken white
-   run in the middle of the page. Locked to .as-creds / .as-svc-process
-   - same ink band, same job. Rhymes with Item 1 (.as-svc-process on
-   the service pages) - same content type ("how it works"), same
-   treatment, two page families. Approved from live DOM-injection
-   preview, 12 July 2026.
+   terracotta-property, ddr-ltd, gypsy-pistoleros). Splits the 3550px
+   unbroken white run in the middle of the page. Locked to .as-creds /
+   .as-svc-process - same ink band, same job. Rhymes with Item 1
+   (.as-svc-process on the service pages) - same content type ("how it
+   works"), same treatment, two page families. Approved from live
+   DOM-injection preview, 12 July 2026.
 
    Supersedes the white-card phase treatment above (chunky box +
    circular candy-chip numeral): the card is gone, copy sits directly
@@ -8277,16 +8300,17 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 /* ============================================================
    CS AUSTIN-SPACE FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   Scoped to /case-studies/austin-space ONLY - the 3 case-study pages
+   Scoped to /case-studies/austin-space ONLY - the 4 case-study pages
    share the .as-cs-* template classes, but this footer strip's markup
    lives only in this page's own HTML, not in the shared template, so it
-   does not appear on terracotta-property or ddr-ltd. Page's true last
-   element before this strip is the LIGHT off-white .as-cs-page-cta
-   (confirmed via live Y-position), not the black CTA banner used
-   elsewhere - so the wave emerges from off-white, a clean case fully
-   resolved on deploy, not a temporary black state. No testimonial
-   section exists on this page (own company, no client quote). Additive
-   only - .as-cs-testimonial and any review-link markup untouched.
+   does not appear on terracotta-property, ddr-ltd or gypsy-pistoleros.
+   Page's true last element before this strip is the LIGHT off-white
+   .as-cs-page-cta (confirmed via live Y-position), not the black CTA
+   banner used elsewhere - so the wave emerges from off-white, a clean
+   case fully resolved on deploy, not a temporary black state. No
+   testimonial section exists on this page (own company, no client
+   quote). Additive only - .as-cs-testimonial and any review-link
+   markup untouched.
    ============================================================ */
 .as-hero--cs-austin-space-footer{
   position:absolute;
