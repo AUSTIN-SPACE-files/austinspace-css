@@ -3966,6 +3966,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--services { aspect-ratio: 2880 / 300; }
 .as-hero--services-hub-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--foundation-build { aspect-ratio: 2880 / 255; }
+.as-hero--custom-build-faq-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--site-refresh { aspect-ratio: 2880 / 255; }
 .as-hero--ongoing-support { aspect-ratio: 2880 / 255; }
 .as-hero--contact { aspect-ratio: 2880 / 192; }
@@ -4008,6 +4009,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--services .as-hero__img { clip-path: url(#wave-clip-services); object-position: center 5%; }
 .as-hero--services-hub-mid .as-hero__img { clip-path: url(#wave-clip-services-hub-mid); object-position: center 45%; }
 .as-hero--foundation-build .as-hero__img { clip-path: url(#wave-clip-foundation-build); object-position: center 87%; }
+.as-hero--custom-build-faq-mid .as-hero__img { clip-path: url(#wave-clip-custom-build-faq-mid); object-position: center 43%; }
 .as-hero--site-refresh .as-hero__img { clip-path: url(#wave-clip-site-refresh); object-position: center 11%; }
 .as-hero--ongoing-support .as-hero__img { clip-path: url(#wave-clip-ongoing-support); object-position: center 80%; }
 .as-hero--contact .as-hero__img { clip-path: url(#wave-clip-contact); object-position: center 30%; }
@@ -6809,7 +6811,7 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--custom-build-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:center 44%;
+  object-position:center 6%;
   clip-path:url(#wave-clip-custom-build-footer);
   display:block;
 }

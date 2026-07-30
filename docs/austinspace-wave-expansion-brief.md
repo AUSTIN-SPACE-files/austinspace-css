@@ -271,15 +271,16 @@ No changes of any kind. Reference page.
 All 13 pages complete and verified live. Contact was frozen and received only a
 stroke-colour change.
 
-- **16 new strips** placed, plus 1 unhidden (`home-low-mid`)
+- **17 new strips** placed, plus 1 unhidden (`home-low-mid`)
 - **5 strips resized** from `2880 / 300` to `2880 / 226`
 - **4 curves redrawn** on existing strips: `home-high-mid`, `home-low-mid`,
   `one-page-mid`, `custom-build-low-mid`
 - **1 strip moved** (`custom-build-low-mid`, to before `.as-svc-fit`)
 - **13 footers** unified on `height: 130px`
-- **8 slices** repositioned during the build, **2 more** in the Phase 3 register pass
-- **Clip def count 38 -> 54**
-- **51 strips total** across the 13 content pages, plus 3 policy-page heroes
+- **8 slices** repositioned during the build, **2 more** in the Phase 3 register pass,
+  plus **1** in the custom-build fifth-strip pass
+- **Clip def count 38 -> 55**
+- **52 strips total** across the 13 content pages, plus 3 policy-page heroes
 
 Wave count per page against `round(height / 2000)` +/-1:
 
@@ -292,7 +293,7 @@ Wave count per page against `round(height / 2000)` +/-1:
 | site-refresh | 4 | 3 | within +/-1 |
 | support | 4 | 3 | within +/-1 |
 | one-page | 4 | 4 | exact |
-| custom-build | 4 | 4 | exact |
+| custom-build | 5 | 4 | within +/-1 |
 | terracotta | 5 | 5 | exact |
 | ddr | 5 | 5 | exact |
 | austin-space | 4 | 4 | exact |
@@ -307,6 +308,12 @@ four case studies) and multi-line (site-refresh, support, matching their existin
 `-mid` siblings). A pattern keyed to either shape silently misses the other.
 `aspect-ratio: 2880 / 226` catches both.
 
+**custom-build is the only page whose mids span both conventions.** `custom-build-mid`
+and `custom-build-low-mid` are multi-line; `custom-build-faq-mid`, added in the
+fifth-strip pass, is single-line. Every other page's mids sit wholly in one shape, so
+custom-build is the one page a convention-keyed count gets partially right and
+therefore silently wrong.
+
 **Inventory curves by DEF ID, never by `d` value.** Geometry is reused, so `d`
 values are duplicated across up to six defs. Current multiplicity:
 
@@ -316,6 +323,7 @@ values are duplicated across up to six defs. Current multiplicity:
 | botA | 5 |
 | invD | 4 |
 | invB | 2 |
+| invC | 2 |
 
 **Stroke `d` values exist in two spellings.** Coordinate form was matched per
 page and per family, so the same curve appears as both `M100,45 C94,45...` and
@@ -457,15 +465,15 @@ slice on the panorama.
 - **The cs hub's top hero uses comma-form** while both its strips use space-form.
 - **`custom-build-mid` is the only high strip that is a 2-trough**; every other is
   a 3-trough. Deliberate, and it offsets the uniformity of the reused botB.
-- **Two pages ride a tolerance:** austin-space at 1276px minimum clearance
-  (needs 1235 at -5%), custom-build at a 4285px gap (needs 4392 at +5%).
+- **One page rides a tolerance:** austin-space at 1276px minimum clearance
+  (needs 1235 at -5%). custom-build no longer does — the fifth strip closed its
+  4285px gap.
+- **`custom-build-footer` at 6% is the darkest footer slice sitewide.** Chosen
+  because with the hero at 87% it was the only slice clearing 15pp from all four
+  other strips on the page. Next darkest footer is gypsy-pistoleros at 12%.
 
 ### Worth doing
 
-- **custom-build could take a fifth strip** at the `.as-svc-bottom` ->
-  `.as-faq--dark` boundary. That would give 1366 / 2040 / 2492 / 1993, need no
-  tolerance, and make all three service pages structurally identical. Declined
-  during the build, not rejected.
 - **The `~60px intrusion` figure** in the master comment near `.as-cs-page-cta`
   is unreliable. It describes the visible depth the wave troughs reach into the
   white, not block overlap — measured block overlap is exactly 135px, the strip's
@@ -477,7 +485,7 @@ slice on the panorama.
 - **`wave-clip-contact`** (top hero) has uneven crests 0.72 / 0.77 / 0.79 / 0.76.
   Regeneration offered twice, not taken.
 - **375px and 320px pass never done** on contact, the two service editorial bands,
-  or any of the 16 new strips. `resize_window` cannot go below ~500px, so this
+  or any of the 17 new strips. `resize_window` cannot go below ~500px, so this
   needs DevTools device emulation.
 - **`json/services/5-support.json:24`** canonical points at
   `/services/ongoing-support`, which 301s to `squarespace-support-retainer`.
@@ -496,6 +504,10 @@ slice on the panorama.
 - Three comments asserting a three-page case-study template, now four
 - The `.as-allsorts .as-hero--home-low-mid { display: none }` block and its comment
 - The master comment claiming ddr was the last page of the footer rollout
+- **custom-build's fifth strip**, previously "worth doing". `custom-build-faq-mid`
+  added at the `.as-svc-bottom` -> `.as-faq--dark` boundary, invC on a second def,
+  slice `center 43%`. Gaps now 1366 / 2040 / 2427 / 2058, inside tolerance with no
+  ride. The footer slice moved 44% -> 6% to free a register-compliant slice for it.
 
 ---
 
