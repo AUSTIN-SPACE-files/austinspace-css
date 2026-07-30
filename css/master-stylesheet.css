@@ -5088,7 +5088,7 @@ a.cky-banner-element.as-cookie__btn:hover {
    var(--as-space-section-side-mobile), the sitewide 480px pair). Bottom
    clearance is untouched here - it comes entirely from the mobile
    :has(~ .as-hero--contact-footer) margin-bottom:160px rule, which is well
-   above the 107px wave-overlap floor.
+   above the 135px wave-overlap floor.
    The Google row is 402px wide at desktop and overflows a 375px viewport,
    so it wraps and re-centres. Its ported gap:12px (inherited from
    .as-hero-combined__trust-google, css:462) is a single-axis value meant
@@ -6281,7 +6281,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 /* Section padding - base .as-svc-cta / .as-hub-notsure / .as-cs-hub-cta all
    use var(--as-space-section-cta) (5rem/80px) top and bottom. Bottom bumped
-   to 100px to clear the 107px footer wave's ~60px intrusion, with headroom
+   to 100px to clear the 135px footer wave's ~60px intrusion, with headroom
    for the taller centred stack. Desktop-only, guarded below; mobile
    (<=480px) falls back to the existing unscoped 64px mobile token rule. */
 @media (min-width: 481px) {
@@ -7981,7 +7981,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 /* .as-cs-page-cta pulled out of the group above - now centred as a light
    CTA stack (see .as-cs-page-cta__inner, css:2991), so its bottom padding
-   is bumped past the shared 84px to clear the 107px footer wave's ~60px
+   is bumped past the shared 84px to clear the 135px footer wave's ~60px
    intrusion, matching the deep-page CTA banner treatment above. */
 @media (min-width: 481px) {
   .as-allsorts .as-cs-page-cta {
@@ -8132,7 +8132,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--site-refresh-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:center 60%;
+  object-position:center 82%;
   clip-path:url(#wave-clip-site-refresh-footer);
   display:block;
 }
@@ -8163,7 +8163,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--ongoing-support-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:center 40%;
+  object-position:center 97%;
   clip-path:url(#wave-clip-ongoing-support-footer);
   display:block;
 }

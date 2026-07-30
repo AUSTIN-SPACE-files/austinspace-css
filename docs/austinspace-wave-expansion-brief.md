@@ -266,18 +266,61 @@ No changes of any kind. Reference page.
 
 ---
 
-## 5. Totals for audit
+## 5. Shipped state
 
-- **16 new strips** = 16 new clip defs + 16 new markup blocks + 32 new CSS rule pairs
-  (doubled across both stylesheets)
-- **1 strip unhidden** (`home-low-mid`)
-- **5 strips resized** 9.6/1 -> 2880/226
+All 13 pages complete and verified live. Contact was frozen and received only a
+stroke-colour change.
+
+- **16 new strips** placed, plus 1 unhidden (`home-low-mid`)
+- **5 strips resized** from `2880 / 300` to `2880 / 226`
 - **4 curves redrawn** on existing strips: `home-high-mid`, `home-low-mid`,
   `one-page-mid`, `custom-build-low-mid`
-- **1 strip moved** (`custom-build-low-mid`)
-- **12 footers** to `height: 130px`; home also drops `aspect-ratio`
-- **8 slices changed** on existing strips
-- **Clip def count: 38 -> 54** in `footer-injection.html`
+- **1 strip moved** (`custom-build-low-mid`, to before `.as-svc-fit`)
+- **13 footers** unified on `height: 130px`
+- **8 slices** repositioned during the build, **2 more** in the Phase 3 register pass
+- **Clip def count 38 -> 54**
+- **51 strips total** across the 13 content pages, plus 3 policy-page heroes
+
+Wave count per page against `round(height / 2000)` +/-1:
+
+| Page | Waves | Rule | |
+|---|---|---|---|
+| home | 4 | 3 | within +/-1 |
+| about | 3 | 3 | exact |
+| services hub | 3 | 3 | exact |
+| cs hub | 3 | 3 | exact |
+| site-refresh | 4 | 3 | within +/-1 |
+| support | 4 | 3 | within +/-1 |
+| one-page | 4 | 4 | exact |
+| custom-build | 4 | 4 | exact |
+| terracotta | 5 | 5 | exact |
+| ddr | 5 | 5 | exact |
+| austin-space | 4 | 4 | exact |
+| gypsy-pistoleros | 5 | 5 | exact |
+| contact | 3 | 2 | frozen |
+
+### Counting rules for any future audit
+
+**Count strips by CLASS NAME, not by grep pattern.** The 8 mids added in section 4
+are split across two CSS conventions: single-line (home, about, both hubs, all
+four case studies) and multi-line (site-refresh, support, matching their existing
+`-mid` siblings). A pattern keyed to either shape silently misses the other.
+`aspect-ratio: 2880 / 226` catches both.
+
+**Inventory curves by DEF ID, never by `d` value.** Geometry is reused, so `d`
+values are duplicated across up to six defs. Current multiplicity:
+
+| Curve | Defs |
+|---|---|
+| botB | 6 |
+| botA | 5 |
+| invD | 4 |
+| invB | 2 |
+
+**Stroke `d` values exist in two spellings.** Coordinate form was matched per
+page and per family, so the same curve appears as both `M100,45 C94,45...` and
+`M100 45 C94 45...`. The two are distinct byte strings, so a grep for one form
+finds only some of the occurrences. Not normalised, deliberately — see §8.
 
 ---
 
@@ -296,27 +339,88 @@ No changes of any kind. Reference page.
 
 ---
 
-## 7. Rules the previews established, for the record
+## 7. Rules as they actually stand
 
-- Wave sits only at an ink/white boundary. Divider, never a splitter. No same-colour
-  splits, no new idioms.
-- Budget: count `round(page height / 2000)` +/-1, AND no gap between consecutive wave
-  events above 50% of page height, with a +/-5% tolerance on both the ceiling and the
-  1300px minimum clearance. Short pages are constrained by interval, tall pages by count.
-- All arithmetic evaluated at **2545px** client width.
-- Polarity is determined by which side is ink, never chosen.
-- Last boundary before the footer strip stays bare.
-- No wave on both edges of an ink band under 700px.
-- Full width always; only the vertical slice varies.
-- Slice register: 15pp separation between any two strips on a page, no exact sitewide
-  duplicate. Mids avoid 0-10% only — below that the panorama sits at luminance 17-20
-  against the ink band's 23 and merges into it.
-- Placement is NOT reducible to a head-of-ink or foot-of-ink rule. Both are in use and
-  both were chosen by eye during the previews.
+Amended during the build. Where a rule was retracted, the reason is recorded so
+it does not get reinvented.
 
-### Panorama tonal profile (measured, luminance 0-255)
+### Placement
 
-For the Phase 3 register pass. Source is 2500x1667.
+1. **A wave sits only at an ink/white boundary.** Divider, never a splitter. No
+   same-colour splits. No new idioms.
+2. **Budget, two tests, both apply.** Count `round(page height / 2000)` with a
+   +/-1 tolerance, AND no gap between consecutive wave events above 50% of page
+   height. Short pages are constrained by interval; tall pages by count. On tall
+   pages the count test binds and the interval test is slack; on short pages the
+   reverse.
+3. **Tolerances: +5% on the interval ceiling, -5% on the 1300px minimum
+   clearance.** Both were added because real pages failed by 0.4% to 3.6% and
+   the strictly-legal alternative broke a harder rule. Two pages ride them:
+   austin-space at 1276px clearance, custom-build at a 4285px gap.
+4. **The last boundary before the footer strip stays bare.**
+5. **No wave on both edges of an ink band under 700px.**
+6. **Polarity is determined, not chosen.** Ink above means bottom-edge; white
+   above means inverted.
+7. **All arithmetic is evaluated at 2545px client width.** Heroes are
+   aspect-ratio sized, so every pixel figure moves with viewport width. A mid is
+   200px at 2545 and 99px at 1265.
+
+### RETRACTED: the head-of-ink rule
+
+Proposed mid-build after two edits both moved a strip to the top of an ink band.
+It does not survive: on home the wave went to the head of an ink band, on
+terracotta to the foot, and both are live. The pre-existing site is split the
+same way. **Placement is a judgement call per boundary, derived from the
+arithmetic above and then overruled on the visual.** Do not try to reduce it to
+a rule again.
+
+### Geometry
+
+8. **Mids: `aspect-ratio: 2880 / 226`. Footers: `height: 130px`.** Both declared
+   values. `.as-hero` is `box-sizing: content-box` with a 5px `border-bottom`, so
+   a declared 130 renders 135. Never write a rendered figure into CSS.
+9. **Lobe count by rendered aspect ratio:** 3 to 4 on footers (~24:1), 2 to 3 on
+   mids (~12.7:1). Crest and trough depths uniform within a curve; only widths
+   and edge exits vary.
+10. **The curve design space is effectively exhausted.** Six inverted and four
+    bottom-edge variants exist, and at 2-3 lobes with depths shallow enough to
+    read at 12.7:1, new curves land within about 0.03 of an existing one on every
+    parameter. **Reuse is the resolution:** geometry is shared across pages, def
+    ids stay per-page, and no page uses the same curve twice.
+11. **Three same-polarity strips on one page cannot all differ in lobe count**,
+    since only 2 and 3 are permitted. Put the odd one in the middle so the two
+    matching curves are as far apart as possible.
+
+### Slice register
+
+12. **Full width always; only the vertical slice varies.** `object-position:
+    center N%`. Three strips were left-anchored (`0px 100%`) and were corrected.
+13. **15pp separation between any two strips on a page.**
+14. **Mids avoid 0-10% only.** The original 20% floor was a guess and was too
+    conservative. Measured: the panorama sits at luminance 17-20 in the top 10%
+    against the ink band's 23, so a strip there merges into the ink. Above 10% it
+    is dark ground with bright saturated shapes and reads fine — three mids are
+    live at 21%, 25% and 32%.
+15. **On five-strip pages the hero and footer slices must sit near the extremes**
+    of the usable range. Five strips at 15pp need 60pp of spread; a hero parked
+    mid-range splits the range into pockets too small to hold three separated
+    mids. This is what forced footer slice moves on ddr, austin-space and
+    gypsy-pistoleros.
+
+### RETRACTED: two register clauses
+
+- **"No more than two strips sitewide in any 5-point band."** Arithmetically
+  impossible with 51 strips across 100 points.
+- **"No exact sitewide duplicate."** Four duplicate pairs are live and invisible,
+  because nobody sees two pages at once. Worth attention only where a slice is
+  used three times or more — currently 100%, on home's footer, one-page's footer
+  and the gypsy hero.
+
+### Panorama tonal profile
+
+Measured by canvas readback, mean luminance 0-255, source 2500x1667. The ink band
+is 23. This is the measurement tool for any future register review — pull each
+strip's slice, look up the luminance of the band it abuts.
 
 | Band | L | Band | L |
 |---|---|---|---|
@@ -325,20 +429,94 @@ For the Phase 3 register pass. Source is 2500x1667.
 | 25-40% | 36-40 | 70-80% | **97-122** |
 | 40-50% | 50-51 | 80-100% | 71-95 |
 
+70-85% is the brightest region by a wide margin and the most visually valuable
+slice on the panorama.
+
 ---
 
-## 8. Known open items, NOT in this brief
+## 8. Open items
 
-- `site-refresh` mid 55% vs footer 60%, and `support-retainer` mid 42% vs footer 40%:
-  pre-existing 15pp register violations. Deferred to the Phase 3 register pass.
-- `custom-build-mid` is the only high strip that is a 2-trough; every other is a
-  3-trough. Left deliberately. One-line swap to botB if wanted.
-- `custom-build` carries the site's largest gap at 4285 (riding the +5% tolerance).
-  Adding a strip at the `.as-svc-bottom` -> `.as-faq--dark` boundary would give
-  1366 / 2040 / 2492 / 1993 and make all three service pages structurally identical.
-  Declined this session.
-- `wave-clip-contact` (top hero) has uneven crests 0.72/0.77/0.79/0.76.
-- 375px pass never done on contact or the editorial bands.
-- `json/services/5-support.json:24` canonical points at a URL that 301s.
-- Untracked `html/case-studies-terracotta-property - old copy.html` and stale
-  `css/master-stylesheet-backup.css` both want binning.
+### Cannot be fixed
+
+- **contact `faq-mid` 65% vs `footer` 75% is a 10pp separation violation.** The
+  page is frozen. Notable because contact is the reference page the rules were
+  partly derived from, which is mild evidence the 15pp figure is stricter than it
+  needs to be.
+
+### Accepted, recorded so they are not re-litigated
+
+- **Three mids below luminance 40:** custom-build 25% (L 38), ddr high-mid 21%
+  (L 30), gypsy high-mid 32% (L 36). All above the 10% floor, all approved on
+  screen. ddr's is the darkest mid on the site if one ever wants revisiting.
+- **The 100% slice is used three times** — home footer, one-page footer, gypsy
+  hero.
+- **Coordinate form is not normalised.** On the service pages it resolves per
+  strip by family (bottom-edge comma, inverted space); terracotta is all space
+  and ddr all comma. Normalising would rewrite a dozen live stroke paths for zero
+  visual change. Consequence: curves cannot be inventoried by `d` value.
+- **The cs hub's top hero uses comma-form** while both its strips use space-form.
+- **`custom-build-mid` is the only high strip that is a 2-trough**; every other is
+  a 3-trough. Deliberate, and it offsets the uniformity of the reused botB.
+- **Two pages ride a tolerance:** austin-space at 1276px minimum clearance
+  (needs 1235 at -5%), custom-build at a 4285px gap (needs 4392 at +5%).
+
+### Worth doing
+
+- **custom-build could take a fifth strip** at the `.as-svc-bottom` ->
+  `.as-faq--dark` boundary. That would give 1366 / 2040 / 2492 / 1993, need no
+  tolerance, and make all three service pages structurally identical. Declined
+  during the build, not rejected.
+- **The `~60px intrusion` figure** in the master comment near `.as-cs-page-cta`
+  is unreliable. It describes the visible depth the wave troughs reach into the
+  white, not block overlap — measured block overlap is exactly 135px, the strip's
+  full height, because the strip sits inside the CTA's `padding-bottom:
+  var(--as-clear-wave)`. Deriving from the curve puts the visible intrusion nearer
+  100px than 60px, but that is arithmetic on a curve rather than a measurement, so
+  the figure was left alone. Clearance token is 224px, so there is 89px of margin
+  and nothing renders wrong.
+- **`wave-clip-contact`** (top hero) has uneven crests 0.72 / 0.77 / 0.79 / 0.76.
+  Regeneration offered twice, not taken.
+- **375px and 320px pass never done** on contact, the two service editorial bands,
+  or any of the 16 new strips. `resize_window` cannot go below ~500px, so this
+  needs DevTools device emulation.
+- **`json/services/5-support.json:24`** canonical points at
+  `/services/ongoing-support`, which 301s to `squarespace-support-retainer`.
+- **Untracked `html/case-studies-terracotta-property - old copy.html`** and
+  **unreferenced, 2+ month stale `css/master-stylesheet-backup.css`** both want
+  binning.
+- **Public repo secrets audit** on `html/header-code-injection.html`, `.claude/`
+  and `backups/` is still outstanding from a previous session.
+
+### Resolved during this work — do not go looking for these
+
+- site-refresh and support 15pp register collisions (footers moved to 82% and 97%)
+- `stroke="#0d0d0d"` on 15 strips, now `#000` sitewide, 54 occurrences, zero others
+- `loading="lazy"` missing on home's two mids and about's one
+- Three comments quoting the old 107px rendered footer height, now 135px
+- Three comments asserting a three-page case-study template, now four
+- The `.as-allsorts .as-hero--home-low-mid { display: none }` block and its comment
+- The master comment claiming ddr was the last page of the footer rollout
+
+---
+
+## Process lessons worth carrying
+
+- **Never replace-all across a token boundary.** `object-position:50% ` ->
+  `object-position:center` produced `object-position:center8%`, which parses as
+  garbage and drops the declaration silently. The strip keeps its default and
+  looks almost right. Scope by selector block or match whole declarations.
+- **Edit clip defs by clipPath id; edit strokes by old `d` value.** Defs have ids
+  and duplicate `d` values; strokes have no ids. Two defs held byte-identical `d`
+  values before this work and one string was shared by four defs — a `d`-keyed
+  edit would have rewritten three strips nobody asked to change.
+- **Anchor HTML insertions on comment text plus the following section line, and
+  insert before the comment.** Every insertion target on every page has a
+  descriptive HTML comment above it, which would otherwise end up captioning the
+  wave. Text-unique anchors also make line drift irrelevant.
+- **Verify a paste with a synthetic element, not a repo grep.** A grep cannot
+  detect a paste-time strip, and `decodedBodySize` reads low because of gzip.
+  Build a div matching the full selector and read `getComputedStyle`.
+- **Split `location.reload(true)` from the measurement.** Reloading inside the
+  same evaluation tears down the context mid-run.
+- **Confirm the viewport width before trusting any pixel figure.** A window that
+  moved to a smaller display silently invalidated a whole page's arithmetic.
