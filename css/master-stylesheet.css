@@ -4274,12 +4274,14 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--about { aspect-ratio: 2880 / 216; }
 .as-hero--about-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--services { aspect-ratio: 2880 / 300; }
+.as-hero--services-hub-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--foundation-build { aspect-ratio: 2880 / 255; }
 .as-hero--site-refresh { aspect-ratio: 2880 / 255; }
 .as-hero--ongoing-support { aspect-ratio: 2880 / 255; }
 /* 192 = 2880 * 170px / 2545px reference width. Ratio term, not a pixel value - do not swap for a flat height. */
 .as-hero--contact { aspect-ratio: 2880 / 192; }
 .as-hero--case-studies { aspect-ratio: 2880 / 300; }
+.as-hero--casestudies-hub-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--case-study-terracotta { aspect-ratio: 2880 / 300; }
 .as-hero--case-study-ddr { aspect-ratio: 2880 / 300; }
 .as-hero--case-study-austin-space { aspect-ratio: 2880 / 300; }
@@ -4305,11 +4307,13 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--about .as-hero__img { clip-path: url(#wave-clip-about); object-position: center 95%; }
 .as-hero--about-mid .as-hero__img { clip-path: url(#wave-clip-about-mid); object-position: center 52%; }
 .as-hero--services .as-hero__img { clip-path: url(#wave-clip-services); object-position: center 5%; }
+.as-hero--services-hub-mid .as-hero__img { clip-path: url(#wave-clip-services-hub-mid); object-position: center 45%; }
 .as-hero--foundation-build .as-hero__img { clip-path: url(#wave-clip-foundation-build); object-position: center 87%; }
 .as-hero--site-refresh .as-hero__img { clip-path: url(#wave-clip-site-refresh); object-position: center 11%; }
 .as-hero--ongoing-support .as-hero__img { clip-path: url(#wave-clip-ongoing-support); object-position: center 80%; }
 .as-hero--contact .as-hero__img { clip-path: url(#wave-clip-contact); object-position: center 30%; }
 .as-hero--case-studies .as-hero__img { clip-path: url(#wave-clip-case-studies); object-position: center 75%; }
+.as-hero--casestudies-hub-mid .as-hero__img { clip-path: url(#wave-clip-casestudies-hub-mid); object-position: center 48%; }
 .as-hero--case-study-terracotta .as-hero__img { clip-path: url(#wave-clip-case-study-terracotta); object-position: center 22%; }
 .as-hero--case-study-ddr .as-hero__img { clip-path: url(#wave-clip-case-study-ddr); object-position: center 70%; }
 .as-hero--case-study-austin-space .as-hero__img { clip-path: url(#wave-clip-case-study-austin-space); object-position: center 28%; }
@@ -4361,6 +4365,16 @@ a.cky-banner-element.as-cookie__btn:hover {
   object-position: center 55%;
 }
 
+.as-hero--site-refresh-low-mid {
+  aspect-ratio: 2880 / 226;
+  background-color: var(--white);
+  border-top: 0;
+}
+.as-hero--site-refresh-low-mid .as-hero__img {
+  clip-path: url(#wave-clip-site-refresh-low-mid);
+  object-position: center 35%;
+}
+
 .as-hero--ongoing-support-mid {
   aspect-ratio: 2880 / 226;
   background-color: var(--white);
@@ -4369,6 +4383,16 @@ a.cky-banner-element.as-cookie__btn:hover {
 .as-hero--ongoing-support-mid .as-hero__img {
   clip-path: url(#wave-clip-ongoing-support-mid);
   object-position: center 42%;
+}
+
+.as-hero--ongoing-support-low-mid {
+  aspect-ratio: 2880 / 226;
+  background-color: var(--white);
+  border-top: 0;
+}
+.as-hero--ongoing-support-low-mid .as-hero__img {
+  clip-path: url(#wave-clip-ongoing-support-low-mid);
+  object-position: center 63%;
 }
 
 .as-hero--one-page-low-mid {
@@ -7954,7 +7978,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--about-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -7963,7 +7987,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--about-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 8%;
+  object-position:center 8%;
   clip-path:url(#wave-clip-about-footer);
   display:block;
 }
@@ -7987,7 +8011,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--services-hub-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -7996,7 +8020,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--services-hub-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 92%;
+  object-position:center 92%;
   clip-path:url(#wave-clip-services-hub-footer);
   display:block;
 }
@@ -8018,7 +8042,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--custom-build-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -8027,7 +8051,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--custom-build-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 100%;
+  object-position:center 44%;
   clip-path:url(#wave-clip-custom-build-footer);
   display:block;
 }
@@ -8045,7 +8069,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--one-page-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -8054,7 +8078,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--one-page-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 100%;
+  object-position:center 100%;
   clip-path:url(#wave-clip-one-page-footer);
   display:block;
 }
@@ -8076,7 +8100,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--site-refresh-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -8085,7 +8109,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--site-refresh-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 60%;
+  object-position:center 60%;
   clip-path:url(#wave-clip-site-refresh-footer);
   display:block;
 }
@@ -8107,7 +8131,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--ongoing-support-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -8116,7 +8140,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--ongoing-support-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 40%;
+  object-position:center 40%;
   clip-path:url(#wave-clip-ongoing-support-footer);
   display:block;
 }
@@ -8147,7 +8171,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--contact-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 75%;
+  object-position:center 75%;
   clip-path:url(#wave-clip-contact-footer);
   display:block;
 }
@@ -8230,7 +8254,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--casestudies-hub-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -8240,7 +8264,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--casestudies-hub-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 25%;
+  object-position:center 25%;
   clip-path:url(#wave-clip-casestudies-hub-footer);
   display:block;
 }
@@ -8267,7 +8291,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--cs-austin-space-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -8276,7 +8300,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--cs-austin-space-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 50%;
+  object-position:center 90%;
   clip-path:url(#wave-clip-cs-austin-space-footer);
   display:block;
 }
@@ -8303,7 +8327,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--cs-terracotta-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -8312,7 +8336,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--cs-terracotta-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 85%;
+  object-position:center 85%;
   clip-path:url(#wave-clip-cs-terracotta-footer);
   display:block;
 }
@@ -8325,7 +8349,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 /* ============================================================
    CS DDR FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
-   LAST page of the footer rollout. Scoped to /case-studies/ddr-ltd
+   LAST page of the 2026-07-10 rollout (gypsy-pistoleros came
+   later). Scoped to /case-studies/ddr-ltd
    ONLY - the footer strip's markup lives only in this page's own
    HTML, not the shared .as-cs-* template, so it does not appear on
    austin-space or terracotta-property. Page's true last element
@@ -8344,7 +8369,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--cs-ddr-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -8353,7 +8378,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--cs-ddr-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 30%;
+  object-position:center 88%;
   clip-path:url(#wave-clip-cs-ddr-footer);
   display:block;
 }
@@ -8375,7 +8400,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--cs-gypsy-pistoleros-footer{
   position:absolute;
   left:0; right:0; bottom:0;
-  width:100%; height:102px;
+  width:100%; height:130px;
   border-top:0;
   border-bottom:5px solid var(--liquorice);
   overflow:hidden;
@@ -8384,7 +8409,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .as-hero--cs-gypsy-pistoleros-footer .as-hero__img{
   width:100%; height:100%;
   object-fit:cover;
-  object-position:50% 70%;
+  object-position:center 12%;
   clip-path:url(#wave-clip-cs-gypsy-pistoleros-footer);
   display:block;
 }
