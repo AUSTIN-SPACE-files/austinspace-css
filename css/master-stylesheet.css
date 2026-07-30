@@ -4352,13 +4352,13 @@ a.cky-banner-element.as-cookie__btn:hover {
    wavy bottom edge, -1 for a wavy top edge. If the clip curve
    changes, re-derive. Do not assume. */
 .as-hero--one-page-mid {
-  aspect-ratio: 2880 / 300;
+  aspect-ratio: 2880 / 226;
   background-color: var(--white);
   border-top: 0;
 }
 .as-hero--one-page-mid .as-hero__img {
   clip-path: url(#wave-clip-one-page-mid);
-  object-position: 0 100%;
+  object-position: center 41%;
 }
 
 /* Service page mid strips. The 226 denominator is a RATIO term, derived
@@ -4418,17 +4418,17 @@ a.cky-banner-element.as-cookie__btn:hover {
 }
 
 .as-hero--one-page-low-mid {
-  aspect-ratio: 2880 / 300;
+  aspect-ratio: 2880 / 226;
   background-color: var(--white);
   border-top: 0;
 }
 .as-hero--one-page-low-mid .as-hero__img {
   clip-path: url(#wave-clip-one-page-low-mid);
-  object-position: center 58%;
+  object-position: center 76%;
 }
 
 .as-hero--custom-build-low-mid {
-  aspect-ratio: 2880 / 300;
+  aspect-ratio: 2880 / 226;
   background-color: var(--white);
   border-top: 0;
 }
