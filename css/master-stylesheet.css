@@ -3867,70 +3867,9 @@ a.cky-banner-element.as-cookie__btn:hover {
  margin: 0;
 }
 
-.as-faq__list {
- display: flex;
- flex-direction: column;
- overflow: hidden;
-}
-
-.as-faq__item {
- background: var(--as-white);
- border-bottom: 1px solid var(--as-border);
-}
-
-.as-faq__item:last-child {
- border-bottom: none;
-}
-
-.as-faq__question {
- display: flex;
- align-items: center;
- justify-content: space-between;
- gap: 2rem;
- padding: 24px 32px;
- font-family: var(--font-body);
- font-size: 17px;
- font-weight: 600;
- line-height: 1.40;
- color: var(--as-black);
- cursor: pointer;
- list-style: none;
-}
-
-.as-faq__question::-webkit-details-marker {
- display: none;
-}
-
-.as-faq__question::after {
- content: '\002B';
- font-size: 1.2rem;
- flex-shrink: 0;
- transition: transform var(--transition);
-}
-
-.as-faq__item[open] .as-faq__question::after {
- content: '\2212';
-}
-
-.as-faq__answer {
- font-family: var(--font-body);
- font-size: 16px;
- line-height: 1.70;
- padding: 0 2rem 1.6rem;
- margin: 0;
-}
-
 @media (max-width: 480px) {
  .as-faq {
  padding: var(--as-space-section-mobile) var(--as-space-section-side-mobile);
- }
-
- .as-faq__question {
- padding: 1.4rem 1.4rem;
- }
-
- .as-faq__answer {
- padding: 0 1.4rem 1.4rem;
  }
 }
 
@@ -4642,7 +4581,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 /* Body copy: DM Sans loaded at 400-700, drop the old 300 to avoid weight-matching oddities */
 :root .as-contact-hero__intro,
 :root .as-contact-form__desc,
-:root .as-faq__answer,
 :root .as-cf-success p,
 :root .as-hub-hero__desc,
 :root .as-row-item__desc,
@@ -4749,22 +4687,17 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 :root .as-cf-success-icon { color: var(--candy-pink); }
 
-/* FAQ marker */
-:root .as-faq__question::after { color: var(--candy-pink); font-weight: 400; }
-
 /* === ALLSORTS CONTAINER TREATMENT - contact page - added 2026-07-09 ===
  Outer containers get chunky ink border + pop-shadow; inner row/item
  dividers stay hairline (remapped off legacy --as-border to --grey-200). */
 :root .as-row-list,
-:root .as-faq__list,
 :root .as-cf-wrap {
  border: var(--bw) solid var(--ink-900);
  border-radius: var(--radius-lg);
  box-shadow: var(--pop-md);
 }
 
-:root .as-row-item,
-:root .as-faq__item {
+:root .as-row-item {
  border-bottom-color: var(--grey-200);
 }
 
@@ -4801,10 +4734,10 @@ a.cky-banner-element.as-cookie__btn:hover {
  -moz-osx-font-smoothing: auto;
 }
 
-/* FAQ - dark editorial variant (services hub, custom build, site refresh,
-   ongoing support only). Scoped under .as-faq--dark so the shared light-
-   accordion .as-faq rules above stay untouched for about/contact/case-
-   studies/one-page-website, which also use the bare .as-faq component. */
+/* FAQ - dark editorial variant. Now the only variant in use: all twelve FAQ
+   sections carry .as-faq--dark (about, contact, the four service pages, the
+   case-studies hub, and the four case-study detail pages). The light .as-faq
+   rules above are retained as the shared base the dark variant builds on. */
 :root .as-faq.as-faq--dark { background: rgb(23,23,26); padding: 96px 32px 104px; }
 :root .as-faq--dark .as-faq__inner { max-width: 1160px; margin: 0 auto; }
 :root .as-faq--dark .as-faq__header { margin: 0 0 56px; max-width: 720px; }
@@ -4817,10 +4750,34 @@ a.cky-banner-element.as-cookie__btn:hover {
 :root .as-faq--dark .as-faq__q { margin: 0 0 12px; font-family: var(--font-display); font-weight: 400; font-style: normal; font-size: 23px; line-height: 1.3; color: #fff; }
 :root .as-faq--dark .as-faq__a { margin: 0; font-family: var(--font-body); font-size: 16px; line-height: 1.72; color: rgb(198,198,206); }
 
+/* The pair ships as <details open> with <summary> as the question, so a
+   no-JS or script-failure client sees every answer rather than none. The
+   header-injection script strips [open] below 860 and restores it above.
+   display:block kills the UA display:list-item; the two marker rules cover
+   Safari and everything else respectively. */
+:root .as-faq--dark summary.as-faq__q { display: block; list-style: none; position: relative; }
+:root .as-faq--dark summary.as-faq__q::-webkit-details-marker { display: none; }
+:root .as-faq--dark summary.as-faq__q::marker { content: ""; }
+
+/* Desktop is non-interactive by design - it must render byte-identically to
+   the pre-details band, so the summary is inert rather than clickable. */
+@media (min-width: 861px) {
+  :root .as-faq--dark summary.as-faq__q { pointer-events: none; }
+}
+
 @media (max-width: 860px) {
   :root .as-faq--dark .as-faq__qa { column-count: 1; }
   :root .as-faq--dark .as-faq__headline { font-size: 38px; }
   :root .as-faq--dark .as-faq__header { margin-bottom: 40px; }
+  :root .as-faq--dark summary.as-faq__q { cursor: pointer; padding-right: 40px; }
+  :root .as-faq--dark summary.as-faq__q::after {
+    content: "\002B";
+    position: absolute; right: 0; top: 0;
+    font-family: var(--font-body); font-weight: 400; color: #fff;
+  }
+  :root .as-faq--dark details.as-faq__pair[open] summary.as-faq__q::after { content: "\2212"; }
+  :root .as-faq--dark details.as-faq__pair:not([open]) summary.as-faq__q { margin-bottom: 0; }
+  :root .as-faq--dark details.as-faq__pair:not([open]) { padding-bottom: 18px; margin-bottom: 18px; }
 }
 
 /* PROOF CLOSER - contact page only. Closing section, sits between the dark
@@ -5827,8 +5784,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 /* CTA row-list -> four individual pop-shadow cards (Option D). Unframes the
    shared .as-row-list panel and gives each .as-row-item its own ink border +
    offset shadow instead, scoped to .as-cta only so the contact page's
-   row-list (and .as-faq__item, which shares the divider-color rule) are
-   unaffected. Desktop-only; mobile falls back to the base unscoped rules. */
+   row-list is unaffected. Desktop-only; mobile falls back to the base
+   unscoped rules. */
 @media (min-width: 481px) {
   :root .as-cta .as-row-list {
     background: transparent;
@@ -6208,7 +6165,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 
 /* Internal pricing rows stay hairline - recolour off the legacy --as-border
-   token only, same technique as .as-row-item / .as-faq__item above. */
+   token only, same technique as .as-row-item above. */
 :root .as-svc-pricing__tier {
   border-bottom-color: var(--grey-200);
 }
@@ -6226,9 +6183,9 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 
 /* .as-faq intentionally NOT boxed here - it's a section wrapper (border-top
-   only, off-white section fill), not a card. Its child .as-faq__list already
-   carries the box treatment from the contact-page container pass
-   (.as-allsorts .as-faq__list, css:6425). */
+   only, off-white section fill), not a card. The .as-faq__list child that used
+   to carry a box treatment was retired with the details-accordion on 31 July
+   2026. Nothing inside .as-faq is boxed now. */
 
 /* Tighter section rhythm - base .as-svc-included / .as-svc-process /
    .as-svc-bottom are all var(--as-space-section) (7rem/112px) top and

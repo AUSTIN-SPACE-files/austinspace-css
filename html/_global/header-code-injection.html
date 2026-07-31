@@ -44,6 +44,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   })();
 </script>
 
+<!-- FAQ mobile collapse. The pairs ship as <details open> so a no-JS client or a
+     script failure leaves every answer visible rather than every answer hidden.
+     Below 860 this strips [open]; above it restores it, keeping the desktop
+     editorial band identical to its pre-details rendering. No-ops on pages with
+     no FAQ. matchMedia change fires only on crossing the breakpoint, so no
+     resize debounce is needed. -->
+<script>
+  (function () {
+    var mq = window.matchMedia('(max-width: 860px)');
+    function sync() {
+      var items = document.querySelectorAll('details.as-faq__pair');
+      for (var i = 0; i < items.length; i++) {
+        if (mq.matches) { items[i].removeAttribute('open'); }
+        else { items[i].setAttribute('open', ''); }
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', sync);
+    } else { sync(); }
+    if (mq.addEventListener) { mq.addEventListener('change', sync); }
+    else if (mq.addListener) { mq.addListener(sync); }
+  })();
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

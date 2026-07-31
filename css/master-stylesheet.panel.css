@@ -3393,70 +3393,9 @@ a.cky-banner-element.as-cookie__btn:hover {
  margin: 0;
 }
 
-.as-faq__list {
- display: flex;
- flex-direction: column;
- overflow: hidden;
-}
-
-.as-faq__item {
- background: var(--as-white);
- border-bottom: 1px solid var(--as-border);
-}
-
-.as-faq__item:last-child {
- border-bottom: none;
-}
-
-.as-faq__question {
- display: flex;
- align-items: center;
- justify-content: space-between;
- gap: 2rem;
- padding: 24px 32px;
- font-family: var(--font-body);
- font-size: 17px;
- font-weight: 600;
- line-height: 1.40;
- color: var(--as-black);
- cursor: pointer;
- list-style: none;
-}
-
-.as-faq__question::-webkit-details-marker {
- display: none;
-}
-
-.as-faq__question::after {
- content: '\002B';
- font-size: 1.2rem;
- flex-shrink: 0;
- transition: transform var(--transition);
-}
-
-.as-faq__item[open] .as-faq__question::after {
- content: '\2212';
-}
-
-.as-faq__answer {
- font-family: var(--font-body);
- font-size: 16px;
- line-height: 1.70;
- padding: 0 2rem 1.6rem;
- margin: 0;
-}
-
 @media (max-width: 480px) {
  .as-faq {
  padding: var(--as-space-section-mobile) var(--as-space-section-side-mobile);
- }
-
- .as-faq__question {
- padding: 1.4rem 1.4rem;
- }
-
- .as-faq__answer {
- padding: 0 1.4rem 1.4rem;
  }
 }
 
@@ -4004,7 +3943,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 :root .as-contact-hero__intro,
 :root .as-contact-form__desc,
-:root .as-faq__answer,
 :root .as-cf-success p,
 :root .as-hub-hero__desc,
 :root .as-row-item__desc,
@@ -4090,18 +4028,14 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 :root .as-cf-success-icon { color: var(--candy-pink); }
 
-:root .as-faq__question::after { color: var(--candy-pink); font-weight: 400; }
-
 :root .as-row-list,
-:root .as-faq__list,
 :root .as-cf-wrap {
  border: var(--bw) solid var(--ink-900);
  border-radius: var(--radius-lg);
  box-shadow: var(--pop-md);
 }
 
-:root .as-row-item,
-:root .as-faq__item {
+:root .as-row-item {
  border-bottom-color: var(--grey-200);
 }
 
@@ -4135,10 +4069,27 @@ a.cky-banner-element.as-cookie__btn:hover {
 :root .as-faq--dark .as-faq__q { margin: 0 0 12px; font-family: var(--font-display); font-weight: 400; font-style: normal; font-size: 23px; line-height: 1.3; color: #fff; }
 :root .as-faq--dark .as-faq__a { margin: 0; font-family: var(--font-body); font-size: 16px; line-height: 1.72; color: rgb(198,198,206); }
 
+:root .as-faq--dark summary.as-faq__q { display: block; list-style: none; position: relative; }
+:root .as-faq--dark summary.as-faq__q::-webkit-details-marker { display: none; }
+:root .as-faq--dark summary.as-faq__q::marker { content: ""; }
+
+@media (min-width: 861px) {
+  :root .as-faq--dark summary.as-faq__q { pointer-events: none; }
+}
+
 @media (max-width: 860px) {
   :root .as-faq--dark .as-faq__qa { column-count: 1; }
   :root .as-faq--dark .as-faq__headline { font-size: 38px; }
   :root .as-faq--dark .as-faq__header { margin-bottom: 40px; }
+  :root .as-faq--dark summary.as-faq__q { cursor: pointer; padding-right: 40px; }
+  :root .as-faq--dark summary.as-faq__q::after {
+    content: "\002B";
+    position: absolute; right: 0; top: 0;
+    font-family: var(--font-body); font-weight: 400; color: #fff;
+  }
+  :root .as-faq--dark details.as-faq__pair[open] summary.as-faq__q::after { content: "\2212"; }
+  :root .as-faq--dark details.as-faq__pair:not([open]) summary.as-faq__q { margin-bottom: 0; }
+  :root .as-faq--dark details.as-faq__pair:not([open]) { padding-bottom: 18px; margin-bottom: 18px; }
 }
 
 :root .as-proof {
@@ -7248,4 +7199,4 @@ a.cky-banner-element.as-cookie__btn:hover {
   max-width: 660px;
   margin: 0;
 }
-.as-build-canary{--as-build-id:"20260731-c26066"}
+.as-build-canary{--as-build-id:"20260731-a4d1e8"}
