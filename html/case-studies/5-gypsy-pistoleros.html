@@ -69,22 +69,22 @@
   </div>
   <div class="as-cs-stats__inner as-container">
     <div class="as-cs-stats__item">
-      <span class="as-cs-stats__icon"><i class="fa-slab-press fa-wrench"></i></span>
+      <span class="as-cs-stats__icon"><i class="fa-slab-press fa-regular fa-wrench"></i></span>
       <span class="as-cs-stats__number">0</span>
       <span class="as-cs-stats__label"><strong>Lines of custom CSS inherited</strong></span>
     </div>
     <div class="as-cs-stats__item">
-      <span class="as-cs-stats__icon"><i class="fa-slab-press fa-gauge"></i></span>
+      <span class="as-cs-stats__icon"><i class="fa-slab-press fa-regular fa-gauge"></i></span>
       <span class="as-cs-stats__number">12,730px</span>
       <span class="as-cs-stats__label"><strong>Homepage length before</strong></span>
     </div>
     <div class="as-cs-stats__item">
-      <span class="as-cs-stats__icon"><i class="fa-slab-press fa-layer-group"></i></span>
+      <span class="as-cs-stats__icon"><i class="fa-slab-press fa-regular fa-layer-group"></i></span>
       <span class="as-cs-stats__number">8</span>
       <span class="as-cs-stats__label"><strong>Pages rebuilt</strong></span>
     </div>
     <div class="as-cs-stats__item">
-      <span class="as-cs-stats__icon"><i class="fa-slab-press fa-quote-left"></i></span>
+      <span class="as-cs-stats__icon"><i class="fa-slab-press fa-regular fa-quote-left"></i></span>
       <span class="as-cs-stats__number">24</span>
       <span class="as-cs-stats__label"><strong>Reviews structured</strong></span>
     </div>
@@ -124,28 +124,28 @@
       <div class="as-cs-challenge__group">
         <p class="as-cs-challenge__group-title">Layout</p>
         <ul class="as-cs-challenge__list">
-          <li><i class="fa-slab fa-regular fa-xmark"></i> Everything was centred. The press release, every review quote, the full tour date list, the management and booking contacts, all running down the middle of the screen at the same size and the same weight, full width, with no hierarchy below the logo. The homepage ran to 12,730 pixels.</li>
+          <li><i class="fa-slab-press fa-regular fa-xmark"></i> Everything was centred. The press release, every review quote, the full tour date list, the management and booking contacts, all running down the middle of the screen at the same size and the same weight, full width, with no hierarchy below the logo. The homepage ran to 12,730 pixels.</li>
         </ul>
       </div>
       <div class="as-cs-challenge__group">
         <p class="as-cs-challenge__group-title">Pages</p>
         <ul class="as-cs-challenge__list">
-          <li><i class="fa-slab fa-regular fa-xmark"></i> The videos page was ten full-width embeds stacked in a single column with nothing grouping them by release.</li>
-          <li><i class="fa-slab fa-regular fa-xmark"></i> The members area, which is the band's actual revenue tool, was one continuous page carrying the entire back catalogue of video updates and photo albums with no way to navigate into it.</li>
-          <li><i class="fa-slab fa-regular fa-xmark"></i> The store was a flat, undifferentiated product grid.</li>
+          <li><i class="fa-slab-press fa-regular fa-xmark"></i> The videos page was ten full-width embeds stacked in a single column with nothing grouping them by release.</li>
+          <li><i class="fa-slab-press fa-regular fa-xmark"></i> The members area, which is the band's actual revenue tool, was one continuous page carrying the entire back catalogue of video updates and photo albums with no way to navigate into it.</li>
+          <li><i class="fa-slab-press fa-regular fa-xmark"></i> The store was a flat, undifferentiated product grid.</li>
         </ul>
       </div>
       <div class="as-cs-challenge__group">
         <p class="as-cs-challenge__group-title">Navigation</p>
         <ul class="as-cs-challenge__list">
-          <li><i class="fa-slab fa-regular fa-xmark"></i> Of the nine pages, one was a navigation item that sent visitors off the site entirely, to a third party distributor.</li>
+          <li><i class="fa-slab-press fa-regular fa-xmark"></i> Of the nine pages, one was a navigation item that sent visitors off the site entirely, to a third party distributor.</li>
         </ul>
       </div>
       <div class="as-cs-challenge__group">
         <p class="as-cs-challenge__group-title">The constraint</p>
         <ul class="as-cs-challenge__list">
-          <li><i class="fa-slab fa-regular fa-xmark"></i> The obvious answer is to move platforms. That was never available. The band's show scheduling and their fan club subscriptions both run natively on Bandzoogle, and both were working. Moving would have meant rebuilding a functioning revenue system to fix a presentation problem.</li>
-          <li><i class="fa-slab fa-regular fa-xmark"></i> So the job was to build a modern site inside a platform that had no interest in letting me, and to do it without breaking anything that was already earning.</li>
+          <li><i class="fa-slab-press fa-regular fa-xmark"></i> The obvious answer is to move platforms. That was never available. The band's show scheduling and their fan club subscriptions both run natively on Bandzoogle, and both were working. Moving would have meant rebuilding a functioning revenue system to fix a presentation problem.</li>
+          <li><i class="fa-slab-press fa-regular fa-xmark"></i> So the job was to build a modern site inside a platform that had no interest in letting me, and to do it without breaking anything that was already earning.</li>
         </ul>
       </div>
     </div>
@@ -167,7 +167,7 @@
     <div class="as-cs-solution__spine">
 
       <div class="as-cs-solution__step">
-        <div class="as-cs-solution__marker"><i class="fa-slab-press fa-1"></i></div>
+        <div class="as-cs-solution__marker"><i class="fa-slab-press fa-regular fa-1"></i></div>
         <h3 class="as-cs-solution__step-title">Get the stylesheet out of the platform</h3>
         <p class="as-cs-solution__step-lead">Bandzoogle's custom CSS field was rejecting my stylesheet and not saying so. Two causes: an undocumented size ceiling, and a CSS validator old enough to reject <code>pointer-events</code> and <code>::part()</code> as invalid. It had been silently falling back to the last version it had accepted, which meant an unknown number of earlier design passes had never actually been live.</p>
         <p class="as-cs-solution__step-lead">Hosting the CSS in Bandzoogle's own file system was not an option either, as it serves <code>.css</code> as <code>text/plain</code>.</p>
@@ -175,21 +175,21 @@
       </div>
 
       <div class="as-cs-solution__step">
-        <div class="as-cs-solution__marker"><i class="fa-slab-press fa-2"></i></div>
+        <div class="as-cs-solution__marker"><i class="fa-slab-press fa-regular fa-2"></i></div>
         <h3 class="as-cs-solution__step-title">Build as an override layer, not a replacement</h3>
         <p class="as-cs-solution__step-lead">The platform owns the cascade and does not give it up. The whole build is anchored to a single container ID, which beats the theme on specificity rather than carpet-bombing everything with <code>!important</code>. Where the platform fought back with its own <code>!important</code> rules, the answer was a second anchor, not a louder one.</p>
         <p class="as-cs-solution__step-lead">That discipline is why the client can still edit the site in Bandzoogle's own editor without any of it coming apart.</p>
       </div>
 
       <div class="as-cs-solution__step">
-        <div class="as-cs-solution__marker"><i class="fa-slab-press fa-3"></i></div>
+        <div class="as-cs-solution__marker"><i class="fa-slab-press fa-regular fa-3"></i></div>
         <h3 class="as-cs-solution__step-title">Give the content a structure it never had</h3>
         <p class="as-cs-solution__step-lead">The reviews, the shows and the video catalogue were all sitting as loose text and embeds. Each became a data file with its own renderer: 24 reviews structured and sorted, the tour dates rendered as a real table, and the videos grouped by album with a facade pattern so the page is not loading ten YouTube players before anyone has clicked one.</p>
         <p class="as-cs-solution__step-lead">The store got the same treatment from the other direction. Rather than replace the platform's commerce, I restyled the markup it emits, and used its own section feature to split a flat grid into five categories: New in, Music, Apparel, Accessories, and Signed &amp; rare. The last of those is where the stage-worn one-offs live, and it did not previously exist as a concept.</p>
       </div>
 
       <div class="as-cs-solution__step">
-        <div class="as-cs-solution__marker"><i class="fa-slab-press fa-4"></i></div>
+        <div class="as-cs-solution__marker"><i class="fa-slab-press fa-regular fa-4"></i></div>
         <h3 class="as-cs-solution__step-title">Ship it, break it, revert it</h3>
         <p class="as-cs-solution__step-lead">Two days after launch, roughly half of every page stopped rendering. It was my code. I found it, told the client the same morning before they had noticed, reverted the whole stylesheet to the last known-good deployment, and had it back inside the hour.</p>
         <p class="as-cs-solution__step-note">I mention it because it is the reason step 1 matters. Being able to identify exactly what was live, and roll back to a specific version of it, is the difference between a bad morning and a bad week.</p>
@@ -333,8 +333,8 @@
     </div>
     <div class="as-cs-testimonial__grid">
       <div class="as-cs-testimonial__main">
-        <i class="fa-slab-press fa-quote-left as-cs-testimonial__mark-open"></i>
-        <p class="as-cs-testimonial__quote">Just WOW! It looks stunning. Cannot thank you enough.<i class="fa-slab-press fa-quote-left as-cs-testimonial__mark-close"></i></p>
+        <i class="fa-slab-press fa-regular fa-quote-left as-cs-testimonial__mark-open"></i>
+        <p class="as-cs-testimonial__quote">Just WOW! It looks stunning. Cannot thank you enough.<i class="fa-slab-press fa-regular fa-quote-left as-cs-testimonial__mark-close"></i></p>
       </div>
       <div class="as-cs-testimonial__side">
         <span class="as-cs-testimonial__name">Lee</span>

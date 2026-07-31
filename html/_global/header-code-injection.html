@@ -10,14 +10,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <script src="https://kit.fontawesome.com/a63c49590c.js" crossorigin="anonymous"></script>
 
-<!-- Allsorts design-system body class (global; replaces per-page injection) -->
-<script>
-  (function () {
-    var add = function () { document.body && document.body.classList.add('as-allsorts'); };
-    if (document.body) { add(); }
-    else { document.addEventListener('DOMContentLoaded', add); }
-  })();
-</script>
+<!-- The .as-allsorts body-class script was removed 31 July 2026. Its scoping job
+     is now done by the ":root " prefix on 612 selectors in Custom CSS - see the
+     ballast note in master-stylesheet.css before changing either. Do not
+     re-add this script; it is what caused the pre-DOMContentLoaded flash. -->
 
 <link rel="preload" as="image" href="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/a51cb895-9013-42dc-b30a-fb97906a60b2/AS_background.webp?content-type=image%2Fwebp" fetchpriority="high">
 
@@ -126,7 +122,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "@type": "Service",
           "name": "Ongoing Squarespace Support & Development",
           "description": "Monthly retainer covering Squarespace development, SEO, performance improvements, and strategic guidance. Flexible hours, no lock-in contracts.",
-          "url": "https://www.austinspace.co.uk/services/ongoing-support"
+          "url": "https://www.austinspace.co.uk/services/squarespace-support-retainer"
         }
       }
     ]
