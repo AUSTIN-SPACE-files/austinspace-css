@@ -54,6 +54,24 @@ window.__ASB2 = (function () {
   var PREFIX  = '__asb2';           // v1 keys (__asb / __asbm) are left intact
   var TRACK   = /^(as-|fa-|surface-|on-speckle)/;
 
+  /* DELIBERATE DIVERGENCE FROM v1 - DO NOT "FIX" THIS.
+   * v1 selected its nodes by `as-` class ONLY, while building sigs that
+   * included fa- classes. v2 selects on all four prefixes, which adds the bare
+   * Font Awesome icon elements carrying no as- class at all (45 of them on the
+   * homepage). That is the whole of the +224 group / +346 element gap against
+   * v1's site totals, verified 31 July:
+   *
+   *     v1 homepage      els 260   gr 149
+   *     v2 as-only       els 259   gr 148
+   *     difference       exactly body.as-allsorts, and nothing else
+   *
+   * The wider net is intentional. FA has caused repeated silent failures on
+   * this codebase - tofu from an omitted style class, `fa-duotone fa-slab`
+   * falling back to single-tone, nth-child colour rotations shifting when a
+   * topper is inserted - and a baseline blind to every bare icon cannot see
+   * any of it. v1 comparison is unharmed: matching is per-sig, so the extra
+   * groups simply report as onlyV2. */
+
   /* Ordered. Index position is part of the format - APPEND ONLY, never insert
    * or reorder, or every stored record silently misaligns against its labels.
    * Chosen for this codebase specifically: clipPath/aspectRatio/objectPosition
@@ -80,6 +98,16 @@ window.__ASB2 = (function () {
    * which never reconciled. Targeting innerWidth directly makes it moot. */
   var WIDTHS = [1505, 768, 375];
   var FRAME_H = 1080;                 // v1's recovered viewport height
+
+  /* SCROLLBAR CAVEAT, verified 31 July. An iframe at 375 yields innerWidth 375
+   * but documentElement.clientWidth 360, because Chrome draws a classic 15px
+   * scrollbar inside the frame. Real phones use overlay scrollbars and give the
+   * full 375. Measured: 1505 -> 1490, 768 -> 753, 375 -> 360.
+   * Regression detection is unaffected, since v2 only ever compares against v2
+   * at the same width. But do NOT judge whether something LOOKS right at 375
+   * from this harness - it is 15px narrow. Bump the frame to 390 for that, or
+   * use Charles's DevTools device emulation. Both vw and cw are stored per
+   * capture so the distinction is always recoverable. */
 
   /* v1 stored sigs in DOM class order; v2 sorts. Normalise v1's before any
    * comparison or every multi-class element reads as a false add/remove pair. */
