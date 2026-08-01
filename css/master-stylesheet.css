@@ -9359,3 +9359,152 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   max-width: 660px;
   margin: 0;
 }
+
+/* ============================================================
+   .as-rail - mobile horizontal card rail (1 August 2026)
+   ============================================================
+   Reusable utility. Below 600 a card grid becomes a full-bleed
+   horizontal rail: 1.2 cards visible, cards snap to the text
+   margin, and a 56px fade at the right edge eases out once the
+   scroll reaches the end. On .as-svc-included this takes the
+   custom-build section from 2964px to 409px at 375.
+
+   83% basis, not something rounder: card height falls as the
+   cards widen and then FLATLINES at 385px from 83% onward, so
+   anything wider costs peek and buys nothing.
+
+   THE FADE IS A MASK ON THE RAIL, not an overlay on a wrapper.
+   An earlier draft put a ::after gradient on
+   .as-svc-included__inner, but that element wraps the header AND
+   the grid, so the gradient painted over the right edge of the
+   h2. A mask cannot reach a sibling, needs no wrapper element,
+   and fades to whatever is behind rather than to a hard-coded
+   white - so the same utility works on the off-white surface and
+   on an ink band without a per-surface gradient colour.
+
+   mask-image is not animatable but mask-size is, so the gradient
+   is static and the MASK BOX grows by 56px to slide the
+   transparent tail off the visible edge. That is what buys the
+   0.2s ease without a second gradient.
+
+   BLEED IS TOKEN-DRIVEN AND MUST MATCH THE HOST'S HORIZONTAL
+   PADDING, or the rail stops short of the screen edge and
+   snapped cards miss the text margin. .as-svc-included is
+   var(--as-space-section-side) (2rem) down to 481 and
+   var(--as-space-section-side-mobile) (1.2rem) at 480 and below
+   - see the 480 rule at css:1564 - which is why there are two
+   values and not one hard-coded 19.2px. A component adopting
+   .as-rail on a differently padded host sets its own
+   --as-rail-bleed rather than editing these rules.
+
+   THE BLEED IS TWO TOKENS THAT MUST BE KEPT IN SYNC BY HAND.
+   --as-rail-bleed is the positive, used by padding and
+   scroll-padding-left. --as-rail-bleed-neg is its negation, used
+   by the margins, and it is a LITERAL - it cannot be derived.
+
+   This was calc(-1 * var(--as-rail-bleed)) until 1 August 2026.
+   The Squarespace Custom CSS panel compiles as LESS, not CSS, and
+   any calc() doing arithmetic on a var() fails the WHOLE compile
+   silently and deploys a 527-byte stub - the entire site loses
+   every custom rule. Both calc(-1 * var(--x)) and
+   calc(var(--x) * -1) fail. Isolated by single-variable live test
+   after it was first misdiagnosed as a file-size ceiling.
+
+   So every override of --as-rail-bleed must set --as-rail-bleed-neg
+   to the matching negative in the SAME rule. 2rem pairs with -32px,
+   1.2rem with -19.2px. Get them out of step and the rail stops
+   short of the screen edge and snapped cards miss the text margin.
+   tools/build-css.js fails the build on calc() containing var(),
+   so reintroducing the old form is caught before it can deploy.
+
+   Note the calc() in the mask declarations below stay exactly as
+   they are: calc(100% - 56px) has LITERAL operands, no var(), and
+   is confirmed safe by live test. The rule is var() inside calc(),
+   not calc() itself.
+
+   SHADOW CLEARANCE. The cards carry a hard 5px 5px 0 0 pop
+   shadow (css:6147) and a mask clips to its own box. The 19.2px
+   right and 20px bottom padding below is the only thing keeping
+   that shadow inside the mask. Tightening it to reclaim vertical
+   space will silently clip every card.
+
+   NEVER ADD A CHILD TO THE RAIL. .as-svc-included__item icon
+   colours rotate on :nth-child(1..4) (css:6109-6135), so any
+   sentinel, spacer or scroll affordance inserted inside the grid
+   shifts every card's colour by one. That regression has already
+   happened once on this site via a topper element. The mask
+   exists so no such child is needed.
+
+   min-width: 0 is REQUIRED - flex items default to
+   min-width: auto, which lets content override the basis. There
+   is no site-wide box-sizing reset either, so the items need
+   border-box here or the 32px padding and 2px border sit outside
+   the declared width and the rendered box overruns the basis by
+   68px. ============================================================ */
+@media (max-width: 600px) {
+
+  :root .as-rail {
+    /* Matched pair - see THE BLEED IS TWO TOKENS above. 2rem/-32px. */
+    --as-rail-bleed: var(--as-space-section-side);
+    --as-rail-bleed-neg: -32px;
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--as-rail-bleed);
+    gap: 16px;
+    margin-left: var(--as-rail-bleed-neg);
+    margin-right: var(--as-rail-bleed-neg);
+    padding: 4px var(--as-rail-bleed) 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent 100%);
+            mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent 100%);
+    -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    transition: -webkit-mask-size 0.2s ease, mask-size 0.2s ease;
+  }
+
+  :root .as-rail::-webkit-scrollbar { display: none; }
+
+  /* End of scroll - grow the mask box past the right edge so the
+     transparent tail leaves the visible area. Toggled by the rail
+     script in header code injection; if that script never runs the
+     rail still scrolls and snaps and the fade simply stays on. */
+  :root .as-rail.as-rail-end {
+    -webkit-mask-size: calc(100% + 56px) 100%;
+            mask-size: calc(100% + 56px) 100%;
+  }
+
+  :root .as-rail > * {
+    box-sizing: border-box;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 83%;
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+}
+
+/* The host section drops to the mobile side token at 480, so the
+   bleed has to follow it down. Must stay AFTER the block above -
+   equal specificity, so source order decides the winner.
+
+   BOTH tokens move together. The negative cannot be derived from
+   the positive, so overriding one without the other silently
+   misaligns the rail. 1.2rem pairs with -19.2px. */
+@media (max-width: 480px) {
+  :root .as-rail {
+    --as-rail-bleed: var(--as-space-section-side-mobile);
+    --as-rail-bleed-neg: -19.2px;
+  }
+}
+
+@media (max-width: 600px) and (prefers-reduced-motion: reduce) {
+  :root .as-rail {
+    transition: none;
+  }
+}

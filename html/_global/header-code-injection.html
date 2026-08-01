@@ -68,6 +68,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   })();
 </script>
 
+<!-- Mobile card rail. Below 600 .as-rail turns a card grid into a full-bleed
+     horizontal scroller; the CSS does all of that on its own. This script only
+     toggles .as-rail-end, which slides the right-edge mask off once the scroll
+     reaches the end. If it never runs the rail still scrolls and snaps and the
+     fade simply stays visible, same degradation principle as the FAQ sync above.
+     tabindex="0" is load bearing: the cards are plain divs with nothing
+     focusable inside, so without it a keyboard user cannot scroll the rail at
+     all. No-ops on pages with no rail. -->
+<script>
+  (function () {
+    var mq = window.matchMedia('(max-width: 600px)');
+    function wire() {
+      var rails = document.querySelectorAll('.as-rail');
+      for (var i = 0; i < rails.length; i++) {
+        var r = rails[i];
+        if (r.dataset.railWired) continue;
+        r.dataset.railWired = '1';
+        r.setAttribute('tabindex', '0');
+        r.setAttribute('role', 'group');
+        r.setAttribute('aria-label', 'Scrollable cards');
+        (function (rail) {
+          function upd() {
+            var end = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
+            rail.classList.toggle('as-rail-end', end || !mq.matches);
+          }
+          rail.addEventListener('scroll', upd, { passive: true });
+          if (mq.addEventListener) { mq.addEventListener('change', upd); }
+          else if (mq.addListener) { mq.addListener(upd); }
+          upd();
+        })(r);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', wire);
+    } else { wire(); }
+  })();
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
