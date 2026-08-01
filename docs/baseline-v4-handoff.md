@@ -2,17 +2,17 @@
 
 Written 1 August 2026, early hours. Commit to `docs/baseline-v4-handoff.md`.
 
-SUPERSEDES `baseline-v3-handoff.md`. v3 is correct on capture, the v1 audit, the
+SUPERSEDES `docs/superseded/baseline-v3-handoff.md`. v3 is correct on capture, the v1 audit, the
 shadow-deletion pass and the FAQ work. **It is WRONG on the Custom CSS panel
 size ceiling**, and that error is the most dangerous kind of stale doc: a
 confident number nobody will re-test. Section 2 retracts it.
 
 Read this one. Where they disagree, this one is right.
 
-> **Note on the chain.** v2 and v3 were never committed. They exist only as
-> `~/Downloads/baseline-v2-handoff.md` and `~/Downloads/baseline-v3-handoff.md`.
-> v4 is the first handoff in the repo. If the chain is worth preserving, commit
-> those two alongside this file; otherwise treat this as the root.
+> **Note on the chain.** v2 and v3 were originally never committed. They are now
+> archived unedited at `docs/superseded/baseline-v2-handoff.md` and
+> `docs/superseded/baseline-v3-handoff.md`, each carrying a header that retracts
+> its panel size ceiling figure and points here. Read them for history only.
 
 > **Verification stamp.** Every checkable claim below was re-run against the
 > working tree at commit time rather than carried over. Five figures moved as a
