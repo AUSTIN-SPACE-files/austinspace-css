@@ -313,7 +313,6 @@
 }
 
 
-
 /* =============================================
  HOME - HERO
  ============================================= */
@@ -1814,50 +1813,6 @@
  gap: 1.5rem;
 }
 
-.as-cs-phase {
- flex-direction: column;
-}
-
-.as-cs-phase__number {
- align-items: center;
- gap: 0.5rem;
- font-weight: 500;
- color: var(--as-purple);
-}
-
-.as-cs-phase__icon {
- font-size: 2em;
-}
-
-/* Allsorts retirement stage 1 (2026-07-31): base .as-cs-phase__title deleted.
-   Two Allsorts rules cover it between them (css:6970 shared display-heading
-   group, css:7142 the per-phase block) and together they restate all seven
-   declarations. This was also the last consumer of var(--font-heading) on
-   this component - the Allsorts side reads var(--font-display). */
-
-.as-cs-phase__list {
- list-style: none;
- display: flex;
- flex-direction: column;
- gap: 0.45rem;
- padding-top: 1rem;
-}
-
-.as-cs-phase__list li {
- display: flex;
- align-items: flex-start;
- gap: 0.6rem;
- font-family: var(--font-body);
- font-weight: 400;
-}
-
-.as-cs-phase__list li i {
- color: var(--as-purple);
- font-size: 0.7rem;
- margin-top: 0.2rem;
- flex-shrink: 0;
-}
-
 /* Challenge section intro paragraph */
 .as-cs-challenge__intro {
  font-family: var(--font-body);
@@ -1866,103 +1821,6 @@
  line-height: 1.70;
  color: var(--as-text-secondary);
  margin: 0.4rem 0 0;
-}
- 
-/* Phase card image slot */
-.as-cs-phase__image {
- margin-top: auto;
- line-height: 0;
-}
- 
-.as-cs-phase__image img {
- display: block;
-}
-
-.as-cs-beforeafter {
- background: var(--as-white);
- padding: var(--as-space-section) var(--as-space-section-side);
-}
-
-.as-cs-beforeafter__inner {
-}
-
-.as-cs-beforeafter__header {
- display: flex;
- flex-direction: column;
- gap: 16px;
- margin-bottom: 56px;
-}
-
-.as-cs-beforeafter__grid {
- display: grid;
- grid-template-columns: 1fr 1fr;
- gap: 2rem;
-}
-
-.as-cs-beforeafter__col {
- display: flex;
- flex-direction: column;
- gap: 1rem;
-}
-
-.as-cs-beforeafter__label {
- font-family: var(--font-mono);
- font-size: 0.72rem;
- font-weight: 500;
- letter-spacing: 0.12em;
- text-transform: uppercase;
- color: var(--as-mid);
- display: flex;
- align-items: center;
- gap: 0.5rem;
-}
-
-.as-cs-beforeafter__label i {
- font-size: 0.7rem;
-}
-
-/* Allsorts retirement stage 1 (2026-07-31): base
-   .as-cs-beforeafter__label--after deleted - Allsorts restates color. */
-
-.as-cs-beforeafter__img {
- width: 100%;
- aspect-ratio: 16 / 10;
- background: var(--white);
- display: flex;
- align-items: center;
- justify-content: center;
- overflow: hidden;
-}
-
-.as-cs-beforeafter__img img {
- width: 100%;
- height: 100%;
- object-fit: cover;
- object-position: top;
-}
-
-.as-cs-beforeafter__img-placeholder {
- display: flex;
- flex-direction: column;
- align-items: center;
- gap: 0.5rem;
-}
-
-.as-cs-beforeafter__img-placeholder i {
- font-size: 1.6rem;
-}
-
-.as-cs-beforeafter__img-placeholder span {
- font-family: var(--font-body);
- font-size: 0.75rem;
-}
-
-.as-cs-beforeafter__caption {
- font-family: var(--font-body);
- font-size: 15px;
- font-weight: 400;
- color: var(--as-mid);
- line-height: 1.60;
 }
 
 .as-cs-testimonial {
@@ -2076,17 +1934,12 @@
  .as-cs-solution__grid {
  grid-template-columns: 1fr;
  }
-
- .as-cs-beforeafter__grid {
- grid-template-columns: 1fr;
- }
 }
 
 @media (max-width: 480px) {
  .as-cs-hero,
  .as-cs-challenge,
  .as-cs-solution,
- .as-cs-beforeafter,
  .as-cs-testimonial,
  .as-cs-page-cta {
  padding: var(--as-space-section-mobile) var(--as-space-section-side-mobile);
@@ -3894,7 +3747,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  .as-cs-hub-grid,
  .as-cs-challenge,
  .as-cs-solution,
- .as-cs-beforeafter,
  .as-cs-page-cta,
  .as-contact-form {
  padding-top: 4rem;
@@ -3928,8 +3780,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  .as-svc-included__header,
  .as-svc-process__header,
  .as-about-work__header,
- .as-cs-solution__header,
- .as-cs-beforeafter__header {
+ .as-cs-solution__header {
  margin-bottom: 2rem;
  }
 }
@@ -5981,8 +5832,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    the .as-allsorts token block). Family later moved off Fraunces to DM Mono
    (Charles's call after live preview) - tabular figures keep the pricing
    tiers aligned down the column; rhymes with the mono numeral layer
-   (.as-cs-stats__label, .as-cs-phase__number, .as-svc-hero__price-label
-   directly above this element). 500 is the heaviest real DM Mono weight -
+   (.as-cs-stats__label and .as-svc-hero__price-label directly above this
+   element). 500 is the heaviest real DM Mono weight -
    700 has no face. */
 :root .as-svc-hero__price {
   font-family: var(--font-mono);
@@ -6750,7 +6601,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    need font-family changed here too, not just weight/line-height. */
 :root .as-cs-hero__headline,
 :root .as-cs-section-headline,
-:root .as-cs-phase__title,
 :root .as-cs-stats__number,
 :root .as-cs-page-cta__headline {
   font-family: var(--font-display);
@@ -6853,164 +6703,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   margin-top: 44px;
 }
 
-/* Phase: white card removed (background/border/radius/shadow all
-   reset). Each phase becomes a 2-col grid - copy one side, device
-   pair the other - divided by the top hairline instead of its own box.
-   No hover rule - these are plain divs, not links. */
-:root .as-cs-phase {
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-  gap: 0 72px;
-  align-items: center;
-  padding: 44px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-}
-:root .as-cs-phase:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-:root .as-cs-phase:last-child {
-  padding-bottom: 0;
-}
-
-/* Numeral chip is gone entirely - .as-cs-phase__number becomes a bare
-   label, matching the eyebrow language, rotating through the same
-   luminous-on-dark candy sequence as .as-svc-process__step-number. */
-:root .as-cs-phase__icon {
-  display: none;
-}
-:root .as-cs-phase__number {
-  grid-column: 1;
-  grid-row: 1;
-  align-self: end;
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 11.52px;
-  letter-spacing: 1.84px;
-  text-transform: uppercase;
-  background: none;
-  border: 0;
-  padding: 0;
-  width: auto;
-  height: auto;
-}
-:root .as-cs-solution__grid .as-cs-phase:nth-child(1) .as-cs-phase__number { color: var(--candy-pink-lt); }
-:root .as-cs-solution__grid .as-cs-phase:nth-child(2) .as-cs-phase__number { color: var(--bead-blue-lt); }
-:root .as-cs-solution__grid .as-cs-phase:nth-child(3) .as-cs-phase__number { color: var(--tangerine); }
-:root .as-cs-solution__grid .as-cs-phase:nth-child(4) .as-cs-phase__number { color: var(--sunshine); }
-
-:root .as-cs-phase__title {
-  grid-column: 1;
-  grid-row: 2;
-  color: #fff;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 1.20;
-  margin: 8px 0 14px;
-}
-
-:root .as-cs-phase__list {
-  grid-column: 1;
-  grid-row: 3;
-  align-self: start;
-  border-top: 0;
-  padding: 0;
-  margin: 0;
-}
-:root .as-cs-phase__list li {
-  color: #9a9aa2;
-  font-size: 14.5px;
-  line-height: 1.55;
-  padding: 0 0 7px 0;
-}
-/* Ticks removed - matches the tick-free treatment on .as-cs-phase__list
-   li i's only sibling context that mattered here: the copy sits on ink
-   with no card to frame a bullet against. */
-:root .as-cs-phase__list li i {
-  display: none;
-}
-
-/* Image zone - the homepage .as-casestudy__card recipe verbatim:
-   shadow-only separation, no border. A mount/border here was tried
-   and rejected - it reads as a hole rather than an object. */
-:root .as-cs-phase__image {
-  grid-column: 2;
-  grid-row-start: 1;
-  grid-row-end: 4;
-  position: relative;
-  width: 88%;
-  aspect-ratio: 16 / 10;
-  border: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75);
-  transform: rotate(-3deg);
-  align-self: center;
-  z-index: 1;
-  margin: 0;
-}
-:root .as-cs-phase__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-}
-
-/* NEW element - overlapping phone, leaning out past the container
-   edge. For now shares the desktop screenshot's src cropped to 9:17
-   (Charles: "just use a double up for now") - built so only the src
-   needs swapping when real mobile screenshots exist. */
-:root .as-cs-phase__phone {
-  grid-column: 2;
-  grid-row-start: 1;
-  grid-row-end: 4;
-  align-self: end;
-  justify-self: end;
-  width: 34%;
-  aspect-ratio: 9 / 17;
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75);
-  transform: rotate(5deg) translateY(28px);
-  margin-right: -6%;
-  z-index: 2;
-}
-:root .as-cs-phase__phone img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-}
-
-/* Alternation - even phases mirror. Devices swap sides, rotation
-   mirrors too, so the pair always leans INTO the copy. */
-:root .as-cs-phase:nth-child(even) .as-cs-phase__number,
-:root .as-cs-phase:nth-child(even) .as-cs-phase__title,
-:root .as-cs-phase:nth-child(even) .as-cs-phase__list {
-  grid-column: 2;
-}
-:root .as-cs-phase:nth-child(even) .as-cs-phase__image,
-:root .as-cs-phase:nth-child(even) .as-cs-phase__phone {
-  grid-column: 1;
-}
-:root .as-cs-phase:nth-child(even) .as-cs-phase__image {
-  transform: rotate(3deg);
-  margin-left: auto;
-}
-:root .as-cs-phase:nth-child(even) .as-cs-phase__phone {
-  justify-self: start;
-  margin-right: 0;
-  margin-left: -6%;
-  transform: rotate(-5deg) translateY(28px);
-}
-
 /* Terracotta case study only, scoped to .as-cs-v2 wrapper.
    "View live site" promoted to a button; the shared .as-cs-hero__link rule
    already sets align-self: flex-start, but this pins it explicitly for the
@@ -7027,11 +6719,15 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   width: 92%;
 }
 
-/* The as-cs-phase pair uses a much heavier shadow (0 14px 40px rgba(0,0,0,.75))
-   deliberately, since it sits on ink rather than white; this value sits between
-   that and the original hero shadow (0 8px 24px rgba(0,0,0,.16)) because the two
-   hero frames are now near-identical images and need more separation than the
-   original provided. Desktop frame keeps its original light shadow untouched. */
+/* 0 12px 30px rgba(0,0,0,.26) is deliberately between two other values on this
+   template: the original hero shadow (0 8px 24px rgba(0,0,0,.16)) is too light
+   here, because the two hero frames are now near-identical images and need more
+   separation than it gave; the heavier 0 14px 40px rgba(0,0,0,.75) belongs to
+   frames sitting on ink rather than white and is too strong for this white
+   band. Desktop frame keeps its original light shadow untouched.
+   (The retired phase-row component, removed 1 August 2026, carried that heavy
+   ink-band value. It survives on .as-casestudy__card and on the case-study hub
+   row pair, .as-cs-row__image / __phone, which are the live references.) */
 :root .as-cs-v2 .as-cs-hero__media-phone {
   width: 28%;
   right: -2%;
@@ -7084,7 +6780,9 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 
 /* Terracotta case study only, scoped to .as-cs-v2 wrapper.
-   Solution section: numbered vertical spine, replaces the alternating as-cs-phase rows */
+   Solution section: numbered vertical spine. Replaced the alternating
+   left/right phase rows this template used until 1 August 2026, when that
+   component was retired; the spine is now the only solution layout. */
 :root .as-cs-v2 .as-cs-solution__spine {
   position: relative;
   padding-left: 96px;
@@ -7211,7 +6909,9 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 }
 
 /* Terracotta case study only, scoped to .as-cs-v2 wrapper.
-   Results section: own white band, sits between as-cs-solution and as-cs-beforeafter */
+   Results section: own white band, sits directly after .as-cs-solution.
+   It used to be followed by a before/after column pair; that component was
+   retired 1 August 2026 and .as-cs-gallery now fills the slot. */
 :root .as-cs-v2 .as-cs-results {
   background: var(--as-white);
   padding: var(--as-space-section) var(--as-space-section-side);
@@ -7616,28 +7316,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: inherit;
 }
 
-/* --- before/after frames - ink + pop, same tier as the phase cards
-   above (bumped from the base's --radius-md to --radius-lg for
-   consistency with every other boxed component on this template).
-   Covers both the "Before" and "After" columns automatically, since
-   both share the one .as-cs-beforeafter__img class - austin-space's
-   fa-triangle-exclamation placeholder gets the identical frame with no
-   extra selector needed. */
-:root .as-cs-beforeafter__img {
-  border: var(--bw) solid var(--ink-900);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--pop-md);
-}
-:root .as-cs-beforeafter__img img {
-  border-radius: var(--radius-lg);
-}
-/* Placeholder icon/text - was --as-border (very faint), bumped to
-   --grey-400 so the "no online presence" placeholder actually reads
-   instead of nearly vanishing against its own off-white fill. */
-:root .as-cs-beforeafter__img-placeholder {
-  color: var(--grey-400);
-}
-
 /* --- challenge list xmarks - muted grey, not candy-pink. These mark
    problems/constraints (a negative); the checklist ticks above mark
    solutions (a positive) - keeping them visually distinct keeps the
@@ -7684,10 +7362,13 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: var(--ink-900);
 }
 
-/* Hero device pair - landscape + portrait, mirrors .as-cs-phase__image /
-   __phone verbatim (css:7630-7678), expressed for a position:relative
-   parent instead of the phase's grid-column/grid-row placement. Single
-   instance per page, no alternation needed. */
+/* Hero device pair - landscape 16/10 frame at 88% with a -3deg tilt, portrait
+   9/17 phone at 34% overlapping bottom-right at +5deg, both 16px radius. The
+   pattern is shared with the case-study hub row pair (.as-cs-row__image /
+   __phone), which is the live copy to compare against; it originated on the
+   phase-row component, retired 1 August 2026. Expressed here for a
+   position:relative parent rather than grid placement, since there is a single
+   instance per page and no left/right alternation to handle. */
 :root .as-cs-hero__media {
   position: relative;
   display: flex;
@@ -7728,21 +7409,15 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: var(--ink-900);
 }
 
-/* Base .as-cs-beforeafter__label is already neutral (--as-mid) -
-   only the --after modifier carries purple. */
-:root .as-cs-beforeafter__label--after {
-  color: var(--ink-900);
-}
-
-/* Tighter section rhythm - base .as-cs-challenge / .as-cs-solution /
-   .as-cs-beforeafter are all var(--as-space-section) (7rem/112px) top and
-   bottom. Desktop-only, guarded below; mobile (<=480px) falls back to the
+/* Tighter section rhythm - base .as-cs-challenge and .as-cs-solution are both
+   var(--as-space-section) (7rem/112px) top and bottom. A third component shared
+   this rule until 1 August 2026 and was retired, which is why only one selector
+   remains below. Desktop-only, guarded below; mobile (<=480px) falls back to the
    existing unscoped 64px mobile token rule.
    .as-cs-solution pulled out by Item 6 below - it's now the ink band and
    takes the .as-creds padding recipe instead of the shared 84/84. */
 @media (min-width: 481px) {
-  :root .as-cs-challenge,
-  :root .as-cs-beforeafter {
+  :root .as-cs-challenge {
     padding-top: var(--as-pad-band);
     padding-bottom: var(--as-pad-band);
   }

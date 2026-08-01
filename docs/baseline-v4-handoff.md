@@ -15,15 +15,20 @@ Read this one. Where they disagree, this one is right.
 > its panel size ceiling figure and points here. Read them for history only.
 
 > **Verification stamp.** Every checkable claim below was re-run against the
-> working tree at commit time rather than carried over. Five figures moved as a
-> result and are marked **[corrected 1 Aug]** inline. The corrections are in
-> sections 1, 3 and 9. Method: section 8.
+> working tree at commit time rather than carried over. Figures that moved as a
+> result are marked **[corrected 1 Aug]** inline, in sections 1, 3 and 9.
+> Method: section 8.
+>
+> Sections 1, 2f, 3 and 9 were then re-checked again after the section 10
+> retirement, which moved every size figure in the document. **Any pass that
+> changes the stylesheet invalidates this table** - re-run
+> `node tools/build-css.js --check` rather than quoting it.
 
 ---
 
 ## 1. Status
 
-Site healthy, live on build `20260801-29128a`.
+Site healthy, live on build `20260801-83b7c3`.
 
 **Shipped and committed since v3:**
 
@@ -33,28 +38,40 @@ Site healthy, live on build `20260801-29128a`.
 | FAQ mobile collapse | `99ea84c` | 48/48 |
 | mobile card rail + minified panel | `1d49b97` | 48/48 |
 | probe environment guard | `ad95ab0` | 28 stub assertions + live |
+| baseline v2/v3 archived to `docs/superseded/` | `fa5ea01` | n/a, docs only |
+| `.as-cs-phase*` / `.as-cs-beforeafter*` retirement | see section 10 | 48/48, `nonExpected: []` |
 
-**Current stylesheet sizes.** **[corrected 1 Aug]** - v4's first draft carried
-`~284,600` for the source and a minification/rail split that did not reconcile
-to the panel size. All figures below are `node tools/build-css.js --check`
-output, which is read-only and writes nothing:
+**Current stylesheet sizes.** All figures are `node tools/build-css.js --check`
+output, which is read-only and writes nothing. Re-run it rather than trusting
+this table - it is the first thing to go stale.
 
 | | bytes |
 |---|---|
-| `master-stylesheet.css` (authoring source, commented) | 286,243 |
-| stripped (decommented, pre-minify, includes rail) | 149,082 |
-| minification saving | -19,547 |
-| minified body | 129,535 |
+| `master-stylesheet.css` (authoring source, commented) | 278,792 |
+| stripped (decommented, pre-minify) | 143,272 |
+| minification saving | -18,747 |
+| minified body | 124,525 |
 | canary line appended post-minify | +50 |
-| **`master-stylesheet.panel.css` (what Charles pastes)** | **129,585** |
-| previous panel (unminified, pre-rail) | 147,863 |
-| **net reduction against that** | **18,278 (12.4%)** |
+| **`master-stylesheet.panel.css` (what Charles pastes)** | **124,575** |
 
-The rail itself added 1,219 bytes to the stripped sheet (149,082 - 147,863), not
-the ~1,500 first estimated. The whole change reconciles exactly:
-`147,863 + 1,219 - 19,547 + 50 = 129,585`.
+Deployed `custom.css` is ~123,500 after Squarespace re-minifies.
 
-Deployed `custom.css` is ~128,500 after Squarespace re-minifies.
+**How the panel got here.** **[corrected 1 Aug]** - v4's first draft carried
+`~284,600` for the source and a minification/rail split that did not reconcile.
+The corrected chain, each step measured:
+
+| step | panel bytes |
+|---|---|
+| pre-minify, pre-rail (build `20260731-c26066`) | 147,863 |
+| rail rules added, +1,219 to the stripped sheet | - |
+| minified for the first time, -19,547 | 129,585 |
+| `.as-cs-phase*` / `.as-cs-beforeafter*` retired, 47 rules | **124,575** |
+
+The rail pass reconciles exactly as `147,863 + 1,219 - 19,547 + 50 = 129,585`.
+The retirement took a further **5,010** bytes off the panel and 7,451 off the
+master. Both pre-minify estimates for the retirement (5,650 and 8,131) were
+high, because minification had already absorbed most of the whitespace they
+counted - which is why section 10 reports the realised figure only.
 
 ---
 
@@ -163,8 +180,11 @@ The deployed URL carries a revision counter:
 `/custom-css/{site}/{id}/NNN/custom.css`. **A failed save still increments it**,
 so the counter proves the save was accepted, not that it worked.
 
-The reliable check is `decodedBodySize` on that resource: healthy is ~128,500, a
-stub is under 600. Symptoms of a stub are total, not partial - hero
+The reliable check is `decodedBodySize` on that resource: healthy is currently
+~123,500 and a stub is under 600. The gap is three orders of magnitude, so the
+exact healthy figure does not matter and should not be treated as a threshold -
+read it from `--check` if you need it precise. Symptoms of a stub are total, not
+partial - hero
 `clip-path: none`, `.as-container` unconstrained, ink bands transparent. It
 reads as a catastrophic CSS bug rather than a save failure.
 
@@ -178,12 +198,14 @@ this panel, and nobody knew.
 
 `panel.css` is now whitespace-minified by `build-css.js`, one line per rule.
 
-- saving **19,547 bytes, 13.1%** of the 149,082-byte stripped sheet
+- saving **18,747 bytes, 13.1%** of the 143,272-byte stripped sheet. The
+  percentage has held at 13.1% across both builds it has run on, which is what
+  you would expect from whitespace that scales with rule count.
   **[corrected 1 Aug]** - the first draft said ~19,300 and 13.9%; neither
   matched `--check`, and 13.9% did not follow from 19,300 against any of the
   three candidate denominators.
-- one line per rule costs ~1,295 bytes over fully flat, and keeps the artefact
-  git-diffable at **1,296 lines**. Worth it: this file cannot be inspected once
+- one line per rule costs ~1,250 bytes over fully flat, and keeps the artefact
+  git-diffable at **1,249 lines**. Worth it: this file cannot be inspected once
   deployed (cross-origin, `cssRules` empty), so the repo copy is the only
   review surface there is.
 - `master-stylesheet.css` is untouched and remains the authoring source
@@ -196,14 +218,20 @@ rather than by a live paste.
 
 **`proveInert()` runs on every build** (`tools/build-css.js:445`), parsing pre-
 and post-minify into (media, selector, declarations) triples and failing on any
-divergence. Current run: 1,198 rules and 3,998 declarations before and after,
+divergence. Current run: 1,151 rules and 3,828 declarations before and after,
 zero only-before, zero only-after, ordered sequence identical, flat declaration
 stream identical. Every future build re-proves its own inertness rather than
 trusting one result.
 
-Independently confirmed live: at 1505 the rail does not exist (media-scoped
-below 600px), so those 16 harness cells exercise minification alone. Zero
-property changes across 1,198 rules.
+The rule count doubles as a delete audit. The retirement in section 10 removed
+47 sole rules, and `proveInert` went 1,198 -> 1,151 on the next build. An
+off-by-one there would mean a rule was merged or lost beyond the plan, so
+**check the delta against the intended count on any deletion pass.**
+
+Independently confirmed live on the rail pass: at 1505 the rail does not exist
+(media-scoped below 600px), so those 16 harness cells exercised minification
+alone. Zero property changes across all 1,198 rules the sheet held at that
+build.
 
 **`--check` is read-only.** Use it to re-derive any size figure in this doc
 without dirtying the tree. `--no-minify` writes a diffing artefact that is
@@ -399,7 +427,13 @@ Carried forward and re-checked 1 August. Still open:
   (`css/master-stylesheet.css:5881`) sets `background: var(--candy-pink)`.
 - `json/services/5-support.json:24` canonical points at a URL that 301s.
 - `wave-clip-contact` has uneven crests 0.72/0.77/0.79/0.76.
-- 8 empty CSS rule bodies. Confirmed - 8 in the master, 8 in the panel.
+- **7** empty CSS rule bodies, in both the master and the panel.
+  **[corrected 1 Aug, post-retirement]** - this was 8 until the section 10 pass.
+  `.as-cs-beforeafter__inner` was simultaneously one of the 8 and one of the 18
+  sole `beforeafter` rules, so it left with its block. The survivors are
+  `.as-creds__item`, `.as-backstory__inner`, `.as-casestudy`,
+  `.as-svc-included__inner`, `.as-svc-process__inner`, `.as-cs-solution__inner`,
+  `.as-about-work__inner`.
 - Hover state is still not captured by the harness. Dispatched pointer events do
   not set `:hover`. 80 of CC's 86 cascade regressions were hover-state, and
   `.as-btn` / `.as-offer` / `.as-card-lift-*` / `.as-pos-card` all express
@@ -415,19 +449,27 @@ longer true. **[corrected 1 Aug]**
 - ~~Untracked `html/case-studies-terracotta-property - old copy.html` and stale
   `css/master-stylesheet-backup.css`.~~ Neither file exists on disk, and
   `git ls-files --others --exclude-standard` returns empty. Tree is clean.
+- ~~`.as-cs-phase*` and `.as-cs-beforeafter*` are dead, held for their own
+  pass.~~ **Done - see section 10.** 47 sole rules deleted, 5 selector trims,
+  6 comments reworded. Panel 129,585 -> 124,575.
+- ~~v2 and v3 handoffs are uncommitted, in `~/Downloads` only.~~ Archived to
+  `docs/superseded/` in `fa5ea01`, each with a header retracting its own panel
+  size ceiling figure.
 
 New:
 
-- **`.as-cs-phase*` and `.as-cs-beforeafter*` are dead.** Re-verified 1 Aug:
-  zero hits in `html/` and zero in `json/`; they survive only in `css/` and one
-  docs `.md`. Those pages now use `.as-cs-gallery` and `.as-cs-results`. 29 sole
-  rules / 3,831 bytes and 18 sole rules / 1,819 bytes respectively, plus 5
-  shared-selector rules that need **selector trims, not block deletes** - one
-  carries four live case-study heading selectors. Held for its own pass.
+- **`docs/austinspace-spacing-desktop-spec.md` predates the section 10
+  retirement** and refers to `.as-cs-phase*` / `.as-cs-beforeafter*` as live
+  components. **This is correct and must not be edited.** It is a dated
+  historical spec; docs record what was true when they were written, and only
+  the CSS has to be true now. Noted here so the next repo-wide grep for those
+  families finds an explanation rather than a loose end.
 - **`.as-build-canary` is panel-only**, applied during the build, not authored
-  in source. Confirmed - present at `master-stylesheet.panel.css:1296`, absent
-  from the master. It must be bumped every pass or paste verification is blind.
-  It went stale through the accordion pass for exactly this reason.
+  in source. Confirmed - present as the last line of the panel, absent from the
+  master. It must be bumped every pass or paste verification is blind. It went
+  stale through the accordion pass for exactly this reason. In practice the
+  build bumps it automatically whenever the source hash changes, so it only
+  needs attention on a no-op rebuild.
 - The canary date stamps UTC, so a build run after midnight BST carries the
   previous day's date. Cosmetic.
 - ~116 `as-*` classes had no match in a local HTML corpus, but the list is
@@ -437,3 +479,73 @@ New:
   bytes if merged. **Not recommended** - merging changes cascade position, the
   same objection that blocked the 26 partial-pair merges. Unnecessary now that
   minification freed the space.
+
+---
+
+## 10. Retirement of `.as-cs-phase*` and `.as-cs-beforeafter*`
+
+Shipped 1 August 2026. Harness **48/48**, `nonExpected: []` on every page at
+every width, all four case-study pages fully clean at 1505. Verified on the
+external display at dpr 1 - see section 4.
+
+`.as-cs-gallery` and `.as-cs-results` had already replaced both components in
+the markup. Zero hits in `html/` and `json/` before the pass, re-confirmed at
+the moment of starting rather than trusted from the earlier scan.
+
+**What changed**
+
+| | count |
+|---|---|
+| sole rules block-deleted | 47 (29 phase, 18 before/after) |
+| shared rules selector-trimmed | 5 |
+| comments reworded | 6 |
+| comments deleted with their blocks | 6 |
+| at-rule blocks left empty | 0 |
+| panel bytes | 129,585 -> **124,575** (-5,010) |
+| master bytes | 286,243 -> 278,792 (-7,451) |
+| `proveInert` rules | 1,198 -> 1,151 |
+
+The rule delta is exactly the 47 deletions, which is the cheapest available
+proof that nothing was merged or lost beyond the plan.
+
+**The five shared rules were the whole risk.** Each needed a selector trim with
+its body and co-tenants kept. Block-deleting any of them would have been a live
+regression on pages the retired components never touched:
+
+| rule | trimmed | live co-tenants kept |
+|---|---|---|
+| `@media (max-width:480px)` | `.as-cs-beforeafter` | 5 - the whole case-study mobile padding |
+| `@media (max-width:1280px)` | `.as-cs-beforeafter` | **16**, spanning nearly every section on the site |
+| `@media (max-width:1280px)` | `.as-cs-beforeafter__header` | 4 |
+| unscoped | `:root .as-cs-phase__title` | 4 - **the Exo-trap heading rule** |
+| `@media (min-width:481px)` | `:root .as-cs-beforeafter` | 1, so the list is now single-selector |
+
+The Exo-trap rule was checked separately on a live page after the paste: all
+four surviving case-study heading classes compute Fraunces. Worth keeping as a
+standing check on any pass that touches a shared heading rule, because a
+`font-family` regression surfaces in the harness as a wall of geometry diffs
+with no obvious cause.
+
+**Comments: reword, do not delete.** The original brief said to delete stale
+comments. That is right for the satisfied-deferral case - a comment describing
+work now done sends the next session chasing finished work. It is wrong for a
+live rule whose comment explains *why it is the way it is*, where the reasoning
+is the asset and only the cross-reference has died.
+
+Six such comments were rewritten rather than dropped, and **none of them names
+the retired selectors**. A comment saying "see `.as-cs-phase`" is worse than no
+comment: the next person greps, finds one hit in a comment, and cannot tell
+whether it is stale or whether they are missing something. The components are
+described in prose with their retirement date instead.
+
+`css:7687` also carried a `css:7630-7678` line reference. Those line numbers
+were already wrong before this pass and would be wrong again after the next
+one, so they were dropped entirely rather than updated. **Describe the thing,
+not its address** - that comment now names the live copy to compare against
+(`.as-cs-row__image` / `__phone`) instead of a line range.
+
+**One claim caught before it shipped.** A draft of the `css:7030` reword
+asserted the heavy `0 14px 40px rgba(0,0,0,.75)` shadow survived only on the
+case-study hub row. Grep says it also survives on `.as-casestudy__card`. Both
+are named in the committed comment. Same failure mode as section 8, caught by
+checking a claim at the moment of writing it rather than after.
