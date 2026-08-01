@@ -44,6 +44,28 @@
  * v1's single styleHash could never be attributed to a property, which is why
  * 46 group differences closed unresolved. v2 stores ONE HASH PER PROPERTY, so
  * a diff names the property in the same call that finds it.
+ *
+ * ENVIRONMENT GUARD - added 1 August 2026
+ * The display silently invalidated THREE harness runs in one session. The
+ * symptom every time was diffuse geometry changes with `props: []`, on elements
+ * unrelated to the edit, spread across pages the change could not reach. Every
+ * time it was diagnosed by hand, twice only after the numbers looked wrong.
+ * Two variables, both established by measurement, both now asserted:
+ *
+ *   devicePixelRatio. 1 on the 2560x1440 external display, 2 on the MacBook Air
+ *   panel. At dpr 2 Chrome snaps layout to HALF pixels rather than whole ones:
+ *   text box heights move 1-2px, widths stay identical, and fractional grid
+ *   tracks round differently. Baseline v2 was captured at dpr 1.
+ *
+ *   Scrollbar mode. macOS "Show scroll bars: Always" gives classic scrollbars
+ *   and cw = vw - 15 (1490 / 753 / 360). Overlay scrollbars give cw = vw, and
+ *   every .as-container auto margin shifts by 7.5px.
+ *
+ * diff() refuses on either mismatch, sweep() refuses to WRITE at dpr != 1.
+ * A mismatch always returns { err }, never a diff and never a zero - those two
+ * are indistinguishable from a real result, which is the whole problem.
+ * Baselines captured before this change store no dpr; a missing value reads as
+ * "unknown, cannot check" and is skipped, not treated as a mismatch.
  */
 
 window.__ASB2 = (function () {
@@ -184,7 +206,7 @@ window.__ASB2 = (function () {
 
   /* --------------------------------------------------------------- capture */
 
-  function captureFrame(doc, win, path, w) {
+  function captureFrame(doc, win, path, w, opts) {
     var all = doc.querySelectorAll('*'), nodes = [], i, j;
     for (i = 0; i < all.length; i++) {
       for (j = 0; j < all[i].classList.length; j++) {
@@ -220,6 +242,11 @@ window.__ASB2 = (function () {
       v: VERSION,
       vw: win.innerWidth,
       cw: doc.documentElement.clientWidth,
+      /* THE ENVIRONMENT IS PART OF THE MEASUREMENT - see ENVIRONMENT GUARD in
+       * the header. Recorded so diff() can refuse to compare across displays.
+       * Baselines captured before 1 August 2026 have no dpr; a missing value
+       * means "unknown", not "mismatch", and is not checked. */
+      dpr: win.devicePixelRatio,
       els: nodes.length,
       gr: lines.length,
       docH: Math.round(doc.documentElement.scrollHeight),
@@ -230,13 +257,19 @@ window.__ASB2 = (function () {
       at: Date.now()
     };
 
-    try {
-      localStorage.setItem(key(path, w), body);
-      localStorage.setItem(mkey(path, w), JSON.stringify(meta));
-      meta.stored = true;
-    } catch (e) {
+    /* opts.save === false inspects a cell without overwriting it. Default is
+     * write-on, so no existing caller changes behaviour. */
+    if (opts && opts.save === false) {
       meta.stored = false;
-      meta.err = String(e).slice(0, 80);          // quota is the likely cause
+    } else {
+      try {
+        localStorage.setItem(key(path, w), body);
+        localStorage.setItem(mkey(path, w), JSON.stringify(meta));
+        meta.stored = true;
+      } catch (e) {
+        meta.stored = false;
+        meta.err = String(e).slice(0, 80);        // quota is the likely cause
+      }
     }
     meta.bytes = body.length;
     return meta;
@@ -277,12 +310,14 @@ window.__ASB2 = (function () {
       return out;
     },
 
-    /* one page at one width */
-    page: function (path, w) {
+    /* one page at one width. opts.save === false returns the record without
+     * touching localStorage - calling page() purely to inspect its return shape
+     * used to overwrite the cell it was inspecting. */
+    page: function (path, w, opts) {
       return new Promise(function (res) {
         openFrame(path, w, function (f, doc, win) {
           var m;
-          try { m = captureFrame(doc, win, path, w); }
+          try { m = captureFrame(doc, win, path, w, opts); }
           catch (e) { m = { err: String(e).slice(0, 120) }; }
           f.remove();
           res(m);
@@ -293,6 +328,14 @@ window.__ASB2 = (function () {
     /* every page at one width, sequential. Returns totals only - tool output
      * truncates at roughly 1KB, so never return the records themselves. */
     sweep: async function (w, pages) {
+      /* sweep WRITES. Capturing on the wrong display silently corrupts cells -
+       * that happened to /@1505 and /@375 on 1 August. Hardcoding 1 is correct:
+       * baseline v2 is a single environment and there is no case for capturing
+       * part of it somewhere else. See ENVIRONMENT GUARD in the header. */
+      if (window.devicePixelRatio !== 1) {
+        return { err: 'ENV dpr ' + window.devicePixelRatio +
+                      ' - baseline v2 was captured at dpr 1, refusing to write' };
+      }
       var list = pages || PAGES, out = { w: w, ok: 0, fail: 0, bytes: 0, gr: 0, els: 0, bad: [] };
       for (var i = 0; i < list.length; i++) {
         var m = await this.page(list[i], w);
@@ -312,9 +355,31 @@ window.__ASB2 = (function () {
     diff: async function (path, w) {
       var base = localStorage.getItem(key(path, w));
       if (!base) return { err: 'no baseline for ' + path + '@' + w };
-      var live = null;
+
+      /* ENVIRONMENT GUARD - checked before opening a frame so it costs nothing.
+       * An env mismatch returns an err and NEVER a diff or a zero: both of those
+       * are indistinguishable from a real result, and that ambiguity is exactly
+       * what invalidated three runs on 1 August before anyone noticed. */
+      var metaRaw = localStorage.getItem(mkey(path, w));
+      var m = metaRaw ? JSON.parse(metaRaw) : null;
+      if (m && m.dpr != null && m.dpr !== window.devicePixelRatio) {
+        return { err: 'ENV devicePixelRatio ' + window.devicePixelRatio +
+                      ' but baseline captured at ' + m.dpr +
+                      ' - wrong display, results invalid' };
+      }
+
+      var live = null, envErr = null;
       await new Promise(function (res) {
         openFrame(path, w, function (f, doc, win) {
+          /* Scrollbar mode is only knowable once the frame exists. Classic
+           * scrollbars give cw = vw - 15, overlay gives cw = vw, and every
+           * .as-container auto margin shifts 7.5px between the two. */
+          if (m && m.cw != null && doc.documentElement.clientWidth !== m.cw) {
+            envErr = 'ENV clientWidth ' + doc.documentElement.clientWidth +
+                     ' but baseline captured at ' + m.cw +
+                     ' - scrollbar mode differs, results invalid';
+            f.remove(); res(); return;
+          }
           var all = doc.querySelectorAll('*'), nodes = [], i, j;
           for (i = 0; i < all.length; i++)
             for (j = 0; j < all[i].classList.length; j++)
@@ -338,6 +403,7 @@ window.__ASB2 = (function () {
           f.remove(); res();
         });
       });
+      if (envErr) return { err: envErr };
 
       var A = {}, B = {}, out = { path: path, w: w, changed: [], gone: [], added: 0, props: {} };
       base.split('\n').forEach(function (l) { A[l.split('|')[0]] = l; });
