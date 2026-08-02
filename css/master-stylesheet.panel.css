@@ -145,6 +145,15 @@
 :root .as-hero--cs-austin-space-low-mid{aspect-ratio:4 / 1}
 :root .as-hero--cs-austin-space-low-mid .as-hero__img{clip-path:url(#wave-clip-cs-austin-space-low-mid-mobile);object-view-box:inset(53.5% 16.67% 21.5%)}
 :root .as-hero--cs-austin-space-footer .as-hero__img{clip-path:url(#wave-clip-cs-austin-space-footer-mobile);object-view-box:inset(63.7% 16.67% 3%)}
+:root .as-hero--case-study-gypsy-pistoleros{aspect-ratio:2 / 1}
+:root .as-hero--case-study-gypsy-pistoleros .as-hero__img{clip-path:url(#wave-clip-case-study-gypsy-pistoleros-mobile);object-view-box:inset(47% 16.67% 3%)}
+:root .as-hero--cs-gypsy-pistoleros-high-mid{aspect-ratio:4 / 1}
+:root .as-hero--cs-gypsy-pistoleros-high-mid .as-hero__img{clip-path:url(#wave-clip-cs-gypsy-pistoleros-high-mid-mobile);object-view-box:inset(19.5% 16.67% 55.5%)}
+:root .as-hero--cs-gypsy-pistoleros-mid{aspect-ratio:4 / 1}
+:root .as-hero--cs-gypsy-pistoleros-mid .as-hero__img{clip-path:url(#wave-clip-cs-gypsy-pistoleros-mid-mobile);object-view-box:inset(37.5% 16.67% 37.5%)}
+:root .as-hero--cs-gypsy-pistoleros-low-mid{aspect-ratio:4 / 1}
+:root .as-hero--cs-gypsy-pistoleros-low-mid .as-hero__img{clip-path:url(#wave-clip-cs-gypsy-pistoleros-low-mid-mobile);object-view-box:inset(55.5% 16.67% 19.5%)}
+:root .as-hero--cs-gypsy-pistoleros-footer .as-hero__img{clip-path:url(#wave-clip-cs-gypsy-pistoleros-footer-mobile);object-view-box:inset(3% 16.67% 63.7%)}
 :root .as-hero-combined{margin-top:-70px;position:relative}
 :root .as-hero-combined__content{padding-top:28px;padding-bottom:60px}
 :root .as-hero-combined__left{gap:24px}
@@ -1346,4 +1355,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){:root .as-rail{transition:none}
 }
-.as-build-canary{--as-build-id:"20260802-d3e792"}
+.as-build-canary{--as-build-id:"20260802-a21927"}
