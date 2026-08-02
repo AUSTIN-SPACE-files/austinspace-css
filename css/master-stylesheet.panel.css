@@ -115,6 +115,11 @@
 :root .as-hero--contact-faq{aspect-ratio:4 / 1}
 :root .as-hero--contact-faq .as-hero__img{clip-path:url(#wave-clip-contact-faq-mobile);object-view-box:inset(52.5% 16.67% 22.5%)}
 :root .as-hero--contact-footer .as-hero__img{clip-path:url(#wave-clip-contact-footer-mobile);object-view-box:inset(58.4% 16.67% 8.3%)}
+:root .as-hero--case-studies{aspect-ratio:2 / 1}
+:root .as-hero--case-studies .as-hero__img{clip-path:url(#wave-clip-case-studies-mobile);object-view-box:inset(47% 16.67% 3%)}
+:root .as-hero--casestudies-hub-mid{aspect-ratio:4 / 1}
+:root .as-hero--casestudies-hub-mid .as-hero__img{clip-path:url(#wave-clip-casestudies-hub-mid-mobile);object-view-box:inset(35.5% 16.67% 39.5%)}
+:root .as-hero--casestudies-hub-footer .as-hero__img{clip-path:url(#wave-clip-casestudies-hub-footer-mobile);object-view-box:inset(8.3% 16.67% 58.4%)}
 :root .as-hero-combined{margin-top:-70px;position:relative}
 :root .as-hero-combined__content{padding-top:28px;padding-bottom:60px}
 :root .as-hero-combined__left{gap:24px}
@@ -1316,4 +1321,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){:root .as-rail{transition:none}
 }
-.as-build-canary{--as-build-id:"20260802-25d7ea"}
+.as-build-canary{--as-build-id:"20260802-13c6ee"}

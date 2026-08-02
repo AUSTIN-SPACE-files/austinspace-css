@@ -913,6 +913,22 @@
     clip-path: url(#wave-clip-contact-footer-mobile);
     object-view-box: inset(58.4% 16.67% 8.3%); }
 
+
+  /* Case Studies hub below the knee, 3 bands.
+     Crop clamped away from desktop intent, to hold the 3 percent margin:
+       case-studies 75 -> 72 */
+  :root .as-hero--case-studies{ aspect-ratio: 2 / 1; }
+  :root .as-hero--case-studies .as-hero__img{
+    clip-path: url(#wave-clip-case-studies-mobile);
+    object-view-box: inset(47% 16.67% 3%); }
+  :root .as-hero--casestudies-hub-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--casestudies-hub-mid .as-hero__img{
+    clip-path: url(#wave-clip-casestudies-hub-mid-mobile);
+    object-view-box: inset(35.5% 16.67% 39.5%); }
+  :root .as-hero--casestudies-hub-footer .as-hero__img{
+    clip-path: url(#wave-clip-casestudies-hub-footer-mobile);
+    object-view-box: inset(8.3% 16.67% 58.4%); }
+
   /* position: relative restates the base. Kept deliberately: the
      -70px pull puts this copy underneath a band whose stroke
      carries z-index 1, so paint order matters here even though
