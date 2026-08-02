@@ -154,6 +154,8 @@
 :root .as-hero--cs-gypsy-pistoleros-low-mid{aspect-ratio:4 / 1}
 :root .as-hero--cs-gypsy-pistoleros-low-mid .as-hero__img{clip-path:url(#wave-clip-cs-gypsy-pistoleros-low-mid-mobile);object-view-box:inset(55.5% 16.67% 19.5%)}
 :root .as-hero--cs-gypsy-pistoleros-footer .as-hero__img{clip-path:url(#wave-clip-cs-gypsy-pistoleros-footer-mobile);object-view-box:inset(3% 16.67% 63.7%)}
+:root .as-hero--policy-privacy{aspect-ratio:2 / 1}
+:root .as-hero--policy-privacy .as-hero__img{clip-path:url(#wave-clip-policy-privacy-mobile);object-view-box:inset(40% 16.67% 10%)}
 :root .as-hero-combined{margin-top:-70px;position:relative}
 :root .as-hero-combined__content{padding-top:28px;padding-bottom:60px}
 :root .as-hero-combined__left{gap:24px}
@@ -1355,4 +1357,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){:root .as-rail{transition:none}
 }
-.as-build-canary{--as-build-id:"20260802-a21927"}
+.as-build-canary{--as-build-id:"20260802-42b9bb"}

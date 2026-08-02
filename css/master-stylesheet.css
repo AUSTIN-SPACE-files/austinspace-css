@@ -1023,6 +1023,14 @@
     clip-path: url(#wave-clip-cs-gypsy-pistoleros-footer-mobile);
     object-view-box: inset(3% 16.67% 63.7%); }
 
+
+  /* Privacy policy below the knee, 1 band.
+     Hero only - no mid, no footer. */
+  :root .as-hero--policy-privacy{ aspect-ratio: 2 / 1; }
+  :root .as-hero--policy-privacy .as-hero__img{
+    clip-path: url(#wave-clip-policy-privacy-mobile);
+    object-view-box: inset(40% 16.67% 10%); }
+
   /* position: relative restates the base. Kept deliberately: the
      -70px pull puts this copy underneath a band whose stroke
      carries z-index 1, so paint order matters here even though
