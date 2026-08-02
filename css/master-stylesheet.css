@@ -954,6 +954,30 @@
     clip-path: url(#wave-clip-cs-terracotta-footer-mobile);
     object-view-box: inset(63.7% 16.67% 3%); }
 
+
+  /* Case study - DDR below the knee, 5 bands.
+     Crop clamped away from desktop intent, to hold the 3 percent margin:
+       cs-ddr-footer 88 -> 80.35 */
+  :root .as-hero--case-study-ddr{ aspect-ratio: 2 / 1; }
+  :root .as-hero--case-study-ddr .as-hero__img{
+    clip-path: url(#wave-clip-case-study-ddr-mobile);
+    object-view-box: inset(45% 16.67% 5%); }
+  :root .as-hero--cs-ddr-high-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--cs-ddr-high-mid .as-hero__img{
+    clip-path: url(#wave-clip-cs-ddr-high-mid-mobile);
+    object-view-box: inset(8.5% 16.67% 66.5%); }
+  :root .as-hero--cs-ddr-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--cs-ddr-mid .as-hero__img{
+    clip-path: url(#wave-clip-cs-ddr-mid-mobile);
+    object-view-box: inset(23.5% 16.67% 51.5%); }
+  :root .as-hero--cs-ddr-low-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--cs-ddr-low-mid .as-hero__img{
+    clip-path: url(#wave-clip-cs-ddr-low-mid-mobile);
+    object-view-box: inset(38.5% 16.67% 36.5%); }
+  :root .as-hero--cs-ddr-footer .as-hero__img{
+    clip-path: url(#wave-clip-cs-ddr-footer-mobile);
+    object-view-box: inset(63.7% 16.67% 3%); }
+
   /* position: relative restates the base. Kept deliberately: the
      -70px pull puts this copy underneath a band whose stroke
      carries z-index 1, so paint order matters here even though
