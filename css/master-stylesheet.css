@@ -853,6 +853,29 @@
     clip-path: url(#wave-clip-site-refresh-footer-mobile);
     object-view-box: inset(63.7% 16.67% 3%); }
 
+
+  /* Ongoing Support below the knee, 4 bands.
+     The live slug is /services/squarespace-support-retainer
+     but every asset here is named ongoing-support. That split is deliberate.
+     Crop clamped away from desktop intent, to hold the 3 percent margin:
+       ongoing-support 80 -> 72
+       ongoing-support-footer 97 -> 80.35 */
+  :root .as-hero--ongoing-support{ aspect-ratio: 2 / 1; }
+  :root .as-hero--ongoing-support .as-hero__img{
+    clip-path: url(#wave-clip-ongoing-support-mobile);
+    object-view-box: inset(47% 16.67% 3%); }
+  :root .as-hero--ongoing-support-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--ongoing-support-mid .as-hero__img{
+    clip-path: url(#wave-clip-ongoing-support-mid-mobile);
+    object-view-box: inset(29.5% 16.67% 45.5%); }
+  :root .as-hero--ongoing-support-low-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--ongoing-support-low-mid .as-hero__img{
+    clip-path: url(#wave-clip-ongoing-support-low-mid-mobile);
+    object-view-box: inset(50.5% 16.67% 24.5%); }
+  :root .as-hero--ongoing-support-footer .as-hero__img{
+    clip-path: url(#wave-clip-ongoing-support-footer-mobile);
+    object-view-box: inset(63.7% 16.67% 3%); }
+
   /* position: relative restates the base. Kept deliberately: the
      -70px pull puts this copy underneath a band whose stroke
      carries z-index 1, so paint order matters here even though

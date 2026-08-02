@@ -96,6 +96,13 @@
 :root .as-hero--site-refresh-low-mid{aspect-ratio:4 / 1}
 :root .as-hero--site-refresh-low-mid .as-hero__img{clip-path:url(#wave-clip-site-refresh-low-mid-mobile);object-view-box:inset(22.5% 16.67% 52.5%)}
 :root .as-hero--site-refresh-footer .as-hero__img{clip-path:url(#wave-clip-site-refresh-footer-mobile);object-view-box:inset(63.7% 16.67% 3%)}
+:root .as-hero--ongoing-support{aspect-ratio:2 / 1}
+:root .as-hero--ongoing-support .as-hero__img{clip-path:url(#wave-clip-ongoing-support-mobile);object-view-box:inset(47% 16.67% 3%)}
+:root .as-hero--ongoing-support-mid{aspect-ratio:4 / 1}
+:root .as-hero--ongoing-support-mid .as-hero__img{clip-path:url(#wave-clip-ongoing-support-mid-mobile);object-view-box:inset(29.5% 16.67% 45.5%)}
+:root .as-hero--ongoing-support-low-mid{aspect-ratio:4 / 1}
+:root .as-hero--ongoing-support-low-mid .as-hero__img{clip-path:url(#wave-clip-ongoing-support-low-mid-mobile);object-view-box:inset(50.5% 16.67% 24.5%)}
+:root .as-hero--ongoing-support-footer .as-hero__img{clip-path:url(#wave-clip-ongoing-support-footer-mobile);object-view-box:inset(63.7% 16.67% 3%)}
 :root .as-hero-combined{margin-top:-70px;position:relative}
 :root .as-hero-combined__content{padding-top:28px;padding-bottom:60px}
 :root .as-hero-combined__left{gap:24px}
@@ -1297,4 +1304,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){:root .as-rail{transition:none}
 }
-.as-build-canary{--as-build-id:"20260802-667767"}
+.as-build-canary{--as-build-id:"20260802-cc7d9f"}
