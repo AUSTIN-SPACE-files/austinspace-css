@@ -627,6 +627,176 @@
 
 }
 
+/* Narrow-curve stroke is hidden above the knee, sitewide. Pairs with the
+   generic swap at the top of the 600px query below. */
+:root .as-hero__stroke-narrow{ display: none; }
+
+/* Homepage hero below the 600px knee. At 9.6 / 1 the cosmos renders
+   41px tall on a phone, a sliver rather than an image. 2 / 1 takes it
+   to 197px, about 28 percent of the hero block. Border and stroke are
+   left alone so both band edges stay at the inherited 5px.
+   object-view-box crops inside the image without touching the element
+   box, so the clip path and the stroke stay aligned - transform would
+   drag the clip and separate them. 1.5x, centred on the same point
+   45.75 percent down the source, sized to the box's 2 / 1 aspect so
+   nothing re-crops. Browsers without support ignore it and get the
+   uncropped framing, which is the current live appearance.
+   Button padding and the trust gap are sized so both rows hold a
+   single line from 375 up and wrap cleanly below. Do not add
+   flex-wrap: nowrap; it forces overflow instead of wrapping. */
+@media (max-width: 600px){
+  /* Wide/narrow stroke swap, sitewide. Both rules key on classes that only
+     exist once a page has been treated - an untreated hero's path carries
+     neither, so neither rule matches and it renders exactly as it does now.
+     There is no dependency on every page being finished; a half-done pass
+     is stable, because classing the wide path and adding its narrow sibling
+     happen in the same edit to the same file.
+     Specificity is (0,2,0), the same as the above-breakpoint default, so
+     source order decides: this query sits after it and display: inline wins
+     below the knee. That is the mechanism the four homepage-scoped swaps
+     already relied on, not a new bet.
+     The failure mode is within a single page - classing a path -wide and
+     forgetting its narrow sibling leaves that band with no stroke below
+     600. Both halves belong in one edit, and a page's wide and narrow
+     counts must match. */
+  :root .as-hero__stroke-wide{ display: none; }
+  :root .as-hero__stroke-narrow{ display: inline; }
+
+  :root .as-hero--home{ aspect-ratio: 2 / 1; }
+  :root .as-hero--home .as-hero__img{ clip-path: url(#wave-clip-home-mobile); object-view-box: inset(20.75% 16.67% 29.25% 16.67%); }
+
+  /* Homepage mid and footer strips below the knee. The multi-lobe desktop
+     paths compress to noise at phone widths: at 390px the mids render 31px
+     tall and no curve is legible in that. 4 / 1 takes them to 98px. The
+     footer's flat 130px is left alone - it is already about half the hero's
+     195px at 2 / 1.
+     Single curves, span 0.24 normalised, the same span as the mobile hero, so
+     the proportions match down the page. On the shorter strips that same span
+     reads as a shallower visual angle - deliberate. Direction and bend
+     position alternate strip to strip so no two read alike.
+     object-position is re-tuned because the crop window changes with the box.
+     The source is 2500x1667 (1.5), so object-fit: cover shows 1.5 / ratio of
+     the image height: 11.8% at the desktop 2880/226, 37.5% at 4 / 1. The
+     desktop 55/78/100 were spaced for the narrow window and overlap ~62% at
+     the wide one.
+
+     object-view-box then applies a 1.5x linear zoom, matching the hero. The
+     insets are NOT transferable between strips - each is derived from that
+     strip's box ratio and crop centre. Do not copy the hero's values across.
+
+     The two mids are pinned at 4/1 and their view boxes are ratio 4.00, so
+     cover discards nothing and their windows stay constant at every width:
+     12.5-37.5 and 40.6-65.6 of the source. Note that this also makes their
+     object-position inert - there is no slack in either axis for it to act
+     on. It is left in place as the fallback framing for browsers without
+     object-view-box support.
+
+     Widest view box is 1666 source px against 1200 device px at the 600 knee,
+     so the source file itself never upscales. The delivered file can: srcset
+     picks a variant for the box width without knowing about the view box, so
+     at the knee the 1280w lands and its view box is 853px - about 1.4x. Same
+     behaviour as the hero, same cause (sizes="100vw"), fixed in HTML not here. */
+  :root .as-hero--home-high-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--home-low-mid{ aspect-ratio: 4 / 1; }
+
+  :root .as-hero--home-high-mid .as-hero__img{
+    clip-path: url(#wave-clip-home-high-mid-mobile);
+    object-position: center 25%;
+    object-view-box: inset(12.5% 16.67% 62.5% 16.67%); }
+  :root .as-hero--home-low-mid .as-hero__img{
+    clip-path: url(#wave-clip-home-low-mid-mobile);
+    object-position: center 60%;
+    object-view-box: inset(40.6% 16.67% 34.4% 16.67%); }
+  /* The footer sits on a flat 130px, so its box ratio moves with the viewport
+     - 2.46 at 320, 3.00 at 390, 4.62 at 600 - while its view box is fixed at
+     2.99. Cover re-crops it and the zoom is exactly 1.5x only at 390. Inherent
+     to the flat height, not a tuning miss. Below 390 the re-crop is horizontal
+     and the vertical window holds at 58.3-91.7; above it the window narrows
+     from the top, to 69.4-91.1 at the knee. */
+  :root .as-hero--home-footer .as-hero__img{
+    clip-path: url(#wave-clip-home-footer-mobile);
+    object-position: center 95%;
+    object-view-box: inset(58.3% 16.67% 8.3% 16.67%); }
+
+  /* About hero, mid and footer below the knee. Same treatment as the
+     homepage set and the same reasoning: at 2880/216 the hero renders 29px
+     tall on a phone and the multi-lobe curve is not legible in that. 2 / 1
+     takes it to 195px, the mid to 98px at 4 / 1. The footer keeps its flat
+     130px - it is already about two thirds of the hero and pinning it would
+     fight the absolute positioning it needs to sit under the footer block.
+     object-view-box crops inside the image without touching the element box,
+     so clip path and stroke stay aligned. Each inset is derived from that
+     band's own box ratio and crop centre - they are not transferable between
+     bands, and not transferable from the homepage set either.
+     The hero at 2 / 1 and the mid at 4 / 1 both match their view box ratios,
+     so cover discards nothing and their windows hold at every width. The
+     footer's flat height means its ratio moves with the viewport, so cover
+     re-crops it - inherent to the fixed height, as on the homepage. */
+  :root .as-hero--about{ aspect-ratio: 2 / 1; }
+  :root .as-hero--about .as-hero__img{
+    clip-path: url(#wave-clip-about-mobile);
+    object-view-box: inset(45% 16.67% 5%); }
+
+  :root .as-hero--about-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--about-mid .as-hero__img{
+    clip-path: url(#wave-clip-about-mid-mobile);
+    object-view-box: inset(37.5% 16.67% 37.5%); }
+
+  :root .as-hero--about-footer .as-hero__img{
+    clip-path: url(#wave-clip-about-footer-mobile);
+    object-view-box: inset(8.3% 16.67% 58.4%); }
+
+  /* Services hub hero, mid and footer below the knee. Same treatment and same
+     reasoning as the home and about sets. The hero is 2880/300 on desktop, so
+     it renders 41px tall on a phone; 2 / 1 takes it to 195px and the mid to
+     98px at 4 / 1. The footer keeps its flat 130px.
+     Each inset is derived from this page's own crop centres - the hero reads
+     from the top of the source (desktop object-position is center 5%), the mid
+     from just above the middle, the footer from low down. They are not
+     transferable to another page's bands, or between bands here.
+     Hero and mid match their view box ratios at 2 / 1 and 4 / 1, so cover
+     discards nothing and their windows hold at every width. The footer's flat
+     height means its ratio moves with the viewport and cover re-crops it -
+     inherent to the fixed height, as elsewhere. */
+  :root .as-hero--services{ aspect-ratio: 2 / 1; }
+  :root .as-hero--services .as-hero__img{
+    clip-path: url(#wave-clip-services-mobile);
+    object-view-box: inset(5% 16.67% 45%); }
+
+  :root .as-hero--services-hub-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--services-hub-mid .as-hero__img{
+    clip-path: url(#wave-clip-services-hub-mid-mobile);
+    object-view-box: inset(32.5% 16.67% 42.5%); }
+
+  :root .as-hero--services-hub-footer .as-hero__img{
+    clip-path: url(#wave-clip-services-hub-footer-mobile);
+    object-view-box: inset(63.4% 16.67% 3.3%); }
+
+  /* position: relative restates the base. Kept deliberately: the
+     -70px pull puts this copy underneath a band whose stroke
+     carries z-index 1, so paint order matters here even though
+     the value is currently inherited. */
+  :root .as-hero-combined{ margin-top: -70px; position: relative; }
+  :root .as-hero-combined__content{ padding-top: 28px;
+    padding-bottom: 60px; }
+
+  :root .as-hero-combined__left{ gap: 24px; }
+  :root .as-hero-combined__subline{ font-size: 16px; line-height: 25.6px; }
+  :root .as-hero-combined__cta{ gap: 12px; }
+  :root .as-hero-combined__cta > .as-btn{ padding-left: 20px; padding-right: 20px; }
+
+  /* Column, so the row-layout controls are gone: flex-wrap and
+     justify-content were both answers to a horizontal question.
+     The min-width 481px guard still sets nowrap into the 481-600
+     band, which is inert in a column - the container height is
+     content-driven, so there is nothing to wrap against. */
+  :root .as-hero-combined__trust{ flex-direction: column;
+    align-items: flex-start; gap: 14px; }
+  :root .as-hero-combined__trust-google{ width: auto; flex: 0 0 auto; gap: 8px; }
+  :root .as-hero-combined__trust-stars i{ font-size: 16px; }
+  :root .as-hero-combined__trust-rule{ display: none; }
+}
+
 
 /* =============================================
  HOME - CREDENTIALS BAR
@@ -4243,6 +4413,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  --ls-heading: -0.01em; /* was -0.02em for DM Serif Display 400; Fraunces at weight 900 is visually denser at the same tracking, so loosened one notch - only consumer sitewide is the Fraunces heading set below, tune live */
  --ls-body: 0em;
  --ls-label: 0.16em; /* wide, uppercase mono labels */
+ --ls-label-tight: 0.10em;
 }
 
 /* ============================================================
@@ -8804,6 +8975,17 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   font-size: 15px;
   line-height: 21px;
   color: var(--ink-900);
+}
+
+/* Spec rows below the 600px knee. The icon column plus the 92px
+   label track take 43 percent of a 308px card interior, forcing
+   every value to wrap. Dropping the icon and tightening the track
+   returns 50px to the value column. Measured: 600px is where
+   values first all fit one line. ASCII only. */
+@media (max-width: 600px){
+  :root .as-offer__spec i{ display: none; }
+  :root .as-offer__spec li{ grid-template-columns: 72px 1fr; }
+  :root .as-offer__spec .k{ letter-spacing: var(--ls-label-tight); }
 }
 
 /* Upgrade note, One Page card only. A tinted panel rather than a fourth tick
