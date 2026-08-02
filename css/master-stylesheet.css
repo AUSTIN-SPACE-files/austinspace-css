@@ -978,6 +978,26 @@
     clip-path: url(#wave-clip-cs-ddr-footer-mobile);
     object-view-box: inset(63.7% 16.67% 3%); }
 
+
+  /* Case study - AUSTIN_SPACE below the knee, 4 bands.
+     Crop clamped away from desktop intent, to hold the 3 percent margin:
+       cs-austin-space-footer 90 -> 80.35 */
+  :root .as-hero--case-study-austin-space{ aspect-ratio: 2 / 1; }
+  :root .as-hero--case-study-austin-space .as-hero__img{
+    clip-path: url(#wave-clip-case-study-austin-space-mobile);
+    object-view-box: inset(3% 16.67% 47%); }
+  :root .as-hero--cs-austin-space-high-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--cs-austin-space-high-mid .as-hero__img{
+    clip-path: url(#wave-clip-cs-austin-space-high-mid-mobile);
+    object-view-box: inset(34.5% 16.67% 40.5%); }
+  :root .as-hero--cs-austin-space-low-mid{ aspect-ratio: 4 / 1; }
+  :root .as-hero--cs-austin-space-low-mid .as-hero__img{
+    clip-path: url(#wave-clip-cs-austin-space-low-mid-mobile);
+    object-view-box: inset(53.5% 16.67% 21.5%); }
+  :root .as-hero--cs-austin-space-footer .as-hero__img{
+    clip-path: url(#wave-clip-cs-austin-space-footer-mobile);
+    object-view-box: inset(63.7% 16.67% 3%); }
+
   /* position: relative restates the base. Kept deliberately: the
      -70px pull puts this copy underneath a band whose stroke
      carries z-index 1, so paint order matters here even though
