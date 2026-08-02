@@ -103,6 +103,13 @@
 :root .as-hero--ongoing-support-low-mid{aspect-ratio:4 / 1}
 :root .as-hero--ongoing-support-low-mid .as-hero__img{clip-path:url(#wave-clip-ongoing-support-low-mid-mobile);object-view-box:inset(50.5% 16.67% 24.5%)}
 :root .as-hero--ongoing-support-footer .as-hero__img{clip-path:url(#wave-clip-ongoing-support-footer-mobile);object-view-box:inset(63.7% 16.67% 3%)}
+:root .as-hero--one-page{aspect-ratio:2 / 1}
+:root .as-hero--one-page .as-hero__img{clip-path:url(#wave-clip-one-page-mobile);object-view-box:inset(3% 16.67% 47%)}
+:root .as-hero--one-page-mid{aspect-ratio:4 / 1}
+:root .as-hero--one-page-mid .as-hero__img{clip-path:url(#wave-clip-one-page-mid-mobile);object-view-box:inset(28.5% 16.67% 46.5%)}
+:root .as-hero--one-page-low-mid{aspect-ratio:4 / 1}
+:root .as-hero--one-page-low-mid .as-hero__img{clip-path:url(#wave-clip-one-page-low-mid-mobile);object-view-box:inset(63.5% 16.67% 11.5%)}
+:root .as-hero--one-page-footer .as-hero__img{clip-path:url(#wave-clip-one-page-footer-mobile);object-view-box:inset(63.7% 16.67% 3%)}
 :root .as-hero-combined{margin-top:-70px;position:relative}
 :root .as-hero-combined__content{padding-top:28px;padding-bottom:60px}
 :root .as-hero-combined__left{gap:24px}
@@ -1304,4 +1311,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){:root .as-rail{transition:none}
 }
-.as-build-canary{--as-build-id:"20260802-cc7d9f"}
+.as-build-canary{--as-build-id:"20260802-654ae9"}
