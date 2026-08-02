@@ -158,6 +158,8 @@
 :root .as-hero--policy-privacy .as-hero__img{clip-path:url(#wave-clip-policy-privacy-mobile);object-view-box:inset(40% 16.67% 10%)}
 :root .as-hero--policy-tos{aspect-ratio:2 / 1}
 :root .as-hero--policy-tos .as-hero__img{clip-path:url(#wave-clip-policy-tos-mobile);object-view-box:inset(8% 16.67% 42%)}
+:root .as-hero--policy-cookies{aspect-ratio:2 / 1}
+:root .as-hero--policy-cookies .as-hero__img{clip-path:url(#wave-clip-policy-cookies-mobile);object-view-box:inset(35% 16.67% 15%)}
 :root .as-hero-combined{margin-top:-70px;position:relative}
 :root .as-hero-combined__content{padding-top:28px;padding-bottom:60px}
 :root .as-hero-combined__left{gap:24px}
@@ -1359,4 +1361,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){:root .as-rail{transition:none}
 }
-.as-build-canary{--as-build-id:"20260802-b20891"}
+.as-build-canary{--as-build-id:"20260802-113af8"}
