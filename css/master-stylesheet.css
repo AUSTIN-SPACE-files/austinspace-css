@@ -3486,7 +3486,6 @@
 }
 
 .as-cf-field input,
-.as-cf-field select,
 .as-cf-field textarea {
  width: 100%;
  font-family: var(--font-body);
@@ -3510,7 +3509,6 @@
    ring. This is the only shared selector list stage 1 touches. */
 
 .as-cf-field input.as-cf-error,
-.as-cf-field select.as-cf-error,
 .as-cf-field textarea.as-cf-error {
  border-color: #cc0000;
 }
@@ -5171,7 +5169,6 @@ a.cky-banner-element.as-cookie__btn:hover {
 
 /* Form field focus - ring, not just border colour */
 :root .as-cf-field input:focus,
-:root .as-cf-field select:focus,
 :root .as-cf-field textarea:focus {
  border-color: var(--candy-pink);
  box-shadow: 0 0 0 4px var(--candy-pink-050);
