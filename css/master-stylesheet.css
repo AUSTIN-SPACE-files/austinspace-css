@@ -2499,9 +2499,10 @@
  gap: 24px;
 }
 
-.as-about-background__right {
- flex-direction: column;
-}
+/* .as-about-background__right had a bare flex-direction: column here.
+   DELETED 2 August 2026 - see the rail block further down this sheet for
+   the full story. It had been inert since the host became a grid, and it
+   woke up the moment .as-rail set display: flex. */
 
 .as-about-role {
  transition: background var(--transition);
@@ -2802,6 +2803,150 @@
  .as-about-hero__photo {
  max-width: 100%;
  }
+}
+
+/* About hero below the knee - photo beside a stacked spec list.
+   Hero 1101 -> 643 at 390 wide.
+
+   The first section below it should land at ~1005: the hero shrinks 458
+   and nothing else in the flow changes, so 1463 - 458. DERIVED, NOT
+   MEASURED - to be replaced with the live figure. An earlier draft of
+   this comment carried ~946, which was arithmetic from a run that still
+   had the breadcrumb pull described below. That is two numbers from two
+   different configurations added together, and it is the exact failure
+   this comment exists to prevent.
+
+   Visual order at mobile: eyebrow, headline, photo beside the spec list,
+   then body. Desktop is untouched - copy column beside the photo.
+
+   display: contents on __left is LOAD-BEARING. It flattens the copy
+   column so the photo and the spec can share a grid row and the headline
+   can sit above both. Without it the spec is trapped inside __left.
+   Deleting it as redundant-looking collapses the layout. It also drops
+   __left's own 32px flex gap, which is why the grid carries an explicit
+   26px row-gap rather than inheriting anything.
+
+   MUST BE fr, NOT PERCENTAGES. 40% / 60% plus a column-gap sums to
+   100% + gap, so the grid overflows its container and every full-width
+   item ran 1px past the viewport edge - measured 19 / -1. fr subtracts
+   the gap before dividing. Same trap already recorded against the
+   .as-about-solo__inner grid at css:2560.
+
+   column-gap 12px, not 20. At 20 the spec column is 199px and "Sole
+   trader, AUSTIN_SPACE" wraps; at 12 it is 204px and all four items hold
+   one line each. 8px gains only 2px more and leaves no separation.
+
+   THE WRAP WAS NOT COSTING HEIGHT. The row is governed by the photo, so
+   the 12px version is actually 4px taller than the 20px one. This was a
+   legibility fix, not a height one - do not re-tune it against a height
+   target.
+
+   VISUAL ORDER DIVERGES FROM DOM ORDER HERE. The body is third in the
+   markup and fourth on screen; the photo is last in the markup and third
+   on screen. That is acceptable because nothing in the hero is focusable,
+   so there is no tab-order trap, and the reordered items are independent
+   statements rather than a sequence, so reading order carries no meaning.
+   If either of those changes - a link in the spec, or copy that depends
+   on running order - the reorder needs revisiting. It is also why the row
+   numbers are explicit rather than left to auto-placement; they are not
+   tidy-uppable.
+
+   THE SPEC LIST NEEDS THE HTML. .as-about-hero__spec-item and
+   .as-about-hero__spec-sep only exist because about.html wraps each fact
+   and each middot in a span. Paste the HTML first: unstyled spans render
+   exactly as the old bare text node did, so the page is correct either
+   side of the CSS landing. The desktop inline line is unchanged -
+   whitespace collapses across the span boundaries.
+
+   The names stay About-specific on purpose. 5-gypsy-pistoleros.html:44
+   carries the identical middot-separated pattern in .as-cs-hero__spec and
+   is the obvious next candidate, but it is a different class and these
+   names would not honestly cover it. The parallel was seen and left
+   alone rather than abstracted early.
+
+   padding-top: 8px IS A NO-OP ACROSS 481-600. css:2453 already sets
+   exactly 8px at min-width 481. The declaration only bites at <= 480,
+   where the shorthand at css:2957 supplies 4rem; our (0,2,0) overrides
+   the top only, leaving 19.2px sides and 64px bottom intact. Kept at the
+   600 knee so this block reads as one unit - half its range being an
+   exact restatement is recorded here so it does not read as load-bearing.
+
+   THE BREADCRUMB PULL IS GONE. A previous round put margin-top: -60px on
+   body:has(.as-about-hero) .as-breadcrumb to tighten the same stretch.
+   Reducing the hero's own padding-top gets there without moving anything
+   outside the hero, so the pull, its About-only :has() scoping and the
+   rationale for both were deleted rather than left dormant. Wave-to-
+   breadcrumb spacing is back to base; the tightening now happens between
+   breadcrumb and eyebrow.
+
+   Longhand grid-column-start/end and grid-row-start/end throughout. The
+   slash shorthand is stripped silently on paste - see the Item 6
+   postmortem.
+
+   No img rule here, deliberately. A width/height:auto override was
+   drafted and dropped: the box keeps aspect-ratio 3 / 4 from css:2430, so
+   an auto-height image of any other ratio would letterbox inside a
+   1px-bordered frame. The base height: 100% + object-fit: cover at
+   css:2445 already makes the image follow the column, which is what the
+   override was reaching for. No width on the photo rule either - the base
+   at css:2431 already sets width: 100% and nothing at this width
+   overrides it.
+
+   Out-specified rather than deleted, all at (0,1,0) against our (0,2,0):
+   grid-template-columns: 1fr at css:2777, gap: 3.5rem at css:4241, and
+   max-width: 100% on the photo in the block directly above. The gap
+   shorthand cannot reach past the row-gap/column-gap longhands here
+   regardless of source order. */
+@media (max-width: 600px) {
+  :root .as-about-hero { padding-top: 8px; }
+
+  :root .as-about-hero__left { display: contents; }
+
+  :root .as-about-hero__inner {
+    grid-template-columns: 2fr 3fr;
+    row-gap: 26px;
+    column-gap: 12px;
+    align-items: start;
+  }
+
+  :root .as-about-hero .as-eyebrow {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  :root .as-about-hero__headline {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+
+  :root .as-about-hero__photo {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+  }
+
+  :root .as-about-hero__spec {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    align-self: center;
+  }
+
+  :root .as-about-hero__body {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+  }
+
+  :root .as-about-hero__spec-item { display: block; }
+  :root .as-about-hero__spec-sep { display: none; }
 }
 
 @media (max-width: 480px) {
@@ -5657,6 +5802,143 @@ a.cky-banner-element.as-cookie__btn:hover {
   }
 }
 
+/* About "Where I came from" below the knee - the chronology becomes a
+   card rail. Section 1587 -> 878 at 390. Cards are 292 wide with a 98px
+   peek, matching the service-page rails exactly.
+
+   THE CARDS ARE TALLER IN THE RAIL, not shorter - 414 against 345
+   stacked. 292 is narrower than the 352 they had full-width, so the
+   descriptions wrap more. The saving is entirely horizontal: three cards
+   occupy one card's height instead of three. Net 709.
+
+   THE PADDING IS THE WHOLE 32 OF THAT 709; the rail is the other 677. An
+   earlier draft of this block also carried gap: 32px on
+   .as-about-background__inner and split the 32 between the two. That was
+   wrong twice over - the inner is display: block at css:5597, so a gap
+   there does nothing at all, and at 390 the section takes 4rem top and
+   bottom from the <=480 shorthand, so 64/64 -> 48/48 already accounts for
+   the full 32 on its own. The gap declaration was dropped rather than
+   kept as decoration. .as-about-background__left keeps its 48px bottom
+   margin at css:5602 - the intro-to-rail separation is unmeasured and
+   deliberately untouched.
+
+   SITED HERE, AFTER THE min-width 481 BAND AT css:5663, ON PURPOSE. That
+   rule gives this section 80px top and bottom at (0,2,0) - the same
+   specificity as the rule below, so source order is the only thing
+   separating them. Sited with the base .as-about-background family up at
+   css:2485 this block would lose the 481-600 overlap and the section
+   would silently keep 80px across half the range in which the rail is
+   already running. Do not move it up for locality.
+
+   ---------------------------------------------------------------
+   THE DORMANT DECLARATION TRAP - read before touching this host.
+
+   .as-about-background__right carried a bare flex-direction: column at
+   css:2502, left behind when the host became a grid at css:5605. It was
+   inert for as long as the host was a grid, because flex-direction does
+   nothing on a grid container, and it read like exactly the sort of
+   leftover that is safe to ignore.
+
+   AN INERT DECLARATION IS ONLY INERT FOR THE CURRENT DISPLAY VALUE. The
+   moment .as-rail set display: flex, that line woke at (0,1,0) with
+   nothing in the rail block to oppose it and made the rail a COLUMN.
+   flex-basis: 83% then resolved against the main axis, which was now
+   height and indefinite, so it behaved as auto and never touched width.
+   The cards stayed full-width, nothing overflowed, there was no
+   horizontal scroll and the section height did not move.
+
+   That presented as a specificity fight and cost a debugging round.
+   Forcing flex: 0 0 83% at (0,3,0) changed nothing, because specificity
+   was never the problem - the axis was. If a rail ever renders as a
+   stack again, check the host's flex-direction before touching
+   specificity.
+
+   It was deleted rather than overridden. An override would have left a
+   live-looking column declaration sitting on a host that must never be a
+   column.
+
+   align-items: stretch AT css:5609 SURVIVES AND SHOULD. It is valid in
+   flex, where it gives equal-height cards across the row - which is what
+   the service rails get from the flex default anyway. It sits two lines
+   from the rule this whole note is about and will look like another
+   dormant leftover to the next reader. It is not. Leave it.
+
+   Same family, different failure, logged so the shape is recognisable:
+   css:1625 sets :root .as-svc-fit .as-pos-cards { display: grid } at
+   (0,3,0), which BEATS :root .as-rail { display: flex } at (0,2,0). No
+   .as-pos-cards inside .as-svc-fit carries the rail class today, so this
+   is not live. If one ever does, the host never becomes flex at all and
+   nothing changes on the page - a loud failure rather than this silent
+   one, but the same lesson about what a host brings to the class.
+
+   PASTE CSS FIRST, HTML SECOND. This block is a no-op on every page at
+   every width until as-rail is in the markup: deleting css:2502 changes
+   nothing while the host is still a grid, and .as-rail matches no
+   element that is not already a rail. HTML first, with css:2502 still
+   live, renders the section as the broken column described above. */
+@media (max-width: 600px) {
+  :root .as-about-background {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+}
+
+/* About "How this actually works" below the knee - the four cards
+   become a rail. Section 1646 -> 664 at 390, 1.95 viewports down to
+   0.79. The grid alone goes 1378 -> 428; the padding rule below is 32
+   of the 982.
+
+   The 428 is 404 of card plus the rail's own 4px top and 20px bottom
+   padding. That padding is not decorative: the rail computes overflow-y
+   to auto alongside its overflow-x, so without it the -2px .as-card-lift
+   hover and the 5px pop-md shadow would both be clipped. It was sized
+   for the service rails and happens to cover this card exactly.
+
+   CARDS LEVEL AT 404, against 285/333/357/333 stacked. Two things
+   combine: 292 is narrower than the 352 they had full-width so every
+   card wraps more, and a flex row stretches them to the tallest. The
+   saving is horizontal - four cards occupy one card's height.
+
+   THIS HOST IS CLEAN, AND THAT WAS CHECKED RATHER THAN ASSUMED.
+   .as-about-work__grid has two rules, css:2649 and css:2797, and both
+   set grid-template-columns and gap only. No flex-direction, nothing
+   else that would wake under display: flex. Verified live: adding
+   .as-rail alone gives flex-direction row with no override needed.
+
+   Recorded because .as-about-background__right was NOT clean - it
+   carried a dormant flex-direction: column that turned its rail into a
+   silent vertical stack, and the note on that block is the long version.
+   The next rail host should be checked the same way. Neither outcome is
+   the default; the only safe move is to look.
+
+   The card is clean too. css:2655 gives .as-about-work__card its own
+   display: flex and flex-direction: column, but that is the card's
+   internal stack, not sizing as a flex item - no width, flex, flex-basis
+   or min-width anywhere on it, so nothing fights flex-basis 83%.
+   .as-card-lift-sm is hover-only (box-shadow and a translate) and has no
+   layout effect in the row.
+
+   SITED HERE, NOT WITH THE .as-about-work FAMILY, and the brief asked
+   for the family. It cannot go there: every rule the family owns -
+   css:2634, css:5584, css:5647 - sits ABOVE the min-width 481 band at
+   css:5663, which gives this section 80px top and bottom at the same
+   (0,2,0). Below that band is the only place 48/48 holds across the
+   whole <=600 rather than only below 481. It therefore lands beside
+   .as-about-background's identical rule, which is here for the same
+   reason.
+
+   Paste order does not matter for this one, unlike the background rail.
+   The rail CSS has been live since 1 August, so the HTML alone activates
+   a correct rail on a clean host, and this padding rule is independent
+   of it. That is a consequence of the host being clean - it is not a
+   general property of adding as-rail. */
+@media (max-width: 600px) {
+  :root .as-about-work {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+}
+
 /* ============================================================
    PHASE 3 ITEM 3 - about page: .as-about-skills becomes the second
    editorial ink band. Locked to .as-creds / .as-svc-process / the
@@ -5746,6 +6028,104 @@ a.cky-banner-element.as-cookie__btn:hover {
   display: grid;
   grid-row: span 3;
   grid-template-rows: subgrid;
+}
+
+/* About "What I work with" below the knee - 2x2 with drawn hairlines.
+   Section 1515 -> 1019 at 390, 1.80 viewports down to 1.21. The grid
+   itself goes 1095 -> 631.
+
+   Ports the homepage Track Record treatment: two columns, and the cross
+   hairlines drawn by borders rather than by the grid gap. Same nth-child
+   pattern - n+3 for the horizontal, even for the vertical.
+
+   THE CONTENT DECISION IS DIFFERENT FROM TRACK RECORD AND MUST NOT BE
+   "MADE CONSISTENT" LATER. There the caption is elaboration under a
+   number, so hiding it below the knee costs nothing. Here the four-item
+   list IS the content - "Platforms" with nothing under it does not answer
+   the question the section asks. Hiding the lists was measured at 715 and
+   0.85 viewports and deliberately not taken. The extra 304px is the
+   section doing its job.
+
+   BORDERS, NOT GAP, AND WHY. The desktop grid draws its hairlines with
+   gap: 1px over a translucent background (css:2710). That works for a
+   4-across, where every gap line is vertical. It cannot draw both axes of
+   a 2x2 - a 1px gap there produces a full cross including the outer
+   edges, not the two interior lines this needs. So the gap goes to 0 and
+   borders take over.
+
+   0.12, NOT TRACK RECORD'S 0.14. This section already owns a hairline
+   alpha - rgba(255,255,255,0.12) at css:5805 - and keeps it here. The two
+   never appear together, since the desktop left-borders are zeroed at
+   <=600 and these are re-added only on even, so either value would look
+   correct. Carrying two alphas on one section across breakpoints would
+   read as a slip later. What is ported is the technique, not the pixel
+   value. The divergence from Track Record is deliberate; it is recorded
+   here so it does not look like drift in the other direction.
+
+   ROW TWO IS 38px TALLER THAN ROW ONE AND THERE IS NO CLEAN FIX. The
+   subgrid pair directly above this note is why. css:5837 gives the grid
+   three explicit rows and css:5839 makes each group span all three as a
+   subgrid, so with two columns groups 1-2 take rows 1-3 and groups 3-4
+   auto-place into implicit rows 4-6. Each band locks its own icon, title
+   and list baselines; the two bands are independent by construction and
+   cannot see each other. Row two is taller because "SEO and speed" and
+   "Tools and workflow" both wrap in a 176px column - title length, not
+   content imbalance. "Make the rows match" is the obvious next instinct
+   and it has no clean answer short of shorter titles. Do not spend a
+   round on it.
+
+   Separately, and from the gap rather than the borders: subgrid inherits
+   the parent's row-gap, so dropping gap to 0 also removes the 1px between
+   each group's own three rows. 2px per group, invisible, listed only so
+   the two consequences of gap: 0 are not conflated.
+
+   SITING IS LOAD-BEARING - THIS BLOCK MUST STAY BELOW css:5804. Three
+   rules tie it at (0,2,0) and source order is the only thing separating
+   them: the <=600 rule at css:2770 puts padding: 0 on every group (all
+   four match odd-or-even at this width), css:5804 sets the group's
+   border-left-color, and the min-width 481 shorthand at css:5778 gives
+   the section 72px/32px. Above any of them this block half-works, and the
+   half is diagnostic: THE BORDERS DRAW AND THE PADDING DOES NOT, because
+   the two nth-child rules are (0,3,0) and win from anywhere while the
+   bare group rule is (0,2,0) and does not. Cards hard against each other
+   with hairlines already in place is a mis-site, not a design choice.
+
+   Being below css:5778 is also what makes 48/48 hold across the whole
+   <=600 range rather than only below 481. That rule is a shorthand, so it
+   still supplies the 32px sides between 481 and 600; only top and bottom
+   are taken here.
+
+   No intro rule. A font-size: 16px on .as-about-skills__intro was drafted
+   and dropped: css:5796 already sets exactly that, unguarded, at every
+   width. The intro has never been 18px - the base rule at css:2703 sets
+   no font-size at all - so this is not one of the 18px-to-16px one-offs
+   the backstory standfirst and featured-work desc belong to. */
+@media (max-width: 600px) {
+  :root .as-about-skills {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-about-skills__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  :root .as-about-skills__group {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-right: 12px;
+  }
+
+  :root .as-about-skills__group:nth-child(n+3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 22px;
+  }
+
+  :root .as-about-skills__group:nth-child(even) {
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    padding-left: 16px;
+  }
 }
 
 /* ============================================================
