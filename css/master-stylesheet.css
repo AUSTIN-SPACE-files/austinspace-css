@@ -3101,26 +3101,45 @@
  gap: 24px;
 }
 
-.as-hub-notsure__tag {
- display: inline-flex;
- align-items: center;
- gap: 0.5rem;
- background: rgba(255, 255, 255, 0.08);
- border: 1px solid rgba(255, 255, 255, 0.1);
- border-radius: 100px;
- padding: 0.4rem 0.9rem;
- font-family: var(--font-mono);
- font-size: 11.5px;
- font-weight: 500;
- letter-spacing: var(--ls-label);
- text-transform: uppercase;
- color: rgba(255, 255, 255, 0.5);
- width: fit-content;
-}
+/* .as-hub-notsure__tag and .as-hub-notsure__tag i stood here. DELETED
+   4 August 2026, and the markup converged onto the standard .as-eyebrow
+   that home, About, custom-build and the case-studies hub already use.
 
-.as-hub-notsure__tag i {
- font-size: 0.7rem;
-}
+   THE TAG WAS INVISIBLE. It carried white text, a white wash and a white
+   border - rgba(255,255,255,0.5 / 0.08 / 0.1) - on a section whose
+   background has been var(--as-white) since the first commit. It rendered
+   as a 254x39 empty gap above the headline. The icon had no colour of its
+   own; it inherited the same white from the pill, so one declaration hid
+   both. Nothing else in the section was wrong: the headline sits on
+   rgb(13,13,13) and the body on rgb(85,85,85), both correctly re-inked.
+
+   THE BANNER WAS THE SURFACE THAT CHANGED, NOT THE SECTION. This is the
+   part worth keeping. .as-cta-banner__inner was once a filled black card
+   floating on the white section, and white-on-dark was correct for it.
+   Two fossils of that survive and are NOT tidied here, so they are not
+   riding along in a bug fix - both are dead-CSS-sweep candidates:
+     .as-svc-cta--dark at css:1873, used by no page in the repo
+     border-radius and overflow:hidden on .as-cta-banner__inner, which
+       are inert on a background:transparent box
+   When the banner went transparent every child was re-inked - the
+   headline, the body, and the inner's own color:var(--ink-900). The tag
+   was the one that was missed.
+
+   CONVERGING REMOVES THE MECHANISM, NOT JUST THE SYMPTOM. It was missed
+   precisely BECAUSE it was not .as-eyebrow: it sat outside the selector
+   list that caught everything else, so the pass that re-inked the rest
+   could not reach it. Re-colouring the pill would have fixed this
+   instance and left the next sitewide pass with the same blind spot. A
+   component outside the shared selector cannot be caught by a sitewide
+   pass, which is the argument for the class going rather than its values
+   changing.
+
+   The label text is unchanged at "Not sure where to start". It reads as
+   an eyebrow rather than a question because the vocabulary already runs
+   that way - "If you already have a site", "If you don't have a site
+   yet", "Who this is for", "Before you write". What is lost is the pill
+   and its fa-circle-question glyph; both were invisible, so nothing that
+   was being seen has gone. */
 
 .as-hub-notsure__headline {
  font-family: var(--font-display);
@@ -11168,11 +11187,21 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    without this they sit up to 8px in from a left-aligned headline
    across 585-600. Inert for the cs pair, already margin:0.
 
-   .as-hub-notsure__tag is named separately because the services hub
-   eyebrow is that class, NOT .as-eyebrow - the selector above does not
-   reach it. align-self, not justify-content: the pill is
-   width:fit-content (css:3118), so its own justify-content moves only
-   its icon and label, and the parent's align-items cannot stretch it.
+   .as-hub-notsure__tag USED TO BE named separately here, because the
+   services hub eyebrow was that class and not .as-eyebrow, so the
+   selector above could not reach it. Both the class and this block's
+   align-self rule for it are gone as of 4 August 2026 - the hub now
+   carries the standard .as-eyebrow and the selector above reaches it
+   like every other CTA.
+
+   KEEP THE REASON, IT OUTLIVED THE RULE. Sitting outside that selector
+   list is exactly why the tag was still styled white-on-dark on a white
+   section long after the banner stopped being a black card: every pass
+   that re-inked the other children was written against .as-eyebrow and
+   could not see it. The full account is at the tombstone on css:3104.
+   The general form: a component that opts out of a shared selector opts
+   out of every future sitewide pass over that selector, and the cost
+   shows up much later than the decision.
 
    The !important pair on .as-svc-cta__actions .as-btn is required and
    is NOT arbitrary escalation. css:1978-1994 is a max-width:767px block
@@ -11288,10 +11317,6 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   :root .as-cs-page-cta__inner .as-eyebrow {
     justify-content: flex-start;
     text-align: left;
-  }
-
-  :root .as-hub-notsure__tag {
-    align-self: flex-start;
   }
 
   :root .as-hub-notsure__left,
