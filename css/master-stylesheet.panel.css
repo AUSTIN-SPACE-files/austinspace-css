@@ -1415,6 +1415,11 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 :root .as-offer__spec .v{font-family:var(--font-body);font-size:15px;line-height:21px;color:var(--ink-900)}
 @media (max-width:600px){:root .as-offer__spec{display:none}
 }
+@media (max-width:600px){:root body:has(.as-hub-hero) .as-offer__spec{display:block}
+:root body:has(.as-hub-hero) .as-offer__spec i{display:none}
+:root body:has(.as-hub-hero) .as-offer__spec li{grid-template-columns:72px 1fr}
+:root body:has(.as-hub-hero) .as-offer__spec .k{letter-spacing:0.10em}
+}
 :root .as-offer__upgrade{background:var(--candy-pink-050);border-radius:var(--radius-md);padding:14px 16px;margin:16px 0 0}
 :root .as-offer__upgrade-title{font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.3;color:var(--ink-900);margin:0 0 2px}
 :root .as-offer__upgrade-body{font-family:var(--font-body);font-size:14px;line-height:1.45;color:var(--grey-500);margin:0}
@@ -1453,4 +1458,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 :root .as-proof__marks{align-items:flex-start}
 :root .as-proof__google{justify-content:flex-start}
 }
-.as-build-canary{--as-build-id:"20260804-cf47b6"}
+.as-build-canary{--as-build-id:"20260804-7b2d86"}
