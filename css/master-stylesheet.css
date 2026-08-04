@@ -1884,14 +1884,57 @@
  Used by: .as-svc-cta__inner, .as-hub-notsure__inner, .as-cs-hub-cta__inner
  ============================================================ */
 
+/* overflow:hidden and border-radius:var(--radius-lg) stood in this rule.
+   DELETED 4 August 2026 - overflow because it had started clipping, radius
+   because it was the same fossil with nothing left to round.
+
+   WHY IT CLIPPED. The button carries box-shadow 5px 5px 0 0, so it needs 5px
+   of room below it. This box was overflow:hidden, and zeroing its
+   padding-bottom at <=600 (css:11373) took the room to 0. Measured at 390:
+   services hub and custom-build both read overflow hidden, room 0, shadowY 5
+   and the shadow's bottom edge was cut. Home is unaffected because it uses
+   .as-cta__inner, which is overflow:visible - the clip was never a property
+   of the CTA pattern, only of this one inner.
+
+   The :active state was clipped too, and is fixed by the same removal:
+   .as-btn:active translates 3px 3px, which moved the button itself past the
+   bottom edge of a box with no room left.
+
+   ALL SIX PAGES, not the five in the original report. .as-cta-banner__inner
+   is carried by one-page, custom-build, refresh, support, the services hub
+   AND the case-studies hub. The last is easy to drop from a list because its
+   section class is .as-cs-hub-cta rather than .as-svc-cta, but the inner is
+   the same element with the same children.
+
+   A DECLARATION THAT LOOKS INERT IS INERT AGAINST THE CURRENT LAYOUT ONLY.
+   This is the lesson and it is the second time this sheet has paid for it.
+   overflow:hidden sat here harmlessly for months - not because a transparent
+   box cannot clip, but because 40px of padding kept every child away from
+   the clip edge. Remove the padding and it woke up. It was recorded as an
+   inert fossil in the tombstone at css:3147 on exactly that reasoning, and
+   that reasoning was wrong. Same class as the dormant flex-direction:column
+   on .as-about-background__right, which did nothing until .as-rail flipped
+   the host to flex. Before calling a declaration inert, name the condition
+   that makes it inert, then check whether anything is about to change it.
+
+   WHAT RELIED ON THE CLIP: nothing, and this was checked rather than assumed
+   the second time. No pseudo-element on the inner or any child, no
+   background-image, no negative margins, and no .as-topper - the one child
+   elsewhere in this sheet that genuinely needs a clipping parent, on the
+   offer cards and the about-work cards. The children are an eyebrow, a body
+   paragraph and an actions row on all six pages.
+
+   border-radius goes with it and IS genuinely inert: the background is
+   transparent and there is no longer any overflow to round.
+
+   Both were leftovers from when this was a filled black card - see the
+   tombstone at css:3147 and the dead .as-svc-cta--dark at css:1873. */
 .as-cta-banner__inner {
  max-width: 640px;
  margin: 0 auto;
  background: transparent;
  color: var(--ink-900);
- border-radius: var(--radius-lg);
  padding: 4rem;
- overflow: hidden;
  display: flex;
  flex-direction: column;
  align-items: center;
@@ -3116,11 +3159,21 @@
    THE BANNER WAS THE SURFACE THAT CHANGED, NOT THE SECTION. This is the
    part worth keeping. .as-cta-banner__inner was once a filled black card
    floating on the white section, and white-on-dark was correct for it.
-   Two fossils of that survive and are NOT tidied here, so they are not
-   riding along in a bug fix - both are dead-CSS-sweep candidates:
-     .as-svc-cta--dark at css:1873, used by no page in the repo
-     border-radius and overflow:hidden on .as-cta-banner__inner, which
-       are inert on a background:transparent box
+   Fossils of that survive:
+     .as-svc-cta--dark at css:1873, used by no page in the repo - still
+       standing, still a dead-CSS-sweep candidate
+     border-radius and overflow:hidden on .as-cta-banner__inner - GONE,
+       deleted 4 August, see the note at css:1887
+
+   THE SECOND OF THOSE WAS DESCRIBED HERE AS INERT AND IT WAS NOT. This
+   note originally called both "inert on a background:transparent box".
+   True of the radius; false of the overflow, which was clipping-capable
+   all along and merely had nothing reaching its edge, because 40px of
+   padding held every child clear. Zeroing that padding at <=600 activated
+   it and it cut the primary button's 5px offset shadow on all six banner
+   pages. The full account and the general lesson are at css:1887. Left
+   recorded rather than quietly rewritten: this note is the reason the
+   declaration survived a pass that was looking straight at it.
    When the banner went transparent every child was re-inked - the
    headline, the body, and the inner's own color:var(--ink-900). The tag
    was the one that was missed.
@@ -9370,9 +9423,19 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 /* ============================================================
    CASE-STUDY HUB FOOTER STRIP - inverted top-edge cosmos, added 2026-07-10
    Same recipe as prior pages. Page's true last element before this strip
-   is the BLACK .as-cs-hub-cta__inner .as-cta-banner__inner (confirmed via
-   live Y-position: bottom 3632), so the stroke is black-on-black at the
-   top edge until the CTA banner is whitened. Accepted temporary state.
+   is .as-cs-hub-cta__inner .as-cta-banner__inner (confirmed via live
+   Y-position: bottom 3632).
+
+   CORRECTED 4 August 2026. This note described that banner as BLACK and
+   the resulting black-on-black stroke as an "accepted temporary state
+   until the CTA banner is whitened". The whitening happened - the banner
+   has carried background:transparent on a white section since before this
+   repo began, so the stroke has not been black-on-black for a long time
+   and there is no temporary state left to accept. Kept rather than
+   deleted because it is the clearest surviving evidence of WHEN the
+   filled black card existed, which is what explains two later bugs: the
+   invisible services-hub eyebrow (css:3147) and the clipped CTA button
+   (css:1887).
    Scoped to /case-studies/view-all (the reskinned hub) - the plain
    unreskinned /case-studies blog collection is untouched. Additive only.
    ============================================================ */
@@ -11198,7 +11261,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    list is exactly why the tag was still styled white-on-dark on a white
    section long after the banner stopped being a black card: every pass
    that re-inked the other children was written against .as-eyebrow and
-   could not see it. The full account is at the tombstone on css:3104.
+   could not see it. The full account is at the tombstone on css:3147.
    The general form: a component that opts out of a shared selector opts
    out of every future sitewide pass over that selector, and the cost
    shows up much later than the decision.
