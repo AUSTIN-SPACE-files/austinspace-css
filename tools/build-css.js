@@ -24,8 +24,14 @@
  * Any calc() performing arithmetic on a var() fails the ENTIRE compile
  * silently and deploys a ~527 byte stub -- the whole site loses every custom
  * rule at once. Both calc(-1 * var(--x)) and calc(var(--x) * -1) fail.
- * Literal operands are fine: calc(100% - 56px) is confirmed safe by live test.
- * The trigger is var() INSIDE calc(), not calc() itself.
+ * Literal operands do not kill the compile -- but that is ALL the live test
+ * ever proved, and it was never a check that the value COMPUTED correctly.
+ * calc(100% - 56px) saves clean and then resolves to 44%, because LESS
+ * evaluates the subtraction and drops the second operand's unit. Corrected in
+ * commit 4c584ea, where the rail mask fade had been landing 120px inside card
+ * one at 390 for as long as this note claimed the expression was safe.
+ * Write literal percentages; do not reach for calc() to express one.
+ * The COMPILE-KILLING trigger is var() INSIDE calc(), not calc() itself.
  *
  * Failure is SILENT and CATASTROPHIC: the editor redisplays the full text you
  * pasted while the server stores a stub. It presents as a total CSS bug, not a
