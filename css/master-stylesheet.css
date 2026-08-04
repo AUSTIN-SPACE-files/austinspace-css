@@ -10591,6 +10591,134 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   :root .as-offer__spec { display: none; }
 }
 
+/* ==================================================================
+   SERVICES HUB ONLY - restore the spec lists at mobile.
+
+   THE HUB IS THE COMPARISON PAGE. Someone who has navigated to "view
+   all services" has asked for the detail; the homepage is a summary
+   and keeps the short cards. This is the FIRST DELIBERATE CONTENT
+   DIVERGENCE between the two, which otherwise share a byte-identical
+   card block - see the identity note on the hide above. The block
+   stays byte-identical; only the CSS diverges, which is the cheaper
+   place to carry a difference.
+
+   THE HOMEPAGE RULE IS UNCHANGED AND REMAINS THE DEFAULT. Anything
+   added to the spec-hide block above applies to home as well as the
+   hub unless it carries this scope. Hiding is the default; showing is
+   the exception, and the exception is the thing that has to be named.
+
+   COST: +1144px at 390. The four lists are 294/364/203/203 = 1064,
+   plus their four 20px top margins = 80. Section 2186 -> ~3330, page
+   from about 6.5 viewports to 7.9. Measured when the hide was
+   introduced; the delta is the same 1144 recorded there against
+   different absolutes, because other mobile work has moved the
+   section since.
+
+   CARD HIERARCHY INVERTS BACK, and that is the point. Without specs
+   the hub reads 466/408/345/326 with One-Page tallest. Restored, it
+   returns to roughly 780/792/523/523: Custom Build is tallest again
+   and the row-1 pair dominates. That is the original design intent,
+   not a regression - the hide note records the inversion as
+   deliberate in the other direction, and this reverses it on one page.
+
+   display: block RESTORES THE UA DEFAULT, NOT AN AUTHORED VALUE. The
+   base rule at css:10490 sets list-style, margin and padding and NO
+   display at all, so .as-offer__spec is a <ul> running on the UA's
+   block. Checked rather than assumed. If a future base rule gives it
+   grid or flex, this literal silently becomes wrong - it is a
+   restatement of the default, so it cannot track a change above it.
+
+   SPECIFICITY, NOT SITING, IS WHAT WINS HERE. This is (0,3,1) against
+   the hide's (0,2,0) - :root is a pseudo-class, body an element, and
+   :has() takes the specificity of its most specific argument. It
+   would therefore win from anywhere in the sheet. It is still sited
+   directly after the hide, because the pair only reads as a pair when
+   they sit together, and because the convention elsewhere in this
+   sheet is position-based and a reader should not have to recompute
+   specificity to know this block is safe.
+
+   ------------------------------------------------------------------
+   THE INTERNALS HAD TO COME BACK, AND THE THREE DECLARATIONS ARE ONE
+   UNIT. Read this before touching any of them.
+
+   The block that tuned the spec internals below 600 was deleted when
+   the hide landed, correctly: it only ever applied below 600, which
+   was exactly where the spec no longer rendered. Restoring the lists
+   at this width restores the problem it existed to solve.
+
+   The arithmetic, re-derived and matching the original note exactly.
+   At 390 the section pads 19.2px a side, the row is single-column, and
+   the card pads 22px a side, so the card interior is 307.6px. The base
+   track is 20px 92px 1fr with two 10px column gaps, which consumes
+   132px - 42.9% of the interior, the "43 percent" in the hide note -
+   leaving 175.6px for the value. Every value wraps at that width.
+   Dropping the icon and tightening to 72px 1fr consumes 82px and
+   leaves 225.6px, which is the "+50px to the value column" the
+   original recorded. The numbers reconcile to the pixel, so this is
+   the same finding, not a new estimate.
+
+   WHY THEY CANNOT BE SPLIT:
+     - The 2-column track REQUIRES the icon to be display:none. The li
+       has three children; hiding the icon leaves two in-flow, which
+       is what makes 72px 1fr correct. Restore the track without the
+       hide and the icon takes column 1, .k takes column 2, and .v
+       auto-places onto an implicit SECOND ROW. Loud, visible break.
+     - The 72px track REQUIRES the tighter tracking. .k is
+       white-space: nowrap by design (css:10526), so a label that does
+       not fit does not wrap, it overflows into the value column.
+       ANALYTICS is the longest label in use, confirmed across the
+       markup at 9 characters. 72px and 0.10em were measured together
+       as a pair; neither was derived from the other, and changing one
+       without re-measuring the other is what breaks it.
+
+   --ls-label-tight IS NOT COMING BACK. The token was deleted with the
+   old block for having no other consumer, and that is still true - one
+   consumer does not earn a token. 0.10em is written as a literal here,
+   the same call the CTA standardisation block made for its 19.2px.
+   The base tracking is var(--ls-label) = 0.16em at css:4916; this is
+   deliberately tighter and deliberately local.
+
+   ON THE body:has() IDIOM. The brief cited About's breadcrumb pull as
+   precedent. That rule NO LONGER EXISTS - css:2875 is a comment
+   recording its deletion, not a live selector, and there is no other
+   body:has() in this sheet. What IS proven live through the LESS panel
+   is the :has(~ ...) sibling form, used throughout this sheet and
+   carrying the load-bearing wave-clearance rules. (No count given
+   deliberately - a tally of occurrences goes stale the moment anyone
+   adds one, including this block, which adds four.) So :has() itself
+   is not the risk; body-level descendant scoping is new here, and is
+   structurally simpler than the clearance selectors that already
+   compile. Recorded so the precedent is not overstated to the next
+   reader.
+
+   .as-hub-hero is unique to html/services/1-services-hub.html.
+   Checked, not assumed - it is the whole basis of the scope.
+
+   NEEDS A LIVE READ. The restored 72px/0.10em pair was measured on
+   this card geometry, which has not changed, so it should hold - but
+   it has not been re-verified since the lists came back. Check
+   ANALYTICS against the 72px track at 390 before treating this as
+   settled.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root body:has(.as-hub-hero) .as-offer__spec {
+    display: block;
+  }
+
+  :root body:has(.as-hub-hero) .as-offer__spec i {
+    display: none;
+  }
+
+  :root body:has(.as-hub-hero) .as-offer__spec li {
+    grid-template-columns: 72px 1fr;
+  }
+
+  :root body:has(.as-hub-hero) .as-offer__spec .k {
+    letter-spacing: 0.10em;
+  }
+}
+
 /* Upgrade note, One Page card only. A tinted panel rather than a fourth tick
    group: as a fourth group it would read as more of the same list and the
    reader would skim past it, and the point of the note is that it is a
