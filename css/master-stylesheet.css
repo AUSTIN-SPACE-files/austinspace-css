@@ -7230,6 +7230,86 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   max-width: 820px;
 }
 
+/* ==================================================================
+   MOBILE HERO STANDARDISATION - one H1 size, one run-in.
+
+   THE CENSUS, measured live at 390 on all thirteen hero pages (the
+   brief's figures came from a sample of eight; these supersede them,
+   and two of the counts move):
+
+       64px    contact, services hub
+       44.8px  home
+       41.6px  about, one-page, custom-build, site-refresh,
+               support, case-studies hub          <- SIX, not four
+       38.4px  all four case studies              <- not ddr alone
+
+   So 41.6 was already the de facto standard on six of thirteen, and
+   adopting it is ratifying the majority rather than picking a new
+   number. There is NO token for it. 2.6rem is the same value and is
+   already the clamp floor on .as-about-hero__headline (css:5587),
+   .as-svc-hero__headline (css:7060) and .as-cs-hub-hero__headline
+   (css:7421), so the figure is not arbitrary - but nothing names it,
+   which is why this is a literal.
+
+   WHAT IT BUYS. Worst case was the services hub: 64px wrapping to
+   six lines, 403px of headline. Now 175 at four. Contact 202 -> 87.
+   NOTE the new worst case is the case-studies hub at 218px, which
+   this rule does not change - it was already 41.6 and simply has a
+   long headline. Note also that the four case studies go UP, 38.4
+   -> 41.6, so this is standardisation and not a size reduction.
+
+   RUN-IN IS PURELY THE SECTION'S PADDING-TOP. Verified on every
+   page: each hero begins with .as-label (or the H1 on the case
+   studies) immediately after the breadcrumb, and crumb-to-content
+   equals padding-top exactly - 8px on about, 32px on the other
+   twelve. An earlier reading suggested an 88px structural spread;
+   that was the H1 sizes and the elements above them, not structure.
+   The -40px breadcrumb pull from the previous round is already
+   present in every number here and applies sitewide.
+
+   ABOUT IS EXCLUDED FROM THE PADDING LIST because it is already 8
+   (css:2901) and is the template the other five are being brought
+   to. HOME is excluded from the padding entirely: it has no
+   breadcrumb, so its run-in is not comparable. Home IS in the
+   headline list, going 44.8 -> 41.6.
+
+   THIS IS NOT A NO-OP ACROSS 481-600, unlike the equivalent About
+   declaration. .as-svc-hero does carry a min-width:481 padding-top
+   of 16px (css:1383), but that rule is ALREADY DEAD below 1280: the
+   max-width:1280 hero block at css:4433 sets padding-top:2rem at the
+   same (0,1,0) specificity and later in source order, so 481-1280
+   resolves to 32px, not 16. Measured at 481 and at 600 to confirm.
+   All five selectors therefore move 32 -> 8 across the FULL <=600
+   range, which is deliberate and matches the breakpoint the
+   breadcrumb pull already uses.
+
+   SOURCE ORDER IS LOAD-BEARING FOR THE HEADLINE HALF. Four of the
+   seven are contested at equal (0,2,0) specificity - the two fixed
+   64px rules at css:5481 and css:5499, and the clamp rules at
+   css:5587, css:7060 and css:7421. A media query adds no
+   specificity, so this block only wins by sitting after all of them.
+   Do not move it earlier in the sheet.
+   ================================================================== */
+@media (max-width: 600px) {
+ :root .as-hero-combined__headline,
+ :root .as-about-hero__headline,
+ :root .as-contact-hero__headline,
+ :root .as-hub-hero__headline,
+ :root .as-svc-hero__headline,
+ :root .as-cs-hub-hero__headline,
+ :root .as-cs-hero__headline {
+ font-size: 41.6px;
+ }
+
+ :root .as-contact-hero,
+ :root .as-hub-hero,
+ :root .as-svc-hero,
+ :root .as-cs-hub-hero,
+ :root .as-cs-hero {
+ padding-top: 8px;
+ }
+}
+
 /* --- testimonial quote - same font-display token, DIFFERENT weight
    (400, not fw-display/900) - matches home's live .as-casestudy__quote p
    exactly. Only Fraunces 900 is loaded today, so this currently still
