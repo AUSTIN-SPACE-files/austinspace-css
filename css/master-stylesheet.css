@@ -5462,7 +5462,13 @@ a.cky-banner-element.as-cookie__btn:hover {
    that value would widen a row that is already overflowing. */
 @media (max-width: 480px) {
   :root .as-proof {
-    padding-top: var(--as-space-section-mobile);
+    /* 48 not var(--as-space-section-mobile) (64): the mobile alignment pass
+       at the foot of this sheet takes the section 679 -> 663, and this 16px
+       IS that delta - the alignment rules themselves cost no height. Scoped
+       here at <=480 rather than in that max-width:600 block on purpose: at
+       481-600 padding-top is still var(--as-space-section) (112), so a 48
+       written there would cut 64, not the measured 16. */
+    padding-top: 48px;
     padding-left: var(--as-space-section-side-mobile);
     padding-right: var(--as-space-section-side-mobile);
   }
@@ -5563,6 +5569,122 @@ a.cky-banner-element.as-cookie__btn:hover {
 :root .as-contact-bar__col:nth-child(2) i { color: var(--bead-blue-lt); }
 :root .as-contact-bar__col:nth-child(3) i { color: var(--tangerine); }
 :root .as-contact-bar__col:nth-child(4) i { color: var(--sunshine); }
+
+/* ==================================================================
+   CONTACT BAR, MOBILE (<=600px) - 2x2 WITH CROSS HAIRLINES
+
+   Section 893 -> 607 at 390, 1.06 viewports to 0.72. Ports the Track
+   Record 2x2 - same nth-child pattern, n+3 horizontal and even
+   vertical.
+
+   Alpha is 0.12, NOT Track Record's 0.14 (css:6727, css:6730). 0.12
+   is this component's own hairline value - it is the band's only
+   existing hairline, the desktop border at css:3350, and the 960
+   block adds none of its own. So the mobile borders match the band
+   they belong to rather than the band they copy the geometry from.
+   The pattern is ported; the colour is not. Same call
+   as when Track Record diverged from About's - each ink band keeps
+   its own hairline value, so this is the convention, not an
+   exception.
+
+   The desktop grid draws its hairlines with gap:1px over the ink
+   background. At mobile the gap goes to 0 and real borders take over,
+   because a 1px gap cannot draw both axes of a 2x2.
+
+   MUST STAY AFTER css:5527. That is :root .as-contact-bar with a
+   padding SHORTHAND inside a min-width:481px guard - (0,2,0),
+   identical to the padding-top/bottom below, so source order is the
+   only thing deciding 481-600. Sited with the base .as-contact-bar
+   family at css:3315-3412 instead, the shorthand would win and the
+   48/48 would silently apply only at <=480. Side padding is
+   deliberately left alone: 32px at 481-600 from that shorthand,
+   19.2px at <=480 from css:3616.
+
+   THIS IS A CONVENTION, NOT A ONE-OFF. Four sections in a row have
+   now hit the same shape: a min-width:481px padding shorthand at
+   equal specificity to the mobile block, where nothing but source
+   order settles the 481-600 band. Track Record is the reference pair
+   - min-481 at css:6637, 600 block at css:6710. The rule for the next
+   section: the mobile block goes AFTER the min-481 rule, not with the
+   base family. Check for one before choosing a site.
+
+   DEPENDS ON THE OLD ONE-COLUMN BLOCK AT css:3404-3414, which is not
+   superseded. Its nth-child(odd),(even){border-left:0} is the only
+   thing killing the base :not(:first-child) border from css:3350, so
+   column 3 stays clean without a reset here - unlike Track Record,
+   which needs an explicit one. Delete that block as "superseded" and
+   column 3 grows a left border back. padding-left:0 below is stated
+   rather than inherited from its padding:0, so at least that half of
+   the dependency is visible; the border half cannot be made visible
+   without duplicating a reset that already works.
+
+   max-width:120px on the title is TUNED TO THESE FOUR STRINGS at 20px
+   Fraunces. It forces "Free site / review" and "Skip the / form" to
+   two lines so all four titles match at 48px, without pushing
+   "Worcester, UK-wide" to three. Measured: 105px gives 2/2/3/2, 92px
+   gives 3/2/3/2, 120px gives 2/2/2/2. Change a title's wording and
+   this needs re-checking - it is a content-dependent value, not a
+   layout constant.
+
+   The shorter copy alone did NOT make the 2x2 work. At 147px the
+   descriptions still wrapped to two lines and the titles wrapped
+   instead, so the grid spent on titles what it saved on bodies. 20px
+   titles plus the width cap is what makes it sit evenly.
+
+   COPY CHANGED WITH THIS BLOCK, at all widths, not mobile-only - a
+   duplicate string set for three short lines was not worth it. One
+   substantive loss, recorded here so it is not buried in a layout
+   change: column 2 was "Send me a URL. I'll come back with what I'd
+   fix first, and whether it's worth doing at all." The replacement
+   keeps the offer but drops "whether it's worth doing at all", which
+   was the no-hard-sell position and now appears nowhere on the page.
+   Charles wrote the replacement; this is a record, not an objection.
+   Column 3 also lost "St Johns, Worcester" - the machine-readable
+   locality is untouched, it lives in the LocalBusiness/PostalAddress
+   JSON-LD in header code injection, so only the human-readable line
+   went.
+
+   Measured alternative, for the record: one column with the About
+   hairline pattern and the same short copy lands near 650 with every
+   line full width and nothing squeezed. The 2x2 was chosen for visual
+   consistency with Track Record, not because it is shorter.
+
+   Remaining 15px row spread is description length, not layout.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-contact-bar {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-contact-bar__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  :root .as-contact-bar__col {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-right: 12px;
+    padding-left: 0;
+  }
+
+  :root .as-contact-bar__col:nth-child(n+3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 22px;
+  }
+
+  :root .as-contact-bar__col:nth-child(even) {
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    padding-left: 16px;
+  }
+
+  :root .as-contact-bar__col-title {
+    font-size: 20px;
+    max-width: 120px;
+  }
+}
 
 /* === ALLSORTS COMPONENTS - about page - added 2026-07-09 === */
 
@@ -10928,3 +11050,78 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
+/* ==================================================================
+   CONTACT PROOF BLOCK - MOBILE ALIGNMENT
+   Closes the exclusion logged at css:10969.
+
+   The CTA standardisation deliberately left .as-proof centred, and the
+   reasoning was sound on its own terms: credibility block, not a CTA,
+   no button, headline already 32px here via clamp(2rem,3.5vw,3rem).
+   But the result was one centred block on a page where everything else
+   is left, and a visitor cannot see that it belongs to a different
+   class family. Consistency wins over the taxonomy.
+
+   THE BLOCK WAS NEVER CENTRED THE WAY IT LOOKED. Every container was
+   already at L19 and full width. What read as centring was text-align
+   inside those boxes, plus the badge genuinely floating.
+
+   __marks IS THE LOAD-BEARING RULE. text-align alone leaves the badge
+   at L121 - it is an image positioned by its flex parent, so only
+   align-items moves it. Measured: text-align alone gives headline,
+   body and the Google row at 19 with the badge still at 121.
+
+   REVERSES INTENT AT css:5429 FOR MOBILE ONLY. That comment records the
+   centred Google-row-over-badge stack as deliberate and turns on the row
+   wrapping and re-centring at 375. The wrap is untouched: flex-wrap and
+   the 10px 12px gap at css:5466 both stand, and align-items CANNOT move
+   the wrap point - __google is a flex item in a COLUMN container, so
+   align-items is its cross axis, and both center and flex-start size it
+   to fit-content. Only stretch would change its width. At 375 the
+   container is 336.6 (375 - 2 x 1.2rem) against a 402 max-content row,
+   so it still wraps onto the same number of lines; only the alignment
+   of those lines changes, centred to left. Height is unaffected.
+
+   DESKTOP KEEPS CENTRED by construction, not by guard: css:5396, 5400
+   and 5432 are unguarded base rules a max-width block cannot reach.
+
+   NO padding-bottom HERE. Deliberate, not an omission, and the reason
+   generalises - see below. .as-proof's padding-bottom IS the footer-wave
+   clearance, set by the guarded :has() rules at css:9186 and css:9200.
+   The prohibition at css:5380 stands.
+
+   SPECIFICITY BEATS SITING - THE GENERAL LESSON. The convention of
+   siting a max-width:600 block after the min-width:481 rule resolves
+   TIES. It does nothing against a higher-specificity selector, because
+   source order is only consulted at equal specificity:
+
+       :root .as-proof:has(~ .as-hero[class*="-footer"]
+                           :not(.as-hero--home-footer))   (0,5,0)  <=480
+       :root .as-proof:has(~ .as-hero--contact-footer)    (0,3,0)  481+
+       :root .as-proof                                    (0,2,0)  <- this
+
+   :has() takes the specificity of its most specific argument, which is
+   why the mobile guard scores 5 - a class plus an attribute selector
+   plus a :not(class). A padding-bottom written in this block would lose
+   at EVERY width no matter how far down the sheet it sat. And if it did
+   land, 48px gives gap = 48 - 85.6 = -37.6 under the css:9121 formula,
+   drawing the cosmos over the Silver badge - worse than the -21.6 that
+   About was at when that formula was written.
+
+   ANY future mobile override on a section carrying wave clearance must
+   have its specificity checked BEFORE its position. This is the second
+   time a clearance rule has been the thing in the way; css:9192 warns
+   about the same trap from the other direction.
+
+   padding-top IS NOT HERE EITHER - it is on css:5461, scoped to <=480.
+   A 48px top padding in THIS block would also hit 481-600, where the
+   current value is var(--as-space-section) = 112, cutting 64 rather
+   than the measured 16. Section 679 -> 663 is a <=480 measurement.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-proof__inner   { text-align: left; }
+  :root .as-proof__eyebrow { justify-content: flex-start; }
+  :root .as-proof__marks   { align-items: flex-start; }
+  :root .as-proof__google  { justify-content: flex-start; }
+
+}
