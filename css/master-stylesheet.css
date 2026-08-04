@@ -7168,7 +7168,16 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    they overlap - same problem the GP detail page solves with a white
    ring on the phone card (.as-cs-gp .as-cs-hero__media-phone). Same
    fix, scoped to this feature section only; .as-cs-gp itself is
-   untouched. Worse on white than on ink, so it is needed here too. */
+   untouched. Worse on white than on ink, so it is needed here too.
+
+   The right: -6% below overflows the viewport at mobile, because this
+   section has no host gutter below 481 for the percentage to lean into.
+   Measured past the viewport by 25/30/32/35px at 320/375/390/430. The
+   mobile correction sits immediately after this rule and MUST STAY
+   THERE: this base rule is unguarded, so an override anywhere earlier
+   in the sheet ties it at (0,2,0) and loses on source order. A media
+   query adds no specificity. The full reasoning is in the featured work
+   overhang note sited with the .as-casestudy family. */
 :root .as-cs-hub-feature__media-phone {
   position: absolute;
   z-index: 2;
@@ -7180,6 +7189,14 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   overflow: hidden;
   box-shadow: 0 0 0 2px #ffffff, 0 12px 30px rgba(0, 0, 0, 0.26);
   transform: rotate(5deg) translateY(28px);
+}
+
+/* Sign flip, not a tweak - see the note above. 18px rather than the
+   homepage's 14: clearance runs 12.2/10.5/9.4/8.8px at 320/375/390/430.
+   12px was considered and rejected at 2.8px on 430, which is the
+   absence of overlap rather than a margin, and 430 is a common width. */
+@media (max-width: 600px) {
+  :root .as-cs-hub-feature__media-phone { right: 18px; }
 }
 
 :root .as-cs-hub-feature__media img {
