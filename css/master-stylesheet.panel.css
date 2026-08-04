@@ -1012,6 +1012,13 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 :root .as-hub-bar__col:nth-child(2) i{color:var(--bead-blue-lt)}
 :root .as-hub-bar__col:nth-child(3) i{color:var(--tangerine)}
 :root .as-hub-bar__col:nth-child(4) i{color:var(--sunshine)}
+@media (max-width:600px){:root .as-hub-bar{padding-top:48px;padding-bottom:48px}
+:root .as-hub-bar__grid{grid-template-columns:1fr 1fr;gap:0}
+:root .as-hub-bar__col{padding-top:14px;padding-bottom:14px;padding-right:12px;padding-left:0}
+:root .as-hub-bar__col:nth-child(n+3){border-top:1px solid rgba(255,255,255,0.12);padding-top:22px}
+:root .as-hub-bar__col:nth-child(even){border-left:1px solid rgba(255,255,255,0.12);padding-left:16px}
+:root .as-hub-bar__col-title{font-size:20px;max-width:120px}
+}
 @media (min-width:481px){:root .as-cta{padding-top:var(--as-pad-cta-top);padding-bottom:var(--as-clear-wave)}
 }
 @media (min-width:481px){:root .as-cta .as-row-list{background:transparent;border:none;border-radius:0;box-shadow:none;padding:0;display:grid;gap:14px;overflow:visible}
@@ -1446,4 +1453,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 :root .as-proof__marks{align-items:flex-start}
 :root .as-proof__google{justify-content:flex-start}
 }
-.as-build-canary{--as-build-id:"20260804-297130"}
+.as-build-canary{--as-build-id:"20260804-cf47b6"}
