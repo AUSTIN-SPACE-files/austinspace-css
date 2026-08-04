@@ -10770,3 +10770,161 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
     transition: none;
   }
 }
+
+/* ==================================================================
+   CTA STANDARDISATION, MOBILE (<=600px)
+
+   Ports home's left-aligned CTA treatment to the four centred ones.
+   Measured: svc-cb 814->677, svc-hub 793->730, cs-hub 877->656,
+   cs-ddr 781->588. cs-page-cta is shared by all four case studies.
+
+   THREE different inner classes, not one. .as-cta-banner__inner covers
+   svc-cta, hub-notsure and cs-hub-cta; .as-cs-page-cta__inner is
+   separate; home and About use .as-cta__inner and are untouched. A rule
+   keyed only to the banner inner silently misses the case studies.
+
+   MUST STAY AT EOF. The two eyebrow rules it reverses -
+   :root .as-cta-banner__inner .as-eyebrow (css:7127) and
+   :root .as-cs-page-cta .as-eyebrow (css:2357) - are both (0,3,0),
+   identical to the rule below. Source order is the only thing deciding
+   this; move it above 7127 and the eyebrows stay centred.
+
+   32px is what home's clamp(2rem,3.5vw,3rem) already resolves to at
+   this width, so the four now match it exactly. It trims svc/cs from
+   35.2px at 501-600 (their clamp is 1rem+3.2vw, css:1924).
+
+   19.2px is home's .as-cta__actions gap (1.2rem, css:1347) written as
+   the literal this block already uses for font-size. Inert today, every
+   one of the ten CTAs carries exactly one button - but the point of
+   this pass is that these components agree, and an arbitrary 12px would
+   have been the one remaining unexplained divergence.
+
+   margin-left/right:0 on the bodies is load-bearing for two of the
+   four. .as-svc-cta__body (css:1936) and .as-hub-notsure__body
+   (css:3134) are margin:0 auto with max-width:520px, and cross-axis
+   auto margins outrank align-items. Zeroing the inner's side padding
+   takes content width to 536px at a 600px viewport, above the cap, so
+   without this they sit up to 8px in from a left-aligned headline
+   across 585-600. Inert for the cs pair, already margin:0.
+
+   .as-hub-notsure__tag is named separately because the services hub
+   eyebrow is that class, NOT .as-eyebrow - the selector above does not
+   reach it. align-self, not justify-content: the pill is
+   width:fit-content (css:3118), so its own justify-content moves only
+   its icon and label, and the parent's align-items cannot stretch it.
+
+   The !important pair on .as-svc-cta__actions .as-btn is required and
+   is NOT arbitrary escalation. css:1978-1994 is a max-width:767px block
+   with TEN !important declarations, including width:100% on the button
+   and align-items:stretch on the parent. Both locks must be defeated:
+   width alone still stretches, because align-items:stretch on the
+   parent re-expands an auto-width flex item. align-self on the CHILD
+   beats the parent's align-items, so the parent rule is left untouched.
+
+   Consequence of leaving it untouched: on svc-cta only, three of the
+   shared __actions declarations lose to that block - flex-direction
+   stays column, align-items stays stretch, and width:100% makes
+   align-self moot on the container. No visual difference, because of
+   the one-button-per-CTA fact above. The button's !important pair is
+   the whole fix there.
+
+   That 767 block is a deliberate full-width-stacked-buttons decision
+   for the service pages. This reverses it at <=600 on Charles's
+   explicit instruction, in favour of matching home. It still applies at
+   601-767.
+
+   Only .as-svc-cta__actions carries the lock. The other three need no
+   !important, which is why the override is scoped to that one selector
+   rather than applied across all four.
+
+   Side padding only, and the sections' own gutters are now load-bearing
+   for it. Zeroing the inner's padding means nothing between the text
+   and the viewport edge except the section padding: 2rem on .as-svc-cta
+   (css:1868), .as-cs-page-cta (css:2315), .as-hub-notsure (css:3093)
+   and .as-cs-hub-cta (css:3224), dropping to 1.2rem at <=480 via the
+   mobile-token rules at css:2011, css:2387, css:3163 and css:3268. If
+   any of those side values is ever removed or zeroed, text on that page
+   goes flush to the edge at <=600. They are not independent of this
+   block any more.
+
+   The <=480 reach is intended, not incidental. This block is
+   :root-prefixed and later in source, so it also beats the
+   padding: 2.5rem 1.8rem shorthand at css:1910 - sides go to 0 at <=480
+   too, while that rule's 2.5rem vertical stands. Vertical padding is
+   deliberately untouched throughout; it feeds the measured footer-wave
+   clearance.
+
+   NOT INCLUDED: contact's .as-proof, which the original census listed
+   as centred. It is a credibility block, not a CTA - no button, and its
+   headline already resolves to 32px here via clamp(2rem,3.5vw,3rem)
+   (css:5407). Left-aligning it needs align-items on .as-proof__marks
+   (css:5432), whose centred Google row and Silver badge stack is a
+   deliberate decision - the note at css:5446 turns on that row wrapping
+   and re-centring at 375. The margin:24px auto 0 / margin:20px auto 0
+   unwind this note used to call for is NOT needed: those max-widths
+   (860 / 660) never bind below 600, so both autos already resolve to 0.
+   CLOSED by the mobile alignment block at the foot of this sheet.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-cta-banner__inner,
+  :root .as-cs-page-cta__inner {
+    text-align: left;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  :root .as-cta-banner__inner .as-eyebrow,
+  :root .as-cs-page-cta__inner .as-eyebrow {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  :root .as-hub-notsure__tag {
+    align-self: flex-start;
+  }
+
+  :root .as-hub-notsure__left,
+  :root .as-svc-cta__left,
+  :root .as-cs-hub-cta__left,
+  :root .as-cs-page-cta__left {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  :root .as-hub-notsure__headline,
+  :root .as-svc-cta__headline,
+  :root .as-cs-hub-cta__headline,
+  :root .as-cs-page-cta__headline {
+    font-size: 32px;
+    text-align: left;
+  }
+
+  :root .as-hub-notsure__body,
+  :root .as-svc-cta__body,
+  :root .as-cs-hub-cta__body,
+  :root .as-cs-page-cta__body {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  :root .as-hub-notsure__actions,
+  :root .as-svc-cta__actions,
+  :root .as-cs-hub-cta__actions,
+  :root .as-cs-page-cta__actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 19.2px;
+    align-self: flex-start;
+  }
+
+  :root .as-svc-cta__actions .as-btn {
+    width: auto !important;
+    align-self: flex-start !important;
+  }
+}
+
