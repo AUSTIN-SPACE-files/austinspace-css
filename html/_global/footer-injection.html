@@ -98,12 +98,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   /* ── Fields ────────────────────────────────────────────── */
-  .as-lb-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
   .as-lb-field {
     margin-bottom: 14px;
   }
@@ -228,9 +222,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     .as-lb-modal {
       padding: 36px 24px 28px;
     }
-    .as-lb-row {
-      grid-template-columns: 1fr;
-    }
   }
 </style>
 
@@ -250,15 +241,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <form id="asLbForm" novalidate>
 
-        <div class="as-lb-row">
-          <div class="as-lb-field">
-            <label for="asFirstName">First Name *</label>
-            <input type="text" id="asFirstName" name="first_name" placeholder="First name" required>
-          </div>
-          <div class="as-lb-field">
-            <label for="asLastName">Last Name *</label>
-            <input type="text" id="asLastName" name="last_name" placeholder="Last name" required>
-          </div>
+        <div class="as-lb-field">
+          <label for="asName">Name *</label>
+          <input type="text" id="asName" name="name" placeholder="Your name" required>
         </div>
 
         <div class="as-lb-field">
@@ -266,28 +251,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="email" id="asEmail" name="email" placeholder="you@example.com" required>
         </div>
 
-        <!--
-        <div class="as-lb-field">
-          <label for="asPhone">Phone Number</label>
-          <input type="tel" id="asPhone" name="phone" placeholder="07700 900000">
-        </div>
-        -->
-
         <div class="as-lb-field">
           <label for="asWebsite">Website URL</label>
           <input type="url" id="asWebsite" name="website_url" placeholder="https://yoursite.com">
-        </div>
-
-        <div class="as-lb-field">
-          <label for="asService">Service Interested In *</label>
-          <select id="asService" name="service" required>
-            <option value="" disabled selected>Select a service...</option>
-            <option value="one_page">One-Page Website</option>
-            <option value="foundation_build">Squarespace Custom Build</option>
-            <option value="site_refresh">Squarespace Site Refresh</option>
-            <option value="ongoing_support">Ongoing Support &amp; Development</option>
-            <option value="not_sure">Not sure yet / General enquiry</option>
-          </select>
         </div>
 
         <div class="as-lb-field">
@@ -395,7 +361,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         dataLayer.push({
           'event': 'as_form_submission',
           'form_location': window.location.pathname,
-          'service_selected': document.getElementById('asService').value || 'not_specified',
           'form_type': 'lightbox_enquiry'
         });
       }

@@ -122,15 +122,9 @@
       <div id="asCfFormWrap">
         <form id="asCfForm" novalidate>
 
-          <div class="as-cf-row">
-            <div class="as-cf-field">
-              <label for="asCfFirstName">First Name *</label>
-              <input type="text" id="asCfFirstName" name="first_name" placeholder="First name" required>
-            </div>
-            <div class="as-cf-field">
-              <label for="asCfLastName">Last Name *</label>
-              <input type="text" id="asCfLastName" name="last_name" placeholder="Last name" required>
-            </div>
+          <div class="as-cf-field">
+            <label for="asCfName">Name *</label>
+            <input type="text" id="asCfName" name="name" placeholder="Your name" required>
           </div>
 
           <div class="as-cf-field">
@@ -139,25 +133,8 @@
           </div>
 
           <div class="as-cf-field">
-            <label for="asCfPhone">Phone Number</label>
-            <input type="tel" id="asCfPhone" name="phone" placeholder="07700 900000">
-          </div>
-
-          <div class="as-cf-field">
             <label for="asCfWebsite">Website URL</label>
             <input type="url" id="asCfWebsite" name="website_url" placeholder="https://yoursite.com">
-          </div>
-
-          <div class="as-cf-field">
-            <label for="asCfService">Service Interested In *</label>
-            <select id="asCfService" name="service" required>
-              <option value="" disabled selected>Select a service...</option>
-              <option value="one_page">One-Page Website</option>
-              <option value="foundation_build">Squarespace Custom Build</option>
-              <option value="site_refresh">Squarespace Site Refresh</option>
-              <option value="ongoing_support">Ongoing Support &amp; Development</option>
-              <option value="not_sure">Not sure yet / General enquiry</option>
-            </select>
           </div>
 
           <div class="as-cf-field">
@@ -328,7 +305,6 @@
         dataLayer.push({
           'event': 'as_form_submission',
           'form_location': window.location.pathname,
-          'service_selected': document.getElementById('asCfService').value || 'not_specified',
           'form_type': 'inline_contact'
         });
       }

@@ -3470,12 +3470,6 @@
  padding: 48px;
 }
 
-.as-cf-row {
- display: grid;
- grid-template-columns: 1fr 1fr;
- gap: 1rem;
-}
-
 .as-cf-field {
  margin-bottom: 1.2rem;
 }
@@ -3604,10 +3598,6 @@
 @media (max-width: 600px) {
  .as-cf-wrap {
  padding: 1.8rem;
- }
-
- .as-cf-row {
- grid-template-columns: 1fr;
  }
 }
 
