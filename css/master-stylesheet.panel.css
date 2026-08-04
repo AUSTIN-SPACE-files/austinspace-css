@@ -292,7 +292,7 @@
 .as-svc-pricing__tier-price{color:var(--as-black);white-space:nowrap}
 .as-svc-cta{background:var(--as-white);padding:var(--as-space-section-cta) var(--as-space-section-side)}
 .as-svc-cta--dark{background:var(--as-black)}
-.as-cta-banner__inner{max-width:640px;margin:0 auto;background:transparent;color:var(--ink-900);border-radius:var(--radius-lg);padding:4rem;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2rem}
+.as-cta-banner__inner{max-width:640px;margin:0 auto;background:transparent;color:var(--ink-900);padding:4rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2rem}
 @media (max-width:960px){.as-cta-banner__inner{grid-template-columns:1fr;gap:2.5rem}
 }
 @media (max-width:480px){.as-cta-banner__inner{padding:2.5rem 1.8rem}
@@ -1456,4 +1456,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 :root .as-proof__marks{align-items:flex-start}
 :root .as-proof__google{justify-content:flex-start}
 }
-.as-build-canary{--as-build-id:"20260804-6ca931"}
+.as-build-canary{--as-build-id:"20260804-e3a28d"}
