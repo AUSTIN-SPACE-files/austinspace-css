@@ -3505,7 +3505,7 @@
 /* Allsorts retirement stage 1 (2026-07-31): this three-selector base rule is
    deleted whole, not trimmed - all three members are full supersets, so the
    list empties rather than being left with a stranded selector. The Allsorts
-   twin (css:4901) restates border-color and background and adds the focus
+   twin (css:5171) restates border-color and background and adds the focus
    ring. This is the only shared selector list stage 1 touches. */
 
 .as-cf-field input.as-cf-error,
