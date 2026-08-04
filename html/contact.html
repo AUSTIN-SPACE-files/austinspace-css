@@ -143,7 +143,7 @@
           </div>
 
           <p class="as-cf-gdpr">
-            By submitting this form you agree to my <a href="/policies/privacy" target="_blank">Privacy Notice</a>. Your details will only be used to respond to your enquiry and will not be shared with third parties.
+            By submitting this form you agree to my <a href="/policies/privacy" target="_blank">Privacy Policy</a>. Your details will only be used to respond to your enquiry and will not be shared with third parties.
           </p>
 
           <button type="submit" class="as-btn as-btn--primary as-cf-submit" id="asCfSubmitBtn">
@@ -326,7 +326,7 @@
       })
       .catch(function () {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Enquiry →';
+        submitBtn.innerHTML = 'Send Enquiry <i class="fa-slab fa-regular fa-arrow-right arw"></i>';
         errorMsg.style.display = 'block';
       });
 
