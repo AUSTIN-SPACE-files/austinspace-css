@@ -3986,6 +3986,67 @@ a.cky-banner-element.as-cookie__btn:hover {
  }
 }
 
+/* ==================================================================
+   MOBILE: close the gap below the hero cosmos.
+
+   Ink-to-breadcrumb-text goes 111 -> 31 at the deep end of the curve
+   and 157 -> 77 at the shallow end. (A second harness reads these
+   3px higher - 114 -> 34 and 161 -> 81 - off a waveH of 195 rather
+   than 193. The DELTAS are identical in both: -40 from the padding,
+   -80 with the pull. Treat the absolutes as +/-3.)
+
+   TWO STACKED CONTRIBUTIONS, AND THE PADDING IS THE SMALLER ONE.
+   The wave's transparent tail is 71px: ink ends at 203 while the box
+   ends at 274, because the diagonal's lowest point is 0.62 of a 193px
+   band. On top of that sits 40px of breadcrumb padding. Removing the
+   padding alone only gets 111 -> 71 - it cannot touch the tail,
+   because the tail is inside the hero's own box. The pull is what
+   closes it. Anyone tempted to "simplify" this to a padding change
+   should read that sentence again.
+
+   THE GAP IS UNEVEN BY CONSTRUCTION - 31 at the deep end against 77
+   at the shallow. That is the diagonal itself, not a fault, and it
+   grows more visible the tighter the pull. -60px was measured at
+   11/57 and rejected as too tight at the deep end.
+
+   VERIFIED IDENTICAL ON ALL TWELVE BREADCRUMB PAGES, not a sample:
+   about, contact, both hubs, all four service pages and all four
+   case studies. Every one reads waveH 195, tail 74, deep 114 and
+   shallow 161 before, 34 and 81 after. The mobile hero curves were
+   standardised in the sitewide wave pass, so a single value is safe
+   across the set and will stay safe as long as that holds.
+
+   position:relative IS A GUARD, AND IT IS NOT INHERITED. The base
+   rule above sets background and padding only, and the max-width
+   1280 rule sets padding only - there is no position anywhere on
+   .as-breadcrumb, so this is not the inert-duplicate case that the
+   .as-hero-combined declaration turned out to be. What it does:
+   .as-hero is itself position:relative and its __img and __stroke
+   are position:absolute inside it, so a NON-positioned breadcrumb
+   paints in the block-background layer, EARLIER than the hero's
+   positioned subtree, and the hero paints over it. Proven by test:
+   at this -40px pull the two are byte-identical, because the whole
+   40px overlap sits inside the 74px transparent tail; at -120px,
+   where the overlap reaches real ink, the static version has the
+   cosmos swallow "HOME / ABOUT" completely while the relative
+   version keeps it legible. So it buys nothing today and everything
+   if the pull ever deepens or a tail ever shortens. Kept.
+
+   RHYTHM BELOW IS UNCHANGED. padding-top only - the 1280px shorthand
+   still supplies 19.2px sides and 16px bottom, confirmed live. The
+   pull moves the breadcrumb and everything after it together, so
+   breadcrumb-text-to-next-element is untouched (24px on about, 48px
+   on the case studies, 80px on custom-build). Each page simply gets
+   80px shorter. Nothing else referenced the 2.5rem.
+   ================================================================== */
+@media (max-width: 600px) {
+ :root .as-breadcrumb {
+ padding-top: 0;
+ margin-top: -40px;
+ position: relative;
+ }
+}
+
 /* =============================================================
  FOOTER - Redesign
  ============================================================= */
