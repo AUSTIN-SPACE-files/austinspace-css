@@ -5106,6 +5106,73 @@ a.cky-banner-element.as-cookie__btn:hover {
   :root .as-faq--dark details.as-faq__pair:not([open]) { padding-bottom: 18px; margin-bottom: 18px; }
 }
 
+/* FAQ question size below the knee - 23px Fraunces down to 17px.
+   Below 600 only; desktop is deliberately untouched.
+
+   THIS IS A TIE, NOT A WIN, AND THE POSITION IS LOAD-BEARING. The 23px
+   comes from css:5223, which is :root .as-faq--dark .as-faq__q at
+   (0,3,0) and is NOT inside a media query. The rule below is also
+   (0,3,0), so source order is the only thing deciding it and IT MUST
+   STAY BELOW css:5223. Two things follow. A bare :root .as-faq__q at
+   (0,2,0) loses silently - verified live by probe, (0,2,0) computed 23px
+   and every (0,3,0) form computed 17px. And a (0,3,0) rule moved ABOVE
+   css:5223 for tidiness would lose just as silently. No !important is
+   needed or wanted; the fix is the position.
+
+   .as-faq__pair rather than .as-faq--dark as the middle class is a free
+   choice - both are (0,3,0). --dark would match the overridden selector
+   exactly and make the tie more legible; __pair does not require the
+   dark variant. All twelve FAQs in use are dark, so nothing separates
+   them in practice.
+
+   LANDS ON ALL TWELVE PAGES CARRYING THE FAQ, WHICH IS INTENDED: about,
+   contact, the services hub, the four service detail pages, the
+   case-studies hub and the four case-study details. No page-scoped FAQ
+   rule exists anywhere in this sheet, so there is nothing to conflict
+   with. Measured at 390 before the change on three of the twelve -
+   contact had 3 of 5 questions wrapping, custom-build 4 of 8, About was
+   the mildest case at 2 of 5.
+
+   About at 390, measured: section 918 -> 780. Pairs 79/79/79/109/108 ->
+   63/63/63/63/62. All five closed with margin-bottom 0, so the <=860
+   rule at css:5252 is doing its job.
+
+   THE TEXT GOVERNS THE ROW HEIGHT AND THE MARKER CANNOT. Settled by
+   test, not inference: forcing the ::after marker to 8px leaves the row
+   at 60, forcing the TEXT to 8px drops it to 30. That is what css:5248
+   predicts - the marker is position: absolute, so it is out of flow and
+   contributes no height to its parent no matter what size it is.
+
+   So the heights are pure line count. .as-faq__q measures 0 padding and
+   0 margin when closed, and every measured height is an exact multiple
+   of the line-height: at 23px, 29.9 x 2 = 60 and 29.9 x 3 = 90; at 17px,
+   22.1 x 2 = 44.
+
+   WHICH MEANS 17px DOES NOT UNWRAP ANYTHING TO ONE LINE. On About the
+   five questions run 2/2/2/3/3 lines at 23px and 2/2/2/2/2 at 17px. Of
+   the 140px that comes off, roughly 95 is the shorter line box across
+   all twelve remaining lines and roughly 44 is the two lines that go
+   away. Call it two thirds type size, one third line count. An earlier
+   draft of this note claimed the change unwrapped every question to a
+   single line; it does not, and no question is one line at either size.
+
+   The 40px right-hand reserve at css:5245 is now loose, and purely
+   cosmetically so. It was sized for a 23px "+" and the marker has no
+   font-size of its own, so it inherits and drops to 17px with the text -
+   about 6px more clearance than the glyph needs. Left alone. Since the
+   marker is out of flow, giving it an explicit font-size would change
+   nothing but the glyph.
+
+   Fraunces retained rather than switching to DM Sans 600. Both measured
+   identical at 44px, so the family choice is free, and Fraunces keeps
+   the questions consistent with the .as-faq__headline above them.
+
+   19px was measured too and left one question a line longer than the
+   other four. */
+@media (max-width: 600px) {
+  :root .as-faq__pair .as-faq__q { font-size: 17px; }
+}
+
 /* PROOF CLOSER - contact page only. Closing section, sits between the dark
    FAQ and the footer wave.
    Bottom padding is NOT set here. The footer wave is position absolute,
