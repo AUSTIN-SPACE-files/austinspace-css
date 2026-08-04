@@ -6881,6 +6881,114 @@ overrides above beat their guarded legacy properties. Rotation: pink -> blue
 :root .as-hub-bar__col:nth-child(3) i { color: var(--tangerine); }
 :root .as-hub-bar__col:nth-child(4) i { color: var(--sunshine); }
 
+/* ==================================================================
+   SERVICES HUB BAR, MOBILE (<=600px) - 2x2 WITH CROSS HAIRLINES
+
+   Section 863 -> 601 at 390. Ports the contact bar treatment
+   verbatim: same 2x2, same nth-child pattern (n+3 horizontal, even
+   vertical), same 14/22/12/16 padding set, same 120px title cap. The
+   two blocks are deliberately identical - the long-form reasoning
+   lives at css:5561 and is not duplicated here.
+
+   ALPHA 0.12 IS THIS COMPONENT'S OWN VALUE, not a copy. css:3039 is
+   .as-hub-bar__col:not(:first-child) and is the band's only existing
+   hairline. It happens to equal the contact bar's, unlike .as-creds
+   (0.14) against .as-about-skills (0.12) - so this is still "match
+   the band you belong to", and it would still read 0.12 here if
+   contact's were 0.14.
+
+   ONLY THE SERVICES HUB CARRIES .as-hub-bar. Checked, not assumed, so
+   a copy change in this component lands on exactly one page.
+
+   MUST STAY AFTER css:6847. That is the min-width:481 padding rule on
+   :root .as-hub-bar at (0,2,0), identical to the padding-top and
+   padding-bottom below, so source order is the only thing deciding
+   481-600. Same convention as the contact bar and every ink band
+   before it. Side padding is deliberately untouched: var(--as-pad-side)
+   at 481-600 from that rule, and --as-space-section-side-mobile at
+   <=480 from the shorthand at css:3164, which is (0,1,0) and cannot
+   reach the longhands below at any width.
+
+   DEPENDS ON THE OLD ONE-COLUMN BLOCK AT css:3080-3090, which is NOT
+   superseded. Its nth-child(odd),(even){border-left:0} is the only
+   thing killing the base :not(:first-child) border from css:3039, so
+   column 3 stays clean without a reset here. Delete that block as
+   "superseded" and column 3 grows a left border back. Exactly the
+   dependency the contact bar has on css:3404-3414.
+
+   max-width:120px IS TUNED TO THESE FOUR STRINGS at 20px Fraunces.
+   All four titles land on two lines with the new copy - "Silver
+   Partner", "End-to-end ownership", "Fast response", "Worcester,
+   UK-wide". "Fast response" is short enough that it could have
+   dropped to one line and does not; that evenness is a property of
+   the 120px cap, not of the string. Change a title's wording and this
+   needs re-checking - it is a content-dependent value, not a layout
+   constant.
+
+   COPY CHANGED WITH THIS BLOCK, at all widths, not mobile-only. Two of
+   the four are recorded because they were layout decisions rather than
+   editorial ones:
+
+   "One person, start to finish" replaced "One person, from the
+   discovery conversation to the handover". The long version took THREE
+   lines at 176px where every other description took two, giving a 15px
+   row imbalance; the short version drops that to 9. Measured against
+   row height, not chosen for tone - same class of fix as the contact
+   bar's, and the same caution applies.
+
+   "Fast response" replaced "24-hour response" on BOTH bars, because the
+   title was restating its own description - "24-hour response" sitting
+   directly over "Within 24 hours, usually same day". The contact bar
+   carries the identical change at html/contact.html:59.
+
+   ONE SUBSTANTIVE LOSS, recorded so it is not buried in a layout
+   change: column 1 dropped "The one that's actually earned." The line
+   still exists on the homepage as a .as-creds__caption, but home hides
+   its captions below 600 via .as-creds--tight, so BELOW 600 the phrase
+   now appears nowhere on the site. Above 600 the homepage still has it.
+
+   TWO INSTANCES OF THE OLD TITLE SURVIVE DELIBERATELY, both as
+   .as-row-item__title rather than a bar title: html/home.html:471 and
+   html/about.html:394. They were out of scope for this pass and are NOT
+   drift - but "24-hour response" and "Fast response" now both exist on
+   the site, and a future consistency pass should settle them rather
+   than read one as a typo.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-hub-bar {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-hub-bar__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  :root .as-hub-bar__col {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-right: 12px;
+    padding-left: 0;
+  }
+
+  :root .as-hub-bar__col:nth-child(n+3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 22px;
+  }
+
+  :root .as-hub-bar__col:nth-child(even) {
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    padding-left: 16px;
+  }
+
+  :root .as-hub-bar__col-title {
+    font-size: 20px;
+    max-width: 120px;
+  }
+}
+
 /* Bottom breathing room - was 160px (too much dead air), then cut to 72px
 (too aggressive: the right-column row-list card runs taller than the left
 copy column, so at 72px it overlapped the footer wave by 34px - verified
