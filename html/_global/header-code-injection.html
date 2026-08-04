@@ -68,6 +68,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   })();
 </script>
 
+<!-- Backstory read-more collapse. Same contract as the FAQ block above, and
+     deliberately its OWN matchMedia rather than a parameter on that loop: this
+     one is keyed to 600 and the FAQ to 860, so keeping them independent means
+     changing one breakpoint cannot silently move the other. Ships as
+     <details open> so a no-JS client or a script failure shows the whole
+     backstory rather than a third of it. Resize behaviour mirrors the FAQ -
+     matchMedia change fires only on crossing the breakpoint, so no resize
+     debounce is needed. No-ops on pages with no backstory. -->
+<script>
+  (function () {
+    var mq = window.matchMedia('(max-width: 600px)');
+    function sync() {
+      var items = document.querySelectorAll('details.as-bs-more');
+      for (var i = 0; i < items.length; i++) {
+        if (mq.matches) { items[i].removeAttribute('open'); }
+        else { items[i].setAttribute('open', ''); }
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', sync);
+    } else { sync(); }
+    if (mq.addEventListener) { mq.addEventListener('change', sync); }
+    else if (mq.addListener) { mq.addListener(sync); }
+  })();
+</script>
+
 <!-- Mobile card rail. Below 600 .as-rail turns a card grid into a full-bleed
      horizontal scroller; the CSS does all of that on its own. This script only
      toggles .as-rail-end, which slides the right-edge mask off once the scroll

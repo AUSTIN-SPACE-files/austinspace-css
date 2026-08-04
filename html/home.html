@@ -72,7 +72,7 @@
   </div>
 </section>
 
-<section class="as-creds">
+<section class="as-creds as-creds--tight">
   <div class="as-creds__header as-container">
     <div class="as-eyebrow as-eyebrow--on-dark">
       <div class="as-eyebrow__dot"></div>
@@ -89,7 +89,7 @@
       <p class="as-creds__number">Silver</p>
       <p class="as-creds__text">
         <strong>Squarespace Partner</strong>
-        Working toward Gold (the one that's actually earned)
+        <span class="as-creds__caption">Working toward Gold (the one that's actually earned)</span>
       </p>
     </div>
 
@@ -100,7 +100,7 @@
       <p class="as-creds__number">10+</p>
       <p class="as-creds__text">
         <strong>Years building for the web</strong>
-        From music industry merch, through project management, to Worcester SMEs
+        <span class="as-creds__caption">From music industry merch, through project management, to Worcester SMEs</span>
       </p>
     </div>
 
@@ -111,7 +111,7 @@
       <p class="as-creds__number">200+</p>
       <p class="as-creds__text">
         <strong>Sites shipped at scale</strong>
-        BSI Merch (Shopify, proprietary CMS) and beyond
+        <span class="as-creds__caption">BSI Merch (Shopify, proprietary CMS) and beyond</span>
       </p>
     </div>
 
@@ -122,7 +122,7 @@
       <p class="as-creds__number">WR2</p>
       <p class="as-creds__text">
         <strong>Worcester-based</strong>
-        Working with clients UK-wide
+        <span class="as-creds__caption">Working with clients UK-wide</span>
       </p>
     </div>
 
@@ -162,7 +162,7 @@
     </div>
     <!-- Positioning cards. New class family. Deliberately shares no selector with
          .as-row-item, which is still live in .as-cta on this page and on About. -->
-    <div class="as-pos-cards">
+    <div class="as-pos-cards as-rail">
 
       <div class="as-pos-card">
         <i class="fa-slab-duo fa-regular fa-pencil as-icon--pink as-pos-card__icon fa-2xl"></i>
@@ -222,7 +222,8 @@
         <div class="as-backstory__stat">
           <span class="as-backstory__figure-wrap">
             <span class="as-backstory__bar as-backstory__bar--blue"></span>
-            <span class="as-backstory__figure">30,000+</span>
+            <span class="as-backstory__figure as-backstory__figure--full">30,000+</span>
+            <span class="as-backstory__figure as-backstory__figure--short">30k+</span>
           </span>
           <span class="as-backstory__stat-label">Peak concurrent users</span>
         </div>
@@ -243,8 +244,11 @@
           <a class="as-backstory__cta" href="/case-studies/view-all">See the work behind the number <i class="fa-slab-press fa-regular fa-arrow-right"></i></a>
         </div>
         <div class="as-backstory__prose-col">
-          <p>Across both, I was fortunate enough to work alongside some incredibly talented and inspiring people, and learned a great deal from them.</p>
-          <p>Working solo gives me the freedom to craft sites on my own terms, prioritising design, performance and usability. AI has become the way I keep that going, a tireless sounding board and a way to keep improving on my own.</p>
+          <details class="as-bs-more" open>
+            <summary>Read more</summary>
+            <p>Across both, I was fortunate enough to work alongside some incredibly talented and inspiring people, and learned a great deal from them.</p>
+            <p>Working solo gives me the freedom to craft sites on my own terms, prioritising design, performance and usability. AI has become the way I keep that going, a tireless sounding board and a way to keep improving on my own.</p>
+          </details>
         </div>
       </div>
 

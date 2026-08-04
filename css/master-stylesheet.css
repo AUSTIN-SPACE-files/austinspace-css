@@ -1049,10 +1049,16 @@
     clip-path: url(#wave-clip-policy-cookies-mobile);
     object-view-box: inset(35% 16.67% 15%); }
 
-  /* position: relative restates the base. Kept deliberately: the
-     -70px pull puts this copy underneath a band whose stroke
-     carries z-index 1, so paint order matters here even though
-     the value is currently inherited. */
+  /* CORRECTED 2 August. The earlier note here claimed position: relative
+     was kept deliberately for paint order against the stroke's z-index 1.
+     That was wrong. .as-hero-combined is ALREADY positioned by its base
+     rule at css:320, and .as-hero__stroke lives inside a hero, so it never
+     competes with this element. The declaration below is redundant, left
+     in place only because it is live and verified. What matters is that
+     the positioning is INHERITED FROM THE BASE RULE and the -70px pull
+     depends on it - remove position: relative at css:320 and this breaks.
+     The same redundancy was copied into the footer pull in the .as-cta
+     mobile block and has been dropped there. */
   :root .as-hero-combined{ margin-top: -70px; position: relative; }
   :root .as-hero-combined__content{ padding-top: 28px;
     padding-bottom: 60px; }
@@ -1097,11 +1103,6 @@
  flex-direction: column;
  align-items: flex-start;
  gap: 1rem;
- transition: background var(--transition);
-}
-
-.as-creds__item:hover {
- background: #1a1a1a;
 }
 
 .as-creds__icon {
@@ -1149,11 +1150,6 @@
 @media (max-width: 860px) {
  .as-creds__inner {
  grid-template-columns: repeat(2, 1fr);
- }
-}
-
-@media (max-width: 480px) {
- .as-creds__item {
  }
 }
 
@@ -4382,6 +4378,13 @@ a.cky-banner-element.as-cookie__btn:hover {
    content-box with a 5px border-bottom, so it renders 135px. */
 .as-hero--home-high-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--home-low-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
+/* The ONLY in-flow footer strip on the site - every other one is
+   position: absolute with bottom set. It stays in flow deliberately, and
+   two things depend on that: the max-width 600 margin-top: -40px pull in
+   the .as-cta mobile block, which closes the CTA/wave whitespace, and the
+   position: relative it inherits from .as-hero above, which is what lets
+   the pulled strip paint over the CTA. Do not give this rule its own
+   position, and do not remove position from .as-hero. */
 .as-hero--home-footer { height: 130px; border-top: none; border-bottom: 5px solid var(--liquorice); }
 .as-hero--about { aspect-ratio: 2880 / 216; }
 .as-hero--about-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
@@ -4778,7 +4781,6 @@ a.cky-banner-element.as-cookie__btn:hover {
  --ls-heading: -0.01em; /* was -0.02em for DM Serif Display 400; Fraunces at weight 900 is visually denser at the same tracking, so loosened one notch - only consumer sitewide is the Fraunces heading set below, tune live */
  --ls-body: 0em;
  --ls-label: 0.16em; /* wide, uppercase mono labels */
- --ls-label-tight: 0.10em;
 }
 
 /* ============================================================
@@ -6043,6 +6045,85 @@ left untouched. */
 
 }
 
+/* Featured work band at mobile. Band 963 -> 868 at 390, measured on the
+   built page.
+
+   .as-casestudy had NO horizontal padding below 481. That is not a
+   deliberate full-bleed choice. The padding was extracted to a
+   min-width 481 guard (css:5726) to stop desktop-scale values applying
+   at phone widths, and no mobile replacement was ever added. This fills
+   a gap rather than reversing intent, and it goes on the section,
+   matching every other band.
+
+   right: 14px on the phone card is a SIGN FLIP, not a tweak. The -8% is
+   correct on desktop, where the card leans into a real page margin. At
+   mobile there is no margin, so the percentage resolves against a
+   viewport-width container and pushed the card off-screen at every
+   width tested: 35 at 320, 41 at 375, 43 at 390, 48 at 430. It never
+   showed as a page scrollbar because .as-casestudy declares
+   overflow-x: hidden (css:5720), which was silently clipping it.
+
+   The overhang idiom is shared by three components with different
+   percentages and different host gutters, and only two of the three
+   overflow:
+     .as-casestudy__card--phone       -8%, no host gutter, fixed here
+     .as-cs-hub-feature__media-phone  -6%, no host gutter, fixed beside
+                                      its own base rule, NOT here
+     .as-cs-hero__media-phone         -6%, 19.2px gutter, CLEARS
+   The idiom is not wrong. A percentage offset only works where there is
+   a margin to lean into, and nobody checked which hosts had one.
+   .as-cs-hero__media-phone was measured and clears by 6/3/3/1px at
+   320/375/390/430 - one pixel at 430, so any future change to its
+   19.2px gutter breaks it.
+
+   CLIPPING, AND THE LIMIT OF WHAT IS KNOWN. css:5720 is the only
+   overflow-x LONGHAND in this stylesheet, but it is NOT the only clip:
+   roughly thirty overflow: hidden shorthands also clip, on both axes.
+   Reading 5720 as the only clip is what made an earlier version of this
+   note wrong. For hub-feature specifically, nothing in this stylesheet
+   accounts for its overhang being clipped - .as-cs-hub-feature
+   (css:6967), its __grid (css:6977) and its __media (css:6993) all
+   declare no overflow, and the overflow: hidden at css:7096 is on the
+   card itself, clipping its own image. An ancestor was OBSERVED LIVE to
+   compute overflowX: hidden, and is PRESUMED to be a Squarespace
+   wrapper. That rests on a single reading and on nothing in this repo.
+   Anyone relying on that clip being present should re-verify it rather
+   than trust this note.
+
+   Pushing the homepage phone further right stops helping at about 24px:
+   the desktop card's own right edge becomes the constraint, and beyond
+   that the phone only slides further behind it. Measured - right: 34px
+   gives the same 28px clearance as right: 24px. Final at 390: 14px
+   left, 22px right, cards overlapping by 150.
+
+   hub-feature's fix does NOT live in this block, and must not be moved
+   into it. Its base rule is unguarded and sits roughly 1200 lines below
+   this one, so an override here ties it at (0,2,0) and LOSES on source
+   order - a media query adds no specificity. It was written here first
+   and was silently dead until the built artefact was checked. It now
+   sits directly beneath its own base rule. Per-component values are
+   deliberate; a shared constant is what created this class of problem.
+
+   __imgs padding contributes very little to the movement, which is
+   almost entirely the right value. Kept for symmetry, not effect.
+
+   desc at 15px sits below the 16px body size and above the 14px floor.
+   Deliberate one-off, same class as the backstory standfirst.
+
+   .as-cs-phase is retired (css:7253) and was not in scope. */
+@media (max-width: 600px) {
+  :root .as-casestudy {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    padding-left: 19.2px;
+    padding-right: 19.2px;
+  }
+  :root .as-casestudy__quote { font-size: 20px; }
+  :root .as-casestudy__desc { font-size: 15px; }
+  :root .as-casestudy__imgs { padding-left: 8px; padding-right: 8px; }
+  :root .as-casestudy__card--phone { right: 14px; }
+}
+
 :root .as-creds,
 :root .as-creds__item {
   background-color: var(--liquorice);
@@ -6070,6 +6151,91 @@ equal specificity so this doesn't silently override it under 480px. */
 @media (max-width: 480px) {
   :root .as-creds__item {
     padding: 1.5rem 1.2rem;
+  }
+}
+
+/* Track Record at mobile: 2x2, with the captions hidden on pages that
+   opt in. Measured band height 526, against 1123 for single column and
+   847 before any of this. Items sit level at 158 because what remains -
+   icon, number, strong - is all fixed height.
+
+   THE CAPTION HIDE IS OPT-IN, VIA .as-creds--tight, AND MUST STAY THAT
+   WAY. Every other rule in this block is content-blind and applies to
+   any .as-creds, because layout is not content. The hide is different:
+   a caption can be the only place a claim is made. One-page's Track
+   Record is the case that forced this. Its "Ten years of it, at volume,
+   under real deadlines" is the ONLY instance of the tenure claim
+   anywhere on that page, because that page swapped home's 10+ / Years
+   building for the web slot for 5.0 / Rated on Google. Hiding it there
+   would delete a fact, not compress one. That page keeps its captions
+   and wants its own pass.
+
+   Before adding the modifier to any future page, run the same test on
+   that page: is each caption's claim made elsewhere on the page at this
+   width? Home passes twice over - the hero eyebrow pairs Worcester with
+   UK-wide, and a row item repeats Worcester-based, UK-wide.
+
+   TWO separate divider systems draw the hairlines and BOTH must go
+   before the 2x2 cross can be drawn cleanly:
+     1. border-left on :not(:first-child)          css:5898
+     2. gap 1px on __inner, letting that element's own translucent
+        background show through the grid gutters   css:1087
+   Removing either alone leaves the other still drawing.
+
+   nth-child(even) replaces :not(:first-child) for the vertical, and in
+   doing so FIXES A LIVE DEFECT: :not(:first-child) also matched item 3,
+   which is first in row two, so it drew a stray leading hairline at
+   every width under 860.
+
+   grid-template-columns is stated explicitly even though the max-width
+   860 rule at css:1145 already supplies two columns. nth-child(n+3) is
+   correct only while the grid is two columns, so this block declares
+   that coupling rather than inheriting it from 4700 lines away.
+
+   Captions are hidden, not deleted. Desktop keeps all four.
+
+   ORDER IS LOAD-BEARING THREE TIMES OVER:
+   1. The :not(:first-child) reset must come BEFORE the nth-child(even)
+      rule. Both are (0,3,0), so source order decides. Item 3 matches
+      only the reset and stays clear; items 2 and 4 match both, and the
+      later rule wins.
+   2. This whole block must stay BELOW css:5898, which it ties at
+      (0,3,0) rather than beating.
+   3. This block must also stay BELOW the max-width 480 padding rule at
+      css:5901. That rule uses the padding SHORTHAND, so if it came
+      later it would reset top and bottom back to 24px. Only
+      padding-top and padding-bottom are set here, never the shorthand,
+      so 480 keeps supplying the 19.2px left/right that serves as the
+      band's gutter - .as-creds itself runs flush. This is the most
+      dangerous of the three because the failure is silent: 24px top
+      and bottom looks entirely plausible, so nobody would go looking
+      for a cause. */
+@media (max-width: 600px) {
+  :root .as-creds {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  :root .as-creds__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: transparent;
+  }
+  :root .as-creds__item {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    gap: 8px;
+  }
+  :root .as-creds__item:not(:first-child) {
+    border-left: 0;
+  }
+  :root .as-creds__item:nth-child(n+3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  :root .as-creds__item:nth-child(even) {
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  :root .as-creds--tight .as-creds__caption {
+    display: none;
   }
 }
 
@@ -6274,6 +6440,89 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   :root .as-cta--flipped .as-row-list {
     order: 1;
   }
+}
+
+/* CTA at mobile: the four row items are hidden. Section 1019 -> 464 at 390,
+   measured on the built page. Largest single reduction on the page.
+
+   Hidden, NOT deleted. Desktop keeps all four, where they sit in a 532px
+   column beside the copy rather than stacked beneath it.
+
+   SCOPED UNDER .as-cta DELIBERATELY. .as-row-list and .as-row-item are
+   shared with the positioning rows and with the About page's CTA. An
+   unscoped rule would hide those too.
+
+   ORDER IS LOAD-BEARING. This ties the min-width 481 rule at css:6243 at
+   (0,3,0) - a media query adds no specificity - so it must stay BELOW it.
+   Move it above and the list reappears between 481 and 600.
+
+   gap: 0 is belt-and-braces, not load-bearing. Checked: nothing separates
+   the copy from the list except __inner's grid gap. .as-row-list carries no
+   margin at css:195 or css:4982, and once the list is display:none the grid
+   has a single item, so the gap contributes nothing regardless. Kept so the
+   intent survives if a third child is ever added to __inner.
+
+   WHAT IS LOST AT MOBILE: 24-hour response, free site review,
+   Worcester-based UK-wide, and the email address. The first three answer
+   objections at the moment of deciding to make contact. Removing them was a
+   deliberate call - the black CTA, headline and button carry the section,
+   and the footer wave follows immediately.
+
+   Measured alternative, for the record: keeping the items but removing their
+   boxes and padding gives 826, also within a viewport. The containers were
+   most of the bulk, not the copy. Available if the removal proves too
+   austere. */
+/* CTA / footer wave junction. The hero's negative-margin move in reverse:
+   the hero pulls copy UP into the transparent lower part of its band, this
+   pulls the footer wave UP into the CTA's bottom padding.
+
+   Both surfaces were contributing whitespace and it was stacking. The CTA
+   has 64px of padding below the button, and the footer wave is a top-edge
+   curve carrying 50-82px of empty above its ink - measured across the
+   width: 82px at x0, 77 at x25, 66 at x50, 55 at x75, 50 at x100. Combined
+   that was 114px of continuous white between the button and the black.
+
+   After the pull: 74px button-to-ink. Section height UNCHANGED at 464 -
+   the overlap absorbs the pull rather than shortening the page.
+
+   The gap VARIES ACROSS THE WIDTH because the curve is diagonal. 74px is
+   the minimum, on the left. The right side sits about 32px looser. Any
+   future increase to the pull is governed by the tightest point, not the
+   average.
+
+   Tied to the E1-derived footer curve at 0.38/0.62. Change that curve and
+   this clearance changes with it.
+
+   NO position: relative here. .as-hero--home-footer is already positioned
+   by the base .as-hero rule at css:4272, and that is what lets the pulled
+   strip paint over the CTA. The pull DEPENDS on it - remove position from
+   css:4272 and this breaks. An earlier draft restated it by analogy with
+   the hero pull, whose own restatement turned out to be equally redundant;
+   see the corrected note at css:1052.
+
+   HOMEPAGE ONLY, AND THIS IS A MECHANISM DIFFERENCE, NOT A TUNING ONE.
+   .as-hero--home-footer (css:4287) is the ONLY in-flow footer strip on the
+   site. The other twelve - about css:8109, services-hub 8142, custom-build
+   8173, one-page 8200, site-refresh 8231, ongoing-support 8262, contact
+   8293, casestudies-hub 8385, and the four case studies at 8423, 8459,
+   8501, 8532 - are position: absolute with bottom set and top auto, where
+   margin-top does nothing at all. Widening this selector would build,
+   paste and verify clean while having no effect whatsoever.
+
+   Upper bound: the fe-block rule at css:4487 forces the homepage footer to
+   position: absolute !important at >=768, so the technique stops working
+   above that width too. This block is <=600, so there is no overlap.
+
+   LOGGED, NOT FIXED: about.html has the same junction and the same stacked
+   whitespace - .as-cta at html/about.html:355 closes at 392 and the footer
+   strip opens at 394. It cannot use this fix. .as-hero--about-footer is
+   absolutely positioned, so the fix there is reducing the host's
+   padding-bottom or changing the bottom offset, and it needs its own
+   measurement: about's footer curve is not the homepage's. */
+@media (max-width: 600px) {
+  :root .as-cta .as-row-list { display: none; }
+  :root .as-cta__inner { gap: 0; }
+  :root .as-hero--home-footer { margin-top: -40px; }
 }
 
 /* Buttons - chunky pop treatment. Base .as-btn/.as-btn--primary/.as-btn--outline
@@ -8859,6 +9108,47 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
 }
 
+/* Positioning cards become a swipe rail at mobile. Section height
+   1919 -> 933 at 390. Cards land at 292 wide and level at 367,
+   matching the service-page rails exactly, because both hosts pad
+   to 19.2px below 481 and both inners are .as-container carrying no
+   padding of their own.
+
+   Three of the four cards sit behind a swipe. Accepted deliberately;
+   the 63px peek of card two plus the mask fade is what signals there
+   is more.
+
+   align-items: stretch is LOAD-BEARING, not tidying. The base rule
+   at css:1160 sets align-items: center at (0,1,0), for the desktop
+   two-column grid. The :root flex rule at css:8431 replaces display,
+   flex-direction and gap but never touches align-items, so center
+   survives into the flex column, where it sizes children to
+   fit-content instead of stretching. The rail then shrink-wraps to
+   its own content and renders about 490 wide inside a 352 container,
+   overflowing the section. min-width: 0 does NOT fix this: the rail
+   is not being held open by a min-content floor, it is being sized
+   to fit-content by the alignment, which min-width has no bearing on.
+
+   The rail's mask is NOT overridden here. It was wrong for every
+   rail on the site, not just this one, and is fixed at the base
+   .as-rail rule instead - see the LESS note at css:9629.
+
+   padding-top and padding-bottom only, never the shorthand. The
+   max-width 480 rule at css:1219 supplies the 19.2px left and right
+   that is the section's gutter. This block must also stay BELOW the
+   min-width 481 padding rule at css:5702, which it ties at (0,2,0)
+   and overlaps with between 481 and 600. */
+@media (max-width: 600px) {
+  :root .as-positioning {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  :root .as-positioning__inner {
+    gap: 32px;
+    align-items: stretch;
+  }
+}
+
 /* ==========================================================
    HOMEPAGE BACKGROUND STORY - editorial ink band
    Sits between .as-positioning and .as-services. Prose-led, NOT a
@@ -9063,6 +9353,88 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
     align-items: start;
   }
 
+}
+
+/* Backstory read-more. Structural summary rules live outside the query, the
+   same split the FAQ uses at css:5047. display:none is the DEFAULT so desktop
+   carries no dead affordance - above 600 the script restores [open] and there
+   is nothing left to disclose, so a visible "Read more" would be a control
+   that does nothing. Marker suppression is THREE declarations, not two:
+   display (set below) kills the UA display:list-item, and the two marker rules
+   cover Safari and everything else respectively. Dropping ::marker leaves the
+   triangle in Firefox and current Chrome. */
+:root .as-bs-more > summary { display: none; list-style: none; position: relative; }
+:root .as-bs-more > summary::-webkit-details-marker { display: none; }
+:root .as-bs-more > summary::marker { content: ""; }
+
+:root .as-backstory__figure--short { display: none; }
+
+/* Backstory at mobile: stats go to a three-across row, prose folds its last
+   two paragraphs behind a disclosure. Section 1410 -> REMEASURE at 390.
+
+   display: contents on __prose-col is LOAD-BEARING, not tidying. It flattens
+   the two columns so the CTA can be ordered last. The CTA is nested inside
+   prose-col ONE (html/home.html:243), so without flattening it sits mid-flow
+   after paragraph one and no amount of order on it can move it - order only
+   sorts siblings. Deleting this as redundant-looking silently drops the link
+   back into the middle of the prose.
+
+   Flattening costs vertical space: the prose gap then applies between three
+   items (p1, CTA, details) rather than two columns. Accepted. Note the gap is
+   additive with margins here, not collapsing - p keeps margin-bottom 1em and
+   .as-backstory__cta keeps margin-top 36px, so p1 to CTA is gap + 16 + 36.
+   REMEASURE before recording a figure.
+
+   30k+ is mobile only. At 109px per column the full 30,000+ drives a 152px bar
+   that overflows into the neighbouring stat - the bar width derives from the
+   figure text, no CSS involved. Desktop has the room and keeps 30,000+. The
+   --short show below must stay AFTER the --short hide above: both are (0,2,0),
+   so it is a tie broken on source order, not a win.
+
+   Paragraphs 2 and 3 fold together, deliberately. Folding only p2 would put
+   the fold above p3, so expanding would insert text above content already read
+   and shift the page under the reader. Appending keeps p1 fixed and puts
+   everything new below it.
+
+   The details ships [open] in the HTML and the script at
+   html/_global/header-code-injection.html strips it below 600. A no-JS client
+   or a script failure therefore sees the whole backstory, never a third of it.
+   That script has its own matchMedia at 600, separate from the FAQ's at 860,
+   so a breakpoint change to one cannot move the other. */
+@media (max-width: 600px) {
+  :root .as-backstory { padding-top: 48px; padding-bottom: 48px; }
+  :root .as-backstory__headline { font-size: 34px; }
+  :root .as-backstory__standfirst { font-size: 18px; line-height: 28px; }
+  :root .as-backstory__body { gap: 32px; }
+  :root .as-backstory__stats { flex-direction: row; gap: 12px; }
+  :root .as-backstory__stat { flex: 1 1 0; min-width: 0; }
+  :root .as-backstory__prose { gap: 16px; }
+  :root .as-backstory__prose p { line-height: 1.5; }
+  :root .as-backstory__prose-col { display: contents; }
+  :root .as-bs-more { order: 1; }
+  :root .as-backstory__cta { order: 2; }
+  :root .as-backstory__figure--full { display: none; }
+  :root .as-backstory__figure--short { display: inline; }
+
+  /* Longhands, never the font shorthand. font: 600 15px/1.4 var(--font-body)
+     contains a division, and the panel compiles as LESS - 15px/1.4 would
+     evaluate to 10.7px and take the line-height with it. See css:9629. */
+  :root .as-bs-more > summary {
+    display: block;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #fff;
+    padding: 10px 40px 10px 0;
+  }
+  :root .as-bs-more > summary::after {
+    content: "\002B";
+    position: absolute; right: 0; top: 10px;
+    font-family: var(--font-body); font-weight: 400; color: #fff;
+  }
+  :root .as-bs-more[open] > summary::after { content: "\2212"; }
 }
 
 /* ============================================================
@@ -9573,15 +9945,53 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   color: var(--ink-900);
 }
 
-/* Spec rows below the 600px knee. The icon column plus the 92px
-   label track take 43 percent of a 308px card interior, forcing
-   every value to wrap. Dropping the icon and tightening the track
-   returns 50px to the value column. Measured: 600px is where
-   values first all fit one line. ASCII only. */
-@media (max-width: 600px){
-  :root .as-offer__spec i{ display: none; }
-  :root .as-offer__spec li{ grid-template-columns: 72px 1fr; }
-  :root .as-offer__spec .k{ letter-spacing: var(--ls-label-tight); }
+/* "What I do" cards at mobile: the spec lists are hidden. Section 3314 ->
+   2170 at 390, from 3.9 viewports to 2.6. The four spec lists were 1064px
+   between them, 32 percent of the section.
+
+   Hidden, NOT deleted. Desktop keeps all of them. Every card already
+   carries a "See what's included" link to its service page, which is where
+   the full detail belongs: the cards carry the decision, the service pages
+   carry the spec.
+
+   600px IS WHERE A SPEC VALUE FIRST FITS ON ONE LINE. Measured when the
+   spec internals were tuned, and the reason this hide is keyed to 600
+   rather than an arbitrary breakpoint. Below that width the icon column
+   plus the 92px label track take 43 percent of a 308px card interior and
+   every value wraps.
+
+   CARD HIERARCHY INVERTS AT MOBILE, deliberately. Row 1 goes from 780/792
+   to 466/408 and row 2 from 523/523 to 300/300, so the Custom Build card
+   becomes SHORTER than One-Page - its spec list was the longest thing
+   about it. Recorded so it is not read as a bug.
+
+   THIS LANDS ON THE SERVICES HUB TOO. The card block is byte-identical
+   between html/home.html and html/services/1-services-hub.html by design,
+   and that identity is the point: one component shown in two places.
+
+   ON COMPARING HASHES. Two different hashes assert that identity and both
+   are correct - they cover different byte ranges. Do not read a mismatch
+   between them as card drift.
+     c06425f4b551953b18617e194f6448b2  the two .as-offers__row blocks alone
+     ba1d31a086c45efe034d585e7824a131  project notes, different boundary
+   A WHOLE-SECTION hash will never match across the two pages, because the
+   .as-offers__header copy differs on purpose: eyebrow "What I do" against
+   "What I offer", headline "Services" against "Choose your starting
+   point", and home carries a subline the hub does not. Three lines, all
+   header, none in the cards.
+
+   ORDER IS LOAD-BEARING. This ties the base rule at css:9619 at (0,2,0) -
+   a media query adds no specificity - so it must stay BELOW it. Placed
+   above, the base list-style/margin/padding rule wins and nothing hides,
+   which would build, paste and verify clean while having no effect.
+
+   The block that previously tuned the spec internals below 600 (icon
+   display:none, a 72px label track, tighter label tracking) was deleted in
+   this pass. It only ever applied below 600, which is exactly where the
+   spec no longer renders, so it had become entirely inert. Its
+   --ls-label-tight token went with it, having had no other consumer. */
+@media (max-width: 600px) {
+  :root .as-offer__spec { display: none; }
 }
 
 /* Upgrade note, One Page card only. A tinted panel rather than a fourth tick
