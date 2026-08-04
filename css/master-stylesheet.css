@@ -4892,6 +4892,7 @@ a.cky-banner-element.as-cookie__btn:hover {
  --as-pad-side: 32px;
  --as-clear-wave: 224px;
  --as-clear-wave-banner: 128px;
+ --as-clear-wave-mobile: 160px;
 }
 
 /* ============================================================
@@ -5299,9 +5300,12 @@ a.cky-banner-element.as-cookie__btn:hover {
 /* Mobile: match the section padding .as-faq and .as-contact-bar both fall
    back to at this breakpoint (var(--as-space-section-mobile) /
    var(--as-space-section-side-mobile), the sitewide 480px pair). Bottom
-   clearance is untouched here - it comes entirely from the mobile
-   :has(~ .as-hero--contact-footer) margin-bottom:160px rule, which is well
-   above the 135px wave-overlap floor.
+   clearance is untouched here - it comes entirely from the sitewide
+   --as-clear-wave-mobile rule at the foot of this sheet, which sets
+   padding-bottom on .as-proof and zeroes its margin-bottom. That rule
+   replaced the bespoke :has(~ .as-hero--contact-footer) margin-bottom:160px
+   that used to supply it; the value is unchanged at 160px, so contact's
+   measured gap is the same +74.4 either way.
    The Google row is 402px wide at desktop and overflows a 375px viewport,
    so it wraps and re-centres. Its ported gap:12px (inherited from
    .as-hero-combined__trust-google, css:462) is a single-axis value meant
@@ -8342,25 +8346,88 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   z-index:1;
 }
 
-/* Contact: lift the proof closer so the footer wave has white clearance
-   above it. Retargeted from .as-faq to .as-proof - .as-proof is now the
-   last section before the footer wave, and this :has(~ ...) general
-   sibling combinator would otherwise still match .as-faq across the
-   newly inserted .as-proof section, doubling the clearance.
-   PENDING mobile pass - re-guarded to mobile only (was unguarded). Desktop
-   clearance now comes from the min-width:481px rule below instead. */
-@media (max-width: 480px) {
-.as-proof:has(~ .as-hero--contact-footer){
-  margin-bottom: 160px;
-}
-}
+/* ==================================================================
+   MOBILE FOOTER-WAVE CLEARANCE - one token for all twelve absolute
+   footer strips.
 
-/* Case-study pages: lift the page CTA so the footer wave has white clearance.
-   PENDING mobile pass - re-guarded to mobile only (was unguarded). Desktop
-   clearance now comes from the min-width:481px rule below instead. */
+   REPLACES the two bespoke rules that used to live here, both of which
+   set margin-bottom:160px inside @media (max-width:480px):
+       .as-proof:has(~ .as-hero--contact-footer)
+       .as-cs-page-cta:has(~ .as-hero[class*="-footer"])
+   Both are gone. Every page now takes its clearance from
+   --as-clear-wave-mobile.
+
+   THE FORMULA. This is the part worth keeping; the per-page numbers
+   below all follow from it.
+
+       gap = clearance - 85.6
+
+   "clearance" is the distance from the last content element down to
+   the last section's border-box bottom: its padding-bottom, plus its
+   margin-bottom, plus any inner-banner padding. 85.6 is the strip's
+   own geometry and is fixed: 135px of strip (130px img + 5px
+   border-bottom) minus the 49.4px that the wave crest sits below the
+   strip top (0.38 x 130, the minimum Y of the mobile clip path).
+   A negative gap means the cosmos is drawn over the content.
+
+   WHY ONE VALUE AND NOT FOUR. Measured live at 390px before this rule
+   existed, the twelve pages sat in four tiers:
+
+       about                       64 = 64 pb                gap  -21.6
+       4 svc-cta + 2 hub CTAs     104 = 64 pb + 40 banner     gap  +18.4
+       4 case studies             224 = 64 pb + 160 mb        gap +138.4
+       contact                    160 = 160 mb                gap  +74.4
+
+   Those four tiers are accidents, not decisions. About is 40 short
+   only because .as-cta carries no .as-cta-banner__inner; the service
+   and hub tier is 40 richer for exactly the same reason; the case
+   studies sit at 224 because a bespoke margin was stacked on top of
+   padding that was already there. Ratifying that spread would
+   permanently encode "these four pages get double clearance for no
+   reason". At 160 the clearance becomes one token rather than four
+   incidental sums, and the case studies come down to parity with the
+   homepage's shipped and twice-approved +73.4.
+
+   RESULTING GAPS. about, contact and the four case studies land on
+   +74.4. The six pages carrying .as-cta-banner__inner land on +114.4,
+   because that banner's own 40px bottom padding sits inside the
+   section and adds to the clearance. Uniform token, not a uniform
+   gap - closing that last 40 would need a second value, which is a
+   separate decision.
+
+   ABOUT WAS A LIVE COLLISION at -21.6: the cosmos was drawn over the
+   primary "Get in touch" CTA. The strips carry overflow:hidden, which
+   clips their own contents but NOT what sits above them, so there was
+   nothing to catch it.
+
+   :not(.as-hero--home-footer) IS REQUIRED. Home is the only in-flow
+   footer strip, and its -40px margin-top pull already positions it at
+   +73.4. Without the exclusion home's .as-cta matches this rule and
+   fights that pull.
+
+   THE GENERAL SIBLING ~ IS REQUIRED, NOT +. On /contact and on
+   /case-studies/ddr-ltd the element immediately preceding the strip is
+   a <script>, so :has(+ ...) lands on the script and the rule does
+   nothing at all. This is why both replaced rules were written with ~.
+
+   BREAKPOINT IS max-width:480, NOT 600, even though the mobile wave
+   swap happens at 600. The min-width:481px --as-clear-wave tokens
+   already cover 481-600: measured at 481 and at 600, About is +138.4
+   and custom-build is +106.4.
+
+   Selector list is written out rather than using :is(). :has() has 13
+   proven occurrences in this sheet; :is() has none, and the panel
+   compiles as LESS. Not the place to debut an untested pseudo-class.
+   ================================================================== */
 @media (max-width: 480px) {
-.as-cs-page-cta:has(~ .as-hero[class*="-footer"]){
-  margin-bottom: 160px;
+:root .as-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
+:root .as-svc-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
+:root .as-hub-notsure:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
+:root .as-cs-hub-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
+:root .as-cs-page-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
+:root .as-proof:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)){
+  padding-bottom: var(--as-clear-wave-mobile);
+  margin-bottom: 0;
 }
 }
 
