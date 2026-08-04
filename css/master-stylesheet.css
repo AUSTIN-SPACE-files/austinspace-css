@@ -9551,10 +9551,29 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    tools/build-css.js fails the build on calc() containing var(),
    so reintroducing the old form is caught before it can deploy.
 
-   Note the calc() in the mask declarations below stay exactly as
-   they are: calc(100% - 56px) has LITERAL operands, no var(), and
-   is confirmed safe by live test. The rule is var() inside calc(),
-   not calc() itself.
+   calc(100% - 56px) does not survive compilation. The panel
+   compiles as LESS, which evaluates 100% - 56px by dropping the
+   second operand's unit, yielding 44%. The earlier "confirmed
+   safe by live test" note proved only that it does not kill the
+   compile - it was never a check that the value computed
+   correctly. Literal percentages only here.
+
+   Both mask declarations therefore carry 82%, not a calc. 82 is
+   the smallest round value that clears card one at every width the
+   rail runs at. Card one's right edge as a fraction of rail width
+   is 0.83 - 12.67/V below 481 and 0.83 - 21.12/V above it, which
+   peaks at 80.36% at V=480. The old 44% put the fade 120px inside
+   card one at 390; a naive 80% would still clip it for every
+   viewport between about 422 and 480, which includes the 428 and
+   430 iPhone Pro Max widths.
+
+   .as-rail-end takes 125% for the same reason. With the fade
+   starting at 82% of the mask box, a 125% box puts it at 102.5%
+   of the element - just past the right edge, so the fade leaves
+   the visible area entirely. The old calc(100% + 56px) compiled
+   to 156%, which combined with the 44% fade start left the fade
+   sitting at 68.6% of the element: as-rail-end was moving the
+   fade, never removing it.
 
    SHADOW CLEARANCE. The cards carry a hard 5px 5px 0 0 pop
    shadow (css:6147) and a mask clips to its own box. The 19.2px
@@ -9592,8 +9611,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
     padding: 4px var(--as-rail-bleed) 20px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent 100%);
-            mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+            mask-image: linear-gradient(to right, #000 82%, transparent 100%);
     -webkit-mask-size: 100% 100%;
             mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
@@ -9608,8 +9627,8 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
      script in header code injection; if that script never runs the
      rail still scrolls and snaps and the fade simply stays on. */
   :root .as-rail.as-rail-end {
-    -webkit-mask-size: calc(100% + 56px) 100%;
-            mask-size: calc(100% + 56px) 100%;
+    -webkit-mask-size: 125% 100%;
+            mask-size: 125% 100%;
   }
 
   :root .as-rail > * {
