@@ -4140,6 +4140,33 @@ a.cky-banner-element.as-cookie__btn:hover {
  }
 }
 
+/* Footer content gutter at mobile. Aligns the footer with every other
+   section's mobile gutter - it was 24px from the max-width 767 rule at
+   css:4076, against the site's 19.2px.
+
+   padding-left and padding-right only. The 767 rule uses the shorthand and
+   supplies the 48px top and 40px bottom, which stay as they are. This wins
+   on specificity at (0,2,0) against that rule's (0,1,0), so unlike most of
+   the mobile blocks in this sheet there is no source-order dependency here.
+
+   Desktop padding is 40px at css:3991 and is unchanged.
+
+   THE BAND'S FULL-BLEED IS NOT CONTROLLED HERE, OR ANYWHERE IN THIS
+   STYLESHEET. It was fixed in the Squarespace editor. The fe-block had been
+   placed grid-column 2 / 10, starting after the left gutter track and
+   ending before the right one, which inset the whole footer by 23px each
+   side and left a 35px gap below it. It now spans 1 / 11 at mobile and
+   1 / 27 at desktop. If the inset ever returns, it is the block placement
+   in the editor and not a CSS regression - and because the fluid engine
+   keeps separate desktop and mobile layouts, check the MOBILE view
+   specifically. Fixing the desktop placement alone will not correct it. */
+@media (max-width: 600px) {
+  :root .as-footer {
+    padding-left: 19.2px;
+    padding-right: 19.2px;
+  }
+}
+
 /* =============================================
  FAQ
  ============================================= */
