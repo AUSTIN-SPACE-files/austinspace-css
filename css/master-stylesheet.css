@@ -1606,6 +1606,119 @@
   }
 }
 
+/* ==================================================================
+   "WHAT THIS IS" EDITORIAL BAND, MOBILE (<=600px)
+
+   THE GUTTER IS A BUG FIX, NOT A REFINEMENT. __inner is
+   .as-svc-editorial__inner .as-container, and .as-container carries
+   max-width and margin only - no padding, at any width. The section's
+   own padding is a SHORTHAND with 0 sides (72px 0 at css:1550, 56px 0
+   in the block above), so nothing insets the content. At 390 the inner
+   measured 390 wide at L0: the eyebrow dot sat hard against the screen
+   edge and every line of text touched both edges. Same omission as the
+   featured-work band on the homepage.
+
+   601-1160 IS STILL FLUSH, AND THIS FIX DOES NOT REACH IT. Worth
+   knowing before this reads as closed. The container only starts
+   inseting once the viewport exceeds its 1160 max-width - at 1506 that
+   gives the L173 the desktop reading came from - so every width from
+   601 to 1160 has the same zero gutter this block fixes below 600. Not
+   widened here because the brief scoped it to mobile and the tablet
+   band wants its own measurement, but it is the same bug, not a
+   separate one.
+
+   THIS SECTION GETS 23px TALLER: 1055 -> 1078 on one-page. Recorded
+   because a "mobile pass" that ADDS height needs its reasoning visible
+   rather than looking like a mistake:
+     +96  the gutter. 38px of lost width makes three of the four items
+          wrap an extra line. This is the cost of the fix, not waste.
+     -27  the narrower icon column, 40px + 28.8 gap down to 28px + 14.
+     -46  net of the divider padding at 18px against the old 32px gap.
+   The height is the price of text that is not touching the screen
+   edge. It is a good trade and it is still worth stating.
+
+   DIVIDER PADDING IS 18px, NOT 22. 22 was measured at 1102 and looks
+   like the like-for-like value, but it is not: the padding applies to
+   BOTH items either side of a rule, where the old row-gap applied ONCE
+   between them. Two paddings per gap, not one. Any future retune of
+   this value has to halve its instinct.
+
+   NO TRAILING RULE. The border is on + .as-row-item, so it draws
+   between items only and never below the last. Verified bt 0/1/1/1.
+
+   ALPHA 0.12 IS THE SITEWIDE INK-BAND DEFAULT, NOT THIS COMPONENT'S
+   OWN VALUE - and that is a real difference from the contact bar and
+   the hub bar, where the number came from a hairline the component
+   already had. .as-svc-editorial has none: css:1578 and css:1588
+   explicitly set border: 0 on both the list and the items, because
+   they are stripped-down CTA cards. So there was nothing to match and
+   the value had to be chosen. 0.12 is what every other band on
+   rgb(23,23,26) uses - .as-svc-process, .as-cs-row, .as-about-solo,
+   .as-hub-bar, .as-contact-bar, .as-about-skills - against three uses
+   of 0.14 (.as-creds) and one of 0.16. Majority, on the same ink.
+
+   SITED AFTER THE max-width:767 BLOCK ABOVE, AND THERE IS NO
+   min-width:481 RULE HERE. The brief assumed one; .as-svc-editorial
+   has never had a min-481 guard. The rule that actually contests this
+   one is the 767 block, and it contests TWICE, both as ties that only
+   source order settles:
+     padding: 56px 0        (0,2,0) against the padding longhands below
+     .as-row-list gap: 32px (0,3,0) against row-gap: 0 below
+   Specificity was checked rather than assumed, and it decides neither.
+   Move this block above css:1599 and the section keeps 56px vertical
+   AND the list keeps a 32px row-gap on top of the new dividers - a
+   double failure that would still build and paste clean.
+
+   SCOPE. .as-svc-editorial is on four service pages: one-page,
+   custom-build, site-refresh and support. All four carry the same
+   gutter omission and all four are fixed. The heights above are
+   one-page only; the other three have different item copy and will
+   land elsewhere.
+
+   .as-row-item and .as-row-item__icon are shared far more widely -
+   the homepage positioning rows, About's CTA, the CTA row-lists. Every
+   rule below is scoped under .as-svc-editorial for that reason. Do NOT
+   lift the icon width or the gap out of that scope.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-svc-editorial {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-svc-editorial__inner {
+    padding-left: 19.2px;
+    padding-right: 19.2px;
+  }
+
+  :root .as-svc-editorial .as-row-list {
+    row-gap: 0;
+  }
+
+  :root .as-svc-editorial .as-row-item {
+    gap: 14px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  :root .as-svc-editorial .as-row-item__icon {
+    width: 28px;
+  }
+
+  :root .as-svc-editorial .as-row-item:first-child {
+    padding-top: 0;
+  }
+
+  :root .as-svc-editorial .as-row-item:last-child {
+    padding-bottom: 0;
+  }
+
+  :root .as-svc-editorial .as-row-item + .as-row-item {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
 /* ---- SERVICE PAGE: TIER FIT BAND ---- */
 /* White band splitting the process and proof ink sections.
    Reuses the homepage as-pos-card component. That grid is
