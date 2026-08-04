@@ -9252,11 +9252,27 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    homepage's shipped and twice-approved +73.4.
 
    RESULTING GAPS. about, contact and the four case studies land on
-   +74.4. The six pages carrying .as-cta-banner__inner land on +114.4,
-   because that banner's own 40px bottom padding sits inside the
-   section and adds to the clearance. Uniform token, not a uniform
-   gap - closing that last 40 would need a second value, which is a
-   separate decision.
+   +74.4. The six pages carrying .as-cta-banner__inner USED TO land on
+   +114.4, because that banner's own 40px bottom padding sat inside the
+   section and added to the clearance.
+
+   CLOSED 4 August 2026, and not the way this note predicted. It said
+   closing that last 40 would need a second token. It did not: the
+   banner's vertical padding was zeroed at <=600 (css:11281) as the
+   vertical half of the CTA standardisation, for reasons of its own
+   nothing to do with clearance, and the 40 went with it. All twelve
+   pages now land on +74.4 and the token really is a uniform gap below
+   480. Recorded because the prediction was wrong in a useful way - the
+   spread was a symptom of the nested padding, not something the
+   clearance layer had to absorb.
+
+   THAT SAME RULE TIGHTENS 481-600 ON THOSE SIX PAGES, which this note
+   is the right place to warn about. There the banner takes 4rem rather
+   than 2.5rem, so clearance goes 128 + 64 = 192 down to 128, and the
+   gap goes +106.4 to +42.4 - the tightest on the site, against the
+   homepage's approved +73.4. Positive, so not a collision, but not
+   verified live. If it needs opening up, raise
+   --as-clear-wave-banner or scope css:11281 to <=480.
 
    ABOUT WAS A LIVE COLLISION at -21.6: the cosmos was drawn over the
    primary "Get in touch" CTA. The strips carry overflow:hidden, which
@@ -11218,6 +11234,54 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
     align-items: flex-start;
     padding-left: 0;
     padding-right: 0;
+  }
+
+  /* The VERTICAL half of the rule above. Same argument: a nested inner
+     padding inside a section that already carries its own. Horizontal was
+     zeroed with the CTA standardisation; this finishes it.
+
+     .as-cta-banner__inner ALONE, not the pair. .as-cs-page-cta__inner has
+     no padding at all (css:2320), so adding it there would be a no-op
+     dressed as a rule. Its gap is already 1.5rem, which is where the 24px
+     below comes from - this adopts the case studies' value rather than
+     inventing a third. 28 was measured and rejected for that reason.
+
+     PARITY AT 390, top-of-section to eyebrow / button to section bottom:
+     home 64/64, about 64/160, cs-ddr 64/160, and the six banner pages
+     104/200. The extra 40 each end is the <=480 banner padding at
+     css:1910. Zeroing it lands all six on 64/160, matching About and the
+     case studies exactly. Sections 730 -> 638 on the services hub and
+     677 -> 585 on custom-build.
+
+     ALL SIX, AND cs-hub IS INCLUDED BY CONSTRUCTION RATHER THAN BY
+     SAMPLE. .as-cta-banner__inner is carried by four .as-svc-cta pages,
+     .as-hub-notsure and .as-cs-hub-cta. The last was not measured, but it
+     takes the same 64px section top (css:3268), the same
+     --as-clear-wave-mobile bottom and the same banner inner, so 104/200
+     follows from the shared rules rather than needing its own reading.
+
+     THIS IS A BIGGER CHANGE AT 481-600 THAN THE 390 FIGURES SHOW, and it
+     reaches the wave clearance. Read before treating the numbers above as
+     the whole story. Across 481-600 the banner takes 4rem from its base
+     rule (css:1887), not the 2.5rem of the <=480 block, so the vertical
+     padding removed is 64 each end rather than 40. Because that bottom
+     padding sat INSIDE the section, it was counted as clearance under the
+     css:9226 formula:
+         <=480   clearance 160 + 40 = 200, gap +114.4  ->  160, gap +74.4
+         481-600 clearance 128 + 64 = 192, gap +106.4  ->  128, gap +42.4
+     Below 480 that is the goal - all twelve pages land on +74.4 and the
+     40px spread the clearance note logged as an open decision closes on
+     its own. Across 481-600 it leaves these six at +42.4, the tightest
+     clearance on the site, against the homepage's approved +73.4. Still
+     positive, so no collision, but NOT verified live at those widths.
+     If it reads too tight, the fix is to scope this rule to <=480 and
+     leave the horizontal zeroing at <=600, or to raise
+     --as-clear-wave-banner; do not reach for the section padding, which
+     is correct as it stands. */
+  :root .as-cta-banner__inner {
+    padding-top: 0;
+    padding-bottom: 0;
+    row-gap: 24px;
   }
 
   :root .as-cta-banner__inner .as-eyebrow,
