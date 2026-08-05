@@ -65,8 +65,21 @@
     </div>
 
     <div class="as-about-hero__photo">
+      <!-- sizes mirrors the three width regimes in the sheet, NOT the 639px
+           band knee: 420px fixed column at 961+, max-width:360px from
+           css:3243 at 601-960, and a 2fr 3fr grid with a 12px gap below
+           600 (css:3355) which works out at 0.4 * (100vw - 50.4), or about
+           40vw. Do not fold these into one breakpoint - claiming 124px at
+           620px wide would fetch 300w for a 360px box.
+           Every variant URL keeps the encoded filename verbatim and hangs
+           ?format= off the end of it. -->
       <img
         src="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/892f1bce-92cf-4fc2-b3ff-128cf1d7cc66/AS_Portrait+%281%29.webp"
+        srcset="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/892f1bce-92cf-4fc2-b3ff-128cf1d7cc66/AS_Portrait+%281%29.webp?format=300w 300w,
+                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/892f1bce-92cf-4fc2-b3ff-128cf1d7cc66/AS_Portrait+%281%29.webp?format=500w 500w,
+                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/892f1bce-92cf-4fc2-b3ff-128cf1d7cc66/AS_Portrait+%281%29.webp?format=1000w 1000w"
+        sizes="(max-width: 600px) 40vw, (max-width: 960px) 360px, 420px"
+        fetchpriority="high"
         alt="Charles Austin. Owner of AUSTIN_SPACE"
       />
     </div>
