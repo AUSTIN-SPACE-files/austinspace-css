@@ -41,7 +41,7 @@
           "name": "What makes this different from a standard Squarespace build?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Almost everything you can see is custom HTML and CSS rather than template layouts or native content blocks. The one exception is the contact form, which is a native Squarespace section, and I would rather tell you that than round it down to zero. The design system, the component library, the analytics, the structured data and the performance work were all built from scratch inside the platform's constraints. You do not have to take my word for any of it. Open the inspector."
+            "text": "Almost everything you can see is custom HTML and CSS rather than template layouts or native content blocks. The one exception is the contact form, which is a native Squarespace section. The design system, the component library, the analytics, the structured data and the performance work were all built from scratch inside the platform's constraints. You do not have to take my word for any of it. Open the inspector."
           }
         },
         {
@@ -49,7 +49,7 @@
           "name": "You are a web designer. Does your own site rank?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not yet, and I would rather tell you why than dress it up. The site is young, it has very few external links pointing at it, and Google allocates crawl attention according to how established a domain looks. Some of my own service pages have been found by Google and not yet fetched, which is normal for a new site and is fixed with links and time rather than with more keywords. Anyone selling you rankings on a brand new domain is selling you a timeline they do not control."
+            "text": "Not yet. The site is young, it has very few external links pointing at it, and Google allocates crawl attention according to how established a domain looks. Some of my own service pages have been found by Google and not yet fetched, which is normal for a new site and is fixed with links and time rather than with more keywords. Anyone selling you rankings on a brand new domain is selling you a timeline they do not control."
           }
         },
         {
@@ -73,7 +73,7 @@
           "name": "Can you do the same for my site?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Send me your URL and I will take a look. The first review is free. You will get an honest assessment of where things stand, what I would fix first, and whether the work is worth doing at all. No obligation."
+            "text": "Send me your URL and I will take a look. The first review is free. I will tell you where things stand, what I would fix first, and whether the work is worth doing at all. No obligation."
           }
         }
       ]

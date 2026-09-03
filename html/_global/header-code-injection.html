@@ -23,7 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       imagesrcset="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/e0bb3927-2840-4f0d-9b7e-002247145c63/hero-cosmos-768.jpg 768w,
                    https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/47f70c2a-c474-4f21-bbbe-ed87e52ff414/hero-cosmos-1280.jpg 1280w,
                    https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/de2a78f0-8188-4f7a-8cc9-439c70385354/hero-cosmos-1920.jpg 1920w,
-                   https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2880w"
+                   https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2500w"
       imagesizes="100vw"
       fetchpriority="high">
 
@@ -132,6 +132,73 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   })();
 </script>
 
+<!-- Rail position counter. Injects an "01 / 09" readout as a sibling directly
+     after every .as-rail and keeps the current index in step with the scroll.
+     Styled by .as-rail-counter in the stylesheet, which is display:none until
+     this script adds .is-scrollable, so a script failure degrades to no counter
+     rather than to a stuck "01 / 01". aria-hidden because the count duplicates
+     what the rail already exposes to AT via its role/aria-label, set by the
+     script above.
+
+     SEPARATE IIFE FROM THE .as-rail-end SCRIPT ABOVE, DELIBERATELY. The two
+     guard on different data attributes (railWired vs counterInit) and neither
+     reads the other's state, so they can be reordered or either one removed
+     without touching the other. Both no-op on pages with no rail.
+
+     THE INDEX MATHS IS RECT-BASED ON PURPOSE - DO NOT "SIMPLIFY" IT BACK TO
+     offsetLeft. getBoundingClientRect returns viewport coordinates, so the
+     rail's midpoint and each card's centre are measured on the same axis and
+     subtract cleanly. offsetLeft does not: it resolves against the nearest
+     POSITIONED ancestor, and :root .as-rail sets no position (css:13071), so
+     the cards would measure from some ancestor section while the rail's own
+     midpoint came from scrollLeft in its padding box. That mismatch put a
+     constant 0-32px skew on every comparison and could flip the readout one
+     card early near a snap boundary. Rects need nothing from the CSS, which is
+     why the rail rule and its mask were left alone rather than given a
+     position: relative. Rect reads are also scroll-accurate for free, so no
+     scrollLeft term is needed here at all. -->
+<script>
+  (function () {
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    function initRail(rail){
+      if (rail.dataset.counterInit) return;
+      rail.dataset.counterInit = '1';
+      var counter = document.createElement('div');
+      counter.className = 'as-rail-counter';
+      counter.setAttribute('aria-hidden', 'true');
+      counter.innerHTML = '<b>01</b> / <span></span>';
+      rail.insertAdjacentElement('afterend', counter);
+      var curEl = counter.querySelector('b');
+      var totalEl = counter.querySelector('span');
+      function cards(){
+        return Array.prototype.filter.call(rail.children, function (c) {
+          return c.getClientRects().length;
+        });
+      }
+      function update(){
+        rail.classList.toggle('is-scrollable', rail.scrollWidth > rail.clientWidth + 4);
+        var list = cards();
+        totalEl.textContent = pad(list.length);
+        var railRect = rail.getBoundingClientRect();
+        var mid = railRect.left + railRect.width / 2, idx = 0, best = Infinity;
+        for (var i = 0; i < list.length; i++) {
+          var b = list[i].getBoundingClientRect();
+          var center = b.left + b.width / 2;
+          var d = Math.abs(center - mid);
+          if (d < best) { best = d; idx = i; }
+        }
+        curEl.textContent = pad(idx + 1);
+      }
+      rail.addEventListener('scroll', function () { requestAnimationFrame(update); }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
+    function init(){ Array.prototype.forEach.call(document.querySelectorAll('.as-rail'), initRail); }
+    if (document.readyState !== 'loading') init();
+    else document.addEventListener('DOMContentLoaded', init);
+  })();
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -190,8 +257,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
+          "name": "One-Page Website Design",
+          "description": "A single professional page for a new or early-stage business. Copy and images written for you, search set up, domain connected, and the full cost redeemable against a Custom Build within 18 months.",
+          "url": "https://www.austinspace.co.uk/services/one-page-website"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
           "name": "Custom Squarespace Website Design",
-          "description": "Complete Squarespace websites built from scratch — designed around your business, your audience, and your goals. Includes strategic design planning, mobile-first development, SEO foundation, and video handover.",
+          "description": "A complete Squarespace website built from scratch, designed around the business, its audience and its goals. Covers strategy, design, development, SEO and a recorded handover.",
           "url": "https://www.austinspace.co.uk/services/squarespace-custom-build"
         }
       },
@@ -200,7 +276,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "itemOffered": {
           "@type": "Service",
           "name": "Squarespace Site Refresh",
-          "description": "A focused refresh that elevates your existing Squarespace site — faster, sharper, better performing. Covers visual design, performance optimisation, SEO improvements, and mobile responsiveness.",
+          "description": "A focused pass over an existing Squarespace site: design, performance, SEO and structure. A free assessment first, and if a rebuild is the better answer I'll say so.",
           "url": "https://www.austinspace.co.uk/services/squarespace-site-refresh"
         }
       },
@@ -208,8 +284,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Ongoing Squarespace Support & Development",
-          "description": "Monthly retainer covering Squarespace development, SEO, performance improvements, and strategic guidance. Flexible hours, no lock-in contracts.",
+          "name": "Ongoing Squarespace Support",
+          "description": "A monthly retainer for development, SEO, performance work and strategic input. Minimum four hours, no lock-in.",
           "url": "https://www.austinspace.co.uk/services/squarespace-support-retainer"
         }
       }
@@ -217,3 +293,493 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 }
 </script>
+
+<!-- ==================================================================
+     WAVE CLIP DEFS - MOVED HERE FROM FOOTER INJECTION, 2026-08-06
+
+     WHY THIS IS IN THE HEADER INJECTION AND NOT THE FOOTER. Every
+     .as-hero__img carries clip-path:url(#wave-clip-*). While these defs
+     sat in the footer injection the clipPath they reference did not
+     exist in the DOM until ~453 elements after the first hero img (DOM
+     index 731 of 959 vs 278). A definition should parse before its
+     first consumer - that is the whole reason, and it stands on its
+     own.
+
+     WHAT THIS MOVE IS *NOT*. It was made during an investigation into
+     hero bands appearing blank for several seconds after load. THAT
+     DEFECT WAS NOT REAL - it was an artefact of measuring in a hidden
+     browser tab, which Chrome does not render at all. See the full
+     correction in master-stylesheet.css above "Per-page clip and crop".
+     The move was never credited as the fix and must not be described
+     as one. It is kept purely because defs-before-consumer is correct
+     ordering. If you are reading this while chasing a paint-timing
+     problem, check document.visibilityState first.
+
+     WHY THE <div> WRAPPER. Squarespace's site-wide header injection
+     lands inside <head>. A <div> is not permitted there, so the HTML
+     parser pops <head>, opens <body>, and reprocesses - which is
+     exactly what we want: these defs become the FIRST body content, so
+     they parse before any hero img on any page. Zero visual footprint.
+
+     WHY IT IS THE LAST THING IN THIS FILE. Everything after the wrapper
+     in source order lands in <body> too. Keeping it last means every
+     preload, font link, behaviour script and the JSON-LD above stay in
+     <head> where they belong. What CANNOT be controlled from here is
+     whatever Squarespace itself emits after the injection point - see
+     the pre-flight note in the handover before trusting this.
+
+     DO NOT put this back in the footer. DO NOT move it above the
+     preloads. If the clips are ever re-authored, this is the only copy.
+     ================================================================== -->
+<div style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="wave-clip-about" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.44 C0.97,0.44 0.85,0.77 0.82,0.77 S0.67,0.42 0.63,0.42 S0.53,0.80 0.50,0.80 S0.40,0.41 0.36,0.41 S0.29,0.72 0.26,0.72 S0.20,0.42 0.16,0.42 S0.11,0.59 0.08,0.59 S0.03,0.45 0,0.45 Z"/>
+    </clipPath>
+    <!-- About hero, mid and footer below the 600px knee. Single curves - the
+         multi-lobe desktop paths above compress to noise on a phone. Span is
+         0.24 on all three, the same normalised span as the homepage mobile
+         set, so the proportions match across the site. Direction and bend
+         position alternate down the page so no two read alike. The originals
+         are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-about-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.66,0.39 0.34,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-about-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.55,0.63 0.15,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-about-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.50,0.37 0.90,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.42 C0.97,0.42 0.84,0.76 0.81,0.76 S0.66,0.41 0.62,0.41 S0.52,0.81 0.49,0.81 S0.40,0.40 0.36,0.40 S0.29,0.69 0.26,0.69 S0.20,0.41 0.16,0.41 S0.11,0.56 0.08,0.56 S0.03,0.44 0,0.44 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.66,0.63 0.34,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home-high-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.94,0.45 0.89,0.75 0.83,0.75 S0.72,0.39 0.66,0.39 S0.53,0.75 0.47,0.75 S0.33,0.39 0.27,0.39 S0.17,0.75 0.11,0.75 S0.04,0.48 0,0.48 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.08,0.29 0.16,0.05 0.24,0.05 S0.44,0.33 0.52,0.33 S0.72,0.05 0.80,0.05 S0.94,0.27 1,0.27 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.03,0.29 0.07,0.05 0.10,0.05 S0.17,0.32 0.22,0.32 S0.32,0.03 0.36,0.03 S0.45,0.30 0.50,0.30 S0.59,0.06 0.64,0.06 S0.74,0.35 0.78,0.35 S0.86,0.04 0.90,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Home mid/footer strips below the 600px knee. Single curves - the
+         multi-lobe desktop paths above compress to noise on a phone. Span is
+         0.24 on all three, the same normalised span as the mobile hero, so the
+         proportions match across the page. Direction and bend position
+         alternate down the page so no two strips read alike. The originals are
+         untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-home-high-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.55,0.39 0.15,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home-low-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.45,0.37 0.85,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-home-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.35,0.61 0.65,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-services" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.44 C0.97,0.44 0.89,0.78 0.81,0.78 C0.72,0.78 0.63,0.41 0.56,0.41 C0.46,0.41 0.38,0.81 0.29,0.81 C0.20,0.81 0.10,0.43 0,0.43 Z"/>
+    </clipPath>
+    <!-- Services hub hero, mid and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is 0.24
+         on all three, the same normalised span as the home and about mobile
+         sets, so the proportions match across the site. Direction and bend
+         position alternate down the page so no two read alike. The originals
+         are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-services-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.60,0.63 0.20,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-services-hub-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.10,0.61 0.50,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-services-hub-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.55,0.37 0.95,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-foundation-build" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.43 C0.95,0.43 0.88,0.78 0.82,0.78 C0.74,0.78 0.64,0.41 0.58,0.41 C0.47,0.41 0.37,0.80 0.28,0.80 C0.19,0.80 0.09,0.45 0,0.45 Z"/>
+    </clipPath>
+    <!-- Custom Build hero, three mids and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 5, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-foundation-build-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.70,0.63 0.30,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-custom-build-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.55,0.39 0.15,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-custom-build-low-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.85,0.63 0.45,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-custom-build-faq-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.35,0.61 0.75,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-custom-build-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.10,0.37 0.50,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-site-refresh" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.48 C0.97,0.48 0.95,0.69 0.92,0.69 C0.89,0.69 0.87,0.47 0.84,0.47 C0.81,0.47 0.77,0.74 0.74,0.74 C0.70,0.74 0.67,0.45 0.63,0.45 C0.60,0.45 0.56,0.79 0.53,0.79 C0.49,0.79 0.44,0.44 0.40,0.44 C0.36,0.44 0.32,0.78 0.28,0.78 C0.24,0.78 0.20,0.46 0.16,0.46 C0.13,0.46 0.11,0.73 0.08,0.73 C0.05,0.73 0.03,0.47 0,0.47 Z"/>
+    </clipPath>
+    <!-- Site Refresh hero, two mids and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 4, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-site-refresh-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.70,0.39 0.30,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-site-refresh-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.50,0.63 0.10,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-site-refresh-low-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.50,0.37 0.90,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-site-refresh-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.20,0.61 0.60,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-ongoing-support" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.44 C0.96,0.44 0.90,0.79 0.83,0.79 C0.75,0.79 0.66,0.42 0.60,0.42 C0.50,0.42 0.42,0.80 0.34,0.80 C0.26,0.80 0.18,0.43 0.11,0.43 C0.06,0.43 0.03,0.61 0,0.61 Z"/>
+    </clipPath>
+    <!-- Ongoing Support hero, two mids and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 4, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-ongoing-support-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.65,0.63 0.25,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-ongoing-support-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.80,0.39 0.40,0.63 0,0.63 Z"/>
+    </clipPath>
+    <!-- 404 strip below the knee. Verbatim clone of
+         wave-clip-ongoing-support-mid-mobile - id only. -->
+    <clipPath id="wave-clip-not-found-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.80,0.39 0.40,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-ongoing-support-low-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.15,0.61 0.55,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-ongoing-support-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.40,0.37 0.80,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-contact" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.46 C0.98,0.46 0.95,0.73 0.93,0.73 C0.89,0.73 0.86,0.45 0.83,0.45 C0.79,0.45 0.75,0.78 0.70,0.78 C0.65,0.78 0.60,0.42 0.55,0.42 C0.50,0.42 0.45,0.80 0.40,0.80 C0.35,0.80 0.30,0.44 0.25,0.44 C0.21,0.44 0.17,0.77 0.13,0.77 C0.09,0.77 0.04,0.44 0,0.44 Z"/>
+    </clipPath>
+    <!-- Contact hero, FAQ mid and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 3, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-contact-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.85,0.39 0.45,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-contact-faq-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.25,0.37 0.65,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-contact-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.10,0.61 0.50,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-case-studies" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.44 C0.96,0.44 0.92,0.76 0.88,0.76 C0.82,0.76 0.76,0.41 0.72,0.41 C0.66,0.41 0.61,0.81 0.55,0.81 C0.49,0.81 0.42,0.43 0.35,0.43 C0.30,0.43 0.24,0.78 0.18,0.78 C0.12,0.78 0.06,0.45 0,0.45 Z"/>
+    </clipPath>
+    <!-- Case Studies hub hero, mid and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 3, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-case-studies-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.55,0.63 0.15,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-casestudies-hub-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.90,0.39 0.50,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-casestudies-hub-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.35,0.37 0.75,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-case-study-terracotta" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.43 C0.96,0.43 0.88,0.79 0.80,0.79 C0.71,0.79 0.62,0.41 0.55,0.41 C0.45,0.41 0.36,0.80 0.27,0.80 C0.18,0.80 0.09,0.44 0,0.44 Z"/>
+    </clipPath>
+    <!-- Case study Terracotta hero, three mids and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 5, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-case-study-terracotta-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.70,0.63 0.30,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-terracotta-high-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.50,0.39 0.10,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-terracotta-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.90,0.63 0.50,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-terracotta-low-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.25,0.61 0.65,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-terracotta-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.40,0.37 0.80,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-case-study-ddr" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.46 C0.98,0.46 0.95,0.73 0.92,0.73 C0.88,0.73 0.84,0.43 0.80,0.43 C0.76,0.43 0.72,0.77 0.68,0.77 C0.64,0.77 0.60,0.45 0.55,0.45 C0.50,0.45 0.45,0.80 0.40,0.80 C0.36,0.80 0.31,0.42 0.26,0.42 C0.23,0.42 0.19,0.78 0.14,0.78 C0.09,0.78 0.05,0.44 0,0.44 Z"/>
+    </clipPath>
+    <!-- Case study DDR hero, three mids and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 5, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-case-study-ddr-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.75,0.39 0.35,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-ddr-high-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.45,0.63 0.05,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-ddr-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.95,0.39 0.55,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-ddr-low-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.20,0.37 0.60,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-ddr-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.50,0.61 0.90,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-case-study-austin-space" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.48 C0.98,0.48 0.95,0.73 0.93,0.73 C0.90,0.73 0.87,0.43 0.84,0.43 C0.81,0.43 0.77,0.80 0.73,0.80 C0.69,0.80 0.65,0.44 0.62,0.44 C0.58,0.44 0.55,0.77 0.51,0.77 C0.47,0.77 0.43,0.42 0.39,0.42 C0.35,0.42 0.31,0.78 0.28,0.78 C0.25,0.78 0.21,0.44 0.17,0.44 C0.14,0.44 0.11,0.74 0.08,0.74 C0.05,0.74 0.03,0.46 0,0.46 Z"/>
+    </clipPath>
+    <!-- Case study AUSTIN_SPACE hero, two mids and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 4, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-case-study-austin-space-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.65,0.63 0.25,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-austin-space-high-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.85,0.39 0.45,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-austin-space-low-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.10,0.37 0.50,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-austin-space-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.35,0.61 0.75,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-policy-privacy" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.97,0.45 0.94,0.73 0.90,0.73 C0.84,0.73 0.78,0.41 0.75,0.41 C0.70,0.41 0.64,0.78 0.58,0.78 C0.52,0.78 0.45,0.42 0.38,0.42 C0.32,0.42 0.27,0.76 0.20,0.76 C0.13,0.76 0.07,0.44 0,0.44 Z"/>
+    </clipPath>
+    <!-- Privacy policy hero below the 600px knee. A single curve - the
+         multi-lobe desktop path above compresses to noise on a phone. Span
+         is 0.24, the same normalised span as every other mobile curve on
+         the site. The original is untouched; desktop keeps using it. -->
+    <clipPath id="wave-clip-policy-privacy-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.70,0.63 0.30,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-policy-tos" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.44 C0.94,0.44 0.87,0.77 0.80,0.77 C0.71,0.77 0.62,0.42 0.55,0.42 C0.48,0.42 0.40,0.80 0.30,0.80 C0.20,0.80 0.10,0.46 0,0.46 Z"/>
+    </clipPath>
+    <!-- Terms of service hero below the 600px knee. A single curve - the
+         multi-lobe desktop path above compresses to noise on a phone. Span
+         is 0.24, the same normalised span as every other mobile curve on
+         the site. The original is untouched; desktop keeps using it. -->
+    <clipPath id="wave-clip-policy-tos-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.70,0.39 0.30,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-policy-cookies" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.47 C0.98,0.47 0.96,0.72 0.94,0.72 C0.91,0.72 0.87,0.45 0.84,0.45 C0.80,0.45 0.76,0.76 0.72,0.76 C0.67,0.76 0.62,0.42 0.58,0.42 C0.53,0.42 0.48,0.80 0.43,0.80 C0.38,0.80 0.32,0.44 0.27,0.44 C0.23,0.44 0.19,0.77 0.14,0.77 C0.09,0.77 0.05,0.45 0,0.45 Z"/>
+    </clipPath>
+    <!-- Cookie policy hero below the 600px knee. A single curve - the
+         multi-lobe desktop path above compresses to noise on a phone. Span
+         is 0.24, the same normalised span as every other mobile curve on
+         the site. The original is untouched; desktop keeps using it. -->
+    <clipPath id="wave-clip-policy-cookies-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.55,0.63 0.15,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-one-page" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.43 C0.95,0.43 0.88,0.78 0.82,0.78 C0.74,0.78 0.64,0.41 0.58,0.41 C0.47,0.41 0.37,0.80 0.28,0.80 C0.19,0.80 0.09,0.45 0,0.45 Z"/>
+    </clipPath>
+    <!-- One Page hero, two mids and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 4, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-one-page-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.80,0.63 0.40,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-one-page-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.65,0.39 0.25,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-one-page-low-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.15,0.37 0.55,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-one-page-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.45,0.61 0.85,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- About footer (inverted top-edge) -->
+    <clipPath id="wave-clip-about-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.03,0.29 0.07,0.05 0.1,0.05 S0.17,0.31 0.22,0.31 S0.3,0.03 0.34,0.03 S0.41,0.32 0.46,0.32 S0.52,0.04 0.56,0.04 S0.63,0.30 0.68,0.30 S0.74,0.05 0.78,0.05 S0.83,0.32 0.88,0.32 S0.9,0.06 0.93,0.06 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Services hub footer (inverted top-edge, 4 lobes) -->
+    <clipPath id="wave-clip-services-hub-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.04,0.29 0.09,0.04 0.14,0.04 S0.25,0.31 0.31,0.31 S0.44,0.04 0.50,0.04 S0.62,0.31 0.68,0.31 S0.81,0.04 0.86,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Custom build footer (inverted top-edge, 7 lobes) -->
+    <clipPath id="wave-clip-custom-build-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.04,0.29 0.09,0.04 0.14,0.04 S0.25,0.31 0.31,0.31 S0.43,0.04 0.49,0.04 S0.62,0.31 0.68,0.31 S0.82,0.04 0.88,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- One-page footer (inverted top-edge, 7 lobes) -->
+    <clipPath id="wave-clip-one-page-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.04,0.29 0.09,0.04 0.14,0.04 S0.25,0.31 0.31,0.31 S0.43,0.04 0.49,0.04 S0.62,0.31 0.68,0.31 S0.82,0.04 0.88,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Site refresh footer (inverted top-edge, 4 lobes) -->
+    <clipPath id="wave-clip-site-refresh-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.03,0.29 0.07,0.03 0.11,0.03 S0.18,0.33 0.23,0.33 S0.3,0.03 0.34,0.03 S0.39,0.33 0.44,0.33 S0.52,0.03 0.56,0.03 S0.63,0.33 0.68,0.33 S0.75,0.03 0.79,0.03 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Ongoing support footer (inverted top-edge, 8 lobes) -->
+    <clipPath id="wave-clip-ongoing-support-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.03,0.29 0.08,0.04 0.12,0.04 S0.20,0.31 0.25,0.31 S0.34,0.04 0.39,0.04 S0.48,0.31 0.53,0.31 S0.62,0.04 0.67,0.04 S0.77,0.31 0.82,0.31 S0.90,0.04 0.93,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Contact footer (inverted top-edge, 5 lobes) -->
+    <clipPath id="wave-clip-contact-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.04,0.29 0.10,0.04 0.15,0.04 S0.26,0.31 0.32,0.31 S0.45,0.04 0.51,0.04 S0.63,0.31 0.69,0.31 S0.82,0.04 0.87,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Case-study hub footer (inverted top-edge, 9 lobes) -->
+    <clipPath id="wave-clip-casestudies-hub-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.04,0.29 0.09,0.04 0.14,0.04 S0.24,0.31 0.30,0.31 S0.42,0.04 0.48,0.04 S0.60,0.31 0.66,0.31 S0.80,0.04 0.86,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- CS austin-space footer (inverted top-edge, 6 lobes) -->
+    <clipPath id="wave-clip-cs-austin-space-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.04,0.29 0.08,0.04 0.13,0.04 S0.23,0.31 0.29,0.31 S0.40,0.04 0.46,0.04 S0.59,0.31 0.65,0.31 S0.79,0.04 0.85,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- CS terracotta footer (inverted top-edge, 7 lobes) -->
+    <clipPath id="wave-clip-cs-terracotta-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.04,0.29 0.09,0.05 0.13,0.05 S0.22,0.30 0.27,0.30 S0.37,0.04 0.42,0.04 S0.52,0.31 0.57,0.31 S0.66,0.04 0.71,0.04 S0.81,0.30 0.86,0.30 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- CS ddr footer (inverted top-edge, 5 lobes) -->
+    <clipPath id="wave-clip-cs-ddr-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.03,0.29 0.07,0.04 0.09,0.04 S0.12,0.33 0.17,0.33 S0.22,0.04 0.26,0.04 S0.31,0.33 0.36,0.33 S0.42,0.04 0.46,0.04 S0.49,0.33 0.54,0.33 S0.59,0.04 0.63,0.04 S0.68,0.33 0.73,0.33 S0.78,0.04 0.82,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-one-page-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.94,0.45 0.89,0.75 0.83,0.75 S0.72,0.39 0.66,0.39 S0.53,0.75 0.47,0.75 S0.33,0.39 0.27,0.39 S0.17,0.75 0.11,0.75 S0.04,0.48 0,0.48 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-custom-build-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.43 C0.94,0.43 0.82,0.77 0.74,0.77 S0.54,0.41 0.46,0.41 S0.28,0.77 0.20,0.77 S0.06,0.51 0,0.51 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-one-page-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.04,0.29 0.09,0.04 0.14,0.04 S0.25,0.31 0.31,0.31 S0.43,0.04 0.49,0.04 S0.62,0.31 0.68,0.31 S0.82,0.04 0.88,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-custom-build-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.94,0.45 0.89,0.75 0.83,0.75 S0.72,0.39 0.66,0.39 S0.53,0.75 0.47,0.75 S0.33,0.39 0.27,0.39 S0.17,0.75 0.11,0.75 S0.04,0.48 0,0.48 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-case-study-gypsy-pistoleros" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.95,0.45 0.87,0.81 0.80,0.81 C0.73,0.81 0.65,0.39 0.58,0.39 C0.51,0.39 0.43,0.82 0.36,0.82 C0.29,0.82 0.21,0.40 0.14,0.40 C0.09,0.40 0.04,0.47 0,0.47 Z"/>
+    </clipPath>
+    <!-- Case study Gypsy Pistoleros hero, three mids and footer below the 600px knee. Single curves -
+         the multi-lobe desktop paths compress to noise on a phone. Span is
+         0.24 on all 5, the same normalised span as every other mobile curve
+         on the site, so the proportions match across the page. Direction and
+         bend position alternate down the page so no two read alike. The
+         originals are untouched; desktop keeps using them. -->
+    <clipPath id="wave-clip-case-study-gypsy-pistoleros-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.60,0.39 0.20,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-gypsy-pistoleros-high-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.63 C0.75,0.63 0.35,0.39 0,0.39 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-gypsy-pistoleros-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.39 C0.45,0.39 0.05,0.63 0,0.63 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-gypsy-pistoleros-low-mid-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.37 C0.45,0.37 0.85,0.61 1,0.61 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-gypsy-pistoleros-footer-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.61 C0.30,0.61 0.70,0.37 1,0.37 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-gypsy-pistoleros-footer" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.05,0.29 0.10,0.04 0.16,0.04 S0.27,0.31 0.33,0.31 S0.45,0.04 0.51,0.04 S0.63,0.31 0.69,0.31 S0.82,0.04 0.88,0.04 S0.97,0.28 1,0.28 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Contact FAQ mid strip (inverted top-edge, lobes into the form) -->
+    <clipPath id="wave-clip-contact-faq" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.06,0.29 0.13,0.04 0.20,0.04 S0.35,0.30 0.42,0.30 S0.54,0.04 0.60,0.04 S0.70,0.30 0.75,0.30 S0.84,0.04 0.88,0.04 S0.97,0.21 1,0.21 L1,1 L0,1 Z"/>
+    </clipPath>
+    <!-- Site refresh mid strip (bottom-edge, 2 troughs at 0.76) -->
+    <clipPath id="wave-clip-site-refresh-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.94,0.45 0.86,0.77 0.78,0.77 S0.62,0.41 0.54,0.41 S0.38,0.77 0.30,0.77 S0.08,0.49 0,0.49 Z"/>
+    </clipPath>
+    <!-- Ongoing support mid strip (bottom-edge, 2 troughs at 0.76) -->
+    <clipPath id="wave-clip-ongoing-support-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.41 C0.92,0.41 0.78,0.77 0.70,0.77 S0.52,0.41 0.44,0.41 S0.24,0.77 0.16,0.77 S0.05,0.55 0,0.55 Z"/>
+    </clipPath>
+    <!-- 404 strip (bottom-edge, 2 troughs at 0.76). Verbatim clone of
+         wave-clip-ongoing-support-mid - same box ratio, same crop centre, so
+         the desktop object-position and the mobile object-view-box inset
+         transfer unchanged. Only the id differs. -->
+    <clipPath id="wave-clip-not-found" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.41 C0.92,0.41 0.78,0.77 0.70,0.77 S0.52,0.41 0.44,0.41 S0.24,0.77 0.16,0.77 S0.05,0.55 0,0.55 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-about-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.47 C0.95,0.47 0.92,0.73 0.86,0.73 S0.74,0.37 0.68,0.37 S0.56,0.73 0.50,0.73 S0.36,0.37 0.30,0.37 S0.19,0.73 0.13,0.73 S0.05,0.45 0,0.45 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-services-hub-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.31 C0.06,0.31 0.11,0.06 0.17,0.06 S0.30,0.34 0.36,0.34 S0.49,0.06 0.55,0.06 S0.66,0.34 0.72,0.34 S0.82,0.06 0.88,0.06 S0.96,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-casestudies-hub-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.46 C0.90,0.46 0.78,0.74 0.70,0.74 S0.50,0.38 0.42,0.38 S0.24,0.74 0.16,0.74 S0.05,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-site-refresh-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.27 C0.10,0.27 0.22,0.07 0.30,0.07 S0.50,0.35 0.58,0.35 S0.76,0.07 0.84,0.07 S0.95,0.31 1,0.31 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-ongoing-support-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.06,0.29 0.09,0.07 0.15,0.07 S0.24,0.35 0.30,0.35 S0.44,0.07 0.50,0.07 S0.65,0.35 0.71,0.35 S0.83,0.07 0.89,0.07 S0.96,0.25 1,0.25 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-terracotta-high-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.94,0.45 0.89,0.75 0.83,0.75 S0.72,0.39 0.66,0.39 S0.53,0.75 0.47,0.75 S0.33,0.39 0.27,0.39 S0.17,0.75 0.11,0.75 S0.04,0.48 0,0.48 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-terracotta-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.46 C0.90,0.46 0.78,0.74 0.70,0.74 S0.50,0.38 0.42,0.38 S0.24,0.74 0.16,0.74 S0.05,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-terracotta-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.27 C0.10,0.27 0.22,0.07 0.30,0.07 S0.50,0.35 0.58,0.35 S0.76,0.07 0.84,0.07 S0.95,0.31 1,0.31 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-ddr-high-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.94,0.45 0.89,0.75 0.83,0.75 S0.72,0.39 0.66,0.39 S0.53,0.75 0.47,0.75 S0.33,0.39 0.27,0.39 S0.17,0.75 0.11,0.75 S0.04,0.48 0,0.48 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-ddr-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.46 C0.90,0.46 0.78,0.74 0.70,0.74 S0.50,0.38 0.42,0.38 S0.24,0.74 0.16,0.74 S0.05,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-ddr-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.27 C0.10,0.27 0.22,0.07 0.30,0.07 S0.50,0.35 0.58,0.35 S0.76,0.07 0.84,0.07 S0.95,0.31 1,0.31 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-austin-space-high-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.46 C0.90,0.46 0.78,0.74 0.70,0.74 S0.50,0.38 0.42,0.38 S0.24,0.74 0.16,0.74 S0.05,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-austin-space-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.31 C0.06,0.31 0.11,0.06 0.17,0.06 S0.30,0.34 0.36,0.34 S0.49,0.06 0.55,0.06 S0.66,0.34 0.72,0.34 S0.82,0.06 0.88,0.06 S0.96,0.29 1,0.29 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-gypsy-pistoleros-high-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.45 C0.94,0.45 0.89,0.75 0.83,0.75 S0.72,0.39 0.66,0.39 S0.53,0.75 0.47,0.75 S0.33,0.39 0.27,0.39 S0.17,0.75 0.11,0.75 S0.04,0.48 0,0.48 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-gypsy-pistoleros-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L1,0 L1,0.46 C0.90,0.46 0.78,0.74 0.70,0.74 S0.50,0.38 0.42,0.38 S0.24,0.74 0.16,0.74 S0.05,0.43 0,0.43 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-cs-gypsy-pistoleros-low-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.27 C0.10,0.27 0.22,0.07 0.30,0.07 S0.50,0.35 0.58,0.35 S0.76,0.07 0.84,0.07 S0.95,0.31 1,0.31 L1,1 L0,1 Z"/>
+    </clipPath>
+    <clipPath id="wave-clip-custom-build-faq-mid" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.29 C0.06,0.29 0.09,0.07 0.15,0.07 S0.24,0.35 0.30,0.35 S0.44,0.07 0.50,0.07 S0.65,0.35 0.71,0.35 S0.83,0.07 0.89,0.07 S0.96,0.25 1,0.25 L1,1 L0,1 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+</div>

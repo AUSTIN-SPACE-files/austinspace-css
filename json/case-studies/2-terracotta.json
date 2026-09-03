@@ -65,7 +65,7 @@
           "name": "Can you do the same for my site?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Send me your URL and I'll take a look. The first review is free. I'll give you an honest assessment of where things stand and what would have the biggest impact for your Squarespace site. No obligation."
+            "text": "Send me your URL and I'll take a look. The first review is free. I'll tell you where things stand and what would have the biggest impact for your Squarespace site. No obligation."
           }
         },
         {
@@ -77,6 +77,34 @@
           }
         }
       ]
+    },
+    {
+      "@id": "https://www.austinspace.co.uk/#business",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "reviewCount": "3"
+      },
+      "review": {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Charlie Crocker MRICS",
+          "jobTitle": "Director",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Terracotta Property"
+          }
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Charles is a great guy and a pleasure to work with. We receive detailed updates, he delivers on time and makes great recommendations. He has become an asset to our organisation. It's a 10 out of 10 from us.",
+        "url": "https://maps.app.goo.gl/DiL3qV9RftvfoZxa7"
+      }
     }
   ]
 }

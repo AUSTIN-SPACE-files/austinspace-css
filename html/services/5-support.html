@@ -2,7 +2,7 @@
   <img srcset="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/e0bb3927-2840-4f0d-9b7e-002247145c63/hero-cosmos-768.jpg 768w,
                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/47f70c2a-c474-4f21-bbbe-ed87e52ff414/hero-cosmos-1280.jpg 1280w,
                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/de2a78f0-8188-4f7a-8cc9-439c70385354/hero-cosmos-1920.jpg 1920w,
-               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2880w"
+               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2500w"
        sizes="100vw"
        src="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/de2a78f0-8188-4f7a-8cc9-439c70385354/hero-cosmos-1920.jpg"
        alt="AUSTIN_SPACE hero artwork. Squarespace ongoing support and development retainer for UK SMEs, from £300 per month"
@@ -43,7 +43,7 @@
         <span class="as-label">Strategic Partnership</span>
       </div>
       <h1 class="as-svc-hero__headline">Ongoing Support<br> and <em>Development</em></h1>
-      <p class="as-svc-hero__desc">The same working relationship on an on-going basis. A monthly Squarespace support retainer covering development, SEO, performance work, and strategic input. The site keeps improving instead of slowly calcifying.</p>
+      <p class="as-svc-hero__desc">The same working relationship on an on-going basis. A monthly Squarespace support retainer covering development, SEO, performance work, and strategic input. The site keeps improving.</p>
       <div class="as-svc-hero__actions">
         <a href="#as-enquiry-form" class="as-btn as-btn--primary">Discuss a retainer <i class="fa-slab fa-regular fa-arrow-right arw"></i></a>
         <a href="/case-studies/view-all" class="as-btn as-btn--outline">See the work</a>
@@ -91,18 +91,25 @@
       <p class="as-svc-editorial__body">Squarespace already does maintenance. Security patching, hosting, uptime and platform updates come with your subscription and I do not charge you for them. The retainer covers the work that only happens if somebody actually sits down and does it.</p>
     </div>
 
+    <!-- INCLUSIONS FIRST, EXCLUSION LAST. Reordered 14 August 2026. The
+         exclusion card ("What you are not paying for") used to open the
+         section, so a band whose job is explaining what the retainer
+         COVERS began with what it does not, and the reader had to hold
+         "one of these four is unlike the others" in their head while
+         reading the rest. It now closes the section as the boundary
+         note, which is the order the rest of the site uses: inclusion
+         first, caveat after.
+
+         ICON COLOURS DID NOT MOVE WITH THE CARDS. The locked rotation
+         is pink, blue, tangerine, sunshine reading down the page, so
+         the as-icon-- classes stayed in position and the content and
+         its glyph moved around them. Nothing here reads colour by
+         nth-child; the only positional rules on this band are the 2x2
+         cross hairlines at css:1975. -->
     <div class="as-row-list">
 
       <div class="as-row-item">
-        <div class="as-row-item__icon"><i class="fa-slab-press fa-regular fa-check as-icon--pink fa-2xl"></i></div>
-        <div class="as-row-item__content">
-          <p class="as-row-item__title">What you are not paying for</p>
-          <p class="as-row-item__desc">Security, hosting, backups and platform updates are Squarespace's job and they do it well. If your site is genuinely fine and just needs the lights kept on, you do not need this.</p>
-        </div>
-      </div>
-
-      <div class="as-row-item">
-        <div class="as-row-item__icon"><i class="fa-slab-press fa-regular fa-magnifying-glass as-icon--blue fa-2xl"></i></div>
+        <div class="as-row-item__icon"><i class="fa-slab-press fa-regular fa-magnifying-glass as-icon--pink fa-2xl"></i></div>
         <div class="as-row-item__content">
           <p class="as-row-item__title">Search visibility</p>
           <p class="as-row-item__desc">Rankings and AI search results move on an on-going basis whether or not anyone is watching. Keeping pace with that is ongoing work, not a one-off setup.</p>
@@ -110,7 +117,7 @@
       </div>
 
       <div class="as-row-item">
-        <div class="as-row-item__icon"><i class="fa-slab-press fa-regular fa-signal as-icon--tangerine fa-2xl"></i></div>
+        <div class="as-row-item__icon"><i class="fa-slab-press fa-regular fa-signal as-icon--blue fa-2xl"></i></div>
         <div class="as-row-item__content">
           <p class="as-row-item__title">Performance that stays fixed</p>
           <p class="as-row-item__desc">Core Web Vitals drift as content is added. Regular attention keeps the numbers where they were when the site launched.</p>
@@ -118,10 +125,18 @@
       </div>
 
       <div class="as-row-item">
-        <div class="as-row-item__icon"><i class="fa-slab-press fa-regular fa-wrench as-icon--sunshine fa-2xl"></i></div>
+        <div class="as-row-item__icon"><i class="fa-slab-press fa-regular fa-wrench as-icon--tangerine fa-2xl"></i></div>
         <div class="as-row-item__content">
           <p class="as-row-item__title">Work that would not otherwise happen</p>
           <p class="as-row-item__desc">New pages, new features, custom development. The things that stay on a list indefinitely unless someone has hours allocated to them.</p>
+        </div>
+      </div>
+
+      <div class="as-row-item">
+        <div class="as-row-item__icon"><i class="fa-slab-press fa-regular fa-check as-icon--sunshine fa-2xl"></i></div>
+        <div class="as-row-item__content">
+          <p class="as-row-item__title">What you are not paying for</p>
+          <p class="as-row-item__desc">Security, hosting, backups and platform updates are Squarespace's job and they do it well. If your site is genuinely fine and just needs the lights kept on, you do not need this.</p>
         </div>
       </div>
 
@@ -134,7 +149,7 @@
   <img srcset="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/e0bb3927-2840-4f0d-9b7e-002247145c63/hero-cosmos-768.jpg 768w,
                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/47f70c2a-c474-4f21-bbbe-ed87e52ff414/hero-cosmos-1280.jpg 1280w,
                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/de2a78f0-8188-4f7a-8cc9-439c70385354/hero-cosmos-1920.jpg 1920w,
-               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2880w"
+               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2500w"
        sizes="100vw"
        src="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/de2a78f0-8188-4f7a-8cc9-439c70385354/hero-cosmos-1920.jpg"
        alt=""
@@ -158,7 +173,7 @@
         <div class="as-eyebrow__dot"></div>
         <span class="as-label">What's available</span>
       </div>
-      <h2 class="as-svc-section-headline">What your retainer hours cover</h2>
+      <h2 class="as-svc-section-headline">What's included</h2>
     </div>
 
     <div class="as-svc-included__grid as-rail">
@@ -300,22 +315,33 @@
           <div class="as-svc-pricing__tier-left">
             <p class="as-svc-pricing__tier-name">Starter</p>
             <p class="as-svc-pricing__tier-desc">4 hours/month, maintenance and SEO</p>
+            <!-- HOURS ARE FIXED MINIMUMS, NOT RANGES. Growth read "6 to 8"
+                 and Partnership "10+" until 14 August 2026, which is what
+                 made the implied hourly rate wobble (£62.50-£83, then £80
+                 or less) instead of falling as the commitment grew. A rate
+                 cannot be stable if the hours it divides by move. The three
+                 tiers now work out at £75, £70 and £60 an hour, all below
+                 the £85 built-by-me rate quoted on the Custom Build page
+                 and well below the £120 standard rate. Any future change to
+                 a price or an hours figure has to keep that sequence
+                 falling, and has to keep every tier under £85. -->
+
           </div>
           <span class="as-svc-pricing__tier-price">£300/mo</span>
         </div>
         <div class="as-svc-pricing__tier">
           <div class="as-svc-pricing__tier-left">
             <p class="as-svc-pricing__tier-name">Growth</p>
-            <p class="as-svc-pricing__tier-desc">6 to 8 hours/month, development, SEO, strategy</p>
+            <p class="as-svc-pricing__tier-desc">8 hours/month, development, SEO, strategy</p>
           </div>
-          <span class="as-svc-pricing__tier-price">£500/mo</span>
+          <span class="as-svc-pricing__tier-price">£560/mo</span>
         </div>
         <div class="as-svc-pricing__tier">
           <div class="as-svc-pricing__tier-left">
             <p class="as-svc-pricing__tier-name">Partnership</p>
-            <p class="as-svc-pricing__tier-desc">10+ hours/month, full digital partner</p>
+            <p class="as-svc-pricing__tier-desc">12 hours/month, full digital partner</p>
           </div>
-          <span class="as-svc-pricing__tier-price">£800/mo</span>
+          <span class="as-svc-pricing__tier-price">£720/mo</span>
         </div>
       </div>
     </div>
@@ -327,7 +353,7 @@
   <img srcset="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/e0bb3927-2840-4f0d-9b7e-002247145c63/hero-cosmos-768.jpg 768w,
                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/47f70c2a-c474-4f21-bbbe-ed87e52ff414/hero-cosmos-1280.jpg 1280w,
                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/de2a78f0-8188-4f7a-8cc9-439c70385354/hero-cosmos-1920.jpg 1920w,
-               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2880w"
+               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2500w"
        sizes="100vw"
        src="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/de2a78f0-8188-4f7a-8cc9-439c70385354/hero-cosmos-1920.jpg"
        alt=""
@@ -412,14 +438,10 @@
        srcset="https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/e0bb3927-2840-4f0d-9b7e-002247145c63/hero-cosmos-768.jpg 768w,
                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/47f70c2a-c474-4f21-bbbe-ed87e52ff414/hero-cosmos-1280.jpg 1280w,
                https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/de2a78f0-8188-4f7a-8cc9-439c70385354/hero-cosmos-1920.jpg 1920w,
-               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2880w"
+               https://images.squarespace-cdn.com/content/68ae3692707429430e9b8ce9/366e8504-d2e8-409d-ab43-996a6fc65431/hero-cosmos-2880.jpg 2500w"
        sizes="100vw" alt="">
   <svg class="as-hero__stroke" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-    <path class="as-hero__stroke-wide"
-          d="M0 29 C3 29 8 4 12 4 S20 31 25 31 S34 4 39 4 S48 31 53 31 S62 4 67 4 S77 31 82 31 S90 4 93 4 S97 28 100 28"
-          fill="none" stroke="#000" stroke-width="5" vector-effect="non-scaling-stroke"/>
-    <path class="as-hero__stroke-narrow"
-          d="M0,37 C40,37 80,61 100,61"
-          fill="none" stroke="#000" stroke-width="5" vector-effect="non-scaling-stroke"/>
+    <path class="as-hero__stroke-wide" d="M0 29 C3 29 8 4 12 4 S20 31 25 31 S34 4 39 4 S48 31 53 31 S62 4 67 4 S77 31 82 31 S90 4 93 4 S97 28 100 28" fill="none" stroke="#000" stroke-width="5" vector-effect="non-scaling-stroke"/>
+    <path class="as-hero__stroke-narrow" d="M0,37 C40,37 80,61 100,61" fill="none" stroke="#000" stroke-width="5" vector-effect="non-scaling-stroke"/>
   </svg>
 </div>

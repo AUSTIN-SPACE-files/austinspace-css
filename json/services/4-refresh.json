@@ -29,11 +29,7 @@
       "@type": "Service",
       "name": "Squarespace Site Refresh",
       "description": "A focused Squarespace refresh or full website redesign for sites already on Squarespace. Covers visual design, performance optimisation, SEO and AI search improvements, mobile responsiveness, content reorganisation, and feature enhancements. Free site review first, with scope and price agreed upfront. Starting at £1,500.",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "AUSTIN_SPACE",
-        "url": "https://www.austinspace.co.uk"
-      },
+      "provider": { "@id": "https://www.austinspace.co.uk/#business" },
       "areaServed": "United Kingdom",
       "offers": {
         "@type": "Offer",
@@ -41,7 +37,7 @@
         "price": "1500",
         "priceSpecification": {
           "@type": "PriceSpecification",
-          "minPrice": "800",
+          "minPrice": "1500",
           "maxPrice": "2200",
           "priceCurrency": "GBP"
         }
@@ -55,7 +51,7 @@
           "name": "How do I know if my site needs a refresh or a full rebuild?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends on the current state of the site. If the underlying structure is sound and the issues are mostly visual, performance, or content presentation, a refresh is the right answer. If the site's structure itself is the problem, like bad navigation, fundamentally broken architecture, or a platform that doesn't fit the business, a full custom build makes more sense. The free site review is where this gets decided. I'll tell you which is the honest answer for your situation."
+            "text": "It depends on the current state of the site. If the underlying structure is sound and the issues are mostly visual, performance, or content presentation, a refresh is the right answer. If the site's structure itself is the problem, like bad navigation, fundamentally broken architecture, or a platform that doesn't fit the business, a full custom build makes more sense. The free site review is where this gets decided. I'll tell you which one your situation needs."
           }
         },
         {
@@ -64,6 +60,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes, often. Whether you outgrew your previous designer, built it yourself and hit a wall, or just haven't had time to keep on top of it, I can pick up an existing Squarespace site and improve it. The site needs to be on Squarespace already. If it's on another platform, the refresh service doesn't apply, but a custom build might."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you only work on Squarespace?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Primarily, yes. It's the platform I know inside out and where I do my best work. For the right project, I'll consider other platforms case by case. If you're not on Squarespace, send me your URL and I'll tell you honestly whether it's a fit."
           }
         },
         {
@@ -87,7 +91,7 @@
           "name": "How much does a site refresh cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Starting at £1,500. A design refresh covering visual and layout improvements is £1,500. A complete overhaul covering design, SEO, performance, and content runs £1,800 to £2,200. A focused performance-only engagement runs £800 to £1,200. The free site review is where scope and price get agreed, before any work starts."
+            "text": "Starting at £1,500. A design refresh covering visual and layout improvements is £1,500. A complete overhaul covering design, SEO, performance, and content runs £1,800 to £2,200. The free site review is where scope and price get agreed, before any work starts."
           }
         },
         {

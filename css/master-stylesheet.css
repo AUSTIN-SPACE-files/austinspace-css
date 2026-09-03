@@ -4,6 +4,46 @@
  ============================================= */
 
 
+/* ==================================================================
+   SITEWIDE CONVENTION - MOBILE STACK DIVIDERS ARE 0.12
+
+   When a multi-column band collapses to a single column at mobile
+   and needs separators between the stacked items, those separators
+   are rgba(255, 255, 255, 0.12) on ink. Sitewide, regardless of what
+   line values the host section already uses.
+
+   THE RULE, STATED ONCE SO IT STOPS BEING A PER-BLOCK DECISION:
+     - A divider INTRODUCED BY the mobile stack takes 0.12.
+     - A line that already existed and is merely being RESTYLED keeps
+       its own value.
+
+   WHY, since 0.12 will keep looking "wrong" against its neighbours:
+   these dividers do a different job from whatever line they replace.
+     .as-cs-solution's spine is 0.20, but it is ONE CONTINUOUS LINE
+     the eye follows down the section, so it can afford to be quiet.
+     .as-cs-stats' 0.06 is a background showing through a 1px grid
+     gap between tiles - tuned as a SEAM, not as a rule.
+   Four discrete separators have to register individually. A reader
+   scanning a stack needs each break to land on its own, with no
+   continuous line and no tile edges doing the work. Same reasoning
+   produced 0.12 in both cases, from two different starting values.
+
+   So a mismatch against the host section is EXPECTED and is not
+   evidence the value is wrong. Do not "correct" a 0.12 divider to
+   match a neighbouring 0.06 or 0.20.
+
+   "STACK" covers both shapes the mobile collapse produces: a true
+   single column (process, editorial, .as-cs-stats, .as-cs-solution)
+   and the 2x2 that the four-column ink bands fall back to (contact
+   bar, hub bar, about skills). All 0.12.
+
+   ONE KNOWN OUTLIER: .as-creds, which is the same 2x2 shape as the
+   ink bands but draws its mobile dividers at 0.14 (css:7047, 7050).
+   It predates this convention. Left alone rather than swept in, and
+   recorded here so it is not read as a counter-example or copied.
+   ================================================================== */
+
+
 /* =============================================
  1. DESIGN TOKENS
  ============================================= */
@@ -260,6 +300,36 @@
  border: none !important;
  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
 }
+
+/* ===============================================
+   Nav dropdowns - house style + white lift glow
+   Applies to both folder menus: Services + Case Studies
+
+   Every !important here is load-bearing: Squarespace sets inline
+   left/right positioning on these panels at runtime.
+
+   This supersedes the rule directly above it in full - border,
+   box-shadow and border-radius are all re-set here, and this block
+   wins on source order. The older rule is left in place rather than
+   removed.
+   =============================================== */
+.header-nav-folder-content {
+ background: #ffffff !important;
+ border: 2px solid #101014 !important;
+ border-radius: 12px !important;
+ box-shadow:
+   5px 5px 0 0 #101014,
+   0 0 12px 3px rgba(255, 255, 255, 0.65) !important;
+ text-align: left !important;
+ padding: 12px 16px !important;
+ min-width: 220px !important;
+ left: 0 !important;
+ right: auto !important;
+}
+
+.header-nav-folder-item { text-align: left !important; }
+.header-nav-folder-item a { justify-content: flex-start !important; }
+.header-nav-folder-item-content { text-align: left !important; }
 
 #footer-sections .sqs-block-html a {
  display: inline-block;
@@ -628,10 +698,40 @@
 }
 
 /* Narrow-curve stroke is hidden above the knee, sitewide. Pairs with the
-   generic swap at the top of the 600px query below. */
+   generic swap at the top of the 639px query below. */
 :root .as-hero__stroke-narrow{ display: none; }
 
-/* Homepage hero below the 600px knee. At 9.6 / 1 the cosmos renders
+/* MOVED 600 -> 639 ON 5 AUGUST, and the query below was SPLIT in two.
+
+   The band system had three breakpoints that did not line up: .as-cta
+   padding at 481, the clip/stroke swap at 600, and the box geometry at
+   640 (added by the band-height rule at the end of this sheet). The
+   601-639 window was the casualty - mobile 2 / 1 boxes wearing the
+   DESKTOP wave. Those paths are authored for a 130px strip, apex 0.04
+   and troughs 0.36 in objectBoundingBox units, so over a ~300px band
+   they stretched to a ~96px exaggerated ripple. Harmless before the
+   band change, because the footer strips were a fixed 130px there;
+   after it, that window is the only place the art does not match its
+   box. Aligning this query to 639 closes it.
+
+   THE STROKE SWAP MOVES WITH THE CLIPS - IT IS NOT SEPARABLE. Clip and
+   stroke are drawn as one wave; -narrow spans 0.39 -> 0.63 against the
+   mobile clip's 0.38 -> 0.62. Leave the stroke at 600 and 601-639 gets
+   a mobile clip under a wide stroke, which is a visible double line -
+   worse than the ripple this is fixing. Both halves, one query.
+
+   WHAT STAYED AT 600. Everything below the split: the .as-hero-combined
+   margin pull, content padding, and trust-row column layout. Those are
+   text-layout decisions with their own knee and no dependency on the
+   band geometry. Moving them would have been an unmeasured change to
+   the homepage hero in a window nobody asked about.
+
+   The aspect-ratio declarations inside this query are now DEAD - the
+   639 rule at the end of the sheet sets 2 / 1 for every band and, at
+   equal (0,2,0) specificity, wins on position. They are left in place
+   because removing 40-odd live-verified lines is not this change.
+
+   Homepage hero below the knee. At 9.6 / 1 the cosmos renders
    41px tall on a phone, a sliver rather than an image. 2 / 1 takes it
    to 197px, about 28 percent of the hero block. Border and stroke are
    left alone so both band edges stay at the inherited 5px.
@@ -644,7 +744,7 @@
    Button padding and the trust gap are sized so both rows hold a
    single line from 375 up and wrap cleanly below. Do not add
    flex-wrap: nowrap; it forces overflow instead of wrapping. */
-@media (max-width: 600px){
+@media (max-width: 639px){
   /* Wide/narrow stroke swap, sitewide. Both rules key on classes that only
      exist once a page has been treated - an untreated hero's path carries
      neither, so neither rule matches and it renders exactly as it does now.
@@ -868,6 +968,14 @@
   :root .as-hero--ongoing-support-mid .as-hero__img{
     clip-path: url(#wave-clip-ongoing-support-mid-mobile);
     object-view-box: inset(29.5% 16.67% 45.5%); }
+  /* 404: clone of the ongoing-support mid above. Same box ratio and crop
+     centre, so the inset transfers verbatim - the only strip pair on the
+     site where that is true. The stroke swap needs nothing here; the
+     global stroke-wide/narrow rules in this block already cover it. */
+  :root .as-hero--not-found{ aspect-ratio: 4 / 1; }
+  :root .as-hero--not-found .as-hero__img{
+    clip-path: url(#wave-clip-not-found-mobile);
+    object-view-box: inset(29.5% 16.67% 45.5%); }
   :root .as-hero--ongoing-support-low-mid{ aspect-ratio: 4 / 1; }
   :root .as-hero--ongoing-support-low-mid .as-hero__img{
     clip-path: url(#wave-clip-ongoing-support-low-mid-mobile);
@@ -1048,6 +1156,16 @@
   :root .as-hero--policy-cookies .as-hero__img{
     clip-path: url(#wave-clip-policy-cookies-mobile);
     object-view-box: inset(35% 16.67% 15%); }
+
+}
+
+
+/* SPLIT POINT, 5 August. Everything above this line is band ART and now
+   swaps at 639 with the box geometry. Everything below is .as-hero
+   -combined TEXT LAYOUT and keeps its own 600px knee - see the long note
+   above the 639 query for why the two were separated. Add band rules
+   above, hero-copy rules below. */
+@media (max-width: 600px){
 
   /* CORRECTED 2 August. The earlier note here claimed position: relative
      was kept deliberately for paint order against the stroke's z-index 1.
@@ -1596,6 +1714,37 @@
   color: rgb(183, 183, 191);
 }
 
+/* ------------------------------------------------------------------
+   EDITORIAL BAND, LABELLED GROUPS (site-refresh only, 14 Aug 2026)
+
+   The refresh page splits its four cards into two labelled groups of
+   two, so that band carries TWO .as-row-list children where the other
+   three pages still carry one. These two rules are the whole cost of
+   that: spacing between the groups, and spacing under each label.
+
+   THEY DELIBERATELY TOUCH NEITHER .as-row-list NOR .as-row-item. The
+   cross-hairline block below (css:1935) closes by asserting that no
+   rule after it touches those two selectors, and the 2x2 rules only
+   stay correct because each list still holds exactly two items. Adding
+   a margin here to a __group WRAPPER keeps both facts true. If you need
+   to space the groups differently, change these rules - do not reach
+   for the list or the items.
+
+   NO MEDIA QUERY. 40px reads correctly at every width because the
+   items' own padding varies either side of it: 24px vertical from 768
+   up, 18px below 600, and zero on a list's first and last child, which
+   is exactly where a group boundary falls. A mobile override would be
+   subtracting from a gap the ~600 block has already trimmed.
+
+   UNUSED ON THE OTHER THREE PAGES. one-page, custom-build and support
+   have no __group wrapper, so these rules match nothing there. */
+:root .as-svc-editorial__group + .as-svc-editorial__group {
+  margin-top: 40px;
+}
+:root .as-svc-editorial__group-label {
+  margin-bottom: 20px;
+}
+
 @media (max-width: 767px) {
   :root .as-svc-editorial .as-row-list {
     grid-template-columns: 1fr;
@@ -1719,6 +1868,163 @@
   }
 }
 
+/* ==================================================================
+   "WHAT THIS IS" EDITORIAL BAND, TABLET GUTTER (>=601px)
+
+   THIS CLOSES THE BAND THE <=600 BLOCK ABOVE EXPLICITLY LEFT OPEN.
+   That comment says "601-1160 IS STILL FLUSH, AND THIS FIX DOES NOT
+   REACH IT ... it is the same bug, not a separate one". This is that
+   same bug, measured across a 520-1300 sweep on all four service
+   pages, and fixed with the same mechanism at the desktop token.
+
+   32px, NOT 19.2: this is var(--as-space-section-side), the value
+   .as-svc-included (css:1604), .as-svc-process and .as-svc-bottom
+   (css:2225) already carry as the sides of their section shorthand,
+   and .as-svc-hero writes literally as "2rem 2rem 5rem" (css:406).
+   Above 600 the editorial band now starts on the same left edge as
+   every other section on the page. The mobile token stays 19.2 in the
+   block above and the two never overlap - 600 / 601, no shared width.
+
+   ON __inner, NOT THE SECTION, and that placement is load-bearing.
+   .as-svc-editorial's own padding is rewritten by a shorthand at
+   css:1753 (56px 0, max-width:767), so a side written into the base
+   shorthand at css:1670 would be silently zeroed again from 601 to
+   767 - exactly a third of the broken range. __inner is untouched by
+   that shorthand.
+
+   NO box-sizing, AND THAT IS WHY THE DESKTOP DOES NOT MOVE. There is
+   no sitewide reset (css:1957, css:13156) and .as-container declares
+   none of its own (css:7940), so this padding sits OUTSIDE the 1160
+   max-width: the element measures 1224 border-box, the content box
+   stays 1160, and margin:0 auto centres it. Above ~1224 the rendering
+   is identical to today. Add box-sizing: border-box here and the band
+   goes 32px narrower than the rest of the page at every desktop
+   width - a regression the sweep would not catch, because it only
+   looks at the 601-1224 range.
+   ================================================================== */
+@media (min-width: 601px) {
+
+  :root .as-svc-editorial__inner {
+    padding-left: var(--as-space-section-side);
+    padding-right: var(--as-space-section-side);
+  }
+}
+
+/* ==================================================================
+   "WHAT THIS IS" EDITORIAL BAND, CROSS HAIRLINES (>=768px)
+
+   Draws a cross through the 2x2 with NO outer edges: one vertical
+   rule between the columns, one horizontal rule between the rows.
+   border-left lands 0/1/0/1 and border-top lands 0/0/1/1, which is
+   the cross and nothing else. nth-child(even) is the right-hand
+   column, nth-child(n+3) is row two.
+
+   THE GRID HAD NOTHING TO DRAW AGAINST. Before this it was a clean
+   560px 560px with a 40px gap: no borders (css:1618 border: 0 on the
+   list, css:1628 border: 0 on the items) and no padding (css:1630),
+   transparent items sitting straight on the ink band. The gap is
+   REPLACED by the 24/32 item padding rather than added to - a rule
+   inside a 40px gap has no relationship to either item. Columns go
+   560 -> 580 as the gap collapses, content per item 560 -> 516, so
+   copy wraps harder and the section grows: 552 -> 609 on
+   custom-build. That figure is the brief's measurement, recorded
+   here as briefed, not re-measured at this commit.
+
+   24px 32px is not an arbitrary pair - it is exactly the base
+   .as-row-item padding at css:246 that css:1630 zeroes out for this
+   band. The items are getting their original card padding back
+   while keeping the transparent background.
+
+   ALPHA 0.12, the sitewide ink-band divider convention, same value
+   and same reasoning as the mobile block above.
+
+   THE SEAM TECHNIQUE WAS MEASURED AND REJECTED. A 1px grid gap over
+   a tinted list background gives a pixel-identical result and is
+   what .as-cs-stats and the contact bar already use on DESKTOP, so
+   it was the obvious first choice. It requires every item to carry
+   an OPAQUE background matching the band. Those two components are
+   tiles and already have one; these are transparent items on ink,
+   so the seam would hard-code rgb(23,23,26) onto all four items and
+   they would silently stop following the band if it ever changed
+   colour. Borders carry no such dependency. Rejected on coupling,
+   not on appearance.
+
+   THE GUARD IS min-width: 768px, NOT 601px. The brief specified 601
+   on the basis that the mobile block above is max-width: 600. It is,
+   but that is not where this band stops being two columns. The
+   max-width: 767 block at css:1639 sets grid-template-columns: 1fr,
+   so 601-767 is ALREADY a single-column stack - it just gets a 32px
+   gap and no dividers instead of the mobile treatment. A 601 guard
+   would put border-left on items 2 and 4 of a one-column stack: a
+   stray vertical hairline hanging down the left of two items in the
+   middle of the tablet range, with no second column beside it. 768
+   is the first width where a second column exists, so it is the
+   first width where a vertical rule means anything.
+
+   601-767 IS THEREFORE UNTOUCHED and still has no dividers at all.
+   That is the pre-existing state, not a regression, but it is now
+   the only width band in this component with none.
+
+   SITED AFTER THE MOBILE BLOCK DELIBERATELY. Media queries add no
+   specificity, so this ties with css:1614 at (0,3,0):
+     gap: 40px          against column-gap/row-gap: 0 below
+     padding: 0         against the padding shorthand below
+   Both are settled by source order alone. Move this block above
+   css:1614 and the band keeps its 40px gap AND its zero padding on
+   top of the new borders - the rules would draw inside a gap, which
+   is the failure the second paragraph describes. Checked, not
+   assumed: no rule after this point touches
+   .as-svc-editorial .as-row-list or its items.
+
+   EXACTLY FOUR ITEMS ON ALL FOUR PAGES, verified: one-page,
+   custom-build, site-refresh and support each carry one .as-row-list
+   with four .as-row-item children. nth-child(n+3) assumes precisely
+   two rows and would rule every row after the first if a fifth item
+   were ever added - and a fifth item would give a 2+2+1 grid whose
+   last row has no right-hand cell for the vertical rule to bound.
+   This band is four items or it needs rethinking.
+
+   THE PADDING INSETS THE TEXT WHERE THE CONTAINER DOES NOT. At
+   768-1160 .as-container is still flush - the tablet gutter gap
+   logged at css:1661 - so the 32px side padding becomes the only
+   thing holding the list copy off the screen edge there. Reads well,
+   but note the side effect: __header and __body above are still
+   flush, so from 768 up the list text now starts 32px inboard of the
+   headline. That step exists at every width, tablet and desktop
+   alike; it is inherent to putting padding on the items and is the
+   price of the rules having something to sit against. Do not "fix"
+   it by negative-margining the list - that would drag the outer
+   borders off-grid, and there are no outer borders to drag.
+
+   No box-sizing needed. There is no sitewide reset (see css:12613)
+   but these are stretched grid items, so the track sizes the border
+   box and the 32px padding plus 1px border are absorbed inside 580
+   rather than overrunning it.
+
+   .as-row-item IS SHARED - homepage positioning rows, About's CTA,
+   the service CTAs (css:7341). Every rule below is scoped under
+   .as-svc-editorial for that reason. Do NOT lift them out.
+   ================================================================== */
+@media (min-width: 768px) {
+
+  :root .as-svc-editorial .as-row-list {
+    column-gap: 0;
+    row-gap: 0;
+  }
+
+  :root .as-svc-editorial .as-row-item {
+    padding: 24px 32px;
+  }
+
+  :root .as-svc-editorial .as-row-item:nth-child(even) {
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  :root .as-svc-editorial .as-row-item:nth-child(n+3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
 /* ---- SERVICE PAGE: TIER FIT BAND ---- */
 /* White band splitting the process and proof ink sections.
    Reuses the homepage as-pos-card component. That grid is
@@ -1752,6 +2058,118 @@
   }
   :root .as-svc-fit .as-pos-cards {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ==================================================================
+   "WHICH ONE DO YOU NEED" BAND, MOBILE (<=600px)
+
+   THE GUTTER IS A BUG FIX, NOT A REFINEMENT. __inner is
+   .as-svc-fit__inner .as-container, and .as-container carries
+   max-width and margin only - no padding at any width. The section's
+   own padding is a shorthand with 0 sides (80px 0 at css:1729, 56px 0
+   at css:1751) and .as-svc-fit is NOT in the max-width:480 group at
+   css:2162 that gives the other service sections their mobile sides,
+   so nothing insets the content at any width below the container's
+   1160 max. At 390 the inner measured 390 wide at L0: the eyebrow dot,
+   the headline, both cards and the credit all ran edge to edge.
+
+   THIRD INSTANCE OF THIS EXACT OMISSION, after the homepage
+   featured-work band and .as-svc-editorial. Three components have now
+   paired a 0-sided section shorthand with a padding-free .as-container
+   and produced the same flush-left result. Worth treating as a pattern
+   to check for rather than three coincidences.
+
+   THE SECTION GOES 1472 -> 1389, but the two halves pull opposite ways
+   and the net hides it:
+     +130  the gutter ALONE, measured at 1602. 38px of lost width
+           pushes both cards from ~461 to ~505 and the credit from
+           144 to 168. This is the cost of the fix, not waste.
+     -213  the copy cuts, which pay for the gutter and 83px more.
+   The single biggest item is the credit, 168 -> 72 - more than both
+   card body trims combined. That cut is only safe because the full
+   explanation survives verbatim in the FAQ below (one-page.html:452),
+   in a <details open>, so it is expanded on load at every width; above
+   860 it cannot even be collapsed (css:5553 sets pointer-events: none
+   on the summary, inside a min-width:861 guard).
+
+   A RAIL WAS ATTEMPTED AND FAILED, and the failure was predicted.
+   Adding .as-rail to .as-pos-cards inside .as-svc-fit does nothing:
+   :root .as-svc-fit .as-pos-cards { display: grid } at css:1738 is
+   (0,3,0) and beats :root .as-rail { display: flex } at (0,2,0), so
+   the host never becomes flex and the class is inert. This is the
+   combination logged at css:6241 as "not live, that combination does
+   not exist today" - the attempt confirms that note rather than
+   overturning it, because the rail was NOT kept: no .as-pos-cards in
+   the committed markup carries .as-rail. Left that way deliberately.
+   The section does not need a rail and this page already has one on
+   .as-svc-included__grid (one-page.html:164) - a second swipe in the
+   same scroll is the same objection that killed the rail on the
+   process band.
+
+   SCOPE - CSS TWO PAGES, COPY ONE. .as-svc-fit is on one-page AND
+   custom-build, both with the same zero-gutter bug, and both rules
+   below are unscoped so both are fixed. The copy cuts in this pass are
+   one-page only: custom-build keeps the full credit sentence
+   (custom-build.html:357) and the untrimmed card bodies, so the two
+   pages now differ in wording where they used to match. Its own FAQ
+   carries the same explanation (custom-build.html:526), so the credit
+   there could take the same cut if the divergence is unwanted.
+
+   .as-pos-card IS SHARED with the homepage positioning section. No
+   rule here touches it - the cards are reached only through
+   .as-pos-cards for the grid, and every card-level rule stays scoped
+   under .as-svc-fit at css:9996 for exactly this reason. The copy is
+   page-specific and lives in the markup.
+
+   SITED AFTER THE max-width:767 BLOCK ABOVE, which contests it once as
+   a tie that only source order settles:
+     padding: 56px 0  (0,2,0) against the padding longhands below.
+   Specificity decides nothing. Move this block above css:1749 and the
+   section keeps 56px vertical while still taking the new gutter - half
+   the change, silently.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-svc-fit {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-svc-fit__inner {
+    padding-left: 19.2px;
+    padding-right: 19.2px;
+  }
+}
+
+/* ==================================================================
+   "WHICH ONE DO YOU NEED" BAND, TABLET GUTTER (>=601px)
+
+   SAME FIX, SAME REASONING AS THE EDITORIAL BAND ABOVE - read that
+   comment first, it carries the full argument. Only the differences
+   are recorded here.
+
+   THE SHORTHAND THAT WOULD HAVE EATEN A SECTION-LEVEL SIDE is
+   css:2014 (56px 0, max-width:767) over the base 80px 0 at css:1991.
+   Same 601-767 hole as the editorial band, same reason __inner is the
+   right host.
+
+   TWO PAGES, NOT FOUR. .as-svc-fit is on one-page (html:261) and
+   custom-build (html:318) only; .as-svc-editorial is on all four.
+   Both rules are unscoped, so both pages take this.
+
+   THE CARDS ARE THE VISIBLE PAYOFF. Between 601 and 767 .as-pos-cards
+   is single-column (css:2018), so one full-bleed card ran edge to edge;
+   from 768 to 1224 it is two columns and both outer edges were flush.
+   The 28px column gap between them was the only breathing room the
+   band had at those widths, which is why it read as a gap error rather
+   than a padding error.
+   ================================================================== */
+@media (min-width: 601px) {
+
+  :root .as-svc-fit__inner {
+    padding-left: var(--as-space-section-side);
+    padding-right: var(--as-space-section-side);
   }
 }
 
@@ -2535,8 +2953,26 @@
  }
 }
 
+/* .as-cs-stats JOINED THIS GROUP - IT WAS AN OMISSION, NOT A WIDER
+   GUTTER BY CHOICE. Every other section on a case-study page was
+   already listed here, so stats alone kept the 2rem sides from its own
+   shorthand (css:2367) and measured 32px at 390 while its five
+   siblings measured 19.2 on the same screen. Five in, one out, and a
+   page that reads inconsistently at 390 is the evidence: nothing
+   anywhere in this sheet or the markup argues for the stats band
+   having a wider gutter than the section above and below it, and no
+   note claimed one.
+
+   ONLY THE SIDES CHANGE. The vertical half of this shorthand
+   (--as-space-section-mobile, 64px) does not reach .as-cs-stats: the
+   mobile stack block at css:9241 sets padding-top/bottom: 48px as
+   longhands under :root, so (0,2,0) beats this (0,1,0) and 48 stands
+   at every width below 600. Adding the selector here is a
+   sides-only change for this one section - the other five take both
+   halves as they always did. */
 @media (max-width: 480px) {
  .as-cs-hero,
+ .as-cs-stats,
  .as-cs-challenge,
  .as-cs-solution,
  .as-cs-testimonial,
@@ -2896,10 +3332,26 @@
  margin: 0 0 18px;
 }
 
+/* This is a <ul>, not a <p>. Converted 6 Aug 2026: it was authored as
+   one <p> with <br> separators, which made textContent concatenate the
+   entries with no delimiter - "Squarespace (Silver Partner)Shopify and
+   Shopify Plus..." is what Google and screen readers were consuming.
+   <li> boundaries separate the text structurally, so no whitespace
+   patching is needed at the seams.
+
+   list-style/padding reset the UA <ul> defaults (disc bullets and a
+   40px inline-start padding); without them the column indents and
+   grows bullets. Same reset pattern as .as-privacy__list.
+
+   Geometry verified live before/after at 1549 and 390: list, group
+   and section heights identical to the decimal, subgrid row sizing
+   and the 2x2 mobile collapse both unaffected. */
 .as-about-skills__group-list {
  font-family: var(--font-body);
  font-size: 15px;
  margin: 0;
+ list-style: none;
+ padding: 0;
 }
 
 @media (max-width: 960px) {
@@ -4703,7 +5155,7 @@ a.cky-banner-element.as-cookie__btn:hover {
    position: relative it inherits from .as-hero above, which is what lets
    the pulled strip paint over the CTA. Do not give this rule its own
    position, and do not remove position from .as-hero. */
-.as-hero--home-footer { height: 130px; border-top: none; border-bottom: 5px solid var(--liquorice); }
+.as-hero--home-footer { height: 130px; border-top: none; border-bottom: 5px solid var(--footer-seam); }
 .as-hero--about { aspect-ratio: 2880 / 216; }
 .as-hero--about-mid { aspect-ratio: 2880 / 226; background-color: var(--white); border-top: 0;}
 .as-hero--services { aspect-ratio: 2880 / 300; }
@@ -4743,6 +5195,59 @@ a.cky-banner-element.as-cookie__btn:hover {
  height: 100%;
  object-fit: cover;
 }
+
+/* ==================================================================
+   "BLANK BAND ON LOAD" - THE DEFECT WAS NOT REAL. NO RULE HERE.
+   Investigated and RETRACTED 2026-08-06, same day. Read this before
+   acting on any document describing a hero late-paint problem.
+
+   THE CLAIM. Every clipped hero band was said to paint nothing on
+   load and stay blank for many seconds with no interaction, painting
+   instantly on one scroll tick. Blank band plus black squiggle -
+   .as-hero__stroke is inline SVG with no clip, so it appeared to
+   paint on time while the image did not.
+
+   THE ACTUAL CAUSE: THE MEASUREMENTS RAN IN A HIDDEN TAB.
+     document.visibilityState  "hidden" for the entire session,
+                               never once visible
+     long tasks recorded       0, with both entry types supported
+                               and actively observing
+     first-contentful-paint    3944ms - NOTHING painted until then,
+                               not just the band
+   Chrome does not render a hidden tab: no rAF, no paint, throttled
+   timers. That single fact explains every symptom attributed to the
+   page - the multi-second frame gaps, setTimeout ticks collapsing
+   onto one timestamp, img load / DOMContentLoaded / load all bunching
+   at the same millisecond, and the run-to-run variance that looked
+   like a race. In a normal foreground tab the bands appear in about
+   a second, consistent with the page's own timing (DCL 698ms, load
+   747ms). THERE WAS NO MAIN-THREAD BLOCK AND NO PAINT DEFECT.
+
+   FIVE HYPOTHESES WERE TESTED AGAINST A SYMPTOM THAT DID NOT EXIST:
+   fetch/decode, clip-reference resolution order, layer promotion via
+   transform, forced layout reads on discrete events, and forced
+   layout reads on a frame loop. Each was "disproven" by measurements
+   taken in the same invalid environment, so none of those results
+   mean anything in either direction. A sixth, replacing the 110 SVG
+   clipPath references with data-URI masks, was costed and correctly
+   never started.
+
+   WHAT SURVIVED, AND WHY. The wave clip defs were moved from the
+   footer injection to the header injection. KEEP THAT - a definition
+   should parse before its first consumer, which is correct on its own
+   terms and was never credited as a fix. Everything else from the
+   investigation has been reverted: the rAF nudge loop, the forced
+   layout reads, and all instrumentation (__asNudge, __asBlock,
+   __asBlockTop, both PerformanceObservers). The nudge loop in
+   particular cost 90 frames of document-global forced layout on every
+   page load, in exchange for nothing.
+
+   FIRST CHECK FOR ANY FUTURE PAINT-TIMING WORK:
+       document.visibilityState
+   If it is not "visible", stop - the numbers are meaningless. No
+   amount of care downstream recovers from that, and none of the five
+   hypotheses above could have been evaluated correctly without it.
+   ================================================================== */
 
 /* Per-page clip and crop */
 .as-hero--home .as-hero__img { clip-path: url(#wave-clip-home); object-position: center 33%; }
@@ -4839,6 +5344,24 @@ a.cky-banner-element.as-cookie__btn:hover {
 }
 .as-hero--ongoing-support-mid .as-hero__img {
   clip-path: url(#wave-clip-ongoing-support-mid);
+  object-position: center 42%;
+}
+
+/* 404 strip. Clip geometry, aspect ratios and strokes are cloned from
+   ongoing-support-mid, so object-position transfers as-is - the one case
+   where these values ARE transferable between strips, because the box ratio
+   and crop centre are identical. Do not re-derive them, and do not treat it
+   as licence to copy insets between strips that differ.
+   It does NOT take the -mid border treatment. Mid strips sit between two
+   sections and deliberately zero the base border and paint a white fill;
+   this one is the first thing on the page, so it keeps the base .as-hero
+   5px black top border and transparent background, same as every top hero.
+   Adding background-color or border-top: 0 here would remove that line. */
+.as-hero--not-found {
+  aspect-ratio: 2880 / 226;
+}
+.as-hero--not-found .as-hero__img {
+  clip-path: url(#wave-clip-not-found);
   object-position: center 42%;
 }
 
@@ -4997,7 +5520,56 @@ a.cky-banner-element.as-cookie__btn:hover {
 
  /* ---- Candy / liquorice-allsorts (committed accent palette) ---- */
  --candy-pink: #ec4d97; /* primary accent - the action */
- --candy-pink-deep: #d23c83; /* accent hover */
+
+ /* ---------------------------------------------------------------
+    THE PINK IS #ec4d97 AND IT DOES NOT MEET WCAG AA
+
+    Stated plainly so nobody reads this palette as accessible:
+    white label on #ec4d97 measures 3.457:1. AA wants 4.5:1 for
+    16px/700 text. The primary CTA fails, on every page, including
+    the header CTA that appears three times per page across all 13.
+
+    Reverted here 6 Aug 2026, deliberately, on Charles's call. An
+    AA-passing replacement was built and then backed out: #ec4d97,
+    hsl(317, 85%, 45.9%), 4.652:1 - sampled from hero-cosmos-1920.jpg
+    so it stayed inside the brand world, and 0.8 points of lightness
+    below the closest high-frequency sample #dc12a3 (4.508:1), which
+    was too near the threshold to be a real margin. It worked and it
+    verified; brand won over compliance. If this is revisited, that
+    is the value to reach for - the research is done.
+
+    WHAT STILL PASSES, so the failure is not overstated: the pink
+    accents are decorative or display-size. Eyebrow dots, toppers and
+    backstory bars carry no text; headline em accents are large-text,
+    where the threshold is 3:1 and 3.457 clears it. The failure is
+    specifically WHITE LABEL ON PINK FILL - i.e. buttons.
+
+    TWO TOKENS, SAME VALUE, ON PURPOSE. --candy-pink drives the
+    decorative accents; --candy-pink-aa drives button fills only
+    (.as-btn--primary, .as-btn--white, and the header CTA override
+    near the foot of this file). The name is now aspirational rather
+    than descriptive - it does NOT currently hold an AA-passing value.
+    It is kept split so the buttons can be moved back to a compliant
+    pink without touching a single accent: repoint --candy-pink-aa
+    and rebuild, nothing else. Collapse the two and you lose that.
+    --------------------------------------------------------------- */
+ --candy-pink-aa: #ec4d97; /* button fills - 3.457:1 on white, FAILS AA */
+
+ /* Accent hover. NOT the historic #d23c83, which was broken twice
+    over: hsl L52.9 against a resting L61.4 is only just darker, and
+    at S62.5 against a resting S80.7 it was desaturating rather than
+    deepening. #e93187 is the resting hue and saturation with 6 points
+    of lightness removed, hsl(332, 80.7%, 55.3%), so it deepens on the
+    same axis the rest of the palette uses.
+
+    3.997:1 on white, so it does NOT meet AA either - inherited from
+    the resting pink it is derived from, not introduced here.
+
+    LATENT: --accent-hover and --link-hover are its only readers and
+    neither is referenced anywhere in this file, so nothing on the
+    live site moves. Kept correct so the token is sane the day it is
+    wired up - but wire it to text and it fails AA. */
+ --candy-pink-deep: #e93187; /* accent hover - 3.997:1, below AA */
  --candy-pink-lt: #f26cae; /* luminous pink for dark surfaces */
  --candy-pink-050: #fdeaf3; /* accent tint surface */
  --sunshine: #f4cf3b;
@@ -5005,6 +5577,26 @@ a.cky-banner-element.as-cookie__btn:hover {
  --bead-blue: #4f7cc9; /* emphasis */
  --bead-blue-lt: #7fa3dd; /* luminous emphasis for dark surfaces */
  --liquorice: #17171a; /* candy black */
+
+ /* The 5px keyline on the flat bottom edge of every footer strip. It is NOT a
+    brand colour and it has exactly one job: be invisible against the site
+    footer it butts up to.
+
+    THIS VALUE IS SET IN THE SQUARESPACE ADMIN, NOT IN THIS REPO. It mirrors
+    the global footer section's background colour, which lives in the site
+    styles panel. Change the footer section colour there and this token
+    silently stops matching - nothing in this repo will fail, warn, or drift
+    into a diff. This comment is the only pointer to where the real value
+    lives, so keep it with the token.
+
+    Measured live on the homepage 6 Aug 2026: footer > .section-background
+    computed rgb(18,18,17). The strips had been painting --liquorice #17171a,
+    which is lighter and bluer - dE76 3.74 against a JND of ~2.3, so it read
+    as a 5px light line along the top of the dark footer. Only visible on the
+    dark side; the #000 top keylines sit on white and are deliberate.
+    Re-measure with an eyedropper on footer > .section-background, do not
+    assume this is still current. */
+ --footer-seam: #121211; /* MUST match the Squarespace footer section colour */
 
  /* legacy paper aliases (kept for back-compat) */
  --paper-000: var(--white);
@@ -6158,12 +6750,16 @@ a.cky-banner-element.as-cookie__btn:hover {
    dormant leftover to the next reader. It is not. Leave it.
 
    Same family, different failure, logged so the shape is recognisable:
-   css:1625 sets :root .as-svc-fit .as-pos-cards { display: grid } at
+   css:1738 sets :root .as-svc-fit .as-pos-cards { display: grid } at
    (0,3,0), which BEATS :root .as-rail { display: flex } at (0,2,0). No
    .as-pos-cards inside .as-svc-fit carries the rail class today, so this
    is not live. If one ever does, the host never becomes flex at all and
    nothing changes on the page - a loud failure rather than this silent
    one, but the same lesson about what a host brings to the class.
+   CONFIRMED BY EXPERIMENT, 2026-08-04: the rail was added to that host
+   and did exactly nothing, then reverted. The prediction held and the
+   combination is still not in the markup. See the mobile block at
+   css:1758 for the surrounding decision.
 
    PASTE CSS FIRST, HTML SECOND. This block is a no-op on every page at
    every width until as-rail is in the markup: deleting css:2502 changes
@@ -6741,8 +7337,10 @@ left untouched. */
    percentages and different host gutters, and only two of the three
    overflow:
      .as-casestudy__card--phone       -8%, no host gutter, fixed here
-     .as-cs-hub-feature__media-phone  -6%, no host gutter, fixed beside
-                                      its own base rule, NOT here
+     .as-cs-hub-feature__media-phone  -6%, 19.2px gutter since the
+                                      gutter fix, but STILL overflows -
+                                      fixed beside its own base rule,
+                                      NOT here
      .as-cs-hero__media-phone         -6%, 19.2px gutter, CLEARS
    The idiom is not wrong. A percentage offset only works where there is
    a margin to lean into, and nobody checked which hosts had one.
@@ -7342,11 +7940,11 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    Hover changes shadow+transform only (from the generic rule above),
    background stays pink - this rule only needs to override the color. */
 :root .as-btn--primary {
-  background: var(--candy-pink);
+  background: var(--candy-pink-aa);
   color: #fff;
 }
 :root .as-btn--primary:hover {
-  background: var(--candy-pink);
+  background: var(--candy-pink-aa);
 }
 
 /* Blue button variant - bead-blue fill, same no-color-change-on-hover
@@ -7368,11 +7966,11 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    Border/shadow/pill-radius/hover-lift already come from the generic
    .as-allsorts .as-btn rule above - only the fill needs changing here. */
 :root .as-btn--white {
-  background: var(--candy-pink);
+  background: var(--candy-pink-aa);
   color: #fff;
 }
 :root .as-btn--white:hover {
-  background: var(--candy-pink);
+  background: var(--candy-pink-aa);
 }
 
 /* Outline buttons never show the arrow icon - coloured buttons (primary
@@ -7689,6 +8287,98 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
+/* ==================================================================
+   "WHAT HAPPENS NEXT" / PRICING BAND, MOBILE (<=600px)
+
+   SPACING ONLY. NO COPY WAS CUT, and that is a decision rather than
+   an omission. This is the terms-and-money section - no monthly fee,
+   the 45-pound small-change rate, the 85-pound developer rate, and who
+   pays Squarespace what. A duplication check across one-page found
+   "partner trial", "10% off" and the 85-pound rate appearing EXACTLY
+   ONCE on the page, so unlike the fit-section credit there is no
+   second instance to fall back on. Cutting here would remove
+   information, not repetition, from the one section whose whole
+   posture is "listed here rather than left for you to find out
+   later". Be precise about the scope of that claim: the 45-pound rate
+   (4 occurrences) and the no-monthly-fee promise (3) DO repeat
+   elsewhere on the page. It is the partner trial, the discount and the
+   hourly rate that are single-instance, and they are the three facts a
+   reader cannot recover from anywhere else.
+
+   SECTION 1646 -> 1534 AT 390, and the three levers are independent.
+   Each was measured on its own so any of them can be reverted alone:
+     -32  inner gap 64 -> 32. This is a desktop COLUMN gap doing duty
+          as vertical rhythm: .as-svc-bottom__inner is gap: 4rem at
+          css:1967, a SHORTHAND setting both axes, and the grid drops
+          to one column at css:2210 (<=960). Below 960 the column half
+          is inert and the row half is the entire gap between the two
+          stacked columns.
+     -32  section padding 64 -> 48.
+     -48  paragraph gap 24 -> 18 inside each column.
+   Stop at any one of them if 18px reads tight - the first two are
+   pure section rhythm and do not touch the copy blocks at all.
+
+   THE -48 IS ONE-PAGE ONLY. .as-svc-bottom__col is a flex column and
+   the saving is 6px per gap, so it scales with how many direct
+   children each column has, and the four pages are not alike:
+     one-page      6 + 4 children ->  8 gaps -> -48   (total -112)
+     custom-build  5 + 4          ->  7      -> -42   (total -106)
+     refresh       2 + 3          ->  3      -> -18   (total  -82)
+     support       2 + 3          ->  3      -> -18   (total  -82)
+   Refresh and support put their content in .as-svc-perfect__list and
+   a second .as-svc-bottom__col-header, both of which carry their own
+   internal gaps (0.8rem and 0.6rem) that this rule does not reach. So
+   18px reads differently there: it is barely doing anything. If it
+   ever looks wrong, it will look wrong on one-page first, because
+   that is the page where it is doing the most work.
+
+   THE GUTTER IS ALREADY CORRECT HERE - 19.2px at 390, measured L19.
+   Unlike .as-svc-editorial and .as-svc-fit, this section's base
+   padding at css:1961 is a shorthand WITH sides, and .as-svc-bottom is
+   in the max-width:480 group at css:2247 that supplies the mobile side
+   token. It is not affected by the zero-side-padding bug and needs no
+   __inner rule. The padding longhands below deliberately leave the
+   sides alone so both of those keep supplying them.
+
+   DESKTOP IS UNTOUCHED. The gap override is inside this max-width:600
+   block, so 601+ keeps the 4rem shorthand - 64px column gap in the
+   two-column layout above 960, 64px row gap between 601 and 960.
+   Confirmed rather than assumed, because rewriting a both-axes
+   shorthand as a single 32px value would otherwise have halved the
+   desktop column gap too.
+
+   SCOPE - ALL FOUR SERVICE PAGES. .as-svc-bottom is on one-page,
+   custom-build, refresh and support. .as-svc-bottom__col exists
+   nowhere else: 8 occurrences in the HTML, two per page, all inside
+   this section, and css:1971 is its only other rule. Nothing outside
+   this band can be reached by the paragraph-gap change.
+
+   SITING. The 767 block is NOT the contest this time, and it is worth
+   saying so, having caught .as-svc-editorial and .as-svc-fit in the
+   two passes before this one. There is no max-width:767 rule on
+   .as-svc-bottom or its __inner anywhere in the sheet. The rule that
+   contests is the min-width:481 block DIRECTLY ABOVE, live from 481 to
+   600, a (0,2,0) tie against the padding longhands below that only
+   source order settles. Everything else loses on specificity: css:4671
+   and css:2247 are both (0,1,0), and the base gaps at css:1967 and
+   css:1974 are (0,1,0) against (0,2,0) here.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-svc-bottom {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-svc-bottom__inner {
+    gap: 32px;
+  }
+
+  :root .as-svc-bottom__col {
+    gap: 18px;
+  }
+}
+
 /* ============================================================
    PHASE 3 ITEM 1 - service pages: .as-svc-process becomes the
    editorial ink band. Locked to .as-creds on the homepage - same
@@ -7790,11 +8480,166 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    (css:1740) and at <=600px to 1 (css:1777). An unconditional border-left
    would draw a divider mid-row at 2-col and a stray line down every
    stacked item at 1-col. Reset at the same breakpoint the existing
-   ::before divider already resets at (css:1745). */
+   ::before divider already resets at (css:1745).
+
+   PADDING-RIGHT IS DELIBERATELY NOT CLEARED HERE, and this is the one
+   thing to know before "finishing" this reset. Between 601 and 960 the
+   steps are still MULTI-COLUMN - two on the four-step pages, three on
+   one-page, because the --three rule at css:7753 carries no media
+   guard - and the grid gap at those widths is 1px, not the 2.5rem the
+   css:1740 block asks for: :root .as-svc-process__steps { gap: 1px }
+   at (0,2,0) outranks it. So the 24px right padding IS the entire
+   inter-column gutter, 24 + 1 + 0 = 25px of text-to-text separation.
+   Clear it here and adjacent columns sit 1px apart. It is cleared in
+   the max-width:600 block below instead, where the steps are actually
+   one column and the inset only reads as a rag. */
 @media (max-width: 960px) {
   :root .as-svc-process__step {
     border-left: 0;
     padding-left: 0;
+  }
+}
+
+/* ==================================================================
+   THREE-STEP PROCESS BAND, MOBILE (<=600px)
+
+   THIS IS A BUG FIX, NOT A REFINEMENT. The steps were rendering as
+   THREE COLUMNS AT 117px on a 390 screen. Each step measured 568 tall,
+   because a 117px column cannot hold a title and a sentence - it holds
+   one or two words per line and runs the sentence down the page. The
+   section goes 801 -> 739, but that 62px understates the fix badly:
+   the steps themselves go from 568 EACH to 204 / 153 / 181.
+
+   WHY IT SURVIVED THIS LONG - THE --three MODIFIER. There has been a
+   stacking rule for this section since the original build:
+     css:2157  .as-svc-process__steps { grid-template-columns: 1fr }
+   at max-width:600. It works on the other three service pages. It has
+   never worked here, because the three-column rule is on the MODIFIER:
+     css:7753  :root .as-svc-process--three .as-svc-process__steps
+   which is (0,3,0), against (0,1,0) at css:2157. Verified by probe
+   rather than reasoned: a bare :root .as-svc-process__steps at (0,2,0)
+   still computed 116.5px x3, and every (0,3,0) form computed 351.6px.
+   The modifier is why this section never got a mobile treatment - the
+   treatment was written, and quietly lost.
+
+   ORDER, NOT SPECIFICITY, DECIDES THIS BLOCK. Two ties, both settled
+   by source position alone:
+     css:7753  the --three grid, (0,3,0), against the grid rule below.
+               NOT in a media query - it applies at every width, so
+               there is no breakpoint that separates them.
+     css:7717  :root .as-svc-process { padding: ... } inside a
+               min-width:481 guard, (0,2,0), against the padding
+               longhands below. Live from 481 to 600.
+   Move this block above css:7717 and the section keeps 72px vertical
+   from 481 to 600 AND stays in three 117px columns everywhere - and it
+   would still build and paste clean. The brief expected the contesting
+   rule to be the max-width:767 block at css:2134; that block carries
+   .as-svc-cta__actions only and says nothing about this section.
+
+   THE NUMBER GOES INLINE, IN A 44px COLUMN SPANNING BOTH ROWS, 14px
+   from the text. FONT-SIZE IS NOT TOUCHED. The 56px fa-slab-press
+   glyph compresses to exactly 44px on its own: __step-number is a
+   flex container (css:1856) and the <i> is a flex item at its default
+   flex-shrink, so FA7's fixed 1.25em box - 70px at 56px font-size -
+   shrinks to whatever the column gives it. Verified: icon width 44,
+   no overflow, 14px clear of the title. If anyone ever puts
+   flex-shrink: 0 on that <i>, this column breaks and the glyph will
+   overhang the title by 26px.
+
+   STACKING THE NUMBER ABOVE THE TEXT WAS MEASURED AT 907 - taller than
+   the 801 it was meant to fix. Full-width text under a 56px digit
+   buys nothing and costs a row per step. The inline number is what
+   makes a single column affordable at all.
+
+   A RAIL WAS CONSIDERED AND REJECTED. It measured 481, the shortest of
+   the three, and it still loses on two counts: .as-svc-included__grid
+   rails immediately above, so this would be the second swipe in a row;
+   and a three-step SEQUENCE behind a swipe shows one step of three
+   while the headline promises three. Height is not the only axis.
+
+   DIVIDERS BETWEEN STEPS ONLY, NONE TRAILING. The border is on
+   + .as-svc-process__step, so it cannot draw above the first or below
+   the last. Verified bt 0/1/1. Alpha 0.12 is this component's OWN
+   value (css:7748), not the sitewide default borrowed - it is the same
+   number either way, but it was checked rather than assumed.
+
+   ROW GAP IS INHERITED, NOT SET. The base step is gap: 1rem (css:1848)
+   and only column-gap is overridden below, so title and desc keep
+   their 16px. Do not add a row-gap here without re-measuring 204/153/181.
+
+   SCOPE - ONE PAGE. .as-svc-process is on all four service pages, but
+   --three is on one-page only. Custom Build, Refresh and Support carry
+   a bare .as-svc-process with FOUR steps and no modifier, so css:2157
+   reaches them and they have stacked correctly all along. There is no
+   --four and no other modifier: the class appears four times in the
+   HTML and every one is --three. Everything below is scoped to --three
+   except the padding and the step layout, which are harmless on the
+   already-stacked pages and keep the four consistent.
+
+   FLAGGED, NOT FIXED: padding-right: 24px SURVIVES ON EVERY STEP,
+   ON ALL FOUR PAGES - NOW FIXED BELOW, at padding-right: 0. css:7747
+   sets padding: 0 24px for the desktop divider columns, and the reset
+   at css:7794 clears padding-LEFT only, so every stacked step was
+   inset 24px on the right and 0 on the left, ragged against the
+   header above it. Verified live at padR 24 / padL 0 on one-page,
+   custom-build and refresh.
+
+   THE CLEAR BELONGS HERE, NOT IN THE css:7794 RESET, even though that
+   is where its other half lives. That reset is guarded at max-width:960
+   and the steps do not reach one column until 600. Between 601 and 960
+   they are still two columns (four-step pages) or three (one-page,
+   since css:7753 has no media guard), and the grid gap there is 1px -
+   :root .as-svc-process__steps { gap: 1px } at (0,2,0) beats the
+   2.5rem in the css:1740 block at (0,1,0). So padding-right is the
+   whole gutter at those widths: 24 + 1 + 0 = 25px between one column's
+   text and the next. Clearing it at 960 would leave 1px and the
+   columns would collide. The ONLY widths where the 24px is dead weight
+   are the ones where the steps stack, and that is exactly this block.
+
+   UNSCOPED, so all four pages get it. Every rule in this block except
+   the --three grid is already unscoped - the four-step pages have had
+   the inline number and the dividers since this block was written - so
+   the rag is the last thing that differed between them.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-svc-process {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-svc-process--three .as-svc-process__steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  :root .as-svc-process__step {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: 14px;
+    align-items: start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 0;
+  }
+
+  :root .as-svc-process__step:first-child {
+    padding-top: 0;
+  }
+
+  :root .as-svc-process__step:last-child {
+    padding-bottom: 0;
+  }
+
+  :root .as-svc-process__step + .as-svc-process__step {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Longhand start/end, never the slash form - Squarespace's panel
+     silently drops grid-row: 1 / 3. Spans title and desc. */
+  :root .as-svc-process__step-number {
+    grid-row-start: 1;
+    grid-row-end: 3;
   }
 }
 
@@ -8070,6 +8915,247 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
+/* ==================================================================
+   CASE-STUDY HUB ROWS, MOBILE (<=600px)
+
+   THIS IS A BUG FIX. The rows were rendering TWO COLUMNS at 390 with a
+   72px column gap between them. Because the tracks resolve from
+   content rather than from the template, the split differed on every
+   row: 161/118, 140/140, and 241/38 - row 3 gave its image a 38px
+   column. Copy ran at 162px wide and 536 tall.
+
+   WHY grid-template-columns LOOKED UNBEATABLE, and it is worth being
+   exact because !important on it changes nothing. The template IS
+   authored, at css:8243, and only (0,2,0). Two separate mechanisms
+   were rebuilding the second column underneath it:
+
+     1. THE PLACEMENTS ARE THE REAL SECOND COLUMN. __image and __phone
+        both carry grid-column: 2 (css:8331, css:8352). Collapse the
+        explicit grid to a single track and those placements make the
+        browser generate an IMPLICIT column to hold them, so the row
+        still renders in two. getComputedStyle reports explicit tracks
+        only, which is why the probe read as "the value is not
+        changing". Nothing done to grid-template-columns alone can
+        ever win this - the column placements below are load-bearing,
+        not tidying.
+
+     2. 1fr IS minmax(auto, 1fr). The auto minimum is each item's
+        min-content contribution, so a track cannot shrink below its
+        content and a starved sibling absorbs the difference. On a
+        351.6px container the 72px gap leaves 279.6 to split: row 2's
+        140/140 is exactly (351.6 - 72) / 2, and rows 1 and 3 are the
+        same 279.6 divided by content instead. That is the asymmetry.
+
+   COLUMN-GAP: 0 IS LOAD-BEARING. On a 351.6px container a 72px gap
+   leaves 279.6 to divide, so no template value survives contact with
+   it. It is removed, not reduced.
+
+   ALL THREE CHILDREN ARE EXPLICITLY PLACED, and the row placement
+   matters as much as the column. __copy is grid-row: 1 (css:8258) and
+   __image / __phone are grid-row-start: 1 / grid-row-end: 2
+   (css:8332, css:8353) - all three pinned to ROW 1. Put them all in
+   column 1 without touching that and they share ONE CELL: the copy
+   sits under the devices, which paint over it at z-index 1 and 2
+   against the copy's auto. row-gap would also be inert, which is the
+   tell. So:
+     __copy           -> row 1
+     __image, __phone -> row 2, together
+   The devices keep sharing a cell, which is the design - the phone
+   overlaps the desktop shot on purpose (position, z-index, the
+   translateY and the negative margin all assume it). Only the copy
+   moves out.
+
+   THE nth-child(even) OVERRIDE IS REQUIRED, NOT BELT AND BRACES.
+   css:8376 is :root .as-cs-row:nth-child(even) .as-cs-row__copy at
+   (0,4,0), against (0,2,0) for the unqualified copy rule below.
+   Specificity beats source order, so without the explicit even rule
+   row 2's copy stays in grid-column 2 and regenerates the implicit
+   track - the exact bug this block exists to remove, surviving on one
+   row out of three. __image and __phone need no such override:
+   css:8379 already sends them to column 1 on even rows, which is
+   where this block wants them anyway.
+
+   ALTERNATION IS grid-column, NOT order (css:8376-8381), so collapsing
+   to one column cannot scramble the reading order. DOM order is copy,
+   image, phone on all three rows, and that is what a single column
+   renders. Had the mirroring been done with order, row 2 would have
+   put its image above its copy and needed unpicking.
+
+   A RAIL WAS MEASURED AND REJECTED. It reports 1190, shorter than
+   this, but it scrolls the BROKEN two-column rows: copy still 162px,
+   image 53px, each row 828 tall. The number is smaller only because
+   one row is on screen at a time. A rail that carries the bug is not
+   a fix, it is a smaller window onto it.
+
+   SCOPE - ONE PAGE, THREE ROWS. .as-cs-row is the case-studies hub
+   only (1-case-studies-hub.html). It replaced .as-cs-card*, which was
+   deleted outright in the Phase 4 dead-code pass (see css:8188), so
+   there is no legacy family sharing these class names. No media query
+   touches .as-cs-row anywhere in the sheet - every one of its rules
+   at css:8241-8392 is unconditional, which is why this block is the
+   first breakpoint it has ever had.
+
+   SITING. The only contest is on the section: the min-width:481 block
+   DIRECTLY ABOVE, live from 481 to 600, a (0,2,0) tie against the
+   padding longhands here that only source order settles. css:3533 and
+   css:4677 are both (0,1,0) and lose on specificity; css:3533 still
+   supplies the mobile side padding, which this block deliberately
+   leaves alone.
+
+   TWO CHANGES LIVE IN THIS BLOCK AND THEY ARE SEPARABLE. Read them as
+   one and the wrong half gets reverted later, so they are split here:
+
+     THE STACKING FIX COSTS HEIGHT. About +82 on the section. Stacking
+     rows that were previously overlapping in a single cell adds the
+     shorter child plus the row gap to every row - roughly +110 each
+     against the broken two-column layout. It is a CORRECTNESS fix and
+     it buys: copy at 352 instead of 162, images at 319 instead of
+     107, rows level at 656/684/657 instead of 640/747/497, and
+     nothing rendered underneath a screenshot. It does not buy height
+     and was never going to.
+
+     THE ROW PADDING GIVES NEARLY ALL THE SAVING. padding: 52px 0 at
+     css:8247 is a desktop value that predates any mobile pass and was
+     never re-measured; 104px of vertical padding per row on a 390
+     screen, 312px across the three. Halving it to 28 returns 144 in
+     one declaration - more than the stacking fix costs, which is the
+     only reason this section nets out shorter at all.
+
+   Net expectation: 2253 -> roughly 2191, about -62. If a future pass
+   wants the height back, take it from the padding and leave the grid
+   alone. Reverting the grid to claw back 82px reinstates two-column
+   rows at 390 with a 72px gap and puts the copy back under the
+   images. The padding is a preference. The grid is a bug.
+
+   HEIGHTS HERE ARE DERIVED FROM THIS SHEET, NOT PROBED, and the two
+   inputs they are calibrated against (rows 414/442/415 and the 1609
+   total) were both read off the overlapping stack. The model
+   reproduces 1609 exactly, which is reassuring but not independent.
+   The number most worth confirming is the 226px device row: it
+   assumes both images lay out at their declared aspect ratios. That
+   holds in the source - no max-height reaches these elements, and
+   none of the six imgs carries a width or height attribute, so the
+   containers are sized purely by aspect-ratio (88% at 16/10, 34% at
+   9/17) while the imgs are width/height 100% with object-fit: cover
+   and cannot influence the box. Note the dependency though: that is
+   true BECAUSE aspect-ratio is present. Remove it and the intrinsic
+   image sizes take over the layout immediately.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-cs-hub-grid {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-cs-row {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 16px;
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  /* Longhand start/end throughout - Squarespace strips the slash form
+     silently, see the Item 6 postmortem referenced at css:8328. */
+  :root .as-cs-row__copy,
+  :root .as-cs-row__image,
+  :root .as-cs-row__phone {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  /* (0,4,0), to beat css:8376. Without this, row 2 alone keeps its
+     copy in column 2 and the implicit track comes straight back. */
+  :root .as-cs-row:nth-child(even) .as-cs-row__copy {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  :root .as-cs-row__copy {
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  /* Both devices into row 2, sharing the cell as designed. */
+  :root .as-cs-row__image,
+  :root .as-cs-row__phone {
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+
+  /* ---- Phone overhang, removed at mobile ----
+
+     THE -6% PUT THE PHONE OFF-SCREEN. It resolves to -21.09px against
+     the 351.6 row, and it flips side by row: css:8364 is margin-right
+     on odd rows, css:8390 is margin-left on even. Measured before,
+     rows 1 and 3 pushed the phone 9px PAST THE RIGHT EDGE of the
+     viewport and row 2 pushed it 14px past the LEFT. Nothing was
+     clipping it - there is no overflow rule on .as-cs-row or on
+     .as-cs-hub-grid, so overflow-x is visible and the phone was
+     simply off the screen rather than cut off at it.
+
+     THE OVERHANG IS CORRECT ON DESKTOP and is not being called a bug
+     there. The row sits in a 1160 container with page margin either
+     side, so -6% leans the phone into space that exists. At 390 the
+     container IS the viewport, the percentage resolves against it,
+     and there is no margin to lean into. Same mechanism as the
+     homepage featured-work band, and fixed the same way.
+
+     THE nth-child(even) FORM IS REQUIRED. Probed live: :root
+     .as-cs-row__phone at (0,2,0) leaves row 2's margin-left at
+     -21.09px untouched, because css:8387 is (0,4,0). Only a (0,4,0)
+     selector clears it. Second time this trap has bitten in this one
+     block - see the __copy override above.
+
+     justify-self: center WAS MEASURED AND REJECTED. It centres the
+     309px image in the 352px row for 35|35, too much inset, and it
+     loses the full-bleed intent that the 88% width exists to give.
+
+     After: 14|12, 12|14, 14|12 - even to within 2px on every row and
+     nothing off-screen. The 2px is the image rotation, not a margin;
+     see the note on __image below. */
+  :root .as-cs-row__phone,
+  :root .as-cs-row:nth-child(even) .as-cs-row__phone {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* ---- __image: the 5px is rotation, but there IS also a margin ----
+
+     Two separate things, and the answer to "is it a margin or the
+     rotation" is BOTH - just not for the same symptom.
+
+     THE 5px EITHER SIDE IS THE ROTATION, and it is arithmetic rather
+     than opinion. The image box is 88% of 351.6 = 309.4 wide by 193.4
+     tall. Rotated 3deg, its bounding half-width is
+     154.7*cos3 + 96.7*sin3 = 159.55, so it overhangs 4.85px on EACH
+     side and the bounding box measures 319.1 wide - which is where
+     the "images at 319" figure comes from; the element itself is
+     309.4. A negative margin can never produce that, because it acts
+     on one side at a time. Symmetric overhang is always a transform.
+     Nothing to fix, and it is left alone deliberately.
+
+     BUT css:8385 DOES CARRY margin-left: auto ON EVEN ROWS. It is a
+     different animal from the phone's -6%: an AUTO margin absorbs
+     free space rather than creating overhang, so it cannot push
+     anything off-screen. What it does do is mirror the image - odd
+     rows sit flush left with 42.2px free to the right, row 2 sits
+     flush right with 42.2px free to the left. That is the image's
+     half of the same alternation the phone gets from justify-self,
+     and at one column it means row 2's image does not line up with
+     rows 1 and 3.
+
+     LEFT IN PLACE, deliberately, because zeroing it would flatten the
+     mirroring on the image while the phone keeps its own via
+     justify-self (css:8356 end, css:8388 start) - half a device pair
+     mirrored and half not. If the mirroring is unwanted at mobile it
+     should come off BOTH elements in one pass, as a design decision
+     about the alternation, not as a margin cleanup. Flagged so the
+     next reader knows it was seen and reasoned about rather than
+     missed. */
+}
+
 /* ============================================================
    Case-study hub feature: Gypsy Pistoleros sits outside the
    numbered ink rows on a pure white section, not on Squarespace
@@ -8086,6 +9172,55 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 @media (min-width: 481px) {
   :root .as-cs-hub-feature {
     padding: var(--as-pad-band) var(--as-pad-side);
+  }
+}
+
+/* ==================================================================
+   CASE-STUDY HUB FEATURE, MOBILE (<=600px)
+
+   THE GUTTER IS A BUG FIX, NOT A REFINEMENT. __inner is
+   .as-cs-hub-feature__inner .as-container (1-case-studies-hub.html:148),
+   and .as-container carries max-width and margin only - no padding at
+   any width. The section's only padding is the min-width:481 shorthand
+   directly above, so below 481 there is nothing at all: no section
+   padding, no host inset, no gutter. Measured at 390 the section ran
+   0/0 vertical and __inner, __grid and __copy all sat at 390 wide from
+   L0, so the eyebrow dot and the headline pressed against the screen
+   edge and the rotated desktop card bled off-screen to the left.
+
+   FOURTH INSTANCE OF THIS EXACT OMISSION, after the homepage
+   featured-work band, .as-svc-editorial and .as-svc-fit (css:1758).
+   Four components have now paired a section that only pads above 481
+   with a padding-free .as-container and produced the same flush-left
+   result. This is a pattern to check for on any new band, not four
+   coincidences.
+
+   THE SECTION GETS TALLER AND THAT IS THE FIX: roughly 803 -> 899 at
+   390, and 96 of that is the vertical padding it never had. Nothing is
+   being reclaimed here - the copy is not touched.
+
+   19.2px, not 24 or 32: it is the same --as-space-section-side-mobile
+   value the .as-cs-row list directly above this section already uses
+   (css:8385), so the feature copy now starts on the same left edge as
+   the four numbered rows instead of 19px outside them.
+
+   SITED IMMEDIATELY AFTER THE min-width:481 BLOCK ABOVE, which contests
+   it once in the 481-600 overlap as a tie that only source order
+   settles: padding: var(--as-pad-band) var(--as-pad-side) is (0,2,0)
+   against these longhands at (0,2,0). Specificity decides nothing. Move
+   this block above it and the band silently keeps 80/32 through the
+   overlap while the gutter appears to have been applied.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-cs-hub-feature {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-cs-hub-feature__inner {
+    padding-left: 19.2px;
+    padding-right: 19.2px;
   }
 }
 
@@ -8138,11 +9273,140 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   max-width: 480px;
 }
 
+/* ==================================================================
+   FEATURE AS A STRUCTURAL REPLICA OF .as-cs-row - ALL WIDTHS
+
+   The feature is now the same object as a hub row, inverted: an ink
+   band with white text becomes a white band with ink text. Everything
+   below the header already matched before this pass and was measured
+   to confirm it - 544/544 columns, tile 494x324 at -3deg, phone
+   215x364 at 5deg, z-index 1 and 2, identical on both. What differed
+   was structure, not styling: the section header sat INSIDE the copy
+   column, so the copy column was carrying five things where a row
+   carries four. The markup moved the eyebrow, headline and body up
+   into __inner, mirroring how .as-cs-hub-grid__inner holds its header
+   above __rows, and __copy now holds number / title / desc / cta -
+   the same four children as .as-cs-row__copy. Copy column lands at
+   281 against the rows' 283.
+
+   THE 20px AND 48px ARE LIFTED, NOT CHOSEN. .as-cs-hub-grid__headline
+   carries margin: 0 0 20px (css:8210) and .as-cs-hub-grid__rows
+   carries margin-top: 48px (css:8237). Both measured off the grid and
+   copied, so the two sections open on the same rhythm rather than on
+   two values that happen to look similar.
+
+   THE HEADLINE MARGIN IS AN OVERRIDE, not a fresh declaration:
+   css:8699 sets margin: 0 on the same (0,2,0) selector. Source order
+   is the only thing settling it, so this block must stay below
+   css:8692. Move it above and the header closes up against the body
+   with no visible error anywhere.
+
+   THE NUMBER IS BLACK - var(--ink-900), deliberately NOT the rows'
+   colour rotation (candy pink / bead blue / tangerine at
+   css:8272-8276). The rows sit on ink where a luminous digit reads as
+   an accent; this sits on white, where the same treatment would read
+   as decoration. Matching the headline colour is the inverted-band
+   equivalent of what the rows are doing.
+
+   fa-1 AND NOT fa-4. The section restarts its own numbering rather
+   than continuing 1-2-3 from the grid above. That is the editorial
+   point of "Something different" - it is not the fourth Squarespace
+   build, it is the one that is not a Squarespace build. If a fourth
+   row is ever added to the grid, this stays at 1.
+
+   text-align: left IS LOAD-BEARING, NOT COSMETIC. Font Awesome gives
+   every <i> a fixed 1.25em box - 70px at 56px font - with
+   text-align: center, while the digit glyph advance is only 28px.
+   Without the override the glyph centres in that box and sits 21px in
+   from the copy column's left edge, out of line with the title
+   beneath it. Verified against .as-cs-row__number i, which already
+   carries text-align: left via css:7956: its icon box starts at L173
+   and its title starts at L173, so the indent is zero.
+
+   RESIDUAL, AND IT IS CORRECT: even with the override the "1" still
+   sits about 6px proud, because the glyph carries its own left side
+   bearing (canvas reports actualBoundingBoxLeft -6 at 56px). That is
+   the typeface, not a layout fault, and the rows have exactly the
+   same residual - so matching them is the right outcome and zero
+   indent would be the wrong one. Do not "fix" it with a negative
+   margin.
+
+   DO NOT ADD PER-ELEMENT MARGINS TO __copy. Measured and rejected:
+   __copy is a flex column with gap: 16px (css:8686), so porting the
+   rows' margin-bottom values (16 / 14 / 28) stacks on top of the gap
+   rather than replacing it - number-to-title goes from 24 to 40. The
+   gap already does the job the margins do on the rows, where __copy
+   is not a flex container.
+
+   number-to-title is 24 HERE AGAINST 16 ON THE ROWS, because the
+   number div occupies a track in a 16px-gap flex column rather than
+   carrying its own 16px margin against a static sibling. 8px out.
+   Accepted rather than corrected, because the only fix is a negative
+   margin fighting the gap, and 8px is below the threshold where that
+   trade is worth making.
+   ================================================================== */
+:root .as-cs-hub-feature__number i {
+  font-size: 56px;
+  color: var(--ink-900);
+  line-height: 1;
+  text-align: left;
+}
+
+:root .as-cs-hub-feature__headline {
+  margin-bottom: 20px;
+}
+
+:root .as-cs-hub-feature__grid {
+  margin-top: 48px;
+}
+
+/* ==================================================================
+   CLIENT NAME, TYPESET TO MATCH THE HUB ROWS - ALL WIDTHS
+
+   "Gypsy Pistoleros" was rendering as a card sub-label while
+   Terracotta, DDR and AUSTIN_SPACE render as client names. Same kind
+   of thing, same position in its section, so it should typeset the
+   same. The two sections are parallel in every other respect,
+   measured at both 390 and 1505:
+
+     eyebrow    16px DM Sans                    both
+     headline   48/32 Fraunces, same clamp      both
+     desc       16px DM Sans                    both
+     title      30px Fraunces vs 22px DM Sans 600   <- the only gap
+
+   NOT MOBILE-SCOPED, deliberately. The mismatch exists at every width
+   and is MORE pronounced at desktop, where a 48px headline sat above
+   a 22px title. .as-cs-row__title at css:8287 carries no media query
+   of its own - one unconditional declaration, no responsive variant
+   anywhere in the sheet - so there is no breakpoint behaviour to
+   mirror and no reason to fence this one.
+
+   COPIED FROM THE SOURCE, NOT FROM A MEASUREMENT, which is what turned
+   up letter-spacing: -0.3px. It is declared at css:8293 and forms part
+   of how that title sets; reading the four obvious values off a
+   rendered element would have missed it silently.
+
+   TWO VALUES DELIBERATELY NOT COPIED, because they are context rather
+   than typesetting: color (#fff there, on the ink band; ink-900 here,
+   on white) and margin (0 0 14px there, sitting above a desc; 8px 0 0
+   here, hanging under the section body). Only the type comes across.
+
+   THE SECTION HEADLINE IS ALREADY CORRECT AND IS NOT TOUCHED.
+   .as-cs-hub-feature__headline is the section heading - the direct
+   counterpart of "Recent builds" on the grid - and both scale 48 -> 32
+   identically off the same clamp. Earlier variants that pulled it down
+   to 26 or 22 were solving a problem that does not exist: the headline
+   was never the mismatch, the title was.
+
+   SCOPE: one element. .as-cs-hub-feature__title appears once in the
+   markup (case-studies-hub.html:157) and this is its only rule.
+   ================================================================== */
 :root .as-cs-hub-feature__title {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 22px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 30px;
   line-height: 1.2;
+  letter-spacing: -0.3px;
   color: var(--ink-900);
   margin: 8px 0 0;
 }
@@ -8201,10 +9465,13 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    fix, scoped to this feature section only; .as-cs-gp itself is
    untouched. Worse on white than on ink, so it is needed here too.
 
-   The right: -6% below overflows the viewport at mobile, because this
-   section has no host gutter below 481 for the percentage to lean into.
-   Measured past the viewport by 25/30/32/35px at 320/375/390/430. The
-   mobile correction sits immediately after this rule and MUST STAY
+   The right: -6% below overflows the viewport at mobile. It was
+   measured past the viewport by 25/30/32/35px at 320/375/390/430 when
+   the section had no host gutter at all; the 19.2px inner gutter added
+   above narrows that but does not close it, because -6% of the narrower
+   media box still exceeds the inset and the 5deg rotation adds its own
+   overhang on top. The correction below is still load-bearing. It sits
+   immediately after this rule and MUST STAY
    THERE: this base rule is unguarded, so an override anywhere earlier
    in the sheet ties it at (0,2,0) and loses on source order. A media
    query adds no specificity. The full reasoning is in the featured work
@@ -8222,12 +9489,19 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   transform: rotate(5deg) translateY(28px);
 }
 
-/* Sign flip, not a tweak - see the note above. 18px rather than the
-   homepage's 14: clearance runs 12.2/10.5/9.4/8.8px at 320/375/390/430.
-   12px was considered and rejected at 2.8px on 430, which is the
-   absence of overlap rather than a margin, and 430 is a common width. */
+/* Sign flip, not a tweak - see the note above.
+
+   18px WAS CORRECT WHILE THE SECTION HAD NO GUTTER, and had to change
+   when it got one. It was measured against the viewport edge, so once
+   __inner took its 19.2px inset the two stacked: the pair sat roughly
+   30px off the right against 14 on the left, visibly off-centre in a
+   container that is now symmetric. 2px restores a true 14|14 - the same
+   left and right clearance as the .as-cs-row device pairs immediately
+   above this section, which is the reference this feature is a replica
+   of. Read it as "2px inside the gutter", not as a smaller version of
+   18. */
 @media (max-width: 600px) {
-  :root .as-cs-hub-feature__media-phone { right: 18px; }
+  :root .as-cs-hub-feature__media-phone { right: 2px; }
 }
 
 :root .as-cs-hub-feature__media img {
@@ -8400,9 +9674,146 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 :root .as-cs-stats__item:nth-child(2) .as-cs-stats__icon { color: var(--bead-blue-lt) !important; }
 :root .as-cs-stats__item:nth-child(3) .as-cs-stats__icon { color: var(--tangerine) !important; }
 :root .as-cs-stats__item:nth-child(4) .as-cs-stats__icon { color: var(--sunshine) !important; }
+
+/* LOAD-BEARING, AND CORRECTIVE RATHER THAN DEFENSIVE: width and text-align.
+   Do not tidy them away as no-ops - nothing in this sheet sets the width they
+   override, because it lives in the remote kit stylesheet. Font Awesome 7
+   ships icons fixed-width by default, without needing fa-fw (a change from
+   FA6), so an untouched glyph renders in a 1.25em box with the glyph centred
+   inside it. At the 2.0rem !important this component sets on the span
+   (css: "ICON SIZE OVERRIDES") that box is 40px, so each glyph sat several
+   pixels right of the card's left edge while __number and __label start at
+   zero - and by a DIFFERENT amount per icon, since the four glyphs have
+   different advances. A ragged icon column above a flush number column is
+   what this reads as on the page. Same finding and same two-property fix as
+   the tick-list and spec-list passes, which carry the live measurements.
+
+   TARGETS THE <i>, NOT THE SPAN. The span is a stretched flex item spanning
+   the full card and is already left-aligned; the 1.25em box belongs to the
+   <i> that carries the fa- classes. (0,2,1) beats the kit's (0,1,0) without
+   !important - unlike colour and font-size on this component, which need it
+   to beat a legacy guard.
+
+   ALL FOUR CASE STUDIES, DELIBERATELY. terracotta, ddr-ltd, austin-space and
+   gypsy-pistoleros share this component verbatim - four items, four icons,
+   same as-cs-v2 wrapper. Reported on gypsy, fixed everywhere, because three
+   pages left inconsistent with the fourth is the worse outcome.
+
+   STILL OUTSTANDING, NOT FIXED HERE: .as-creds__icon and
+   .as-casestudy__stat-icon share this component's colour and size rules and
+   carry the identical dead space on the homepage bands. Separate components,
+   left for their own pass. */
+:root .as-cs-stats__icon i {
+  width: auto;
+  text-align: left;
+}
+
 :root .as-cs-stats__label {
   font-weight: 400;
   color: #b7b7bf;
+}
+
+/* ==================================================================
+   STATS BAND, MOBILE (<=600px) - 2x2 GRID BECOMES ONE COLUMN
+
+   THE 2x2 WAS BROKEN ON EVERY PAGE, DIFFERENTLY EACH TIME. The
+   max-width:960 rule at css:2610 drops the four columns to
+   repeat(2, 1fr), and 1fr resolves against content, so each page got
+   its own split from whatever its own stat text happened to measure.
+   At 390 the two columns came out:
+     terracotta    148.5 | 189.9   2 of 4 numbers wrapping
+     ddr           165.9 | 159.1   3 of 4 wrapping
+     austin-space  162.5 | 162.5   none
+     gypsy         125.1 | 209.9   none, but a 125px column
+   DDR was the worst: "4 weeks", "3 to 13" and "8 to 13" all broke to
+   two lines inside a 76px number box. Nothing is wrong with the
+   markup on any of these pages - a two-up grid at 390 simply cannot
+   hold a display number and a mono label side by side, and the four
+   different splits are the same bug wearing four faces.
+
+   AFTER: one column, ZERO numbers wrapping on any of the four, and
+   the items go from 358 wide down to about 180.
+
+   THE SECTION GETS TALLER AND THAT IS THE POINT. Stacking four items
+   trades the 2x2's density for width. This is a LEGIBILITY FIX, NOT A
+   HEIGHT SAVING, and it is the same trade already made on the About
+   background section - state it plainly rather than dressing it up as
+   a tidy-up.
+
+   THE HEIGHT FIGURES ARE STALE AND NEED RE-MEASURING. terracotta
+   920 -> 964 and ddr 935 -> 988 were measured with the old 32px side
+   gutter still in place. .as-cs-stats has since joined the
+   max-width:480 group at css:2619, taking the sides to 19.2 and giving
+   each item about 26px more width, which can only reduce the increase
+   and may erase it. Treat both pairs as upper bounds on the cost, not
+   as current values, until someone re-measures at 390.
+
+   NUMBER-BESIDE-LABEL WAS MEASURED AND REJECTED. Putting the number
+   in its own column beside the label narrows the number column again,
+   so the wrapping comes straight back - 2 on terracotta and 3 on ddr,
+   exactly what the stack just fixed - and DDR grows to 1058, taller
+   than the plain stack it was meant to beat. Do not re-propose it.
+
+   DIVIDER ALPHA IS 0.12, WHICH IS NOT THIS SECTION'S OWN HAIRLINE.
+   The desktop rule draws its lines a different way: __inner carries
+   background: rgba(255,255,255,0.06) at css:2374 and a 1px gap lets
+   it show between the items. That is 0.06, half of what is set here.
+   0.12 is deliberate - it is the value every other ink band uses for
+   its mobile stack dividers (contact bar, hub bar, about skills,
+   process, editorial), and a 0.06 border reads as absent against
+   liquorice on a phone. Flagged because "match the section's own
+   hairline" would give a different answer to "match the sitewide
+   mobile convention", and this rule follows the second.
+
+   gap: 0 also retires the 0.06 hairline mechanism entirely - with no
+   gap the __inner background is fully covered, so these borders are
+   the only dividers at this width. Between items only, none trailing,
+   which is why this is an adjacent-sibling rule and not a
+   border-bottom with a :last-child reset.
+
+   NO SPECIFICITY OR ORDER RISK. There is no min-width:481 rule on
+   .as-cs-stats or __inner anywhere in this sheet - unusually for an
+   ink band, this one has no allsorts padding rule at all, which is
+   also why its 32px sides never became 19.2 at mobile (see below).
+   Both rules it does contest are single-class and lose on
+   specificity, not on source order: .as-cs-stats { padding: 3.5rem
+   2rem } at css:2367 and .as-cs-stats__inner { grid-template-columns:
+   repeat(2, 1fr) } at css:2611 are (0,1,0) against (0,2,0) here.
+
+   THE 32px SIDE GUTTER WAS A SEPARATE BUG AND IS NOW FIXED. At 390
+   __inner measured 326 wide at L32, against 19.2 everywhere else on
+   the page. That 32 was the SECTION's padding - 2rem from css:2367 -
+   not the container's; .as-cs-stats__inner is __inner .as-container
+   (2-terracotta.html:71 and the same on the other three), and
+   .as-container carries max-width and margin only. It was never a
+   page-wide 32: the max-width:480 group at css:2619 hands 19.2px sides
+   to .as-cs-hero, .as-cs-challenge, .as-cs-solution,
+   .as-cs-testimonial and .as-cs-page-cta, and .as-cs-stats was the one
+   case-study section missing from that list - an omission, not a
+   decision. It has since been added to that group, so the sides now
+   match the rest of the page below 480. Between 481 and 600 the base
+   2rem still applies and the stack runs at 32px sides; that band is
+   untouched and nothing on the page contradicts it there.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-cs-stats {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-cs-stats__inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  :root .as-cs-stats__item {
+    padding: 20px 0;
+  }
+
+  :root .as-cs-stats__item + .as-cs-stats__item {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
 }
 
 /* ============================================================
@@ -8643,6 +10054,132 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
+/* ==================================================================
+   "WHAT I DID ABOUT IT", MOBILE (<=600px) - SPINE BECOMES A STACK
+
+   EVERY SELECTOR HERE CARRIES .as-cs-v2 AND IT IS NOT OPTIONAL. The
+   whole family is scoped :root .as-cs-v2 .as-cs-solution__* at
+   (0,3,0). A :root .as-cs-solution__* override is (0,2,0) and loses
+   SILENTLY - it applies to nothing and reads like the rule was never
+   parsed. Four separate attempts were lost to this before the cause
+   was found. The stats and challenge blocks elsewhere in this sheet
+   get away with (0,2,0) because those families are only two classes
+   deep; this subtree is one class deeper. Drop .as-cs-v2 from any
+   line below and that line stops working without any other symptom.
+
+   THE 52px INDENT WAS THE MARKER'S HOUSING, NOTHING ELSE. __spine
+   carried padding-left: 52px (css:9510) purely so the marker, at
+   position:absolute left:-52px (css:9518), had somewhere to sit. No
+   width or max-width rule exists on __step anywhere in this sheet, so
+   the step's 300px was derived entirely from that padding:
+   351.6 container - 52 = 299.6. Putting the marker into normal flow
+   frees the whole 52 in one move, and steps go 300 wide at L71 to 352
+   at L19, flush with every other section on the page.
+
+   THE SECTION GETS TALLER: 2317 -> 2355 on terracotta, +38. The
+   marker now occupies its own row in flow, roughly 22px per step
+   across four steps, and the extra width does NOT offset it because
+   the lists already fitted inside 300. This is a legibility and
+   alignment change, NOT a saving - the section is paying height to
+   put the steps on the page's left edge and to stop the copy running
+   in a column narrower than everything above it. State it that way.
+
+   THE ::before SPINE LINE IS HIDDEN, NOT RESTYLED. It lived at
+   left: -37px (css:9513), inside the padding gutter. With the gutter
+   gone it has nowhere to live - there is no negative space left to
+   draw into. The hairline dividers below REPLACE it: discrete phases
+   rather than one connected line. That is a deliberate substitution
+   and the reason display:none is correct here rather than a repaint.
+   The :last-child::before rule at css:9426 only sets `bottom`, so it
+   cannot resurrect the line once display:none is set.
+
+   DIVIDER ALPHA 0.12 IS NOT THIS SECTION'S OWN LINE WEIGHT. The rule
+   being replaced is rgba(255,255,255,0.20) (css:9421), and the only
+   other lines in this subtree are 0.35 on the list dashes and 0.5 on
+   the list text. There is no 0.12 anywhere inside .as-cs-solution.
+   0.12 is the SITEWIDE mobile stack-divider value - contact bar, hub
+   bar, about skills, process, editorial and the .as-cs-stats stack -
+   so the dividers match the other stacked bands rather than the line
+   they replace. Deliberate: a connected 0.20 spine and a set of
+   discrete section rules are doing different jobs and should not
+   share a weight.
+
+   22px, NOT 28. Measured against the control: 28 costs +74 where 22
+   costs +38. The padding sits on BOTH steps either side of every
+   rule, so the per-step figure is doubled at every join - 28 is not
+   "slightly more air", it is nearly twice the height cost.
+
+   THREE LITERALS TRACK EACH OTHER BY HAND, NOT BY VARIABLE:
+     __spine   padding-left  52px   css:9510
+     __marker  left         -52px   css:9518
+     __step::before left    -37px   css:9513
+   Nothing links them. This block neutralises all three together,
+   which is the only safe way to touch any of them. If the spine is
+   ever reinstated at another width, all three move or none do.
+
+   position:static STRANDS TWO DECLARATIONS HARMLESSLY. The marker
+   keeps top: -6px (css:9436) and width: 32px (css:9520). `top` goes
+   inert under static - the marker sits ~6px lower relative to its
+   text than the absolute version did, which is correct in flow and
+   not worth a reset. `width: 32px` still applies and still matches
+   the 32px icon, so it is left alone deliberately rather than missed.
+
+   THE :last-child RULE BELOW IS BELT AND BRACES. css:9423 already
+   sets padding-bottom: 0 on the last step at (0,4,0), which beats the
+   (0,3,0) padding-bottom here on its own. Restated so this block
+   survives intact if that rule is ever narrowed.
+
+   MUST SIT AFTER THE max-width:767 BLOCK ABOVE. Those are the live
+   values and they are also (0,3,0) - equal specificity, so source
+   order is the only thing deciding this. Media queries add no
+   specificity. Move this block above css:9508 and every line silently
+   loses. The section padding is the exception: it beats the
+   min-width:481 rule at css:10246 on specificity, (0,3,0) to (0,2,0),
+   so that one is order-independent.
+
+   A RAIL WAS MEASURED AND REJECTED at 896 - by far the shortest
+   option, and rejected anyway. It narrows steps to 265 and grows each
+   to 670, so it only reports short by showing one phase of four at a
+   time. Four sequential phases IS the content: a case study is an
+   argument in order, and a swipe rail turns it into four things the
+   reader has to go looking for. Height was never the thing to
+   optimise here.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-cs-v2 .as-cs-solution {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-cs-v2 .as-cs-solution__spine {
+    padding-left: 0;
+  }
+
+  :root .as-cs-v2 .as-cs-solution__marker {
+    position: static;
+    left: auto;
+    margin-bottom: 12px;
+  }
+
+  :root .as-cs-v2 .as-cs-solution__step::before {
+    display: none;
+  }
+
+  :root .as-cs-v2 .as-cs-solution__step {
+    padding-bottom: 22px;
+  }
+
+  :root .as-cs-v2 .as-cs-solution__step + .as-cs-solution__step {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 22px;
+  }
+
+  :root .as-cs-v2 .as-cs-solution__step:last-child {
+    padding-bottom: 0;
+  }
+}
+
 /* Terracotta case study only, scoped to .as-cs-v2 wrapper.
    Results section: own white band, sits directly after .as-cs-solution.
    It used to be followed by a before/after column pair; that component was
@@ -8807,6 +10344,164 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 @media (max-width: 767px) {
   :root .as-cs-v2 .as-cs-results__stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==================================================================
+   RESULTS SECTION, MOBILE (<=600px)
+
+   THE LARGEST SINGLE SAVING ON THE PAGE: 2670 -> 2430 at 390 on
+   terracotta, and almost all of it is vertical padding that was
+   still at its DESKTOP value. The base rule at css:9700 sets
+   padding: var(--as-space-section) var(--as-space-section-side),
+   i.e. 112px top and bottom, at every width - while every other
+   section on the same page runs 48 to 64 at mobile. Nothing chose
+   112 for a phone; the section simply had no mobile rule at all.
+
+   THIS IS NOT THE .as-cs-stats FIX. DO NOT REACH FOR THE GROUP EDIT.
+   The 32px side gutter looks identical to the one on .as-cs-stats
+   and has a completely different cause:
+     .as-cs-stats  got 32px by being ABSENT from the max-width:480
+                   side-padding group at css:2639. Adding the
+                   selector to that group fixed it - (0,1,0) against
+                   a (0,1,0) base, settled on source order.
+     .as-cs-results gets 32px from ITS OWN SHORTHAND at css:9700,
+                   :root .as-cs-v2 .as-cs-results, at (0,3,0). The
+                   group rule is (0,1,0), so adding .as-cs-results
+                   to it would LOSE ON SPECIFICITY at every position
+                   in the file. There is no siting that makes it
+                   work, and it would read as applied while doing
+                   nothing.
+   Same symptom at 390, different cause, opposite fix. Hence four
+   longhand declarations here rather than one selector added there.
+
+   SIDES ARE LONGHANDS BECAUSE THE BASE IS A SHORTHAND. Overriding
+   only padding-top/bottom would leave the sides on the shorthand's
+   32px - the vertical saving would land and the gutter would not.
+   The two are one change here, not two.
+
+   SIDE EFFECT WORTH HAVING: with the gutter at 19.2 the stat cards
+   go 153 -> 166 wide and LEVEL at 371, where they were 394/394/
+   417/417. The 2x2 was uneven because the narrower column wrapped
+   its labels differently; widen the column and the wrap disappears.
+
+   THE 2x2 IS CORRECT HERE AND MUST NOT BE FLATTENED. Measured: one
+   column gives cards 352 wide and 239 tall, but the stats block goes
+   762 -> 958 and the section back up to 2626, because two cards per
+   row packs better than one. Nothing wraps badly at 166px - each
+   card is a number and a short label.
+
+   THIS IS THE OPPOSITE ANSWER TO .as-cs-stats, ON PURPOSE. There the
+   2x2 was breaking display numbers across lines inside a 76px box
+   and one column was the fix; here the 2x2 packs better and one
+   column is the regression. Same-looking component, opposite call -
+   because the content differs, not because one of them is wrong.
+
+   SITING: no min-width:481 rule exists on .as-cs-results anywhere in
+   this sheet. The only media rule in the family is the max-width:767
+   __stats grid above. This block contests the base rule at css:9700
+   alone - equal (0,3,0), so it must stay AFTER it, and does.
+
+   SCOPE - PRE-FLIGHTED, AND NARROWER THAN IT LOOKS:
+     terracotta    results section, 4 stat cards
+     ddr           results section, 4 stat cards
+     gypsy         results section, NO __stats block - eyebrow,
+                   title, intro and three prose/finding pairs only
+     austin-space  NO RESULTS SECTION AT ALL
+   So the padding lands on THREE pages, and the 2x2 reasoning above
+   governs TWO. The max-width:767 __stats rule matches nothing on
+   gypsy, which is correct rather than a gap.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-cs-v2 .as-cs-results {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    padding-left: 19.2px;
+    padding-right: 19.2px;
+  }
+
+  /* ----------------------------------------------------------------
+     STATS BECOME A RAIL
+
+     terracotta 2430 -> 1979 (-451), ddr 2261 -> 1794 (-467).
+
+     THIS RAIL MAKES THE CARDS BIGGER, NOT SMALLER. 166 -> 260 wide
+     and 371 -> 288 tall on terracotta; ddr's uneven 402/402/380/380
+     LEVELS to 311. At 260px nothing wraps, and 288 is exactly the
+     card's desktop height - the rail is showing the card as designed
+     rather than a squeezed version of it. This is the OPPOSITE of the
+     rails measured on the hub rows and .as-cs-solution, which
+     narrowed their content and grew taller. "Rails make things
+     smaller" is the wrong generalisation and is why each one has to
+     be measured rather than assumed.
+
+     WHY A RAIL IS RIGHT HERE AND WAS REJECTED THERE: four stat cards
+     are PARALLEL FACTS. There is no reading order to preserve, so
+     showing one at a time costs nothing. The four solution phases and
+     the three process steps are a SEQUENCE - an argument in order -
+     and a rail turns those into four things the reader has to go
+     looking for. Same control, opposite verdict, decided by whether
+     the content is ordered.
+
+     THE .as-rail CLASS ALONE DOES NOT WORK - MEASURED. Adding the
+     class without the declarations below leaves display:grid in
+     force, makes the cards NARROWER (147px) and the section 93px
+     TALLER. The repeat(2, 1fr) at css:9858 is (0,3,0) inside a
+     max-width:767 block; the generic :root .as-rail is (0,2,0) and
+     loses. This forced form is (0,4,0) - three classes - so it beats
+     both that and the (0,3,0) base at css:9729 on SPECIFICITY, not
+     source order. It would work anywhere in the file; it lives here
+     because this is where the section's mobile rules are.
+
+     THIS SUPPLEMENTS THE GENERIC :root .as-rail BLOCK, it does not
+     replace it. Full-bleed margins, the right-edge mask, scrollbar
+     hiding and scroll-padding all still come from there - only the
+     properties the (0,3,0) grid rules were beating are restated.
+
+     THE BLEED TOKENS ARE OVERRIDDEN AND THAT IS A BUG FIX, NOT A
+     PREFERENCE. The generic rail sets --as-rail-bleed to
+     var(--as-space-section-side) = 32px between 481 and 600, only
+     dropping to 19.2 below 480, because it was written for sections
+     that carry 32px sides in that band. .as-cs-results now carries
+     19.2px sides across the whole of <=600 (see the block above), so
+     the inherited 32px bleed would pull the scroll container 12.8px
+     past the viewport on each side between 481 and 600 - horizontal
+     page scroll, in a 120px-wide band that is easy to miss. Pinning
+     both tokens to 19.2 makes the bleed track THIS section's gutter
+     at every width it applies to. If the section's side padding ever
+     changes, these two must change with it.
+
+     flex-direction: row is explicit for the same reason as
+     .as-about-background__right - the default is not safe to assume
+     once another rule in the family has set column on a sibling.
+
+     SCOPE: terracotta and ddr only. Gypsy's results section has no
+     __stats block and austin-space has no results section, so the
+     class exists in two files and this rule matches two elements.
+
+     THE SCRIPT NEEDS NOTHING ADDED. header-code-injection.html:109
+     selects '.as-rail' alone, and sets tabindex="0", role="group"
+     and aria-label itself. Its own note records that tabindex is
+     load-bearing because rail cards are plain divs with nothing
+     focusable inside - which is exactly .as-cs-results__stat. No
+     per-page wiring, and no tabindex in the markup.
+     ---------------------------------------------------------------- */
+  :root .as-cs-v2 .as-cs-results__stats.as-rail {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    flex-direction: row;
+    gap: 16px;
+    --as-rail-bleed: 19.2px;
+    --as-rail-bleed-neg: -19.2px;
+  }
+
+  :root .as-cs-v2 .as-cs-results__stats.as-rail > .as-cs-results__stat {
+    flex: 0 0 83%;
+    min-width: 0;
+    scroll-snap-align: start;
   }
 }
 
@@ -9029,6 +10724,85 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
+/* ==================================================================
+   TESTIMONIAL ATTRIBUTION - PINK RULE OFF (mobile treatment only)
+
+   The line removed here is the 2px rgb(236,77,151) border-TOP on
+   __side - the name / role / Google-link block - NOT on the quote.
+   Its 20px padding-top existed only to clear that rule, so it goes
+   with it. Terracotta 740 -> 718 at 390, side block 111 -> 89; the
+   22px is the 2px border plus its 20px of clearance.
+
+   THIS IS UNGUARDED AND SO APPLIES AT EVERY WIDTH, BUT IT ONLY HAS
+   AN EFFECT AT <=767. Read the base rule at css:10043 before assuming
+   otherwise: the pink rule is TWO DIFFERENT BORDERS at two widths.
+     >=768   border-LEFT: 2px candy-pink, with padding-left: 26px
+     <=767   border-left zeroed, replaced by border-TOP + padding-top
+   So border-top: 0 is a no-op above 767, where there is no border-top
+   to remove, and the vertical pink rule on the desktop attribution
+   column SURVIVES this block. That is a deliberate stop, not an
+   oversight - see the note below.
+
+   THE DESKTOP border-left IS DELIBERATELY RETAINED. THE ASYMMETRY IS
+   THE DECISION, NOT AN UNFINISHED JOB - DO NOT "COMPLETE" IT. At
+   >=768 __side is a 280px column sitting 72px from an 808px quote,
+   with no background, no other border and no rule of its own. The
+   border-left plus its 26px padding is the ONLY device tying the
+   attribution to the quote it belongs to; remove it and the name
+   floats in the right-hand column related to nothing.
+
+   At <=767 the same block is stacked DIRECTLY BENEATH the quote, so
+   the relationship is positional and already legible without help.
+   There the rule is decoration and comes off cleanly. Same element,
+   same line, two different jobs - which is the whole reason one goes
+   and one stays.
+
+   THE INSTRUCTION AND THE INTENT DIVERGED HERE, ON PURPOSE. The brief
+   said "remove the pink rule, ALL WIDTHS", written while looking at a
+   mobile view where the only pink rule visible is the border-top.
+   Reviewed and confirmed: mobile only. Anyone reading the brief later
+   against this file will find the two disagreeing, and this note is
+   the record that the difference was seen, argued and settled - not
+   missed.
+
+   If the desktop rule is ever removed after all, padding-left: 26px
+   at css:10044 must go with it or the column keeps 26px of dead
+   inset, and the attribution needs some other anchor - a shared
+   baseline with the quote, or a label above the name - rather than
+   nothing.
+
+   SELECTOR MUST CARRY .as-cs-v2. The family is (0,3,0). A
+   :root .as-cs-* selector at (0,2,0) loses silently against it - that
+   cost four attempts on .as-cs-solution before the cause was found.
+
+   MUST SIT AFTER THE max-width:767 BLOCK ABOVE. Equal specificity at
+   (0,3,0), so source order is the only thing deciding it. Unguarded
+   does not mean "wins" - a media query adds no specificity, and this
+   rule beats the block above only because it comes later in the file.
+
+   CANNOT REACH .as-casestudy__quote-source, which the project notes
+   flag as shared with the homepage band. __side is its parent, but
+   border and padding do not inherit and this rule names no
+   descendant, so the shared child is untouched at every width.
+
+   SECTION SPACING MEASURED AND NOT TAKEN: padding 64 -> 48 and grid
+   row-gap 32 -> 24 would give a further -40 (678 total). Deliberately
+   left, so the testimonial keeps more breathing room than the
+   sections around it - it is the one place on the page where a single
+   quote is meant to sit on its own.
+
+   SCOPE - pre-flighted all four:
+     terracotta    quote 206ch, Google link, LOCKED
+     ddr           quote 327ch, Google link, LOCKED
+     gypsy         quote  53ch, no link
+     austin-space  NO TESTIMONIAL SECTION AT ALL - this rule matches
+                   nothing there, which is correct, not a gap.
+   ================================================================== */
+:root .as-cs-v2 .as-cs-testimonial__side {
+  border-top: 0;
+  padding-top: 0;
+}
+
 /* Gypsy Pistoleros only. The band site is near-black, so both hero
    device cards are dark and the phone card vanishes into the desktop
    card where they overlap. A white ring separates them. It is invisible
@@ -9158,6 +10932,76 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   }
 }
 
+/* ==================================================================
+   "WHAT I INHERITED", MOBILE (<=600px)
+
+   SPACING ONLY. No copy was cut and no structure changed - the
+   section loses 56px at 390 (terracotta 1356 -> 1300) entirely from
+   two numbers that were never chosen for this width.
+
+   THE 56px ROW GAP IS A DESKTOP COLUMN GAP DOING VERTICAL DUTY.
+   __inner is a two-column grid (380px 1fr) with a gap SHORTHAND -
+   6rem at css:2415, stepped to 3.5rem by the max-width:1280 group at
+   css:4724 and again at max-width:960 at css:2601. Below 960 the
+   columns collapse to 1fr and that 56px stops being the space between
+   two columns and becomes the space between the intro block and the
+   three lists. Nobody picked 56 for that job; it is a horizontal
+   value the stack inherited. Halving it to 32 costs nothing, which is
+   the same mechanism already documented on .as-svc-bottom's 64px.
+
+   row-gap ONLY, DELIBERATELY. A gap shorthand here would also
+   overwrite the column gap. It happens to be inert below 960 (one
+   column), but writing the shorthand would mean the rule silently
+   depends on that, and the desktop 96px column gap above 1280 stays
+   untouched only because this rule never mentions it.
+
+   THE REST OF THE SECTION WAS EXAMINED AND LEFT ALONE. The three
+   groups are labelled lists of 4-5 short items at 8px spacing -
+   already tight, and the items ARE the evidence the section exists to
+   present. Compressing the list is compressing the argument.
+
+   MEASURED AND NOT TAKEN - THE SECOND INTRO PARAGRAPH. On terracotta
+   it summarises the three lists directly beneath it: "no site
+   hierarchy, no analytics, no structured approach to search" sits
+   immediately above groups headed Structure, Measurement and
+   Foundation containing those exact points. Removing it measured
+   1161, a further -139 and by far the largest item available here.
+   NOT TAKEN because the intro copy differs per case study and the
+   redundancy may be terracotta-only. If this is ever revisited, read
+   all four intros against all four sets of group headings before
+   cutting anything - the saving is real but the premise may not
+   generalise.
+
+   MEASURED AND REJECTED - group row-gap 24 -> 16, a further -16. Not
+   worth tightening an already-dense list for a sixth of what the
+   paragraph above would give.
+
+   MUST STAY AFTER THE min-width:481 BLOCK DIRECTLY ABOVE. That rule
+   is :root .as-cs-challenge with padding longhands, (0,2,0), exactly
+   the same weight as the padding here. Specificity settles nothing
+   and source order is the whole mechanism: move this block above it
+   and the section keeps 80/80 through the 481-600 overlap while
+   appearing to have been given 48. The __inner rule is not exposed
+   this way - it beats both gap shorthands at (0,1,0) on specificity.
+
+   WHAT CHANGES WHERE. Below 481 the section was on 64/64 from the
+   mobile token group at css:2637 (.as-cs-challenge IS in that group,
+   unlike .as-cs-stats), so this is -32 vertical there. Between 481
+   and 600 it was on 80/80 from the block above, so it is -64. The
+   -24 row gap applies across the whole range.
+   ================================================================== */
+@media (max-width: 600px) {
+
+  :root .as-cs-challenge {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  :root .as-cs-challenge__inner {
+    row-gap: 32px;
+  }
+}
+
 /* .as-cs-solution pulled out of the group above by Item 6 - ink band,
    locked to the .as-creds padding recipe (css:7202) instead of the
    shared 84/84. Must land AFTER the group rule above - equal
@@ -9192,7 +11036,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9225,7 +11069,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9256,7 +11100,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9283,7 +11127,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9314,7 +11158,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9345,7 +11189,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9376,7 +11220,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9484,13 +11328,48 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    compiles as LESS. Not the place to debut an untested pseudo-class.
    ================================================================== */
 @media (max-width: 480px) {
-:root .as-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
 :root .as-svc-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
 :root .as-hub-notsure:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
 :root .as-cs-hub-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
 :root .as-cs-page-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)),
 :root .as-proof:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)){
   padding-bottom: var(--as-clear-wave-mobile);
+  margin-bottom: 0;
+}
+}
+
+/* .as-cta SPLIT OUT OF THE LIST ABOVE, 5 August, and given 252px.
+
+   ABOUT WAS AT 45px OF CLEARANCE, against Home's 137. Not a collision -
+   the wave apex is 70px down, so nothing was drawn over - but About's
+   CTA content is taller AND its wave is Home's mirror, 0.38 -> 0.62,
+   which puts the high side exactly where the button is. Content bottom
+   sat 25px BELOW the band's top edge. 252 lands it on 137, level with
+   Home. Measured by forcing the value live: 160 -> 45, 200 -> 85,
+   240 -> 125, 252 -> 137, 260 -> 145.
+
+   WHY A SPLIT RATHER THAN EDITING THE VALUE IN PLACE. The declaration
+   above is var(--as-clear-wave-mobile), and that token has exactly one
+   consumer - this rule. Retuning the token to 252 would therefore have
+   moved .as-svc-cta, .as-hub-notsure, .as-cs-hub-cta, .as-cs-page-cta
+   and .as-proof by the same 92px, and those five are unmeasured: they
+   are banner-style CTAs sitting on --as-clear-wave-banner elsewhere and
+   nobody has taken a clearance reading on them. Splitting moves the one
+   component that was measured and leaves the token meaning what it says.
+
+   NO CASCADE QUESTION IS BEING ASKED HERE. Same query, same (0,5,0),
+   sited immediately after, and the two selector lists are now disjoint -
+   .as-cta cannot match both. That is deliberate: an override at equal
+   specificity would work, but only from a position later in the SAME
+   sheet, which is why an attempt to do it from a separately injected
+   stylesheet did not take. Splitting sidesteps the whole question.
+
+   Home is untouched by this and stays on the 92px rule at the foot of
+   the sheet - :not(.as-hero--home-footer) excludes it, because home's
+   strip is the only in-flow one and has its own -40px pull. */
+@media (max-width: 480px) {
+:root .as-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer)){
+  padding-bottom: 252px;
   margin-bottom: 0;
 }
 }
@@ -9557,7 +11436,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
   
@@ -9595,7 +11474,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9631,7 +11510,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9673,7 +11552,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -9704,7 +11583,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   left:0; right:0; bottom:0;
   width:100%; height:130px;
   border-top:0;
-  border-bottom:5px solid var(--liquorice);
+  border-bottom:5px solid var(--footer-seam);
   overflow:hidden;
   background:transparent;
 }
@@ -10266,6 +12145,22 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    .header-actions .header-actions-action--cta .btn (0,3,0).
    NOT scoped to .as-allsorts: policy pages lack that class
    and share the same global header.
+
+   FILL MOVED TO --candy-pink-aa FOR WCAG AA. This rule already
+   existed and already carried !important, so pointing it at the
+   AA token adds no new brittleness - it is a value change, not a
+   specificity escalation. Do NOT reach for the longer
+   html body .header ... .btn--border.theme-btn--primary-inverse
+   .sqs-button-element--primary chain if this turns out not to
+   win: that selector breaks the moment Squarespace renames a
+   wrapper class.
+
+   THE AUTHORITATIVE FIX FOR THIS BUTTON IS NOT IN THIS FILE.
+   The native fill comes from the Squarespace site colour theme,
+   in a cross-origin generated stylesheet. Change the button
+   colour to #ec4d97 in the Squarespace admin. Until that is
+   done, treat the header CTA as UNVERIFIED at AA regardless of
+   what this rule computes to.
    ============================================================ */
 .header .header-actions .header-actions-action--cta a.btn,
 .header .header-menu-cta a.btn {
@@ -10281,7 +12176,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   text-decoration: none;
   border-radius: 999px;
   border: 2px solid var(--border-strong) !important;
-  background-color: var(--candy-pink) !important;
+  background-color: var(--candy-pink-aa) !important;
   color: #ffffff !important;
   box-shadow: var(--pop-md);
   transition: transform .12s cubic-bezier(.22, 1, .36, 1),
@@ -10326,7 +12221,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    else moves on hover. */
 .header .header-actions .header-actions-action--cta a.btn:hover,
 .header .header-menu-cta a.btn:hover {
-  background-color: var(--candy-pink) !important;
+  background-color: var(--candy-pink-aa) !important;
   color: #ffffff !important;
   border-color: var(--border-strong) !important;
   transform: translate(-1px, -1px) !important;
@@ -10345,6 +12240,82 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 .header .header-menu-cta a.btn:active {
   transform: translate(var(--press-shift), var(--press-shift)) !important;
   box-shadow: 0 0 0 0 var(--ink-900) !important;
+}
+
+/* ============================================================
+   MOBILE OVERLAY NAV - ITEM SIZE
+
+   SQUARESPACE'S OWN COMPONENT, NOT OURS. The overlay items are
+   .header-menu-nav-item a, styled from site.css, currently
+   computing 33.15px DM Mono. Verified live. !important is
+   REQUIRED: this is not our stylesheet's cascade, and there is no
+   selector we can write that beats a Squarespace rule without it -
+   raising specificity only wins against rules we can see, and
+   site.css loads after the Custom CSS panel.
+
+   33.15px -> 26px. Measured alongside 22 and 20. 26 keeps the link
+   box at 26px, which with the existing line-height stays a usable
+   tap target; 20 and 22 were rejected as needing added padding to
+   get the target back near 44px, which this rule deliberately does
+   not do. Note the 26px box is the LINK, not the row - the row
+   spacing Squarespace already applies is what carries the rest of
+   the target, so anything that tightens overlay row spacing later
+   has to revisit this number.
+
+   THE GET IN TOUCH BUTTON MUST NOT BE CAUGHT, AND CANNOT BE. It is
+   16px DM Sans and correct as it stands. Two independent reasons it
+   is safe:
+     1. It sits in .header-menu-cta, a sibling of the nav items, so
+        .header-menu-nav-item a should not reach it at all.
+     2. Even if it did, css:11742 sets its font-size at
+        .header .header-menu-cta a.btn - (0,3,1) !important against
+        this rule's (0,1,1) !important. Higher specificity wins
+        between two !important declarations, so 16px holds
+        regardless of source order. Reason 2 is provable from this
+        sheet; reason 1 is the DOM claim and is the one that has
+        never been read here.
+
+   THE FOLDER BACK LINK IS THE OPEN QUESTION - READ IT LIVE. This
+   site has TWO folder drawers in the overlay (recorded in
+   docs/superseded/baseline-v4-handoff.md:311, "two
+   div.header-menu-nav-folder drawers parked one viewport right"),
+   so a Back control exists and is reachable. In Squarespace 7.1 the
+   back control is commonly emitted as
+   <div class="header-menu-controls container header-menu-nav-item">
+   wrapping an <a class="header-menu-controls-control">, which this
+   selector WOULD match and resize to 26px. That is markup memory,
+   not a reading of this site, and nothing in this repo records the
+   overlay's internal DOM. Confirm before treating this rule as
+   closed. If the Back link is caught, decide rather than assume:
+   26px may well be the wanted size for it, but it is an unintended
+   reach either way and belongs in a :not() or a tighter selector if
+   it is not.
+
+   NO MEDIA GUARD, DELIBERATELY. .header-menu-nav-item only exists
+   inside .header-menu, which Squarespace opens from the burger; the
+   site runs a real desktop nav (.header-nav-folder-content is
+   styled at css:298), so the overlay is burger-only and the markup
+   is display:none at desktop. A max-width guard would be inert
+   rather than protective. The one thing that would break that: if
+   the header is ever reconfigured in Site Styles to show the burger
+   at desktop, this rule follows it up there unguarded.
+
+   33.15px IS SQUARESPACE-GENERATED, NOT A LITERAL IN THIS SHEET -
+   grep confirms nothing here sets it. If a Mobile Navigation slot
+   exists under Design > Site Styles > Assign Styles, changing it
+   there is the cleaner fix and this whole rule can be retired.
+   Worth checking before the override is treated as permanent. The
+   variable behind it could not be named from this repo; read it off
+   the live document to make the Site Styles route findable:
+     getComputedStyle(document.querySelector('.header-menu-nav-item a')).fontSize
+     [...document.styleSheets].flatMap(s => { try { return [...s.cssRules] } catch(e) { return [] } })
+       .filter(r => r.selectorText?.includes('header-menu-nav-item'))
+       .map(r => [r.parentStyleSheet.href, r.cssText])
+   The second line names the file and rule that owns the 33.15px; if
+   its value is a var(), record the custom property name here.
+   ============================================================ */
+.header-menu-nav-item a {
+  font-size: 26px !important;
 }
 
 /* ============================================================
@@ -11313,7 +13284,38 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 
    BOTH tokens move together. The negative cannot be derived from
    the positive, so overriding one without the other silently
-   misaligns the rail. 1.2rem pairs with -19.2px. */
+   misaligns the rail. 1.2rem pairs with -19.2px.
+
+   ==================================================================
+   THE BLEED TOKENS ASSUME A 32px HOST GUTTER AT 481-600. READ THIS
+   BEFORE ADDING .as-rail TO ANY SECTION.
+
+   The block above sets --as-rail-bleed to var(--as-space-section-side)
+   = 32px, and this block only drops it to 19.2 BELOW 480. That is
+   correct for a host that also carries 32px sides between 481 and 600
+   - which is what every section had when the rail was written.
+
+   Give a section 19.2px sides across the WHOLE of <=600 and then rail
+   it, and the two disagree in that 120px band: the scroll container
+   takes -32px margins against a 19.2px gutter and bleeds 12.8px past
+   the viewport on EACH SIDE. That is horizontal page scroll, and it
+   is INVISIBLE AT 390 - the usual test width is below 480, where the
+   tokens happen to line up again. It will only show between 481 and
+   600.
+
+   SAFE BY COINCIDENCE, NOT BY DESIGN. Every existing rail host sits
+   at 32px in that band, so nothing is broken today. That is a
+   property of the token matching the old section padding, not a
+   guarantee the rail makes. .as-cs-results is the first exception -
+   it carries 19.2px across all of <=600 - and it pins both tokens
+   locally at css:10010.
+
+   IF THE <=600 GUTTER TREATMENT SPREADS, SWEEP THESE TOKENS RATHER
+   THAN PINNING PER RAIL. Two or three local overrides is the signal
+   that the token itself is wrong, not the hosts. The fix at that
+   point is to make the 481-600 bleed 19.2 here and delete the local
+   pins - one place, not one per component.
+   ================================================================== */
 @media (max-width: 480px) {
   :root .as-rail {
     --as-rail-bleed: var(--as-space-section-side-mobile);
@@ -11326,6 +13328,48 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
     transition: none;
   }
 }
+
+/* ==================================================================
+   .as-rail-counter - "01 / 09" position readout under a rail
+
+   Injected as a SIBLING immediately after each .as-rail by the
+   counter script in header code injection (added directly below the
+   .as-rail-end script there). Not a child, so it never becomes a
+   flex item and never picks up the 83% flex-basis at css:13106.
+
+   NO MEDIA GUARD, AND IT DOES NOT NEED ONE. The script sets
+   .is-scrollable only when scrollWidth exceeds clientWidth, which is
+   true only while .as-rail is an overflow-x scroller - and that is
+   the <=600 block above. Above 600 the host is a grid again, nothing
+   overflows, the class comes off and the counter returns to
+   display: none. It self-guards on measurement rather than on a
+   breakpoint, so it stays correct if a rail is ever given a
+   different breakpoint.
+
+   HIDDEN COUNTERS COST NOTHING IN LAYOUT. display: none removes the
+   element before box generation, so it does not become a stray grid
+   or flex item in the host section while inactive. That matters on
+   home's .as-pos-cards, which carries .as-rail in the markup but
+   never actually scrolls (its host rule wins at (0,3,0) over
+   :root .as-rail at (0,2,0) - see the note at css:2016), so that one
+   gets a counter element that stays hidden permanently. Harmless,
+   but do not read its presence in the DOM as a bug.
+
+   The font is written out rather than taking var(--font-mono). It is
+   the same family, but drops the ui-monospace / SFMono-Regular
+   fallbacks the token carries at css:5667. Left as supplied.
+   ================================================================== */
+.as-rail-counter {
+  display: none;
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #6b6b72;
+  margin-top: 14px;
+  text-align: center;
+}
+.as-rail-counter b { color: #101014; font-weight: 500; }
+.as-rail.is-scrollable + .as-rail-counter { display: block; }
 
 /* ==================================================================
    CTA STANDARDISATION, MOBILE (<=600px)
@@ -11612,4 +13656,525 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   :root .as-proof__marks   { align-items: flex-start; }
   :root .as-proof__google  { justify-content: flex-start; }
 
+}
+
+
+/* ==================================================================
+   MOBILE BAND HEIGHTS - one rule, every band, added 2026-08-05
+
+   Below the knee every cosmos band takes the top hero's 2 / 1 box.
+   52 bands over 13 pages: the 13 top heroes are already 2 / 1 and do
+   not move, the 26 mid bands come up from 4 / 1, and the 13 footer
+   strips come off their fixed 130px. At 375 that is 180px of artwork
+   in all four bands on the homepage - the hero and the footer strip
+   still measure 185px outside, because each keeps its own 5px rule
+   (border-top under the header, border-bottom above the footer).
+   Those borders are the design, not padding to be reclaimed.
+
+   NOTHING ELSE CHANGES, AND THAT IS THE POINT. Every mobile clip path
+   sweeps 0.38 -> 0.62 in objectBoundingBox units and .as-hero__stroke
+   -narrow spans 0.39 -> 0.63 in a 0 0 100 100 viewBox with
+   preserveAspectRatio="none" and vector-effect="non-scaling-stroke".
+   Both are proportional, so they stretch with the taller box and stay
+   registered to each other, and the stroke holds its 5px weight. The
+   wave depth actually HARMONISES: it was 43px on the hero, 21.6 on
+   the mids and 31.2 on the footer strips, and is now 43 throughout.
+   That is why this reads as intended rather than as a stretch. Do not
+   "correct" a clip path or a stroke path to suit this rule.
+   object-position is untouched - retuning the slices is a separate
+   pass, and doing it here would confound the two.
+
+   .as-hero.as-hero IS DOUBLED ON PURPOSE - (0,2,0), not (0,1,0). It
+   has to clear two tiers:
+
+       .as-hero--home-high-mid                  (0,1,0)  css:4951
+       .as-hero--home-footer  height: 130px     (0,1,0)  css:4960
+       :root .as-hero--home-high-mid            (0,2,0)  css:739
+
+   Specificity settles the first two at any position. It TIES the
+   third, so this block has to sit after the 600px hero query that
+   ends at css:1121 - which is what siting it at the end of the sheet
+   buys. Do not simplify the selector to a single .as-hero, and do not
+   reach for !important: the tie is resolved by position, exactly as
+   the sitewide stroke swap at css:687 already resolves its own.
+
+   height: auto IS LOAD-BEARING. The footer strips are absolutely
+   positioned with a hard height: 130px (css:10662 and its twelve
+   siblings). aspect-ratio does not override a used height, so without
+   this line the 13 footer bands would ignore the rule entirely while
+   the 26 mid bands moved - a half-applied change that would read as a
+   footer bug. left: 0 / right: 0 give those boxes their width, so
+   auto height resolves against the ratio the same as the in-flow
+   bands do.
+
+   639, NOT 640. The knee is 640 - probed at 375/480/600/640/700/768/
+   900/1024 - so the query has to stop one pixel short of it. Desktop
+   geometry at 640 and above is untouched.
+
+   601-639 IS A MIXED WINDOW, and it is fine. Every other mobile hero
+   treatment in this sheet stops at 600, so in that 39px band the boxes
+   are 2 / 1 while the DESKTOP clip paths and the wide stroke are still
+   the ones in force. Checked rather than assumed: all 110 clipPaths in
+   the footer injection are clipPathUnits="objectBoundingBox", and every
+   .as-hero__stroke is viewBox="0 0 100 100" preserveAspectRatio="none".
+   Desktop and mobile art are both proportional, so whichever pair is
+   live stretches together and stays registered. Nothing here needs a
+   600px twin.
+
+   Mobile pages get longer, by design: +140 on the four single-mid
+   pages, +230 on the five two-mid pages, +320 on the four three-mid
+   pages. Placeholder colours / LQIP must be generated AFTER this
+   lands, because it changes the mobile crop for 39 of the 52 bands.
+   ================================================================== */
+@media (max-width: 639px) {
+
+  .as-hero.as-hero {
+    aspect-ratio: 2 / 1;
+    height: auto;
+  }
+
+}
+
+
+/* ==================================================================
+   FINAL CTA - BREATHING ROOM ABOVE THE FOOTER WAVE, added 2026-08-05
+   MOBILE ONLY. This block shipped with a desktop half as well; that
+   half was a regression and is gone. See the revert note below before
+   adding anything above 480 back.
+
+   THE COMPLAINT WAS MOBILE: the Home CTA button sat too close to the
+   cosmos strip at 375. 64px of padding read 109px of effective
+   clearance; 92px reads 137px, level with About.
+
+   EFFECTIVE CLEARANCE IS NOT THE PADDING. It is the gap to the band's
+   box PLUS the dead space above the wave inside it. The measure is the
+   button's bottom edge to the nearest artwork pixel beneath it, sampled
+   across the button's whole x-span against the clip's edge curve - and
+   on Home the button sits at x 0.05-0.60, directly under the deepest
+   part of a wave that runs 0.62 -> 0.38. That buys about 45px of empty
+   band on top of whatever the padding is, which is why the padding and
+   the clearance are not the same number. Measured live, 1:1 with
+   padding:
+
+       64 (pre-change)  109        92  ->  137
+       96               141       120  ->  165
+
+   92, NOT 96. This sheet has no 8px grid to hold - 19.2, 25.6, 41.6 and
+   22.32 are all live values - so there is no reason to trade the exact
+   figure for a rounder one. 92 lands on 137, which is also exactly where
+   About lands via the split-out rule at css:11039. Parity is the point.
+
+   ABOUT AT <=480 DOES NOT TAKE THIS RULE and is not meant to.
+   .as-cta:has(~ .as-hero[class*="-footer"]:not(.as-hero--home-footer))
+   at css:11039 is (0,5,0) and beats this (0,2,0) at any position - the
+   exact trap the note at the foot of that block describes. It gives
+   About 252px, which lands on the same 137. Do not raise the
+   specificity here to "fix" it; the two rules are a matched pair.
+
+   THE SERVICE AND CASE-STUDY PAGES ARE OUT OF SCOPE. .as-cta is on home
+   and About only; their final CTAs are .as-svc-cta, .as-cs-page-cta,
+   .as-hub-notsure and .as-cs-hub-cta, which take
+   --as-clear-wave-banner (128px) or --as-clear-wave (224px) and are
+   unmeasured for this. Widening the selector list would be inventing
+   numbers.
+   ================================================================== */
+/* DESKTOP HALF REVERTED 6 August. It read:
+
+       @media (min-width: 640px) { .as-cta.as-cta { padding-bottom: 280px } }
+
+   and it was a regression, not a fix. Nobody asked for it - the
+   complaint was mobile. It was added because 224px measured 94px of
+   clearance on Home at 1440 and 94 looked tight in isolation. It was
+   not tight; it was the site's desktop standard, and the sibling
+   components were never checked before a shared value moved. Measured
+   at 1440 with the rule live:
+
+       /                 .as-cta          280   ->  171 clear
+       /about            .as-cta          280   ->  153 clear
+       /contact          .as-proof        224   ->   96 clear
+       /services/view-all             .as-hub-notsure  128  ->  64
+       /services/squarespace-custom-build  .as-svc-cta 128  ->  64
+       /services/squarespace-site-refresh  .as-svc-cta 128  ->  63
+
+   Desktop ran a coherent TWO-TIER system - 224 on the three bare CTAs,
+   128 on the banner CTAs. The rule made it three tiers with the two
+   most-visited pages as the outliers. Deleting it, rather than editing
+   280 back to 224, is the tidier revert: with the rule gone .as-cta
+   falls through to :root .as-cta { padding-bottom: var(--as-clear-wave) }
+   at css:7484, which is the 224px that was always there and covers the
+   whole 481-and-up range in one place. Expected back at 1440: 224px
+   resolved on both / and /about, clearance 115 and 97 - within ~20px of
+   /contact's 96. NOT yet re-measured live after the delete; the two
+   figures are the pre-regression readings. Mobile untouched at 92 on
+   home and 252 on About, both still landing on 137.
+
+   THE LESSON, RECORDED BECAUSE IT WILL RECUR: before changing a value
+   on a component shared across pages, measure the same property on
+   every sibling component - not just the page in front of you. A value
+   that looks wrong in isolation may be the convention. This sheet's own
+   note at css:11020 makes exactly that argument about not retuning
+   --as-clear-wave-mobile under five unmeasured components; the same
+   caution applies to the number being changed, not only the ones
+   nearby. */
+@media (max-width: 480px) {
+
+  .as-cta.as-cta { padding-bottom: 92px; }
+
+}
+
+/* ==================================================================
+   BANNER-CTA BOTTOM CLEARANCE, DESKTOP ONLY - 6 August 2026
+   Follow-on to the .as-cta revert above (build 20260806-e04772).
+
+   Charles flagged five pages as having "a gap above" the final CTA
+   and called the other eight fine. The split maps exactly onto
+   desktop padding-bottom, no misclassifications:
+
+       224  .as-cta          /, /about                  great
+       224  .as-proof        /contact                   great
+       224  .as-cs-page-cta  4 case-study children      great
+       128  .as-svc-cta      4 service pages            FLAGGED
+       128  .as-hub-notsure  /services/view-all         FLAGGED
+       128  .as-cs-hub-cta   /case-studies/view-all     FLAGGED
+
+   padding-top is 80px on all thirteen (112 on /contact), so the gap
+   ABOVE really is identical everywhere. What reads as a top gap is
+   the block sitting bottom-tight: these five are short centred
+   single-column banners with only 64px of clearance below, so a
+   fixed 80px above dominates. The fix belongs on the bottom.
+
+   160px, NOT 224px. Matching the good pages' padding NUMBER
+   overshoots - their footer bands have different clip geometry and
+   sit lower in the band, so the padding does not transfer. Match the
+   measured CLEARANCE instead. On the flagged pages:
+
+       128 (was)  ->  64 clear
+       160        ->  96 clear   <- lands on the site standard
+       168        -> 104
+       176        -> 112
+       224        -> 160 clear   <- overshoots
+
+   Measured on the pages Charles called great: /contact 96,
+   terracotta 96, /about 97, / 115. So 96 is the desktop standard and
+   / at 115 is the outlier among the good pages, not the target.
+   160px lands all five flagged pages on exactly 96, verified
+   individually at 1440 (custom-build, one-page-website,
+   squarespace-support-retainer, services/view-all,
+   case-studies/view-all).
+
+   This is the previous mistake avoided, per the LESSON note above.
+
+   WHY A RULE AND NOT THE TOKEN. These three do share a token -
+   --as-clear-wave-banner at css:5508, and it has exactly one consumer
+   (css:7860), so retuning it looked like the tidier move. It is not:
+   that consumer sits in @media (min-width: 481px), so moving the
+   token would also shift the 481-639 band, which was never measured
+   for this. The brief scoped the change to 640-and-up. Left the token
+   at 128px and scoped the override instead. If the 481-639 band is
+   ever measured and wants 160 too, collapsing this back onto the
+   token is the right cleanup.
+
+   SPECIFICITY. .as-svc-cta.as-svc-cta is (0,2,0) - exactly equal to
+   :root .as-svc-cta at css:7856, not above it. This block wins on
+   SOURCE ORDER alone. Do not move it above css:7862, and do not
+   assume the doubled class is buying headroom; it matches the house
+   convention on the other CTA rules and nothing more.
+
+   Mobile is deliberately untouched. Measured at 375: / 137,
+   /about 137, /contact 123, custom-build 128, case-studies/view-all
+   127, terracotta 127. Not flagged, already consistent. The
+   min-width guard is what keeps it that way - do not widen it, and
+   do not reach for --as-clear-wave-mobile or the <=480 rules.
+   ================================================================== */
+@media (min-width: 640px) {
+
+  .as-svc-cta.as-svc-cta,
+  .as-hub-notsure.as-hub-notsure,
+  .as-cs-hub-cta.as-cs-hub-cta { padding-bottom: 160px; }
+
+}
+
+
+/* ==================================================================
+   HERO CTA ABOVE THE MOBILE FOLD, added 2026-08-07. MOBILE ONLY.
+
+   THE COMPLAINT. On six pages the primary hero button landed below
+   the first screenful on a phone. Measured live at a TRUE 390 width
+   (same-origin iframe rig on www.austinspace.co.uk - Squarespace
+   sends X-Frame-Options, so a standalone iframe of the live site is
+   blocked; the rig injects the 390 iframe FROM the live origin).
+   Fold reference 740px, a conservative first screenful for a 390
+   phone with browser chrome. Button top/bottom against it:
+
+       one-page        655-713   primary ok, secondary straddles
+       custom build    788-846   48 below
+       site refresh    759-817   19 below
+       ongoing support 774-832   34 below, H1 wraps to 4 lines
+       gypsy           794-852   54 below, intro runs to 9 lines
+       ddr             732-790   straddles
+
+   Every hero is the same shape: a ~188px cosmos band, then a flex
+   column (.as-*-hero__left, gap 32) of eyebrow -> H1 -> intro ->
+   button. The H1 is 41.6/43.68 below the knee and wraps to 3-4
+   lines. That, not the artwork, is what pushes the button down.
+
+   TWO LEVERS, and only two. Halve the column gap 32 -> 16, and take
+   the H1 to 32px. Case studies need a third - the intro to 16px -
+   because their copy is roughly twice the length of a service
+   page's. Verified by patching these exact rules into the frame and
+   re-measuring. Primary button bottom after:
+
+       one-page        645   secondary also clears, at 722
+       custom build    735   H1 3 -> 2 lines
+       site refresh    740   TIGHTEST, H1 stays 3 lines
+       ongoing support 677   H1 4 -> 2 lines, both buttons clear
+       gypsy           682   intro tightened
+       ddr             660
+
+   REFRESH AND CUSTOM BUILD ARE ON THE LINE at 735-740. If a shorter
+   first paint ever clips them the next lever is row-gap 16 -> 14, or
+   one line off the intro copy - NOT a smaller H1, which is already
+   as far down as the display face reads at this weight.
+
+   THE SECONDARY "All services" LINK still sits at or just below the
+   fold on the 3-line service pages. Left alone deliberately: the
+   primary is the real CTA. If it must clear too, the move is laying
+   the two buttons side by side on mobile, which buys a whole button
+   height - a layout change, not a number, so it is not in here.
+
+   SCOPING - WHY THESE HOOKS AND NOT THE PAGE MODIFIER. The
+   .as-hero--{page} modifier lives on the ARTWORK BAND, which is a
+   separate fluid-engine section from the copy and is neither an
+   ancestor nor an adjacent sibling of it. It cannot reach the
+   headline. What can:
+
+     - Service pages have NO per-page wrapper class. .as-svc-hero
+       itself is the hook, and it is unique to the four service
+       detail pages - one-page, custom build, refresh, support.
+       Confirmed by grep: .as-svc-hero__left appears in exactly those
+       four files. The services hub (/services/view-all) uses
+       .as-hub-hero, so a global .as-svc-hero__* rule here hits the
+       four that need it and nothing that is already approved.
+     - Case studies DO carry a page class on the content wrapper, so
+       these are scoped to .as-cs-ddr and .as-cs-gp ONLY. Terracotta
+       (.as-cs-terracotta) is approved as it stands, and AUSTIN_SPACE
+       carries .as-cs-v2 and NOTHING ELSE - so do not be tempted to
+       scope any of this on .as-cs-v2, which is the shared wrapper on
+       all four and would drag both approved pages in with it.
+
+   639 AND NOT 600, which is the knee the rest of the hero copy uses
+   (the H1 normalisation block at css:9463, the run-in padding beside
+   it). 639 matches the ARTWORK band instead - .as-hero goes 2 / 1 at
+   css:13493 - so the whole hero switches to its phone presentation
+   on one boundary. The cost is that 601-639 gets a 32px H1 it was
+   never measured at. That is accepted rather than overlooked: the
+   fold problem does not exist at those widths (a 620-wide viewport
+   is a tablet, far taller than 740), so the band is a cosmetic
+   question, not a functional one. Moving this block to 600 is a
+   one-line change if the tablet rendering is ever disliked.
+
+   NO line-height ON THE HEADLINES. --lh-tight is already 1.05
+   (css:5524) and both headline groups read it - :root
+   .as-svc-hero__headline at css:7886, :root .as-cs-hero__headline at
+   css:9371. The measured 41.6/43.68 IS that token. Restating 1.05
+   here would silently decouple these two H1s from it. The 1.45 on
+   the case-study intro is a genuine change, off the base 1.60.
+
+   NO !important, despite the browser patch this came from using it.
+   That was a way to win against a live sheet from devtools; in the
+   sheet itself, specificity and source order do the job:
+
+     - :root .as-svc-hero__left        (0,2,0) beats the base (0,1,0).
+     - :root .as-svc-hero__headline    (0,2,0) TIES the clamp at
+       css:7900 and the 41.6px rule at css:9464. It wins on SOURCE
+       ORDER ALONE. Do not move this block above either of them.
+     - the three case-study pairs are (0,3,0) and win outright.
+
+   row-gap, NOT gap: the base rules set the shorthand, and the
+   cross-axis half of it is inert in a single-column flex. Naming the
+   axis says which one is load bearing.
+   ================================================================== */
+@media (max-width: 639px) {
+
+  /* Service detail pages - one-page, custom build, refresh, support. */
+  :root .as-svc-hero__left { row-gap: 16px; }
+  :root .as-svc-hero__headline { font-size: 32px; }
+
+  /* Case studies - DDR and Gypsy Pistoleros ONLY. */
+  :root .as-cs-ddr .as-cs-hero__left,
+  :root .as-cs-gp .as-cs-hero__left { row-gap: 16px; }
+
+  :root .as-cs-ddr .as-cs-hero__headline,
+  :root .as-cs-gp .as-cs-hero__headline { font-size: 32px; }
+
+  :root .as-cs-ddr .as-cs-hero__desc,
+  :root .as-cs-gp .as-cs-hero__desc { font-size: 16px; line-height: 1.45; }
+
+}
+
+
+/* ==================================================================
+   HOMEPAGE PROOF BAND - .as-home-proof
+
+   Three Google reviews shown in full, directly below the featured
+   case study band and directly above .as-cta.
+
+   THIS SECTION IS LOAD BEARING FOR THE PAGE'S STRUCTURED DATA.
+   The homepage JSON-LD (json/home.json) carries aggregateRating plus
+   three Review objects, and Google requires the review content it
+   marks up to be visible on the page carrying the markup. These three
+   quotes ARE that visible content. If a quote is removed or shortened
+   here, the matching reviewBody in json/home.json has to change with
+   it, or the page starts asserting review text no visitor can see.
+
+   BACKGROUND. --liquorice, the same literal token .as-casestudy reads
+   at css:7158, chosen so the two bands merge into one dark proof run
+   rather than showing a seam between two near-identical darks.
+
+   PADDING. Top is --as-pad-band (80px) against the case study band's
+   own --as-pad-ink (72px) bottom, giving the 152px two-sided ink-band
+   gap already documented at css:11856. That is the house rhythm, not a
+   new value, and it means this band still spaces itself correctly if
+   the case study above it is ever moved or removed.
+
+   Breakpoint structure mirrors .as-casestudy exactly: desktop padding
+   guarded at min-width 481, mobile padding at max-width 600. The
+   481-600 overlap resolves to the mobile block on source order, which
+   is why this block sits below the min-width 481 one.
+   ================================================================== */
+:root .as-home-proof {
+  background: var(--liquorice);
+  color: #ffffff;
+}
+
+/* as-cs-section-headline defaults to --as-black for light sections;
+   override to white here so it is legible on the dark band. Same
+   treatment as the testimonial header at css:10637. */
+:root .as-home-proof .as-cs-section-headline {
+  color: #ffffff;
+}
+
+:root .as-home-proof__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 56px;
+}
+
+:root .as-home-proof__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+:root .as-home-proof__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+}
+
+/* Press quote mark above each quote, same idiom as
+   .as-cs-v2 .as-cs-testimonial__mark-open at css:10649.
+   Colours walk the locked allsorts rotation, taking the luminous -lt
+   variants because the surface is dark. There is no --tangerine-lt
+   token, so slot 3 uses --tangerine itself - bright enough on
+   --liquorice, and inventing a token for one use would be worse. */
+:root .as-home-proof__mark {
+  display: block;
+  font-size: 40px;
+  line-height: 0.6;
+  margin: 0 0 18px;
+}
+:root .as-home-proof__item:nth-child(1) .as-home-proof__mark { color: var(--candy-pink-lt); }
+:root .as-home-proof__item:nth-child(2) .as-home-proof__mark { color: var(--bead-blue-lt); }
+:root .as-home-proof__item:nth-child(3) .as-home-proof__mark { color: var(--tangerine); }
+
+:root .as-home-proof__quote {
+  font-family: "DM Serif Display", Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.55;
+  color: #ffffff;
+  text-align: left;
+  margin: 0 0 24px;
+}
+
+/* rgba(255,255,255,0.16), matching the card divider on
+   .as-svc-proof__link at css:2193. This is a permanent card rule at
+   every width, NOT a mobile stack divider, so the 0.12 stack-divider
+   constant does not apply here. */
+:root .as-home-proof__attr {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  border-top: 2px solid rgba(255, 255, 255, 0.16);
+  padding-top: 20px;
+  width: 100%;
+}
+
+:root .as-home-proof__name {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+:root .as-home-proof__role {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  line-height: 1.5;
+}
+
+/* Pinned to its resting colour on both states, same decision and same
+   literal as the proof-band review link at css:2218 - no hover shift
+   inside a proof band. */
+:root .as-home-proof__source,
+:root .as-home-proof__source:hover {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  transition: none;
+  margin-top: 10px;
+}
+
+@media (min-width: 481px) {
+  :root .as-home-proof {
+    padding-top: var(--as-pad-band);
+    padding-bottom: var(--as-pad-ink);
+    padding-left: var(--as-pad-side);
+    padding-right: var(--as-pad-side);
+  }
+}
+
+/* Three columns stop working before the tablet range ends. At 961px the
+   content box is 897px and each column lands at 272px, which is the
+   floor for a quote this long; below that they go single column rather
+   than 2 + 1, which would orphan the third. */
+@media (max-width: 960px) {
+  :root .as-home-proof__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root .as-home-proof {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    padding-left: 19.2px;
+    padding-right: 19.2px;
+  }
+  :root .as-home-proof__header { margin-bottom: 32px; }
+  :root .as-home-proof__quote { font-size: 17px; }
 }

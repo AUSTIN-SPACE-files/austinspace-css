@@ -30,9 +30,7 @@
       "name": "Custom Squarespace Website Design",
       "description": "A custom Squarespace website built end-to-end. Covers strategy, design, mobile-first development, SEO foundation, content migration, and launch. Four-week typical timeline. Thirty days of post-launch support included. Built by one person from the discovery conversation through to handover. Built on Squarespace Core, paid to Squarespace directly. Starting at £2,500.",
       "provider": {
-        "@type": "LocalBusiness",
-        "name": "AUSTIN_SPACE",
-        "url": "https://www.austinspace.co.uk"
+        "@id": "https://www.austinspace.co.uk/#business"
       },
       "areaServed": "United Kingdom",
       "offers": {
@@ -55,7 +53,7 @@
           "name": "Why build on Squarespace rather than another platform?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Squarespace's native tools are powerful, well-maintained, and remove the overhead of plugins, security scans, and constant updates. Built properly from the ground up, it's a streamlined, professional platform that's easy to manage long-term."
+            "text": "Squarespace's native tools are powerful, well-maintained, and remove the overhead of plugins, security scans, and constant updates. Built from the ground up, it's a streamlined, professional platform that's easy to manage long-term."
           }
         },
         {
@@ -115,6 +113,34 @@
           }
         }
       ]
+    },
+    {
+      "@id": "https://www.austinspace.co.uk/#business",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "reviewCount": "3"
+      },
+      "review": {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Charlie Crocker MRICS",
+          "jobTitle": "Director",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Terracotta Property"
+          }
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Charles is a great guy and a pleasure to work with. We receive detailed updates, he delivers on time and makes great recommendations. He has become an asset to our organisation. It's a 10 out of 10 from us.",
+        "url": "https://maps.app.goo.gl/DiL3qV9RftvfoZxa7"
+      }
     }
   ]
 }

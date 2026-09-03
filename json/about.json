@@ -23,11 +23,7 @@
       "@type": "Person",
       "name": "Charles Austin",
       "jobTitle": "Web Design Consultant",
-      "worksFor": {
-        "@type": "LocalBusiness",
-        "name": "AUSTIN_SPACE",
-        "url": "https://www.austinspace.co.uk"
-      },
+      "worksFor": { "@id": "https://www.austinspace.co.uk/#business" },
       "url": "https://www.austinspace.co.uk/about",
       "description": "Solo Squarespace designer based in Worcester, UK, working with clients nationwide. Squarespace Silver Partner with ten years of experience across BSI Merch (Shopify, proprietary CMS, 200+ ecommerce stores, platforms handling tens of thousands of concurrent users) and magic42 (Magento agency project management). Now offering end-to-end Squarespace builds, focused refreshes, and ongoing support retainers for UK SMEs.",
       "address": {
@@ -68,7 +64,7 @@
           "name": "What does working with you actually look like day to day?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Straightforward. You deal with one person from the first conversation through to launch, and through to the retainer that often follows. No handoffs, no briefing chains. The site that ships reflects an actual understanding of the business, rather than a brief passed between departments and gradually misinterpreted along the way."
+            "text": "Straightforward. You deal with one person from the first conversation through to launch, and through to the retainer that often follows. No handoffs, no briefing chains. The site that ships reflects an actual understanding of the business."
           }
         },
         {
