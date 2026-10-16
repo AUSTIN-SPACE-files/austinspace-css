@@ -1550,9 +1550,9 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 }
 @media (max-width:639px){:root .as-svc-hero__left{row-gap:16px}
 :root .as-svc-hero__headline{font-size:32px}
-:root .as-cs-ddr .as-cs-hero__left,:root .as-cs-gp .as-cs-hero__left{row-gap:16px}
-:root .as-cs-ddr .as-cs-hero__headline,:root .as-cs-gp .as-cs-hero__headline{font-size:32px}
-:root .as-cs-ddr .as-cs-hero__desc,:root .as-cs-gp .as-cs-hero__desc{font-size:16px;line-height:1.45}
+:root .as-cs-ddr .as-cs-hero__left,:root .as-cs-gp .as-cs-hero__left,:root .as-cs-priya .as-cs-hero__left{row-gap:16px}
+:root .as-cs-ddr .as-cs-hero__headline,:root .as-cs-gp .as-cs-hero__headline,:root .as-cs-priya .as-cs-hero__headline{font-size:32px}
+:root .as-cs-ddr .as-cs-hero__desc,:root .as-cs-gp .as-cs-hero__desc,:root .as-cs-priya .as-cs-hero__desc{font-size:16px;line-height:1.45}
 }
 :root .as-home-proof{background:var(--liquorice);color:#ffffff}
 :root .as-home-proof .as-cs-section-headline{color:#ffffff}
@@ -1576,4 +1576,4 @@ a.cky-banner-element.as-cookie__btn:hover{background:var(--as-black) !important;
 :root .as-home-proof__header{margin-bottom:32px}
 :root .as-home-proof__quote{font-size:17px}
 }
-.as-build-canary{--as-build-id:"20260818-e903df"}
+.as-build-canary{--as-build-id:"20261016-db96e4"}

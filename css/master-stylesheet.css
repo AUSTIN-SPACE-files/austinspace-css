@@ -8785,7 +8785,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
 :root .as-cs-row:nth-child(1) .as-cs-row__number i { color: var(--candy-pink-lt); }
 :root .as-cs-row:nth-child(2) .as-cs-row__number i { color: var(--bead-blue-lt); }
 :root .as-cs-row:nth-child(3) .as-cs-row__number i { color: var(--tangerine); }
-/* inactive while the hub has 3 numbered rows, retained for a future fifth case study */
+/* row 4 is Priya Veda Reacts, added to the hub 16 Oct 2026 */
 :root .as-cs-row:nth-child(4) .as-cs-row__number i { color: var(--sunshine); }
 
 /* Titles reverted to Fraunces 900, 14 July 2026 - the DM Sans experiment
@@ -8987,7 +8987,7 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
    one row is on screen at a time. A rail that carries the bug is not
    a fix, it is a smaller window onto it.
 
-   SCOPE - ONE PAGE, THREE ROWS. .as-cs-row is the case-studies hub
+   SCOPE - ONE PAGE, FOUR ROWS. .as-cs-row is the case-studies hub
    only (1-case-studies-hub.html). It replaced .as-cs-card*, which was
    deleted outright in the Phase 4 dead-code pass (see css:8188), so
    there is no legacy family sharing these class names. No media query
@@ -13956,11 +13956,13 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
        .as-hub-hero, so a global .as-svc-hero__* rule here hits the
        four that need it and nothing that is already approved.
      - Case studies DO carry a page class on the content wrapper, so
-       these are scoped to .as-cs-ddr and .as-cs-gp ONLY. Terracotta
-       (.as-cs-terracotta) is approved as it stands, and AUSTIN_SPACE
-       carries .as-cs-v2 and NOTHING ELSE - so do not be tempted to
-       scope any of this on .as-cs-v2, which is the shared wrapper on
-       all four and would drag both approved pages in with it.
+       these are scoped to .as-cs-ddr, .as-cs-gp and .as-cs-priya ONLY.
+       Terracotta (.as-cs-terracotta) is approved as it stands, and
+       AUSTIN_SPACE carries .as-cs-v2 and NOTHING ELSE - so do not be
+       tempted to scope any of this on .as-cs-v2, which is the shared
+       wrapper on all five and would drag both approved pages in with it.
+       .as-cs-priya joined 16 Oct 2026: its two-line H1 (Priya Veda
+       Reacts / Search My Reactions) is the longest of the five.
 
    639 AND NOT 600, which is the knee the rest of the hero copy uses
    (the H1 normalisation block at css:9463, the run-in padding beside
@@ -14000,15 +14002,18 @@ guarded below; mobile (<=480px) falls back to the 64px mobile token. */
   :root .as-svc-hero__left { row-gap: 16px; }
   :root .as-svc-hero__headline { font-size: 32px; }
 
-  /* Case studies - DDR and Gypsy Pistoleros ONLY. */
+  /* Case studies - DDR, Gypsy Pistoleros and Priya Veda Reacts ONLY. */
   :root .as-cs-ddr .as-cs-hero__left,
-  :root .as-cs-gp .as-cs-hero__left { row-gap: 16px; }
+  :root .as-cs-gp .as-cs-hero__left,
+  :root .as-cs-priya .as-cs-hero__left { row-gap: 16px; }
 
   :root .as-cs-ddr .as-cs-hero__headline,
-  :root .as-cs-gp .as-cs-hero__headline { font-size: 32px; }
+  :root .as-cs-gp .as-cs-hero__headline,
+  :root .as-cs-priya .as-cs-hero__headline { font-size: 32px; }
 
   :root .as-cs-ddr .as-cs-hero__desc,
-  :root .as-cs-gp .as-cs-hero__desc { font-size: 16px; line-height: 1.45; }
+  :root .as-cs-gp .as-cs-hero__desc,
+  :root .as-cs-priya .as-cs-hero__desc { font-size: 16px; line-height: 1.45; }
 
 }
 

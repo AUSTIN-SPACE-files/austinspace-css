@@ -1,0 +1,75 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.austinspace.co.uk"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Case Studies",
+          "item": "https://www.austinspace.co.uk/case-studies/view-all"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Priya Veda Reacts",
+          "item": "https://www.austinspace.co.uk/case-studies/priya-veda-reacts"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can Squarespace search a YouTube channel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not natively. This build syncs the channel into a Google Sheet every hour with Apps Script, then a custom Code Block on the Squarespace page searches that feed. Visitors never leave the site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a feature like this need ongoing maintenance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Very little. New uploads sync automatically. The owner only edits the Sheet for things that need a human decision, such as marking a request as taken."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you add a custom feature without redesigning my whole Squarespace site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. This page shares a site with a separate photography business, and all its code and styling is scoped so the rest of the site is unaffected."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with YouTubers and creators?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Creator builds tend to be focused features rather than full sites, such as catalogue search, request flows and links to Patreon or Ko-fi, and they are priced to fit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when a reaction cannot stay on YouTube?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It stays searchable. A row in the Sheet marks it as an exception, and the result shows it as unavailable on YouTube with a link to watch it on Patreon instead."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
