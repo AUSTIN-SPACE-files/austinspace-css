@@ -22,6 +22,20 @@ semantically, narrow path `d` byte-exact, `-wide` hidden, `-narrow` shown,
 full stroke attribute set, and stroke alignment measured against the IMAGE
 rect. 45/45 on the final pass, plus the 10 from the two pilot batches.
 
+**Live check, 16 October 2026 (live site verified by Claude in the claude.ai chat session via browser: synthetic canary probe plus DOM count of wave-clip ids; repo count cross-checked by Claude Code):**
+
+    Live canary   20260818-e903df   (build from commit e864894)
+    Clip defs     112 wave-clip defs present = 56 desktop + 56 mobile
+
+The repo agrees: `html/_global/header-code-injection.html` at e864894
+carries 112 unique `wave-clip` ids, and `footer-injection.html` carries
+none. That is two more than the 110 in section 2 below, which was
+counted on 2 August. The build ID in the State block above is the
+2 August build and is no longer the live one.
+
+Not yet live at that date: build `20261016-db96e4` on branch
+`case-study-priya` (the Priya Veda Reacts case study and hub card).
+
 ---
 
 ## 2. Inventory - v4's figures were wrong, these are measured
